@@ -1,0 +1,683 @@
+---
+import Layout from '../layouts/Layout.astro'
+import { CHAMPIONS } from '../data/champions'
+import { getLatestDDRVersion, getDDRBase } from '../lib/ddr-version'
+import AffiliateBlock from '../components/AffiliateBlock.astro'
+import { UI } from '../i18n.js'
+
+const champions = [...CHAMPIONS].sort((a, b) => a.name.localeCompare(b.name))
+const locale = Astro.cookies.get('locale')?.value || 'fr'
+const t = UI[locale] || UI.fr
+const champBase = locale === 'fr' ? '/champion' : `/${locale}/champion`
+
+const ddrVersion = await getLatestDDRVersion()
+const DDR_BASE = getDDRBase(ddrVersion)
+---
+
+<Layout
+  title={t.home.title}
+  description={t.home.description}
+  lang={locale}
+>
+  <script type="application/ld+json" set:html={JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "name": "RiftMatch",
+    "url": "https://riftmatch.io",
+    "description": "Découvrez quel champion League of Legends vous correspond grâce à un quiz de personnalité gratuit.",
+    "inLanguage": "fr",
+    "potentialAction": {
+      "@type": "SearchAction",
+      "target": {
+        "@type": "EntryPoint",
+        "urlTemplate": "https://riftmatch.io/champion/{champion_name}"
+      },
+      "query-input": "required name=champion_name"
+    }
+  })} slot="head" />
+  <main>
+
+    <!-- ── Hero ── -->
+    <section class="hero">
+      <div class="hero-bg" aria-hidden="true">
+        <div class="hero-hex hero-hex--1"></div>
+        <div class="hero-hex hero-hex--2"></div>
+        <div class="hero-orb hero-orb--gold"></div>
+        <div class="hero-orb hero-orb--blue"></div>
+      </div>
+      <div class="hero-content">
+        <p class="hero-eyebrow">
+          <span class="eyebrow-dot"></span>
+          {t.home.heroEyebrow(champions.length)}
+        </p>
+        <h1 class="hero-title">
+          {t.home.heroTitle1}<br/>
+          <em>{t.home.heroTitle2}</em>
+        </h1>
+        <p class="hero-sub">{t.home.heroSub}</p>
+        <div class="hero-actions">
+          <a href="/quiz" class="btn-primary">
+            <span class="btn-shimmer"></span>
+            {t.home.heroCta}
+          </a>
+          <a href="#champions" class="btn-ghost">{t.home.heroGhostCta}</a>
+        </div>
+        <div class="hero-stats">
+          <div class="stat-pill">
+            <span class="stat-num">{champions.length}</span>
+            <span>{t.home.statChamps}</span>
+          </div>
+          <div class="stat-pill">
+            <span class="stat-num">7</span>
+            <span>{t.home.statQuestions}</span>
+          </div>
+          <div class="stat-pill">
+            <span class="stat-num">6</span>
+            <span>{t.home.statPaths}</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── Affiliate Banner ── -->
+    <div class="aff-wrap-hero">
+      <AffiliateBlock placement="homepage-hero" variant="banner" locale={locale} />
+    </div>
+
+    <!-- ── Champions Grid ── -->
+    {champions.length > 0 && (
+      <section class="champions-section hex-bg" id="champions">
+        <div class="section-header">
+          <div>
+            <h2 class="section-title">{t.home.sectionTitle}</h2>
+            <p class="section-sub">{t.home.sectionSub}</p>
+          </div>
+          <div class="search-bar">
+            <span class="search-icon" aria-hidden="true">🔍</span>
+            <input
+              type="search"
+              id="champion-search"
+              placeholder={t.home.searchPlaceholder}
+              aria-label={t.home.searchAriaLabel}
+            />
+          </div>
+        </div>
+
+        <div
+          class="champions-grid"
+          id="champions-grid"
+          data-champ-word={t.home.statChamps}
+          data-no-results={t.home.noResults}
+          data-of-word={locale === 'en' ? 'of' : locale === 'es' ? 'de' : 'sur'}
+          data-result-word={locale === 'en' ? 'result' : locale === 'es' ? 'resultado' : 'résultat'}
+          data-results-word={locale === 'en' ? 'results' : locale === 'es' ? 'resultados' : 'résultats'}
+        >
+          {champions.map((champion: any, i: number) => (
+            <a
+              href={`${champBase}/${champion.apiId}`}
+              class={`champion-card${i >= 24 ? ' champion-card--hidden' : ''}`}
+              data-name={champion.name.toLowerCase()}
+              data-index={i}
+            >
+              <div class="champion-img-wrap">
+                <img
+                  src={`${DDR_BASE}/${champion.apiId}.png`}
+                  alt={champion.name}
+                  loading={i < 24 ? 'eager' : 'lazy'}
+                  decoding={i < 24 ? 'sync' : 'async'}
+                  width="64"
+                  height="64"
+                  onerror="this.onerror=null;this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%2264%22 height=%2264%22 viewBox=%220 0 64 64%22%3E%3Crect width=%2264%22 height=%2264%22 fill=%22%231a1f2d%22/%3E%3Cpolygon points=%2232,8 56,20 56,44 32,56 8,44 8,20%22 stroke=%22%23c89b3c%22 stroke-width=%221.5%22 fill=%22none%22 opacity=%220.4%22/%3E%3Ctext x=%2232%22 y=%2237%22 text-anchor=%22middle%22 font-size=%2220%22 fill=%22%23c89b3c%22 opacity=%220.5%22%3E%3F%3C/text%3E%3C/svg%3E'"
+                />
+                <div class="champion-img-glow"></div>
+              </div>
+              <div class="champion-info">
+                <span class="champion-name">{champion.name}</span>
+                {champion.lanes && champion.lanes.length > 0 && (
+                  <span class="champion-lanes">
+                    {champion.lanes.join(' · ')}
+                  </span>
+                )}
+              </div>
+              <div class="card-hover-line"></div>
+            </a>
+          ))}
+        </div>
+        <p class="no-results" id="no-results" style="display:none">{t.home.noResults}</p>
+        <div class="show-more-wrap" id="show-more-wrap">
+          <button id="show-more-btn" class="show-more-btn" data-show-more={t.home.showMore(champions.length - 24)}>
+            {t.home.showMore(champions.length - 24)}
+            <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+        </div>
+        <p class="results-count" id="results-count">{champions.length} {t.home.statChamps}</p>
+      </section>
+    )}
+
+  </main>
+</Layout>
+
+<script>
+  const INITIAL_COUNT = 24
+  const input        = document.getElementById('champion-search') as HTMLInputElement
+  const grid         = document.getElementById('champions-grid') as HTMLElement
+  const noResults    = document.getElementById('no-results') as HTMLElement
+  const countEl      = document.getElementById('results-count') as HTMLElement
+  const showMoreWrap = document.getElementById('show-more-wrap') as HTMLElement
+  const showMoreBtn  = document.getElementById('show-more-btn') as HTMLButtonElement
+
+  // Read translated strings from data-* attributes (no define:vars = TypeScript works)
+  const _champWord    = grid?.dataset.champWord    || 'Champions'
+  const _noResults    = grid?.dataset.noResults    || 'No results.'
+  const _ofWord       = grid?.dataset.ofWord       || 'sur'
+  const _resultWord   = grid?.dataset.resultWord   || 'résultat'
+  const _resultsWord  = grid?.dataset.resultsWord  || 'résultats'
+
+  const allCards = grid ? Array.from(grid.querySelectorAll<HTMLElement>('.champion-card')) : []
+  const total = allCards.length
+  let expanded = false
+
+  // ── Show more ──────────────────────────────────────────────
+  showMoreBtn?.addEventListener('click', () => {
+    expanded = true
+    allCards.forEach(card => card.classList.remove('champion-card--hidden'))
+    if (showMoreWrap) showMoreWrap.style.display = 'none'
+    if (countEl) countEl.textContent = `${total} ${_champWord}`
+  })
+
+  // ── Search ─────────────────────────────────────────────────
+  input?.addEventListener('input', () => {
+    const q = input.value.toLowerCase().trim()
+
+    if (!q) {
+      allCards.forEach((card, i) => {
+        card.style.display = ''
+        if (!expanded && i >= INITIAL_COUNT) card.classList.add('champion-card--hidden')
+        else card.classList.remove('champion-card--hidden')
+      })
+      if (noResults)    noResults.style.display = 'none'
+      if (showMoreWrap) showMoreWrap.style.display = expanded ? 'none' : ''
+      if (countEl)      countEl.textContent = `${total} ${_champWord}`
+      return
+    }
+
+    // While searching: show all matches regardless of expanded state
+    if (showMoreWrap) showMoreWrap.style.display = 'none'
+    let visible = 0
+    allCards.forEach(card => {
+      const match = card.dataset.name?.includes(q)
+      card.classList.remove('champion-card--hidden')
+      card.style.display = match ? '' : 'none'
+      if (match) visible++
+    })
+    if (noResults) noResults.style.display = visible === 0 ? 'block' : 'none'
+    if (countEl)   countEl.textContent = `${visible} ${visible !== 1 ? _resultsWord : _resultWord} ${_ofWord} ${total}`
+  })
+</script>
+
+<style>
+  main {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 1.25rem 5rem;
+  }
+
+  /* ── Hero ── */
+  .hero {
+    position: relative;
+    text-align: center;
+    padding: 5rem 1rem 5rem;
+    overflow: hidden;
+  }
+  .hero-bg {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    overflow: hidden;
+  }
+
+  /* Hex shapes */
+  .hero-hex {
+    position: absolute;
+    width: 320px; height: 320px;
+    border: 1px solid rgba(200,155,60,0.07);
+    clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+    animation: spin-slow 60s linear infinite;
+  }
+  .hero-hex--1 {
+    top: -80px; left: 50%;
+    transform: translateX(-50%);
+    opacity: 0.5;
+  }
+  .hero-hex--2 {
+    width: 500px; height: 500px;
+    top: -140px; left: 50%;
+    transform: translateX(-50%);
+    border-color: rgba(11,196,227,0.04);
+    animation-direction: reverse;
+  }
+
+  /* Orbs */
+  .hero-orb {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(60px);
+    pointer-events: none;
+  }
+  .hero-orb--gold {
+    width: 400px; height: 300px;
+    background: radial-gradient(circle, rgba(200,155,60,0.12) 0%, transparent 70%);
+    top: 0; left: 50%;
+    transform: translateX(-50%);
+  }
+  .hero-orb--blue {
+    width: 300px; height: 200px;
+    background: radial-gradient(circle, rgba(11,196,227,0.08) 0%, transparent 70%);
+    bottom: 0; right: 10%;
+  }
+
+  /* Hero content */
+  .hero-content {
+    position: relative;
+    z-index: 2;
+  }
+  .hero-eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 0.8rem;
+    font-weight: 600;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 1.25rem;
+    background: rgba(200,155,60,0.07);
+    border: 1px solid rgba(200,155,60,0.2);
+    padding: 0.3rem 0.85rem;
+    border-radius: 20px;
+  }
+  .eyebrow-dot {
+    width: 6px; height: 6px;
+    background: var(--gold);
+    border-radius: 50%;
+    animation: pulse-glow 2s ease-in-out infinite;
+  }
+
+  .hero-title {
+    font-family: 'Russo One', sans-serif;
+    font-size: clamp(1.8rem, 7vw, 4.5rem);
+    font-weight: 900;
+    line-height: 1.1;
+    color: var(--text-light);
+    margin-bottom: 1.25rem;
+  }
+  .hero-title em {
+    font-style: normal;
+    background: linear-gradient(135deg, #f0e6b2 0%, #c89b3c 50%, #e8c96a 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .hero-sub {
+    font-size: clamp(0.95rem, 2vw, 1.15rem);
+    color: var(--text-muted);
+    max-width: 500px;
+    margin: 0 auto 2.5rem;
+    line-height: 1.7;
+  }
+
+  /* Actions */
+  .hero-actions {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+    margin-bottom: 2.5rem;
+  }
+  .btn-primary {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    overflow: hidden;
+    background: linear-gradient(135deg, #d4a43f 0%, #c89b3c 50%, #b8873a 100%);
+    color: #08090d;
+    font-family: 'Rajdhani', sans-serif;
+    font-weight: 700;
+    font-size: 1.05rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 0.9rem 2.2rem;
+    border-radius: 6px;
+    text-decoration: none;
+    transition: transform 0.25s var(--ease-out), box-shadow 0.25s;
+    animation: pulse-glow 3s ease-in-out infinite;
+  }
+  .btn-primary:hover {
+    transform: translateY(-3px) scale(1.02);
+    box-shadow: 0 8px 30px rgba(200,155,60,0.45);
+    animation: none;
+  }
+  .btn-shimmer {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(105deg, transparent 40%, rgba(255,255,255,0.25) 50%, transparent 60%);
+    background-size: 200% 100%;
+    animation: shimmer 2.5s ease-in-out infinite;
+  }
+
+  .btn-ghost {
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 0.9rem;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    color: var(--text-muted);
+    text-decoration: none;
+    padding: 0.9rem 1.5rem;
+    border: 1px solid rgba(200,155,60,0.2);
+    border-radius: 6px;
+    transition: color 0.2s, border-color 0.2s, background 0.2s;
+  }
+  .btn-ghost:hover {
+    color: var(--gold);
+    border-color: var(--gold);
+    background: rgba(200,155,60,0.06);
+  }
+
+  /* Stats pills */
+  .hero-stats {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+  .stat-pill {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 0.8rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    background: rgba(255,255,255,0.03);
+    border: 1px solid rgba(255,255,255,0.07);
+    padding: 0.3rem 0.9rem;
+    border-radius: 20px;
+  }
+  .stat-num {
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--gold);
+  }
+
+  /* ── Affiliate wrap ── */
+  .aff-wrap-hero {
+    max-width: 760px;
+    margin: 0 auto 1rem;
+  }
+
+  /* ── Champions section ── */
+  .champions-section {
+    margin-top: 3rem;
+    scroll-margin-top: 80px;
+    border-radius: 16px;
+    padding: 2rem 1.25rem 1.5rem;
+    background: rgba(14,17,24,0.6);
+    border: 1px solid rgba(200,155,60,0.07);
+  }
+  .section-header {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 1.5rem;
+    margin-bottom: 1.75rem;
+    flex-wrap: wrap;
+  }
+  .section-title {
+    font-family: 'Russo One', sans-serif;
+    font-size: 1.6rem;
+    color: var(--gold-light);
+    margin-bottom: 0.25rem;
+  }
+  .section-sub {
+    font-size: 0.8rem;
+    color: var(--text-dim);
+  }
+
+  /* Search */
+  .search-bar {
+    position: relative;
+    width: 240px;
+    min-width: 0;
+  }
+  .search-icon {
+    position: absolute;
+    left: 0.75rem;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 0.85rem;
+    pointer-events: none;
+  }
+  .search-bar input {
+    width: 100%;
+    padding: 0.6rem 1rem 0.6rem 2.2rem;
+    background: var(--dark3);
+    border: 1px solid rgba(200,155,60,0.2);
+    border-radius: 6px;
+    color: var(--text-light);
+    font-size: 0.9rem;
+    outline: none;
+    transition: border-color 0.2s, box-shadow 0.2s;
+  }
+  .search-bar input:focus {
+    border-color: var(--gold);
+    box-shadow: 0 0 0 3px rgba(200,155,60,0.08);
+  }
+  .search-bar input::placeholder { color: var(--text-dim); }
+
+  /* Grid */
+  .champions-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+    gap: 0.75rem;
+  }
+  @media (max-width: 480px) {
+    .champions-grid { grid-template-columns: repeat(auto-fill, minmax(90px, 1fr)); gap: 0.5rem; }
+  }
+
+  /* Card */
+  .champion-card {
+    position: relative;
+    background: var(--dark3);
+    border: 1px solid rgba(200,155,60,0.1);
+    border-radius: 8px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 0.9rem 0.5rem 0.7rem;
+    gap: 0.5rem;
+    text-decoration: none;
+    cursor: pointer;
+    transition: border-color 0.25s, transform 0.2s var(--ease-out), box-shadow 0.25s;
+  }
+  .champion-card:hover {
+    border-color: rgba(200,155,60,0.5);
+    transform: translateY(-4px);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.4), 0 0 16px rgba(200,155,60,0.12);
+  }
+  /* Scanlines on hover */
+  .champion-card::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: repeating-linear-gradient(
+      0deg,
+      transparent,
+      transparent 3px,
+      rgba(0,0,0,0.06) 3px,
+      rgba(0,0,0,0.06) 4px
+    );
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.3s;
+  }
+  .champion-card:hover::after { opacity: 1; }
+
+  /* Bottom line accent on hover */
+  .card-hover-line {
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, var(--gold), transparent);
+    transform: scaleX(0);
+    transition: transform 0.35s var(--ease-out);
+  }
+  .champion-card:hover .card-hover-line { transform: scaleX(1); }
+
+  .champion-img-wrap {
+    position: relative;
+    width: 60px; height: 60px;
+    border-radius: 50%;
+    overflow: hidden;
+    border: 2px solid rgba(200,155,60,0.3);
+    flex-shrink: 0;
+    transition: border-color 0.25s;
+  }
+  .champion-card:hover .champion-img-wrap { border-color: var(--gold); }
+  .champion-img-wrap img {
+    width: 100%; height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.3s var(--ease-out);
+  }
+  .champion-card:hover .champion-img-wrap img { transform: scale(1.08); }
+
+  .champion-img-glow {
+    position: absolute;
+    inset: 0;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(200,155,60,0.15) 0%, transparent 70%);
+    opacity: 0;
+    transition: opacity 0.3s;
+  }
+  .champion-card:hover .champion-img-glow { opacity: 1; }
+
+  .champion-info {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.15rem;
+    text-align: center;
+  }
+  .champion-name {
+    font-size: 0.78rem;
+    font-weight: 600;
+    color: var(--text-light);
+    line-height: 1.2;
+  }
+  .champion-lanes {
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 0.62rem;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    color: var(--text-dim);
+    text-transform: capitalize;
+  }
+
+  .no-results {
+    text-align: center;
+    color: var(--text-muted);
+    padding: 3rem;
+    font-size: 0.9rem;
+  }
+
+  /* Hidden cards — in HTML source (SEO) but not painted */
+  .champion-card--hidden { display: none; }
+
+  /* Show more */
+  .show-more-wrap {
+    display: flex;
+    justify-content: center;
+    margin-top: 1.5rem;
+  }
+  .show-more-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 0.85rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    background: rgba(255,255,255,0.03);
+    border: 1px solid rgba(200,155,60,0.2);
+    border-radius: 6px;
+    padding: 0.65rem 1.5rem;
+    cursor: pointer;
+    transition: color 0.2s, border-color 0.2s, background 0.2s;
+  }
+  .show-more-btn svg {
+    width: 16px; height: 16px;
+    transition: transform 0.2s;
+  }
+  .show-more-btn:hover {
+    color: var(--gold);
+    border-color: rgba(200,155,60,0.5);
+    background: rgba(200,155,60,0.05);
+  }
+  .show-more-btn:hover svg { transform: translateY(2px); }
+
+  .results-count {
+    text-align: center;
+    margin-top: 1rem;
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 0.78rem;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    color: var(--text-dim);
+    text-transform: uppercase;
+  }
+
+  /* ── Responsive ── */
+  @media (max-width: 768px) {
+    .hero { padding: 3.5rem 1rem 3.5rem; }
+    .btn-primary { font-size: 0.95rem; padding: 0.8rem 1.8rem; }
+    .btn-ghost { font-size: 0.85rem; padding: 0.8rem 1.25rem; }
+    .section-header { flex-direction: column; align-items: flex-start; gap: 0.75rem; }
+    .search-bar { width: 100%; }
+    .champions-section { padding: 1.5rem 1rem; }
+    .section-title { font-size: 1.3rem; }
+    .aff-wrap-hero { padding: 0 0.5rem; }
+  }
+
+  @media (max-width: 480px) {
+    main { padding: 0 0.75rem 3rem; }
+    .hero { padding: 2.5rem 0.75rem 2.5rem; }
+    .hero-hex { width: 220px; height: 220px; }
+    .hero-hex--2 { width: 340px; height: 340px; }
+    .hero-orb--gold { width: 260px; height: 200px; }
+    .hero-orb--blue { width: 180px; height: 130px; }
+    .hero-sub { max-width: 100%; margin-bottom: 1.75rem; }
+    .hero-actions { gap: 0.6rem; }
+    .btn-primary { font-size: 0.88rem; padding: 0.72rem 1.4rem; }
+    .btn-ghost { font-size: 0.82rem; padding: 0.7rem 1rem; }
+    .hero-stats { gap: 0.5rem; }
+    .stat-pill { font-size: 0.72rem; padding: 0.25rem 0.65rem; }
+    .section-title { font-size: 1.15rem; }
+    .champions-section { margin-top: 1.75rem; padding: 1.25rem 0.75rem; }
+    .no-results { padding: 1.75rem; }
+  }
+
+  @media (max-width: 360px) {
+    .hero-title { font-size: 1.6rem; }
+    .hero-eyebrow { font-size: 0.7rem; padding: 0.2rem 0.6rem; }
+    .stat-num { font-size: 0.9rem; }
+  }
+</style>

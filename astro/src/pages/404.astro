@@ -1,0 +1,161 @@
+---
+import Layout from '../layouts/Layout.astro'
+import { UI } from '../i18n.js'
+
+const locale = Astro.cookies.get('locale')?.value || 'fr'
+const t = UI[locale] || UI.fr
+---
+
+<Layout
+  title={locale === 'en' ? 'Page not found | RiftMatch' : locale === 'es' ? 'Página no encontrada | RiftMatch' : 'Page introuvable | RiftMatch'}
+  description={locale === 'en' ? 'This page does not exist.' : locale === 'es' ? 'Esta página no existe.' : 'Cette page n\'existe pas.'}
+  lang={locale}
+>
+  <main class="not-found">
+    <div class="nf-bg" aria-hidden="true">
+      <div class="nf-hex"></div>
+      <div class="nf-orb"></div>
+    </div>
+    <div class="nf-content">
+      <p class="nf-code">404</p>
+      <h1 class="nf-title">
+        {locale === 'en' ? 'This lane doesn\'t exist' : locale === 'es' ? 'Este carril no existe' : 'Cette lane n\'existe pas'}
+      </h1>
+      <p class="nf-sub">
+        {locale === 'en'
+          ? 'You wandered into uncharted territory. Even the Void doesn\'t map this far.'
+          : locale === 'es'
+          ? 'Te has adentrado en territorio inexplorado. Ni el Vacío llega hasta aquí.'
+          : 'Tu t\'es aventuré dans une zone non cartographiée. Même le Néant ne va pas si loin.'}
+      </p>
+      <div class="nf-actions">
+        <a href="/" class="btn-primary">
+          {locale === 'en' ? '← Back to base' : locale === 'es' ? '← Volver a la base' : '← Retour à la base'}
+        </a>
+        <a href="/quiz" class="btn-ghost">
+          {locale === 'en' ? 'Take the quiz' : locale === 'es' ? 'Hacer el quiz' : 'Faire le quiz'}
+        </a>
+      </div>
+    </div>
+  </main>
+</Layout>
+
+<style>
+  .not-found {
+    min-height: calc(100vh - 64px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+    padding: 2rem 1.25rem;
+  }
+
+  .nf-bg {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+  }
+  .nf-hex {
+    position: absolute;
+    width: 420px; height: 420px;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    border: 1px solid rgba(200,155,60,0.08);
+    clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+    animation: spin-slow 80s linear infinite;
+  }
+  .nf-orb {
+    position: absolute;
+    width: 500px; height: 400px;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    background: radial-gradient(circle, rgba(200,155,60,0.07) 0%, transparent 65%);
+    filter: blur(40px);
+    border-radius: 50%;
+  }
+
+  .nf-content {
+    position: relative;
+    z-index: 2;
+    max-width: 520px;
+  }
+
+  .nf-code {
+    font-family: 'Russo One', sans-serif;
+    font-size: clamp(5rem, 18vw, 9rem);
+    font-weight: 900;
+    background: linear-gradient(135deg, #f0e6b2 0%, #c89b3c 50%, #e8c96a 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    line-height: 1;
+    margin-bottom: 0.5rem;
+    opacity: 0.9;
+  }
+
+  .nf-title {
+    font-family: 'Russo One', sans-serif;
+    font-size: clamp(1.4rem, 4vw, 2rem);
+    color: var(--text-light);
+    margin-bottom: 1rem;
+  }
+
+  .nf-sub {
+    font-size: 0.95rem;
+    color: var(--text-muted);
+    line-height: 1.7;
+    margin-bottom: 2.5rem;
+  }
+
+  .nf-actions {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  .btn-primary {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: linear-gradient(135deg, #d4a43f 0%, #c89b3c 50%, #b8873a 100%);
+    color: #08090d;
+    font-family: 'Rajdhani', sans-serif;
+    font-weight: 700;
+    font-size: 1rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    padding: 0.85rem 2rem;
+    border-radius: 6px;
+    text-decoration: none;
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+  .btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 24px rgba(200,155,60,0.4);
+  }
+
+  .btn-ghost {
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 0.95rem;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    color: var(--text-muted);
+    text-decoration: none;
+    padding: 0.85rem 1.5rem;
+    border: 1px solid rgba(200,155,60,0.2);
+    border-radius: 6px;
+    transition: color 0.2s, border-color 0.2s;
+  }
+  .btn-ghost:hover {
+    color: var(--gold);
+    border-color: var(--gold);
+  }
+
+  @keyframes spin-slow {
+    from { transform: translate(-50%, -50%) rotate(0deg); }
+    to   { transform: translate(-50%, -50%) rotate(360deg); }
+  }
+</style>

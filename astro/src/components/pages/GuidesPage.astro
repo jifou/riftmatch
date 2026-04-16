@@ -1,0 +1,202 @@
+---
+/**
+ * GuidesPage — shared component used by all locale routes
+ * /guides       → Astro.currentLocale = 'fr'
+ * /en/guides    → Astro.currentLocale = 'en'
+ * /es/guides    → Astro.currentLocale = 'es'
+ */
+import Layout from '../../layouts/Layout.astro'
+import { UI } from '../../i18n.js'
+
+const urlLocale = Astro.currentLocale || 'fr'
+const cookieLocale = Astro.cookies.get('locale')?.value || 'fr'
+
+// Redirect si l'utilisateur préfère une autre langue et est sur l'URL FR par défaut
+if (urlLocale === 'fr' && cookieLocale !== 'fr') {
+  return Astro.redirect(`/${cookieLocale}/guides`, 302)
+}
+
+const locale = urlLocale
+const t = (UI as any)[locale] || (UI as any).fr
+const PAYLOAD_URL = import.meta.env.PAYLOAD_API_URL || 'http://payload:3000'
+
+let pages: any[] = []
+try {
+  // Fetch pages for current locale + fallback to all
+  let res = await fetch(`${PAYLOAD_URL}/api/pages?where[locale][equals]=${locale}&limit=100&sort=title`)
+  let data = await res.json()
+  pages = data.docs ?? []
+
+  // If no locale-specific pages, show all (graceful fallback)
+  if (pages.length === 0) {
+    res = await fetch(`${PAYLOAD_URL}/api/pages?limit=100&sort=title`)
+    data = await res.json()
+    pages = data.docs ?? []
+  }
+} catch { /* silent fail */ }
+
+const infoBase = locale === 'fr' ? '/info' : `/${locale}/info`
+const BASE = 'https://riftmatch.io'
+const canonicalUrl = locale === 'fr' ? `${BASE}/guides` : `${BASE}/${locale}/guides`
+---
+
+<Layout
+  title={t.guidesPage.title}
+  description={t.guidesPage.description}
+  lang={locale}
+>
+  <Fragment slot="head">
+    <link rel="canonical" href={canonicalUrl} />
+    <link rel="alternate" hreflang="fr" href={`${BASE}/guides`} />
+    <link rel="alternate" hreflang="en" href={`${BASE}/en/guides`} />
+    <link rel="alternate" hreflang="es" href={`${BASE}/es/guides`} />
+    <link rel="alternate" hreflang="x-default" href={`${BASE}/guides`} />
+  </Fragment>
+
+  <main class="guides-page">
+    <header class="guides-header">
+      <p class="guides-eyebrow">{t.guidesPage.eyebrow}</p>
+      <h1 class="guides-title">{t.guidesPage.heading}</h1>
+      <p class="guides-sub">{t.guidesPage.sub}</p>
+    </header>
+
+    {pages.length === 0 ? (
+      <p class="guides-empty">{t.guidesPage.empty}</p>
+    ) : (
+      <ul class="guides-grid">
+        {pages.map((page: any) => (
+          <li>
+            <a href={`${infoBase}/${page.slug}`} class="guide-card">
+              <div class="guide-card-inner">
+                <p class="guide-card-label">{t.guidesPage.cardLabel}</p>
+                <h2 class="guide-card-title">{page.title}</h2>
+                {page.seo?.description && (
+                  <p class="guide-card-desc">{page.seo.description}</p>
+                )}
+                <span class="guide-card-cta">{t.guidesPage.cardCta}</span>
+              </div>
+              <div class="guide-card-line"></div>
+            </a>
+          </li>
+        ))}
+      </ul>
+    )}
+  </main>
+</Layout>
+
+<style>
+  .guides-page {
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 3rem 1.25rem 5rem;
+  }
+
+  .guides-header {
+    text-align: center;
+    margin-bottom: 3rem;
+  }
+  .guides-eyebrow {
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--gold);
+    opacity: 0.8;
+    margin-bottom: 0.75rem;
+  }
+  .guides-title {
+    font-family: 'Russo One', sans-serif;
+    font-size: clamp(1.8rem, 5vw, 3rem);
+    color: var(--gold-light, #f0e6b2);
+    margin-bottom: 0.75rem;
+  }
+  .guides-sub {
+    font-size: 1rem;
+    color: var(--text-muted);
+  }
+
+  .guides-grid {
+    list-style: none;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 1.25rem;
+  }
+
+  .guide-card {
+    display: block;
+    position: relative;
+    background: rgba(14,17,24,0.7);
+    border: 1px solid rgba(200,155,60,0.12);
+    border-radius: 12px;
+    padding: 1.5rem;
+    text-decoration: none;
+    overflow: hidden;
+    transition: border-color 0.25s, transform 0.2s, box-shadow 0.25s;
+    height: 100%;
+    cursor: pointer;
+  }
+  .guide-card:hover {
+    border-color: rgba(200,155,60,0.45);
+    transform: translateY(-3px);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.4), 0 0 16px rgba(200,155,60,0.1);
+  }
+  .guide-card-inner {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+  .guide-card-label {
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 0.65rem;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--gold);
+    opacity: 0.7;
+  }
+  .guide-card-title {
+    font-family: 'Cinzel', serif;
+    font-size: 1rem;
+    color: var(--gold-light, #f0e6b2);
+    line-height: 1.35;
+  }
+  .guide-card-desc {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    line-height: 1.55;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+  .guide-card-cta {
+    margin-top: 0.75rem;
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    color: var(--gold);
+    text-transform: uppercase;
+  }
+  .guide-card-line {
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, var(--gold), transparent);
+    transform: scaleX(0);
+    transition: transform 0.3s;
+  }
+  .guide-card:hover .guide-card-line { transform: scaleX(1); }
+
+  .guides-empty {
+    text-align: center;
+    color: var(--text-muted);
+    padding: 3rem;
+  }
+
+  @media (max-width: 500px) {
+    .guides-page { padding: 2rem 0.75rem 4rem; }
+    .guides-grid { grid-template-columns: 1fr; }
+  }
+</style>

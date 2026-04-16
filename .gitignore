@@ -1,0 +1,33 @@
+# ── Environnement (secrets) ──────────────────────────────────────────────────
+.env
+.env.local
+.env.production
+.env.*.local
+
+# ── Node ─────────────────────────────────────────────────────────────────────
+node_modules/
+npm-debug.log*
+
+# ── Astro ────────────────────────────────────────────────────────────────────
+astro/dist/
+astro/.astro/
+astro/node_modules/
+
+# ── Payload ──────────────────────────────────────────────────────────────────
+payload/dist/
+payload/build/
+payload/node_modules/
+
+# ── Docker ───────────────────────────────────────────────────────────────────
+# (volumes gérés par Docker, pas par git)
+
+# ── OS ───────────────────────────────────────────────────────────────────────
+.DS_Store
+Thumbs.db
+
+# ── IDE ──────────────────────────────────────────────────────────────────────
+.vscode/settings.json
+.idea/
+
+# ── Claude Code (configs locales) ────────────────────────────────────────────
+.claude/

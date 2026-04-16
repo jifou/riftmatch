@@ -1,0 +1,254 @@
+---
+/**
+ * ChampionPage — shared component used by all locale routes
+ * /champion/[apiId]       → Astro.currentLocale = 'fr'
+ * /en/champion/[apiId]    → Astro.currentLocale = 'en'
+ * /es/champion/[apiId]    → Astro.currentLocale = 'es'
+ * Astro.params.apiId is available from the parent page route.
+ */
+import Layout from '../../layouts/Layout.astro'
+import { CHAMPIONS } from '../../data/champions'
+import { getLatestDDRVersion, getDDRBase } from '../../lib/ddr-version'
+import {
+  generateDescription,
+  getDifficultyLabel,
+  getDifficultyStars,
+  getOpGGUrl,
+} from '../../lib/champion-description'
+import AffiliateBlock from '../AffiliateBlock.astro'
+import { UI } from '../../i18n.js'
+
+const { apiId } = Astro.params
+const champion = CHAMPIONS.find(c => c.apiId === apiId)
+if (!champion) return Astro.redirect('/')
+
+// URL locale : 'fr' (default, sans préfixe) | 'en' | 'es'
+const urlLocale = Astro.currentLocale || 'fr'
+const cookieLocale = Astro.cookies.get('locale')?.value || 'fr'
+
+// Si l'utilisateur est sur l'URL FR par défaut mais préfère une autre langue,
+// on le redirige vers l'URL locale correcte (ex: /en/champion/Ahri)
+if (urlLocale === 'fr' && cookieLocale !== 'fr') {
+  return Astro.redirect(`/${cookieLocale}/champion/${apiId}`, 302)
+}
+
+const locale = urlLocale
+const tc = (UI as any)[locale]?.championPage || (UI as any).fr.championPage
+
+const PAYLOAD_URL = import.meta.env.PAYLOAD_API_URL || 'http://payload:3000'
+
+// Fetch editorial content for this locale, fallback to any locale
+let editorial: { description?: string; tip?: string } = {}
+try {
+  // Try locale-specific first
+  let res = await fetch(
+    `${PAYLOAD_URL}/api/champion-content?where[championApiId][equals]=${champion.apiId}&where[locale][equals]=${locale}&limit=1`
+  )
+  let data = await res.json()
+  if (!data.docs?.[0]) {
+    // Fallback: any locale
+    res = await fetch(
+      `${PAYLOAD_URL}/api/champion-content?where[championApiId][equals]=${champion.apiId}&limit=1`
+    )
+    data = await res.json()
+  }
+  editorial = data.docs?.[0] ?? {}
+} catch { /* silent fail */ }
+
+const description = editorial.description || generateDescription(champion, locale as any)
+const tip = editorial.tip
+const diffLabel = getDifficultyLabel(champion.difficulty, locale as any)
+const diffStars = getDifficultyStars(champion.difficulty)
+const opggUrl = getOpGGUrl(champion.apiId)
+
+const ddrVersion = await getLatestDDRVersion()
+const DDR_ICON  = getDDRBase(ddrVersion)
+const DDR_SPLASH = `https://ddragon.leagueoflegends.com/cdn/img/champion/splash`
+const laneLabels: Record<string, string> = {
+  top: 'Top', jungle: 'Jungle', mid: 'Mid', bot: 'Bot', support: 'Support', adc: 'ADC',
+}
+const diffColors: Record<number, string> = {
+  1: '#22c55e', 2: '#86efac', 3: '#fbbf24', 4: '#f97316', 5: '#ef4444'
+}
+const diffColor = diffColors[champion.difficulty] || '#fbbf24'
+
+// Canonical + hreflang
+const BASE = 'https://riftmatch.io'
+const champPath = `/champion/${champion.apiId}`
+const canonicalUrl = locale === 'fr' ? `${BASE}${champPath}` : `${BASE}/${locale}${champPath}`
+const quizPath = '/quiz'  // pas de variante URL par locale
+const homePath = '/'  // homepage n'a pas de variante URL par locale
+---
+
+<Layout
+  title={`${champion.name} – ${locale === 'en' ? 'LoL Champion' : locale === 'es' ? 'Campeón LoL' : 'Champion LoL'} | RiftMatch`}
+  description={`${description.slice(0, 150).trimEnd()}…`}
+  image={`${DDR_SPLASH}/${champion.apiId}_0.jpg`}
+  lang={locale}
+>
+  <!-- hreflang SEO -->
+  <Fragment slot="head">
+    <link rel="canonical" href={canonicalUrl} />
+    <link rel="alternate" hreflang="fr" href={`${BASE}${champPath}`} />
+    <link rel="alternate" hreflang="en" href={`${BASE}/en${champPath}`} />
+    <link rel="alternate" hreflang="es" href={`${BASE}/es${champPath}`} />
+    <link rel="alternate" hreflang="x-default" href={`${BASE}${champPath}`} />
+  </Fragment>
+
+  <script type="application/ld+json" slot="head" set:html={JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "Thing",
+    "name": champion.name,
+    "url": canonicalUrl,
+    "description": description.slice(0, 200),
+    "image": `${DDR_SPLASH}/${champion.apiId}_0.jpg`,
+    "additionalType": "https://schema.org/VideoGameCharacter",
+    "partOfGame": {
+      "@type": "VideoGame",
+      "name": "League of Legends",
+      "publisher": { "@type": "Organization", "name": "Riot Games" }
+    }
+  })} />
+
+  <main class="champ-page">
+    <a href={homePath} class="back-link">{tc.backLink}</a>
+
+    <div class="splash-wrap">
+      <img
+        class="splash-img"
+        src={`${DDR_SPLASH}/${champion.apiId}_0.jpg`}
+        alt={`${champion.name} – splash art League of Legends`}
+        width="1215" height="717"
+        fetchpriority="high" decoding="async"
+      />
+      <div class="splash-overlay">
+        <div class="splash-content">
+          <div class="champ-lanes">
+            {champion.lanes.map((l: string) => (
+              <span class="lane-badge">{laneLabels[l] ?? l}</span>
+            ))}
+          </div>
+          <h1 class="champ-name">{champion.name}</h1>
+          <div class="champ-archetypes">
+            {champion.archetypes.slice(0, 3).map((a: string) => (
+              <span class="archetype-pill">{a}</span>
+            ))}
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="content-grid">
+      <div class="main-col">
+        <section class="info-card">
+          <h2 class="section-label">{tc.sectionLabel}</h2>
+          <p class="champ-desc">{description}</p>
+          {tip && (
+            <div class="tip-box">
+              <span class="tip-icon" aria-hidden="true">💡</span>
+              <p>{tip}</p>
+            </div>
+          )}
+        </section>
+
+        <section class="info-card stats-grid">
+          <div class="stat">
+            <span class="stat-label">{tc.difficulty}</span>
+            <div class="diff-row">
+              <span class="stat-stars" aria-label={`${champion.difficulty}/5`} style={`color:${diffColor}`}>{diffStars}</span>
+            </div>
+            <span class="stat-sub">{diffLabel}</span>
+          </div>
+          <div class="stat">
+            <span class="stat-label">{tc.archetypes}</span>
+            <div class="tags">
+              {champion.archetypes.map((a: string) => <span class="tag">{a}</span>)}
+            </div>
+          </div>
+          <div class="stat">
+            <span class="stat-label">{tc.playstyle}</span>
+            <div class="tags">
+              {champion.styles.map((s: string) => <span class="tag tag--style">{s}</span>)}
+            </div>
+          </div>
+          <div class="stat">
+            <span class="stat-label">{tc.faction}</span>
+            <span class="stat-value">{champion.faction}</span>
+          </div>
+        </section>
+
+        <a class="opgg-btn" href={opggUrl} target="_blank" rel="noopener noreferrer">
+          <img src="https://s-lol-web.op.gg/images/icon/icon-opgg.svg" alt="op.gg" width="18" height="18" onerror="this.style.display='none'" />
+          {tc.opggLink(champion.name)}
+        </a>
+
+        <AffiliateBlock placement="champion-sidebar" variant="card" roles={[...champion.lanes, ...champion.archetypes]} locale={locale} />
+      </div>
+
+      <aside class="thumb-col">
+        <div class="thumb-card">
+          <img class="champ-thumb" src={`${DDR_ICON}/${champion.apiId}.png`} alt={champion.name} width="120" height="120" />
+        </div>
+        <a href={quizPath} class="quiz-cta">
+          <span class="quiz-cta-icon" aria-hidden="true">🎯</span>
+          <Fragment set:html={tc.quizCta.replace('\n', '<br>')} />
+        </a>
+        <div class="diff-meter">
+          <p class="diff-label-sm">{tc.difficulty}</p>
+          <div class="diff-track">
+            <div class="diff-fill" style={`width:${champion.difficulty * 20}%;background:${diffColor}`}></div>
+          </div>
+          <p class="diff-num" style={`color:${diffColor}`}>{diffLabel}</p>
+        </div>
+      </aside>
+    </div>
+  </main>
+</Layout>
+
+<style>
+  .champ-page { max-width: 960px; margin: 0 auto; padding: 1rem 1.25rem 5rem; }
+  .back-link { display:inline-flex;align-items:center;gap:.4rem;color:var(--text-muted);text-decoration:none;font-size:.82rem;font-family:'Rajdhani',sans-serif;font-weight:600;letter-spacing:.06em;text-transform:uppercase;margin-bottom:1.5rem;padding:.35rem .75rem;border:1px solid rgba(255,255,255,.07);border-radius:20px;transition:color .2s,border-color .2s,background .2s; }
+  .back-link:hover { color:var(--gold);border-color:rgba(200,155,60,.3);background:rgba(200,155,60,.05); }
+  .splash-wrap { position:relative;border-radius:12px;overflow:hidden;margin-bottom:2rem;border:1px solid rgba(200,155,60,.15);box-shadow:0 20px 60px rgba(0,0,0,.5); }
+  .splash-img { width:100%;height:320px;object-fit:cover;object-position:top center;display:block; }
+  @media (min-width:600px) { .splash-img { height:380px; } }
+  .splash-overlay { position:absolute;inset:0;background:linear-gradient(to top,rgba(9,11,16,.97) 0%,rgba(9,11,16,.5) 40%,transparent 70%);display:flex;align-items:flex-end; }
+  .splash-content { padding:1.75rem 1.75rem 1.5rem;width:100%; }
+  .champ-lanes { display:flex;gap:.4rem;flex-wrap:wrap;margin-bottom:.6rem; }
+  .lane-badge { font-family:'Rajdhani',sans-serif;font-size:.65rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;background:rgba(200,155,60,.15);border:1px solid rgba(200,155,60,.4);color:var(--gold);padding:.2rem .6rem;border-radius:20px; }
+  .champ-name { font-family:'Cinzel',serif;font-size:clamp(1.8rem,5vw,3.2rem);font-weight:900;color:var(--text-light);margin-bottom:.6rem;text-shadow:0 2px 20px rgba(0,0,0,.6);line-height:1.1; }
+  .champ-archetypes { display:flex;gap:.35rem;flex-wrap:wrap; }
+  .archetype-pill { font-family:'Rajdhani',sans-serif;font-size:.68rem;font-weight:600;letter-spacing:.06em;text-transform:uppercase;background:rgba(11,196,227,.12);border:1px solid rgba(11,196,227,.25);color:var(--blue);padding:.18rem .55rem;border-radius:20px; }
+  .content-grid { display:grid;grid-template-columns:1fr 150px;gap:1.75rem;align-items:start; }
+  .info-card { background:var(--glass-bg,rgba(15,18,28,.75));backdrop-filter:var(--glass-blur);-webkit-backdrop-filter:var(--glass-blur);border:1px solid var(--glass-border,rgba(200,155,60,.15));border-radius:10px;padding:1.5rem;margin-bottom:1.25rem;transition:border-color .3s; }
+  .info-card:hover { border-color:rgba(200,155,60,.28); }
+  .section-label { font-family:'Rajdhani',sans-serif;font-size:.68rem;color:var(--gold);text-transform:uppercase;letter-spacing:.15em;font-weight:700;margin-bottom:.75rem;opacity:.9; }
+  .champ-desc { color:var(--text-light);line-height:1.75;font-size:.93rem; }
+  .tip-box { display:flex;gap:.75rem;align-items:flex-start;margin-top:1.1rem;background:rgba(11,196,227,.06);border:1px solid rgba(11,196,227,.2);border-radius:7px;padding:.85rem 1rem;font-size:.87rem;color:var(--text-light);line-height:1.5; }
+  .tip-icon { font-size:1.1rem;flex-shrink:0;margin-top:.05rem; }
+  .stats-grid { display:grid;grid-template-columns:1fr 1fr;gap:1.5rem; }
+  .stat { display:flex;flex-direction:column;gap:.3rem; }
+  .stat-label { font-family:'Rajdhani',sans-serif;font-size:.65rem;text-transform:uppercase;letter-spacing:.12em;color:var(--text-dim);font-weight:600; }
+  .diff-row { display:flex;align-items:center;gap:.5rem; }
+  .stat-stars { font-size:.95rem;letter-spacing:2px; }
+  .stat-sub { font-size:.72rem;color:var(--text-muted); }
+  .stat-value { font-size:.88rem;color:var(--text-light);text-transform:capitalize; }
+  .tags { display:flex;flex-wrap:wrap;gap:.3rem;margin-top:.1rem; }
+  .tag { background:rgba(200,155,60,.08);border:1px solid rgba(200,155,60,.2);color:var(--gold-light);font-size:.68rem;padding:.15rem .5rem;border-radius:20px;text-transform:capitalize; }
+  .tag--style { background:rgba(11,196,227,.07);border-color:rgba(11,196,227,.22);color:var(--blue); }
+  .opgg-btn { display:inline-flex;align-items:center;gap:.5rem;background:rgba(15,25,40,.8);border:1px solid rgba(47,64,85,.8);color:#a0b4cc;font-size:.87rem;font-weight:600;padding:.75rem 1.25rem;border-radius:7px;text-decoration:none;margin-bottom:1.5rem;transition:border-color .2s,background .2s,color .2s; }
+  .opgg-btn:hover { border-color:#5b8dd9;background:rgba(30,50,75,.8);color:#d0e4f8; }
+  .thumb-col { display:flex;flex-direction:column;align-items:center;gap:1rem;position:sticky;top:80px; }
+  .thumb-card { background:var(--dark3);border:1px solid rgba(200,155,60,.2);border-radius:50%;padding:4px;box-shadow:var(--glow-gold); }
+  .champ-thumb { width:120px;height:120px;border-radius:50%;object-fit:cover;display:block; }
+  .quiz-cta { display:block;width:100%;text-align:center;background:linear-gradient(135deg,#d4a43f 0%,#c89b3c 100%);color:var(--dark);font-family:'Rajdhani',sans-serif;font-weight:700;font-size:.82rem;letter-spacing:.06em;text-transform:uppercase;padding:.7rem .75rem;border-radius:7px;text-decoration:none;transition:transform .2s var(--ease-out),box-shadow .2s;line-height:1.35;animation:pulse-glow 3s ease-in-out infinite; }
+  .quiz-cta:hover { transform:translateY(-2px);box-shadow:0 6px 20px rgba(200,155,60,.4);animation:none; }
+  .quiz-cta-icon { display:block;font-size:1.2rem;margin-bottom:.2rem; }
+  .diff-meter { width:100%;background:var(--dark3);border:1px solid rgba(255,255,255,.06);border-radius:8px;padding:.75rem;text-align:center; }
+  .diff-label-sm { font-family:'Rajdhani',sans-serif;font-size:.62rem;text-transform:uppercase;letter-spacing:.1em;color:var(--text-dim);font-weight:600;margin-bottom:.5rem; }
+  .diff-track { height:4px;background:rgba(255,255,255,.08);border-radius:2px;margin-bottom:.45rem;overflow:hidden; }
+  .diff-fill { height:100%;border-radius:2px;transition:width .6s var(--ease-out); }
+  .diff-num { font-family:'Rajdhani',sans-serif;font-size:.75rem;font-weight:700;text-transform:uppercase;letter-spacing:.06em; }
+  @media (max-width:768px) { .champ-page{padding:1rem 1rem 4rem}.content-grid{grid-template-columns:1fr}.thumb-col{position:static;top:auto;flex-direction:row;justify-content:center;flex-wrap:wrap}.champ-thumb{width:90px;height:90px}.diff-meter{max-width:200px}.quiz-cta{max-width:200px;font-size:.78rem} }
+  @media (max-width:480px) { .champ-page{padding:.75rem .75rem 3rem}.splash-img{height:280px}.splash-content{padding:1.25rem 1rem}.champ-name{font-size:clamp(1.4rem,5vw,2.4rem)}.info-card{padding:1rem;margin-bottom:.9rem}.stats-grid{grid-template-columns:1fr} }
+</style>

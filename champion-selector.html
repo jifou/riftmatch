@@ -1,0 +1,1437 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Quel Champion LoL es-tu ? | Quiz League of Legends 2025</title>
+<meta name="description" content="Découvre quel champion League of Legends correspond à ton style de jeu. Quiz gratuit parmi 165 champions — résultats personnalisés en secondes.">
+<meta name="keywords" content="quel champion lol, quiz league of legends, trouver son champion lol, champion personnalité, lol champion finder, quiz lol 2025">
+<meta property="og:title" content="Quel Champion LoL es-tu ? Quiz Personnalisé">
+<meta property="og:description" content="Quiz gratuit — Trouve ton champion idéal parmi les 165 du roster complet en moins de 2 minutes.">
+<meta property="og:type" content="website">
+<meta property="og:image" content="https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Ahri_0.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Quel Champion LoL es-tu ?">
+<meta name="twitter:description" content="Quiz personnalisé League of Legends — Trouve ton champion idéal.">
+<link rel="alternate" hreflang="fr" href="?lang=fr">
+<link rel="alternate" hreflang="en" href="?lang=en">
+<link rel="alternate" hreflang="es" href="?lang=es">
+<link rel="alternate" hreflang="x-default" href="?lang=en">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"Quiz","name":"Quel Champion League of Legends es-tu ?","description":"Quiz personnalisé pour trouver ton champion LoL idéal parmi 165 champions selon ton style de jeu, niveau et préférences.","about":{"@type":"VideoGame","name":"League of Legends","publisher":{"@type":"Organization","name":"Riot Games"}},"educationalLevel":"beginner to expert","inLanguage":["fr","en","es"]}
+</script>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{--gold:#C89B3C;--gold2:#F0E6D3;--blue:#0BC4E3;--dark:#010A13;--panel:#0D1B2A;--panel2:#1A2D40;--text:#A0B4C8;--white:#F0E6D3}
+body{background:var(--dark);color:var(--white);font-family:'Segoe UI',Arial,sans-serif;min-height:100vh;
+  background-image:radial-gradient(ellipse at 50% 0%,rgba(12,78,117,0.3) 0%,transparent 65%);
+  background-attachment:fixed}
+#app{max-width:920px;margin:0 auto;padding:16px 14px 80px;position:relative}
+
+/* LANG SWITCHER */
+.lang-bar{display:flex;justify-content:flex-end;gap:6px;padding:10px 0 0}
+.lang-btn{background:transparent;border:1px solid rgba(200,155,60,0.2);color:var(--text);
+  padding:4px 12px;border-radius:20px;cursor:pointer;font-size:12px;font-weight:600;transition:all .2s}
+.lang-btn.active,.lang-btn:hover{border-color:var(--gold);color:var(--gold);background:rgba(200,155,60,0.08)}
+
+/* HEADER */
+.header{text-align:center;padding:28px 0 24px}
+.header .logo{font-size:11px;letter-spacing:4px;color:var(--gold);text-transform:uppercase;margin-bottom:6px}
+.header h1{font-size:clamp(26px,5vw,44px);font-weight:800;letter-spacing:1px;
+  background:linear-gradient(135deg,#C89B3C,#F0E6D3,#C89B3C);-webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;background-clip:text;line-height:1.15;margin-bottom:10px}
+.header p{color:var(--text);font-size:14px;max-width:480px;margin:0 auto}
+
+/* PROGRESS */
+.progress-wrap{margin:0 0 24px}
+.progress-label{display:flex;justify-content:space-between;margin-bottom:7px;font-size:12px;color:var(--text)}
+.progress-bar{height:4px;background:rgba(255,255,255,0.08);border-radius:4px;overflow:hidden}
+.progress-fill{height:100%;background:linear-gradient(90deg,var(--gold),var(--blue));border-radius:4px;transition:width .5s ease}
+.step-dots{display:flex;gap:7px;justify-content:center;margin-top:10px}
+.step-dot{width:8px;height:8px;border-radius:50%;background:rgba(255,255,255,0.12);transition:all .3s}
+.step-dot.active{background:var(--gold);transform:scale(1.3)}
+.step-dot.done{background:var(--blue)}
+
+/* CARD */
+.question-card{background:rgba(13,27,42,0.92);border:1px solid rgba(200,155,60,0.22);border-radius:12px;
+  padding:28px 26px;backdrop-filter:blur(10px);box-shadow:0 6px 28px rgba(0,0,0,0.45);
+  animation:fadeUp .35s ease both}
+@keyframes fadeUp{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:translateY(0)}}
+.q-step{font-size:11px;letter-spacing:3px;color:var(--gold);text-transform:uppercase;margin-bottom:6px}
+.q-text{font-size:clamp(17px,3vw,22px);font-weight:700;color:var(--white);margin-bottom:5px}
+.q-sub{font-size:13px;color:var(--text);margin-bottom:20px}
+.multi-hint{font-size:11px;color:rgba(200,155,60,0.6);text-align:center;margin:-12px 0 16px;font-style:italic}
+.gold-line{height:1px;background:linear-gradient(90deg,transparent,rgba(200,155,60,0.35),transparent);margin:0 0 20px}
+
+/* OPTIONS */
+.opts{display:grid;gap:10px}
+.opts.c2{grid-template-columns:repeat(2,1fr)}
+.opts.c3{grid-template-columns:repeat(3,1fr)}
+@media(max-width:520px){.opts.c3{grid-template-columns:repeat(2,1fr)}.opts.c2{grid-template-columns:1fr}}
+.opt{background:rgba(26,45,64,0.55);border:1px solid rgba(200,155,60,0.18);border-radius:9px;
+  padding:14px 12px;cursor:pointer;transition:all .22s;text-align:center;user-select:none;position:relative}
+.opt:hover{border-color:var(--gold);transform:translateY(-2px);box-shadow:0 3px 16px rgba(200,155,60,0.18)}
+.opt.sel{border-color:var(--gold);background:rgba(200,155,60,0.14);box-shadow:0 0 18px rgba(200,155,60,0.25)}
+.opt.sel::after{content:'✓';position:absolute;top:7px;right:9px;color:var(--gold);font-size:13px;font-weight:800}
+.opt-icon{font-size:26px;margin-bottom:7px;display:block}
+.opt-name{font-size:13px;font-weight:700;color:var(--white);margin-bottom:3px}
+.opt-desc{font-size:11px;color:var(--text);line-height:1.4}
+
+/* RANK GRID special */
+.rank-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
+@media(max-width:520px){.rank-grid{grid-template-columns:repeat(2,1fr)}}
+.rank-card{background:rgba(26,45,64,0.55);border:1px solid rgba(200,155,60,0.18);border-radius:9px;
+  padding:14px 8px;cursor:pointer;text-align:center;transition:all .22s;user-select:none;position:relative}
+.rank-card:hover{border-color:var(--gold);transform:translateY(-2px)}
+.rank-card.sel{border-color:var(--gold);background:rgba(200,155,60,0.14)}
+.rank-card.sel::after{content:'✓';position:absolute;top:6px;right:8px;color:var(--gold);font-size:12px;font-weight:800}
+.rank-icon{font-size:28px;display:block;margin-bottom:6px}
+.rank-name{font-size:13px;font-weight:700;color:var(--white);margin-bottom:2px}
+.rank-desc{font-size:10px;color:var(--text)}
+
+/* FACTION GRID */
+.fact-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
+@media(min-width:600px){.fact-grid{grid-template-columns:repeat(5,1fr)}}
+.fact-card{background:rgba(26,45,64,0.55);border:1px solid rgba(200,155,60,0.18);border-radius:8px;
+  padding:11px 6px;cursor:pointer;text-align:center;transition:all .22s;user-select:none}
+.fact-card:hover,.fact-card.sel{border-color:var(--gold);background:rgba(200,155,60,0.12)}
+.fact-icon{font-size:20px;display:block;margin-bottom:5px}
+.fact-name{font-size:11px;font-weight:700;color:var(--white)}
+
+/* NAV */
+.nav-row{display:flex;gap:10px;margin-top:24px;justify-content:flex-end}
+.btn{padding:11px 26px;border-radius:6px;border:none;cursor:pointer;font-weight:700;
+  font-size:13px;letter-spacing:1px;text-transform:uppercase;transition:all .2s}
+.btn-back{background:transparent;border:1px solid rgba(200,155,60,0.28);color:var(--text)}
+.btn-back:hover{border-color:var(--gold);color:var(--gold)}
+.btn-next{background:linear-gradient(135deg,#785A28,#C89B3C);color:var(--dark);box-shadow:0 3px 14px rgba(200,155,60,0.3)}
+.btn-next:hover{background:linear-gradient(135deg,#C89B3C,#F0E6D3);transform:translateY(-1px)}
+.btn-next:disabled{opacity:.38;cursor:not-allowed;transform:none}
+
+/* RESULTS */
+#results{display:none;animation:fadeUp .45s ease both}
+.res-header{text-align:center;margin-bottom:30px}
+.res-header h2{font-size:clamp(20px,4vw,34px);font-weight:800;
+  background:linear-gradient(135deg,#C89B3C,#F0E6D3);-webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;background-clip:text;margin-bottom:6px}
+.res-header p{color:var(--text);font-size:13px}
+.champ-list{display:grid;gap:18px}
+.champ-card{background:rgba(13,27,42,0.92);border:1px solid rgba(200,155,60,0.2);border-radius:12px;
+  overflow:hidden;display:flex;transition:all .3s;animation:fadeUp .45s ease both}
+.champ-card:nth-child(1){border-color:rgba(200,155,60,0.65);box-shadow:0 0 28px rgba(200,155,60,0.18)}
+.champ-card:nth-child(2){border-color:rgba(192,192,192,0.35)}
+.champ-card:nth-child(3){border-color:rgba(176,141,87,0.28)}
+.champ-card:hover{transform:translateY(-2px);box-shadow:0 6px 24px rgba(0,0,0,0.5)}
+.champ-img-wrap{flex-shrink:0;width:120px;position:relative;overflow:hidden}
+@media(max-width:480px){.champ-img-wrap{width:80px}}
+.champ-img{width:100%;height:100%;object-fit:cover;object-position:top center;min-height:155px}
+.champ-rank{position:absolute;top:7px;left:7px;background:rgba(0,0,0,0.75);border:1px solid var(--gold);
+  color:var(--gold);font-weight:800;font-size:12px;width:24px;height:24px;border-radius:50%;
+  display:flex;align-items:center;justify-content:center}
+.champ-info{padding:18px;flex:1;display:flex;flex-direction:column;gap:8px;min-width:0}
+.champ-name{font-size:clamp(16px,3vw,22px);font-weight:800;color:var(--white)}
+.champ-title{font-size:11px;color:var(--gold);font-style:italic;margin-top:-4px}
+.match-row{display:flex;align-items:center;gap:10px}
+.match-pct{font-size:20px;font-weight:800;color:var(--gold);min-width:48px}
+.match-bar{flex:1;height:5px;background:rgba(255,255,255,0.1);border-radius:4px;overflow:hidden}
+.match-fill{height:100%;border-radius:4px;background:linear-gradient(90deg,var(--gold),var(--blue));transition:width 1s ease}
+.champ-tags{display:flex;flex-wrap:wrap;gap:5px}
+.tag{padding:2px 9px;border-radius:20px;font-size:10px;font-weight:600;border:1px solid;white-space:nowrap}
+.tag-l{border-color:rgba(11,196,227,0.4);color:var(--blue)}
+.tag-a{border-color:rgba(200,155,60,0.4);color:var(--gold)}
+.tag-f{border-color:rgba(160,180,200,0.28);color:var(--text)}
+.tag-d{font-size:10px}
+.champ-bio{font-size:11px;color:var(--text);line-height:1.55}
+.champ-links{display:flex;flex-wrap:wrap;gap:7px;margin-top:2px}
+.champ-link{padding:5px 12px;border-radius:5px;font-size:11px;font-weight:700;text-decoration:none;
+  transition:all .2s;letter-spacing:.5px;white-space:nowrap}
+.link-opgg{background:rgba(11,196,227,0.12);border:1px solid rgba(11,196,227,0.3);color:var(--blue)}
+.link-opgg:hover{background:rgba(11,196,227,0.22)}
+.link-guide{background:rgba(200,155,60,0.1);border:1px solid rgba(200,155,60,0.3);color:var(--gold)}
+.link-guide:hover{background:rgba(200,155,60,0.2)}
+
+/* AFFILIATION SECTION */
+.aff-section{margin-top:40px;padding-top:30px;border-top:1px solid rgba(200,155,60,0.2)}
+.aff-title{text-align:center;font-size:18px;font-weight:700;color:var(--gold);margin-bottom:6px;letter-spacing:1px}
+.aff-sub{text-align:center;font-size:12px;color:var(--text);margin-bottom:22px}
+.aff-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}
+@media(min-width:640px){.aff-grid{grid-template-columns:repeat(4,1fr)}}
+.aff-card{background:rgba(13,27,42,0.85);border:1px solid rgba(200,155,60,0.18);border-radius:10px;
+  padding:18px 14px;text-align:center;text-decoration:none;transition:all .25s;display:block}
+.aff-card:hover{border-color:var(--gold);transform:translateY(-2px);box-shadow:0 4px 18px rgba(200,155,60,0.15)}
+.aff-icon{font-size:28px;display:block;margin-bottom:8px}
+.aff-card-title{font-size:13px;font-weight:700;color:var(--white);margin-bottom:4px}
+.aff-card-desc{font-size:11px;color:var(--text);line-height:1.4;margin-bottom:10px}
+.aff-cta{display:inline-block;padding:5px 14px;border-radius:4px;font-size:11px;font-weight:700;
+  background:linear-gradient(135deg,#785A28,#C89B3C);color:var(--dark);letter-spacing:.5px}
+.aff-coaching-badge{display:inline-block;background:rgba(195,7,63,0.15);border:1px solid rgba(195,7,63,0.3);
+  color:#ff4466;font-size:10px;padding:2px 8px;border-radius:10px;margin-bottom:6px;font-weight:700}
+
+/* RESTART */
+.restart-row{text-align:center;margin-top:32px}
+.btn-restart{background:transparent;border:1px solid rgba(200,155,60,0.35);color:var(--gold);
+  padding:12px 36px;border-radius:6px;cursor:pointer;font-size:13px;font-weight:700;
+  letter-spacing:2px;text-transform:uppercase;transition:all .3s}
+.btn-restart:hover{background:rgba(200,155,60,0.08)}
+
+/* REASONS */
+.reasons{display:flex;flex-wrap:wrap;gap:5px;margin-top:2px}
+.reason-tag{padding:2px 9px;border-radius:12px;font-size:10px;background:rgba(200,155,60,0.08);
+  border:1px solid rgba(200,155,60,0.22);color:rgba(200,155,60,0.8)}
+</style>
+</head>
+<body>
+<div id="app">
+  <div class="lang-bar">
+    <button class="lang-btn" onclick="setLang('fr')">🇫🇷 FR</button>
+    <button class="lang-btn" onclick="setLang('en')">🇺🇸 EN</button>
+    <button class="lang-btn" onclick="setLang('es')">🇪🇸 ES</button>
+  </div>
+  <header class="header">
+    <div class="logo" id="h-logo">⚔ League of Legends</div>
+    <h1 id="h-title">Quel Champion LoL Es-Tu ?</h1>
+    <p id="h-sub">Réponds à 8 questions pour découvrir les champions qui te correspondent le mieux parmi les 165 du roster complet.</p>
+  </header>
+  <div id="quiz">
+    <div class="progress-wrap">
+      <div class="progress-label"><span id="prog-step">Étape 1 / 8</span><span id="prog-pct">0%</span></div>
+      <div class="progress-bar"><div class="progress-fill" id="prog-fill"></div></div>
+      <div class="step-dots" id="step-dots"></div>
+    </div>
+    <div id="question-area"></div>
+  </div>
+  <div id="results">
+    <div class="res-header">
+      <h2 id="res-title">Tes Champions Idéaux</h2>
+      <p id="res-sub">Basé sur tes préférences — voici les champions faits pour toi</p>
+    </div>
+    <div class="champ-list" id="champ-list"></div>
+    <div class="aff-section" id="aff-section"></div>
+    <div class="restart-row"><button class="btn-restart" id="btn-restart" onclick="restart()">↺ Recommencer</button></div>
+  </div>
+</div>
+
+<script>
+// =============================================
+// I18N — FR / EN / ES
+// =============================================
+const I18N = {
+fr:{
+  logo:"⚔ League of Legends",
+  title:"Quel Champion LoL Es-Tu ?",
+  sub:"Réponds à 8 questions pour découvrir les champions qui te correspondent parmi les 165 du roster.",
+  step_of:"Étape {n} / 8",
+  back:"← Retour", next:"Suivant →", finish:"✨ Voir mes Champions",
+  res_title:"Tes Champions Idéaux",
+  res_sub:"Basé sur tes préférences — voici les champions faits pour toi",
+  restart:"↺ Recommencer",
+  multi_hint:"💡 Tu peux sélectionner plusieurs réponses",
+  match_label:"Compatibilité",
+  // STEP 0 — RANK
+  s0_lbl:"Ton Niveau", s0_q:"Quel est ton rang actuel ?", s0_sub:"Ta position en Solo Queue",
+  s0_iron:"Fer", s0_iron_d:"Je découvre LoL",
+  s0_bronze:"Bronze", s0_bronze_d:"J'apprends les bases",
+  s0_silver:"Argent", s0_silver_d:"Je maîtrise les fondamentaux",
+  s0_gold:"Or", s0_gold_d:"Joueur confirmé",
+  s0_plat:"Platine", s0_plat_d:"Au-dessus de la moyenne",
+  s0_emerald:"Émeraude", s0_emerald_d:"Joueur sérieux",
+  s0_diamond:"Diamant", s0_diamond_d:"Joueur d'élite",
+  s0_master:"Maître+", s0_master_d:"Sommet de la ladder",
+  // STEP 1 — LANE
+  s1_lbl:"Ta Lane", s1_q:"Où aimes-tu jouer ?", s1_sub:"Ta position préférée sur la Rift",
+  s1_top:"Top Lane", s1_top_d:"Isolé, 1v1, duels épiques",
+  s1_jungle:"Jungle", s1_jungle_d:"Embuscades, pression globale",
+  s1_mid:"Mid Lane", s1_mid_d:"Roaming, impact direct",
+  s1_bot:"Bot Lane", s1_bot_d:"ADC, late-game carry",
+  s1_support:"Support", s1_support_d:"Protéger, engager, contrôler",
+  s1_any:"Flexible", s1_any_d:"Je m'adapte partout",
+  // STEP 2 — ARCHETYPE
+  s2_lbl:"Archétype", s2_q:"Quel est ton style de combat ?", s2_sub:"Le rôle que tu veux jouer",
+  s2_tank:"Tank", s2_tank_d:"Encaisser, protéger, initier",
+  s2_mage:"Mage", s2_mage_d:"Sorts, contrôle, dégâts magiques",
+  s2_assassin:"Assassin", s2_assassin_d:"Burst, one-shot, mobilité",
+  s2_adc:"ADC / Tireur", s2_adc_d:"Dégâts physiques, late-game",
+  s2_support:"Support", s2_support_d:"Soins, CC, protections",
+  s2_fighter:"Fighter / Bruiser", s2_fighter_d:"Dégâts et résistance mélangés",
+  // STEP 3 — STYLE
+  s3_lbl:"Style de Jeu", s3_q:"Comment tu joues ?", s3_sub:"Ta façon d'aborder les parties",
+  s3_aggressive:"Agressif", s3_aggressive_d:"Je cherche les kills en permanence",
+  s3_passive:"Passif / Farm", s3_passive_d:"Je farm et je scale doucement",
+  s3_carry:"Carry", s3_carry_d:"Je porte mes coéquipiers",
+  s3_utility:"Utilité", s3_utility_d:"CC, soins — je sers l'équipe",
+  s3_engage:"Engage", s3_engage_d:"J'initie les teamfights",
+  s3_peel:"Peel", s3_peel_d:"Je protège mon carry",
+  // STEP 4 — FACTION
+  s4_lbl:"Faction", s4_q:"Quelle faction t'attire le plus ?", s4_sub:"Ton univers narratif de prédilection",
+  s4_demacia:"Démacia", s4_noxus:"Noxus", s4_ionia:"Ionie", s4_freljord:"Freljord",
+  s4_shurima:"Shurima", s4_piltover:"Piltover", s4_zaun:"Zaun", s4_bilgewater:"Bilgewater",
+  s4_shadow:"Îles Obscures", s4_targon:"Targon", s4_void:"Le Vide", s4_ixtal:"Ixtal",
+  s4_bandle:"Bandle City", s4_any:"Peu importe",
+  // STEP 5 — DIFFICULTY
+  s5_lbl:"Difficulté", s5_q:"Quel niveau de complexité ?", s5_sub:"La courbe d'apprentissage que tu cherches",
+  s5_1:"Débutant", s5_1_d:"Simple, efficace rapidement",
+  s5_2:"Facile", s5_2_d:"Quelques mécaniques à maîtriser",
+  s5_3:"Intermédiaire", s5_3_d:"Bon niveau requis",
+  s5_4:"Difficile", s5_4_d:"Long apprentissage, haut plafond",
+  s5_5:"Expert", s5_5_d:"Maîtrise totale nécessaire",
+  s5_0:"Surprise !", s5_0_d:"Je veux être surpris",
+  // STEP 6 — UNIVERSE
+  s6_lbl:"Univers", s6_q:"Dans quel univers ?", s6_sub:"L'ambiance visuelle qui te correspond",
+  s6_medieval:"Médiéval / Fantasy", s6_medieval_d:"Épées, magie, royaumes",
+  s6_steampunk:"Steampunk", s6_steampunk_d:"Vapeur, technologie, cités",
+  s6_cosmic:"Cosmique", s6_cosmic_d:"Dieux, étoiles, puissance divine",
+  s6_ancient:"Antique", s6_ancient_d:"Égypte, jungle, civilisations",
+  s6_dark:"Sombre / Horreur", s6_dark_d:"Mort, malédictions, terreur",
+  s6_nature:"Nature / Océan", s6_nature_d:"Forêts, mers, esprits",
+  s6_pirate:"Pirate", s6_pirate_d:"Haute mer, aventure",
+  s6_future:"Futuriste", s6_future_d:"Cybernétique, machines",
+  s6_void:"Le Vide", s6_void_d:"Horreur cosmique, dimensions inconnues",
+  // STEP 7 — TYPE
+  s7_lbl:"Type de Héros", s7_q:"Quel type de personnage es-tu ?", s7_sub:"La nature de ton champion",
+  s7_human:"Humain", s7_human_d:"Humain (ou presque)",
+  s7_animal:"Animal / Bête", s7_animal_d:"Créature animale, semi-bestiale",
+  s7_construct:"Robot / Artefact", s7_construct_d:"Machine, golem, construct",
+  s7_god:"Dieu / Divinité", s7_god_d:"Aspect, dieu, puissance divine",
+  s7_demon:"Démon", s7_demon_d:"Entité démoniaque",
+  s7_undead:"Mort-vivant", s7_undead_d:"Revenants, liches, zombies",
+  s7_yordle:"Yordle", s7_yordle_d:"Petite créature magique",
+  s7_void_e:"Créature du Vide", s7_void_e_d:"Horreurs du Vide",
+  s7_spirit:"Esprit / Entité", s7_spirit_d:"Esprits, entités cosmiques",
+  // RESULTS TAGS
+  tag_top:"Top", tag_jungle:"Jungle", tag_mid:"Mid", tag_bot:"Bot", tag_support:"Support",
+  tag_tank:"Tank", tag_mage:"Mage", tag_assassin:"Assassin", tag_adc:"ADC", tag_fighter:"Fighter",
+  diff_labels:["","Débutant","Facile","Intermédiaire","Difficile","Expert"],
+  reason_lane:"Lane ✓", reason_role:"Rôle ✓", reason_style:"Style ✓",
+  reason_faction:"Faction ✓", reason_diff:"Difficulté ✓", reason_univ:"Univers ✓", reason_type:"Type ✓",
+  link_stats:"📊 Stats OP.GG", link_guide:"📖 Guide Mobafire", link_skin:"🎨 Voir les skins",
+  // AFFILIATION
+  aff_title:"Pour aller plus loin",
+  aff_sub:"Outils recommandés pour progresser",
+  aff_coaching_title:"Coaching & Guides", aff_coaching_desc:"Progresse rapidement avec des cours pros",
+  aff_coaching_cta:"Voir les cours →",
+  aff_stats_title:"Analyse ton jeu", aff_stats_desc:"Stats, tierlist & counter-picks en temps réel",
+  aff_stats_cta:"Ouvrir OP.GG →",
+  aff_gear_title:"Setup Gaming", aff_gear_desc:"Souris, clavier, casque pour les ranked",
+  aff_gear_cta:"Voir le setup →",
+  aff_skins_title:"Skins & RP", aff_skins_desc:"Personnalise ton champion favori",
+  aff_skins_cta:"Boutique LoL →",
+  coaching_badge_iron:"⬆️ Passe de Fer à Or",
+  coaching_badge_gold:"⬆️ Atteins le Diamant",
+  coaching_badge_dia:"⬆️ Rejoins le top 1%",
+},
+en:{
+  logo:"⚔ League of Legends",
+  title:"Which LoL Champion Are You?",
+  sub:"Answer 8 questions to discover your perfect champion among all 165 on the complete roster.",
+  step_of:"Step {n} / 8",
+  back:"← Back", next:"Next →", finish:"✨ See My Champions",
+  res_title:"Your Ideal Champions",
+  res_sub:"Based on your preferences — here are the champions made for you",
+  restart:"↺ Restart",
+  multi_hint:"💡 You can select multiple answers",
+  match_label:"Match",
+  s0_lbl:"Your Level", s0_q:"What's your current rank?", s0_sub:"Your Solo Queue rank",
+  s0_iron:"Iron", s0_iron_d:"Just starting out",
+  s0_bronze:"Bronze", s0_bronze_d:"Learning the basics",
+  s0_silver:"Silver", s0_silver_d:"Got the fundamentals down",
+  s0_gold:"Gold", s0_gold_d:"Solid, experienced player",
+  s0_plat:"Platinum", s0_plat_d:"Above average",
+  s0_emerald:"Emerald", s0_emerald_d:"Serious competitive player",
+  s0_diamond:"Diamond", s0_diamond_d:"Elite player",
+  s0_master:"Master+", s0_master_d:"Top of the ladder",
+  s1_lbl:"Your Lane", s1_q:"Where do you like to play?", s1_sub:"Your preferred position on the Rift",
+  s1_top:"Top Lane", s1_top_d:"Isolated, 1v1, epic duels",
+  s1_jungle:"Jungle", s1_jungle_d:"Ambushes, global pressure",
+  s1_mid:"Mid Lane", s1_mid_d:"Roaming, direct impact",
+  s1_bot:"Bot Lane", s1_bot_d:"ADC, late-game carry",
+  s1_support:"Support", s1_support_d:"Protect, engage, control",
+  s1_any:"Flexible", s1_any_d:"I adapt anywhere",
+  s2_lbl:"Archetype", s2_q:"What's your combat style?", s2_sub:"The role you want to play in a team",
+  s2_tank:"Tank", s2_tank_d:"Absorb damage, protect, initiate",
+  s2_mage:"Mage", s2_mage_d:"Spells, CC, magic damage",
+  s2_assassin:"Assassin", s2_assassin_d:"Burst, one-shot, mobility",
+  s2_adc:"ADC / Marksman", s2_adc_d:"Physical damage, late-game carry",
+  s2_support:"Support", s2_support_d:"Heals, CC, protection",
+  s2_fighter:"Fighter / Bruiser", s2_fighter_d:"Mixed damage and tankiness",
+  s3_lbl:"Playstyle", s3_q:"How do you play?", s3_sub:"Your approach to games",
+  s3_aggressive:"Aggressive", s3_aggressive_d:"Always looking for kills",
+  s3_passive:"Passive / Farm", s3_passive_d:"I farm and scale quietly",
+  s3_carry:"Carry", s3_carry_d:"I want to carry my teammates",
+  s3_utility:"Utility", s3_utility_d:"CC, heals — I serve the team",
+  s3_engage:"Engage", s3_engage_d:"I initiate teamfights",
+  s3_peel:"Peel", s3_peel_d:"I protect my ADC / carry",
+  s4_lbl:"Faction", s4_q:"Which faction appeals to you most?", s4_sub:"Your preferred narrative universe",
+  s4_demacia:"Demacia", s4_noxus:"Noxus", s4_ionia:"Ionia", s4_freljord:"Freljord",
+  s4_shurima:"Shurima", s4_piltover:"Piltover", s4_zaun:"Zaun", s4_bilgewater:"Bilgewater",
+  s4_shadow:"Shadow Isles", s4_targon:"Targon", s4_void:"The Void", s4_ixtal:"Ixtal",
+  s4_bandle:"Bandle City", s4_any:"No preference",
+  s5_lbl:"Difficulty", s5_q:"What complexity level?", s5_sub:"The learning curve you're looking for",
+  s5_1:"Beginner", s5_1_d:"Simple, effective fast",
+  s5_2:"Easy", s5_2_d:"A few mechanics to master",
+  s5_3:"Intermediate", s5_3_d:"Good skill level required",
+  s5_4:"Hard", s5_4_d:"Long learning curve, high ceiling",
+  s5_5:"Expert", s5_5_d:"Total mastery required",
+  s5_0:"Surprise me!", s5_0_d:"I want to be surprised",
+  s6_lbl:"Universe", s6_q:"Which universe?", s6_sub:"The visual vibe that fits you",
+  s6_medieval:"Medieval / Fantasy", s6_medieval_d:"Swords, magic, kingdoms",
+  s6_steampunk:"Steampunk", s6_steampunk_d:"Steam, technology, cities",
+  s6_cosmic:"Cosmic", s6_cosmic_d:"Gods, stars, divine power",
+  s6_ancient:"Ancient", s6_ancient_d:"Egypt, jungle, old civilizations",
+  s6_dark:"Dark / Horror", s6_dark_d:"Death, curses, terror",
+  s6_nature:"Nature / Ocean", s6_nature_d:"Forests, seas, spirits",
+  s6_pirate:"Pirate", s6_pirate_d:"High seas, adventure",
+  s6_future:"Futuristic", s6_future_d:"Cybernetics, machines",
+  s6_void:"The Void", s6_void_d:"Cosmic horror, unknown dimensions",
+  s7_lbl:"Hero Type", s7_q:"What type of character are you?", s7_sub:"Your champion's nature",
+  s7_human:"Human", s7_human_d:"Human (or close to it)",
+  s7_animal:"Animal / Beast", s7_animal_d:"Animal creature, semi-bestial",
+  s7_construct:"Robot / Construct", s7_construct_d:"Machine, golem, artifact",
+  s7_god:"God / Deity", s7_god_d:"Aspect, god, divine power",
+  s7_demon:"Demon", s7_demon_d:"Demonic entity",
+  s7_undead:"Undead", s7_undead_d:"Revenants, liches, zombies",
+  s7_yordle:"Yordle", s7_yordle_d:"Small magical creature",
+  s7_void_e:"Void Entity", s7_void_e_d:"Horrors of the Void",
+  s7_spirit:"Spirit / Entity", s7_spirit_d:"Spirits, cosmic entities",
+  tag_top:"Top", tag_jungle:"Jungle", tag_mid:"Mid", tag_bot:"Bot", tag_support:"Support",
+  tag_tank:"Tank", tag_mage:"Mage", tag_assassin:"Assassin", tag_adc:"ADC", tag_fighter:"Fighter",
+  diff_labels:["","Beginner","Easy","Intermediate","Hard","Expert"],
+  reason_lane:"Lane ✓", reason_role:"Role ✓", reason_style:"Style ✓",
+  reason_faction:"Faction ✓", reason_diff:"Difficulty ✓", reason_univ:"Universe ✓", reason_type:"Type ✓",
+  link_stats:"📊 Stats OP.GG", link_guide:"📖 Mobafire Guide", link_skin:"🎨 View Skins",
+  aff_title:"Level Up Your Game",
+  aff_sub:"Recommended tools to improve faster",
+  aff_coaching_title:"Coaching & Guides", aff_coaching_desc:"Pro courses to climb the ladder fast",
+  aff_coaching_cta:"View Courses →",
+  aff_stats_title:"Analyze Your Game", aff_stats_desc:"Stats, tierlist & counter-picks live",
+  aff_stats_cta:"Open OP.GG →",
+  aff_gear_title:"Gaming Setup", aff_gear_desc:"Mouse, keyboard, headset for ranked",
+  aff_gear_cta:"View Setup →",
+  aff_skins_title:"Skins & RP", aff_skins_desc:"Customize your favorite champion",
+  aff_skins_cta:"LoL Store →",
+  coaching_badge_iron:"⬆️ Go from Iron to Gold",
+  coaching_badge_gold:"⬆️ Reach Diamond",
+  coaching_badge_dia:"⬆️ Join the top 1%",
+},
+es:{
+  logo:"⚔ League of Legends",
+  title:"¿Qué Campeón de LoL Eres?",
+  sub:"Responde 8 preguntas para descubrir los campeones que mejor se adaptan a ti entre los 165 del roster.",
+  step_of:"Paso {n} / 8",
+  back:"← Volver", next:"Siguiente →", finish:"✨ Ver Mis Campeones",
+  res_title:"Tus Campeones Ideales",
+  res_sub:"Basado en tus preferencias — estos son los campeones hechos para ti",
+  restart:"↺ Reiniciar",
+  multi_hint:"💡 Puedes seleccionar varias respuestas",
+  match_label:"Compatibilidad",
+  s0_lbl:"Tu Nivel", s0_q:"¿Cuál es tu rango actual?", s0_sub:"Tu posición en Solo Queue",
+  s0_iron:"Hierro", s0_iron_d:"Descubriendo el juego",
+  s0_bronze:"Bronce", s0_bronze_d:"Aprendiendo lo básico",
+  s0_silver:"Plata", s0_silver_d:"Domino los fundamentos",
+  s0_gold:"Oro", s0_gold_d:"Jugador consolidado",
+  s0_plat:"Platino", s0_plat_d:"Por encima de la media",
+  s0_emerald:"Esmeralda", s0_emerald_d:"Jugador serio y competitivo",
+  s0_diamond:"Diamante", s0_diamond_d:"Jugador de élite",
+  s0_master:"Maestro+", s0_master_d:"Cima de la clasificación",
+  s1_lbl:"Tu Carril", s1_q:"¿Dónde te gusta jugar?", s1_sub:"Tu posición preferida en la Grieta",
+  s1_top:"Carril Superior", s1_top_d:"Aislado, 1v1, duelos épicos",
+  s1_jungle:"Jungla", s1_jungle_d:"Emboscadas, presión global",
+  s1_mid:"Carril Central", s1_mid_d:"Roaming, impacto directo",
+  s1_bot:"Carril Inferior", s1_bot_d:"ADC, carry en late-game",
+  s1_support:"Soporte", s1_support_d:"Proteger, iniciar, controlar",
+  s1_any:"Flexible", s1_any_d:"Me adapto a cualquier posición",
+  s2_lbl:"Arquetipo", s2_q:"¿Cuál es tu estilo de combate?", s2_sub:"El rol que quieres jugar en el equipo",
+  s2_tank:"Tanque", s2_tank_d:"Absorber daño, proteger, iniciar",
+  s2_mage:"Mago", s2_mage_d:"Hechizos, CC, daño mágico",
+  s2_assassin:"Asesino", s2_assassin_d:"Burst, one-shot, movilidad",
+  s2_adc:"Tirador (ADC)", s2_adc_d:"Daño físico, carry en late-game",
+  s2_support:"Soporte", s2_support_d:"Curación, CC, protección",
+  s2_fighter:"Luchador / Bruiser", s2_fighter_d:"Mezcla de daño y resistencia",
+  s3_lbl:"Estilo de Juego", s3_q:"¿Cómo juegas?", s3_sub:"Tu forma de abordar las partidas",
+  s3_aggressive:"Agresivo", s3_aggressive_d:"Siempre busco kills",
+  s3_passive:"Pasivo / Farmear", s3_passive_d:"Farmeo y escalo tranquilo",
+  s3_carry:"Carry", s3_carry_d:"Quiero cargar a mis compañeros",
+  s3_utility:"Utilidad", s3_utility_d:"CC, curación — sirvo al equipo",
+  s3_engage:"Iniciar", s3_engage_d:"Inicio los teamfights",
+  s3_peel:"Proteger", s3_peel_d:"Protejo a mi carry",
+  s4_lbl:"Facción", s4_q:"¿Qué facción te atrae más?", s4_sub:"Tu universo narrativo preferido",
+  s4_demacia:"Demacia", s4_noxus:"Noxus", s4_ionia:"Ionia", s4_freljord:"Freljord",
+  s4_shurima:"Shurima", s4_piltover:"Piltover", s4_zaun:"Zaun", s4_bilgewater:"Bilgewater",
+  s4_shadow:"Islas de las Sombras", s4_targon:"Targon", s4_void:"El Vacío", s4_ixtal:"Ixtal",
+  s4_bandle:"Ciudad de Bandle", s4_any:"Sin preferencia",
+  s5_lbl:"Dificultad", s5_q:"¿Qué nivel de complejidad?", s5_sub:"La curva de aprendizaje que buscas",
+  s5_1:"Principiante", s5_1_d:"Simple, efectivo rápido",
+  s5_2:"Fácil", s5_2_d:"Pocas mecánicas que dominar",
+  s5_3:"Intermedio", s5_3_d:"Buen nivel requerido",
+  s5_4:"Difícil", s5_4_d:"Largo aprendizaje, alto techo",
+  s5_5:"Experto", s5_5_d:"Maestría total necesaria",
+  s5_0:"¡Sorpréndeme!", s5_0_d:"Quiero ser sorprendido",
+  s6_lbl:"Universo", s6_q:"¿En qué universo?", s6_sub:"El ambiente visual que te corresponde",
+  s6_medieval:"Medieval / Fantasía", s6_medieval_d:"Espadas, magia, reinos",
+  s6_steampunk:"Steampunk", s6_steampunk_d:"Vapor, tecnología, ciudades",
+  s6_cosmic:"Cósmico", s6_cosmic_d:"Dioses, estrellas, poder divino",
+  s6_ancient:"Antiguo", s6_ancient_d:"Egipto, jungla, civilizaciones",
+  s6_dark:"Oscuro / Terror", s6_dark_d:"Muerte, maldiciones, terror",
+  s6_nature:"Naturaleza / Océano", s6_nature_d:"Bosques, mares, espíritus",
+  s6_pirate:"Pirata", s6_pirate_d:"Alta mar, aventura",
+  s6_future:"Futurista", s6_future_d:"Cibernética, máquinas",
+  s6_void:"El Vacío", s6_void_d:"Horror cósmico, dimensiones desconocidas",
+  s7_lbl:"Tipo de Héroe", s7_q:"¿Qué tipo de personaje eres?", s7_sub:"La naturaleza de tu campeón",
+  s7_human:"Humano", s7_human_d:"Humano (o casi)",
+  s7_animal:"Animal / Bestia", s7_animal_d:"Criatura animal, semi-bestial",
+  s7_construct:"Robot / Artefacto", s7_construct_d:"Máquina, gólem, constructo",
+  s7_god:"Dios / Deidad", s7_god_d:"Aspecto, dios, poder divino",
+  s7_demon:"Demonio", s7_demon_d:"Entidad demoníaca",
+  s7_undead:"No-muerto", s7_undead_d:"Espectros, liches, zombies",
+  s7_yordle:"Yordle", s7_yordle_d:"Pequeña criatura mágica",
+  s7_void_e:"Criatura del Vacío", s7_void_e_d:"Horrores del Vacío",
+  s7_spirit:"Espíritu / Entidad", s7_spirit_d:"Espíritus, entidades cósmicas",
+  tag_top:"Superior", tag_jungle:"Jungla", tag_mid:"Central", tag_bot:"Inferior", tag_support:"Soporte",
+  tag_tank:"Tanque", tag_mage:"Mago", tag_assassin:"Asesino", tag_adc:"Tirador", tag_fighter:"Luchador",
+  diff_labels:["","Principiante","Fácil","Intermedio","Difícil","Experto"],
+  reason_lane:"Carril ✓", reason_role:"Rol ✓", reason_style:"Estilo ✓",
+  reason_faction:"Facción ✓", reason_diff:"Dificultad ✓", reason_univ:"Universo ✓", reason_type:"Tipo ✓",
+  link_stats:"📊 Stats OP.GG", link_guide:"📖 Guía Mobafire", link_skin:"🎨 Ver Skins",
+  aff_title:"Lleva tu juego al siguiente nivel",
+  aff_sub:"Herramientas recomendadas para mejorar",
+  aff_coaching_title:"Coaching y Guías", aff_coaching_desc:"Cursos pro para subir de rango rápido",
+  aff_coaching_cta:"Ver Cursos →",
+  aff_stats_title:"Analiza tu juego", aff_stats_desc:"Stats, tierlist y counter-picks en vivo",
+  aff_stats_cta:"Abrir OP.GG →",
+  aff_gear_title:"Setup Gaming", aff_gear_desc:"Ratón, teclado, auriculares para ranked",
+  aff_gear_cta:"Ver Setup →",
+  aff_skins_title:"Skins y RP", aff_skins_desc:"Personaliza tu campeón favorito",
+  aff_skins_cta:"Tienda LoL →",
+  coaching_badge_iron:"⬆️ Pasa de Hierro a Oro",
+  coaching_badge_gold:"⬆️ Llega a Diamante",
+  coaching_badge_dia:"⬆️ Únete al top 1%",
+}
+};
+
+// =============================================
+// CHAMPION DATA
+// =============================================
+const C=[
+["Aatrox","Aatrox",["top"],["fighter"],["aggressive","carry"],"darkin",3,["medieval","dark","fantasy"],["demon","entity"]],
+["Ahri","Ahri",["mid"],["mage","assassin"],["aggressive","carry"],"ionia",2,["medieval","fantasy"],["demon","spirit"]],
+["Akali","Akali",["mid","top"],["assassin"],["aggressive","carry"],"ionia",4,["medieval","fantasy"],["human"]],
+["Akshan","Akshan",["mid"],["adc","mage"],["aggressive","carry"],"shurima",3,["medieval","fantasy"],["human"]],
+["Alistar","Alistar",["support"],["tank","support"],["engage","utility"],"noxus",2,["medieval","fantasy"],["animal"]],
+["Amumu","Amumu",["jungle","support"],["tank","mage"],["engage","utility"],"shurima",2,["ancient","dark"],["undead"]],
+["Anivia","Anivia",["mid"],["mage"],["passive","utility"],"freljord",4,["medieval","fantasy"],["animal","spirit"]],
+["Annie","Annie",["mid"],["mage"],["aggressive","carry"],"noxus",1,["medieval","dark"],["human"]],
+["Aphelios","Aphelios",["bot"],["adc"],["aggressive","carry"],"targon",5,["cosmic","fantasy"],["human"]],
+["Ashe","Ashe",["bot","support"],["adc","support"],["passive","utility"],"freljord",1,["medieval","fantasy"],["human"]],
+["Aurelion Sol","AurelionSol",["mid"],["mage"],["aggressive","carry"],"targon",4,["cosmic"],["animal","cosmic_entity"]],
+["Aurora","Aurora",["mid"],["mage","fighter"],["aggressive","carry"],"freljord",3,["medieval","nature"],["animal","spirit"]],
+["Azir","Azir",["mid"],["mage"],["aggressive","carry"],"shurima",5,["ancient"],["undead","human"]],
+["Bard","Bard",["support"],["support","mage"],["utility","passive"],"runeterra",4,["cosmic"],["cosmic_entity"]],
+["Bel'Veth","BelVeth",["jungle"],["fighter"],["aggressive","carry"],"void",4,["void","cosmic"],["void_entity","demon"]],
+["Blitzcrank","Blitzcrank",["support"],["tank","support"],["engage","utility"],"zaun",2,["steampunk"],["robot","construct"]],
+["Brand","Brand",["mid","support"],["mage"],["aggressive","carry"],"freljord",2,["medieval","dark"],["spirit","undead"]],
+["Braum","Braum",["support"],["tank","support"],["engage","peel","utility"],"freljord",1,["medieval","fantasy"],["human"]],
+["Briar","Briar",["jungle","top"],["fighter","assassin"],["aggressive","carry"],"noxus",3,["medieval","dark"],["demon","human"]],
+["Caitlyn","Caitlyn",["bot"],["adc"],["aggressive","carry"],"piltover",2,["steampunk","future"],["human"]],
+["Camille","Camille",["top"],["fighter"],["aggressive","carry"],"piltover",4,["steampunk","future"],["human","construct"]],
+["Cassiopeia","Cassiopeia",["mid"],["mage"],["aggressive","carry"],"noxus",4,["medieval","ancient"],["animal","human"]],
+["Cho'Gath","Chogath",["top"],["tank","mage"],["aggressive","engage"],"void",2,["void","horror"],["void_entity"]],
+["Corki","Corki",["mid"],["adc","mage"],["aggressive","carry"],"bandle_city",3,["steampunk","fantasy"],["yordle"]],
+["Darius","Darius",["top"],["fighter"],["aggressive","carry"],"noxus",1,["medieval","fantasy"],["human"]],
+["Diana","Diana",["mid","jungle"],["fighter","mage","assassin"],["aggressive","carry"],"targon",3,["cosmic","fantasy"],["human","god"]],
+["Dr. Mundo","DrMundo",["top","jungle"],["tank","fighter"],["aggressive","carry"],"zaun",1,["steampunk","horror"],["human","construct"]],
+["Draven","Draven",["bot"],["adc"],["aggressive","carry"],"noxus",4,["medieval","fantasy"],["human"]],
+["Ekko","Ekko",["mid","jungle"],["assassin","mage"],["aggressive","carry"],"zaun",4,["steampunk","future"],["human"]],
+["Elise","Elise",["jungle"],["mage","fighter"],["aggressive","carry"],"shadow_isles",4,["dark","fantasy"],["human","animal"]],
+["Evelynn","Evelynn",["jungle"],["mage","assassin"],["aggressive","carry"],"runeterra",3,["dark","fantasy"],["demon"]],
+["Ezreal","Ezreal",["bot","mid"],["adc","mage"],["aggressive","carry"],"piltover",4,["steampunk","medieval"],["human"]],
+["Fiddlesticks","Fiddlesticks",["jungle","support"],["mage"],["aggressive","utility"],"shadow_isles",3,["dark","horror"],["entity","demon"]],
+["Fiora","Fiora",["top"],["fighter"],["aggressive","carry"],"demacia",4,["medieval","fantasy"],["human"]],
+["Fizz","Fizz",["mid"],["assassin","mage"],["aggressive","carry"],"bilgewater",4,["oceanic"],["animal","spirit"]],
+["Galio","Galio",["mid","support"],["tank","mage"],["engage","utility"],"demacia",2,["medieval","fantasy"],["construct"]],
+["Gangplank","Gangplank",["top"],["fighter"],["aggressive","carry"],"bilgewater",5,["pirate","oceanic"],["human"]],
+["Garen","Garen",["top"],["fighter","tank"],["aggressive","carry"],"demacia",1,["medieval","fantasy"],["human"]],
+["Gnar","Gnar",["top"],["fighter","tank"],["aggressive","engage"],"freljord",3,["prehistoric","fantasy"],["animal","spirit"]],
+["Gragas","Gragas",["top","jungle","support"],["tank","mage","fighter"],["aggressive","utility"],"freljord",3,["medieval","fantasy"],["human"]],
+["Graves","Graves",["jungle","mid"],["adc","fighter"],["aggressive","carry"],"bilgewater",3,["pirate","steampunk"],["human"]],
+["Gwen","Gwen",["top","mid"],["fighter","mage"],["aggressive","carry"],"shadow_isles",3,["dark","fantasy"],["construct","spirit"]],
+["Hecarim","Hecarim",["jungle"],["fighter","tank"],["aggressive","carry","engage"],"shadow_isles",3,["dark","medieval"],["undead","entity"]],
+["Heimerdinger","Heimerdinger",["mid","top","support"],["mage"],["passive","utility"],"piltover",3,["steampunk"],["yordle"]],
+["Hwei","Hwei",["mid"],["mage"],["aggressive","utility"],"ionia",4,["medieval","fantasy"],["human"]],
+["Illaoi","Illaoi",["top"],["fighter"],["aggressive","carry"],"bilgewater",3,["oceanic","pirate"],["human"]],
+["Irelia","Irelia",["top","mid"],["fighter"],["aggressive","carry"],"ionia",5,["medieval","fantasy"],["human"]],
+["Ivern","Ivern",["jungle"],["support","mage"],["utility","passive"],"ionia",4,["nature","fantasy"],["spirit","construct"]],
+["Janna","Janna",["support"],["support","mage"],["utility","peel"],"zaun",2,["steampunk"],["human","spirit"]],
+["Jarvan IV","JarvanIV",["top","jungle"],["fighter","tank"],["aggressive","engage"],"demacia",2,["medieval","fantasy"],["human"]],
+["Jax","Jax",["top","jungle"],["fighter"],["aggressive","carry"],"runeterra",2,["medieval","fantasy"],["human"]],
+["Jayce","Jayce",["top","mid"],["fighter","mage"],["aggressive","carry"],"piltover",4,["steampunk","future"],["human"]],
+["Jhin","Jhin",["bot"],["adc","mage"],["aggressive","carry"],"ionia",4,["medieval","fantasy"],["human"]],
+["Jinx","Jinx",["bot"],["adc"],["aggressive","carry"],"zaun",3,["steampunk","future"],["human"]],
+["K'Sante","KSante",["top"],["tank","fighter"],["aggressive","engage"],"shurima",5,["ancient"],["human"]],
+["Kai'Sa","Kaisa",["bot"],["adc"],["aggressive","carry"],"void",3,["void","future"],["human"]],
+["Kalista","Kalista",["bot"],["adc"],["aggressive","carry"],"shadow_isles",5,["dark"],["undead","spirit"]],
+["Karma","Karma",["mid","support"],["mage","support"],["utility","aggressive"],"ionia",3,["medieval","fantasy"],["human"]],
+["Karthus","Karthus",["mid","jungle"],["mage"],["aggressive","carry"],"shadow_isles",2,["dark","medieval"],["undead"]],
+["Kassadin","Kassadin",["mid"],["assassin","mage"],["aggressive","carry"],"void",4,["void","medieval"],["human"]],
+["Katarina","Katarina",["mid"],["assassin","mage"],["aggressive","carry"],"noxus",4,["medieval","fantasy"],["human"]],
+["Kayle","Kayle",["top","mid"],["fighter","mage"],["aggressive","carry"],"demacia",3,["divine","medieval"],["god","divine"]],
+["Kayn","Kayn",["jungle"],["fighter","assassin"],["aggressive","carry"],"ionia",4,["medieval","dark"],["human"]],
+["Kennen","Kennen",["mid","top"],["mage"],["aggressive","carry"],"ionia",3,["medieval","fantasy"],["yordle"]],
+["Kha'Zix","Khazix",["jungle"],["assassin"],["aggressive","carry"],"void",4,["void"],["void_entity","animal"]],
+["Kindred","Kindred",["jungle"],["adc","mage"],["aggressive","carry"],"runeterra",4,["cosmic","fantasy"],["spirit","cosmic_entity"]],
+["Kled","Kled",["top"],["fighter"],["aggressive","carry"],"noxus",4,["medieval","fantasy"],["yordle","animal"]],
+["Kog'Maw","KogMaw",["bot"],["adc","mage"],["aggressive","carry"],"void",3,["void"],["void_entity","animal"]],
+["LeBlanc","Leblanc",["mid"],["mage","assassin"],["aggressive","carry"],"noxus",4,["medieval","fantasy"],["human"]],
+["Lee Sin","LeeSin",["jungle"],["fighter"],["aggressive","carry"],"ionia",5,["medieval","fantasy"],["human"]],
+["Leona","Leona",["support"],["tank","support"],["engage","utility"],"targon",2,["cosmic","fantasy"],["human","god"]],
+["Lillia","Lillia",["jungle"],["mage","fighter"],["utility","carry"],"ionia",3,["nature","fantasy"],["animal","spirit"]],
+["Lissandra","Lissandra",["mid"],["mage"],["aggressive","utility"],"freljord",3,["medieval","dark"],["human"]],
+["Lucian","Lucian",["bot","mid"],["adc"],["aggressive","carry"],"demacia",3,["medieval","dark"],["human"]],
+["Lulu","Lulu",["support","mid"],["support","mage"],["utility","peel"],"bandle_city",2,["fantasy"],["yordle"]],
+["Lux","Lux",["mid","support"],["mage","support"],["aggressive","utility"],"demacia",1,["medieval","fantasy"],["human"]],
+["Malphite","Malphite",["top","support"],["tank"],["engage","passive"],"ixtal",1,["ancient","nature"],["construct"]],
+["Malzahar","Malzahar",["mid"],["mage"],["aggressive","utility"],"void",2,["void","ancient"],["human"]],
+["Maokai","Maokai",["top","support"],["tank"],["engage","utility"],"shadow_isles",2,["dark","nature"],["plant"]],
+["Master Yi","MasterYi",["jungle"],["fighter","assassin"],["aggressive","carry"],"ionia",1,["medieval","fantasy"],["human"]],
+["Milio","Milio",["support"],["support","mage"],["utility","peel"],"ixtal",2,["ancient","nature"],["human"]],
+["Miss Fortune","MissFortune",["bot"],["adc","mage"],["aggressive","carry"],"bilgewater",1,["pirate","oceanic"],["human"]],
+["Mordekaiser","Mordekaiser",["top"],["fighter","mage"],["aggressive","carry"],"noxus",3,["medieval","dark"],["undead"]],
+["Morgana","Morgana",["mid","support"],["mage","support"],["utility","passive"],"demacia",2,["divine","medieval"],["god","divine"]],
+["Naafiri","Naafiri",["mid"],["assassin"],["aggressive","carry"],"shurima",2,["ancient"],["animal","demon"]],
+["Nami","Nami",["support"],["support","mage"],["utility","peel"],"bilgewater",2,["oceanic"],["animal"]],
+["Nasus","Nasus",["top"],["fighter","tank"],["passive","carry"],"shurima",2,["ancient"],["animal","god"]],
+["Nautilus","Nautilus",["support","jungle"],["tank","support"],["engage","utility"],"bilgewater",2,["oceanic","dark"],["construct","human"]],
+["Neeko","Neeko",["mid","support"],["mage"],["aggressive","utility"],"ixtal",2,["ancient","nature"],["animal"]],
+["Nidalee","Nidalee",["jungle","mid"],["mage","fighter"],["aggressive","carry"],"ixtal",5,["ancient","nature"],["human","animal"]],
+["Nilah","Nilah",["bot"],["fighter","adc"],["aggressive","carry"],"runeterra",4,["medieval","fantasy"],["human"]],
+["Nocturne","Nocturne",["jungle"],["fighter","assassin"],["aggressive","carry"],"shadow_isles",3,["dark","horror"],["demon","entity"]],
+["Nunu & Willump","Nunu",["jungle"],["tank","mage"],["engage","utility"],"freljord",1,["medieval","fantasy"],["human","animal"]],
+["Olaf","Olaf",["top","jungle"],["fighter"],["aggressive","carry"],"freljord",2,["medieval","fantasy"],["human"]],
+["Orianna","Orianna",["mid"],["mage","support"],["aggressive","utility"],"piltover",4,["steampunk"],["robot","construct"]],
+["Ornn","Ornn",["top"],["tank","fighter"],["engage","utility"],"freljord",3,["medieval","mythological"],["animal","god"]],
+["Pantheon","Pantheon",["top","support","mid"],["fighter","tank"],["aggressive","engage"],"targon",2,["greco_roman","fantasy"],["human","god"]],
+["Poppy","Poppy",["top","support"],["tank","fighter"],["engage","utility"],"demacia",3,["medieval","fantasy"],["yordle"]],
+["Pyke","Pyke",["support"],["assassin","support"],["aggressive","carry"],"bilgewater",4,["pirate","dark"],["undead","human"]],
+["Qiyana","Qiyana",["mid"],["assassin"],["aggressive","carry"],"ixtal",4,["ancient","nature"],["human"]],
+["Quinn","Quinn",["top","bot"],["adc","fighter"],["aggressive","carry"],"demacia",3,["medieval","fantasy"],["human","animal"]],
+["Rakan","Rakan",["support"],["support","fighter"],["utility","engage"],"ionia",3,["medieval","fantasy"],["animal","spirit"]],
+["Rammus","Rammus",["jungle"],["tank"],["engage","utility"],"shurima",1,["ancient"],["animal"]],
+["Rek'Sai","RekSai",["jungle"],["fighter","tank"],["aggressive","carry"],"void",3,["void"],["void_entity","animal"]],
+["Rell","Rell",["support"],["tank","support"],["engage","utility"],"noxus",3,["medieval","fantasy"],["human"]],
+["Renata Glasc","Renata",["support"],["support","mage"],["utility","aggressive"],"zaun",4,["steampunk"],["human"]],
+["Renekton","Renekton",["top"],["fighter"],["aggressive","carry"],"shurima",2,["ancient"],["animal","god"]],
+["Rengar","Rengar",["jungle"],["assassin","fighter"],["aggressive","carry"],"ixtal",4,["ancient","nature"],["animal"]],
+["Riven","Riven",["top"],["fighter"],["aggressive","carry"],"noxus",4,["medieval","fantasy"],["human"]],
+["Rumble","Rumble",["top"],["fighter","mage"],["aggressive","carry"],"bandle_city",3,["steampunk","fantasy"],["yordle"]],
+["Ryze","Ryze",["mid"],["mage"],["aggressive","carry"],"runeterra",5,["medieval","fantasy"],["human"]],
+["Samira","Samira",["bot"],["adc","fighter"],["aggressive","carry"],"noxus",4,["medieval","fantasy"],["human"]],
+["Sejuani","Sejuani",["top","jungle"],["tank","fighter"],["engage","aggressive"],"freljord",2,["medieval","fantasy"],["human","animal"]],
+["Senna","Senna",["bot","support"],["adc","support"],["utility","carry"],"demacia",3,["medieval","dark"],["human","spirit"]],
+["Seraphine","Seraphine",["bot","support","mid"],["mage","support"],["utility","carry"],"piltover",2,["steampunk","future"],["human"]],
+["Sett","Sett",["top"],["fighter"],["aggressive","carry"],"ionia",2,["medieval","fantasy"],["human","animal"]],
+["Shaco","Shaco",["jungle"],["assassin"],["aggressive","carry"],"shadow_isles",4,["dark","horror"],["demon","entity"]],
+["Shen","Shen",["top","support"],["tank"],["utility","engage"],"ionia",3,["medieval","fantasy"],["human"]],
+["Shyvana","Shyvana",["jungle","top"],["fighter","tank"],["aggressive","carry"],"demacia",3,["medieval","fantasy"],["animal","human"]],
+["Singed","Singed",["top"],["tank","mage"],["utility","aggressive"],"zaun",3,["steampunk","horror"],["human"]],
+["Sion","Sion",["top","support"],["tank","fighter"],["aggressive","engage"],"noxus",2,["medieval","dark"],["undead"]],
+["Sivir","Sivir",["bot"],["adc"],["aggressive","carry"],"shurima",1,["ancient"],["human"]],
+["Skarner","Skarner",["jungle"],["tank","fighter"],["aggressive","engage"],"shurima",3,["ancient"],["animal"]],
+["Smolder","Smolder",["bot"],["adc"],["aggressive","carry"],"noxus",2,["medieval","fantasy"],["animal"]],
+["Sona","Sona",["support"],["support","mage"],["utility","peel"],"demacia",1,["medieval","fantasy"],["human"]],
+["Soraka","Soraka",["support"],["support","mage"],["utility","peel"],"targon",1,["cosmic","fantasy"],["god","divine"]],
+["Swain","Swain",["mid","support"],["mage","fighter"],["aggressive","utility"],"noxus",3,["medieval","dark"],["human","demon"]],
+["Sylas","Sylas",["mid"],["mage","fighter"],["aggressive","carry"],"demacia",3,["medieval","fantasy"],["human"]],
+["Syndra","Syndra",["mid"],["mage"],["aggressive","carry"],"ionia",4,["medieval","dark"],["human"]],
+["Tahm Kench","TahmKench",["support","top"],["tank","support"],["utility","engage"],"runeterra",3,["dark","fantasy"],["demon","animal"]],
+["Taliyah","Taliyah",["mid","jungle"],["mage"],["aggressive","utility"],"shurima",3,["ancient"],["human"]],
+["Talon","Talon",["mid","jungle"],["assassin"],["aggressive","carry"],"noxus",3,["medieval","fantasy"],["human"]],
+["Taric","Taric",["support"],["tank","support"],["utility","peel"],"targon",2,["cosmic","fantasy"],["human","god"]],
+["Teemo","Teemo",["top"],["mage","fighter"],["aggressive","utility"],"bandle_city",2,["fantasy"],["yordle"]],
+["Thresh","Thresh",["support"],["tank","support"],["utility","engage"],"shadow_isles",4,["dark"],["undead","entity"]],
+["Tristana","Tristana",["bot","mid"],["adc"],["aggressive","carry"],"bandle_city",2,["fantasy","steampunk"],["yordle"]],
+["Trundle","Trundle",["top","jungle","support"],["fighter","tank"],["aggressive","carry"],"freljord",2,["medieval","fantasy"],["animal","human"]],
+["Tryndamere","Tryndamere",["top"],["fighter"],["aggressive","carry"],"freljord",2,["medieval","fantasy"],["human"]],
+["Twisted Fate","TwistedFate",["mid"],["mage","adc"],["aggressive","carry"],"bilgewater",4,["pirate","fantasy"],["human"]],
+["Twitch","Twitch",["bot","mid"],["adc"],["aggressive","carry"],"zaun",3,["steampunk","horror"],["animal"]],
+["Udyr","Udyr",["jungle","top"],["fighter","tank"],["aggressive","carry"],"freljord",3,["medieval","fantasy"],["human","spirit"]],
+["Urgot","Urgot",["top"],["fighter","tank"],["aggressive","carry"],"zaun",3,["steampunk","horror"],["human","construct"]],
+["Varus","Varus",["bot","mid"],["adc","mage"],["aggressive","carry"],"ionia",2,["medieval","fantasy"],["human","demon"]],
+["Vayne","Vayne",["bot","top"],["adc"],["aggressive","carry"],"demacia",4,["medieval","dark"],["human"]],
+["Veigar","Veigar",["mid","support"],["mage"],["aggressive","carry"],"bandle_city",2,["medieval","fantasy"],["yordle"]],
+["Vel'Koz","Velkoz",["mid","support"],["mage"],["aggressive","carry"],"void",2,["void"],["void_entity"]],
+["Vex","Vex",["mid"],["mage"],["aggressive","carry"],"shadow_isles",2,["dark","fantasy"],["yordle"]],
+["Vi","Vi",["jungle","top"],["fighter"],["aggressive","carry"],"piltover",2,["steampunk","future"],["human"]],
+["Viego","Viego",["jungle","mid"],["fighter","assassin"],["aggressive","carry"],"shadow_isles",4,["medieval","dark"],["undead","human"]],
+["Viktor","Viktor",["mid"],["mage"],["aggressive","carry"],"zaun",4,["steampunk","future"],["human","construct"]],
+["Vladimir","Vladimir",["mid","top"],["mage","fighter"],["aggressive","carry"],"noxus",3,["medieval","dark"],["human"]],
+["Volibear","Volibear",["top","jungle"],["fighter","tank"],["aggressive","engage"],"freljord",2,["medieval","mythological"],["animal","god"]],
+["Warwick","Warwick",["jungle","top"],["fighter"],["aggressive","carry"],"zaun",1,["steampunk","horror"],["animal","human"]],
+["Wukong","MonkeyKing",["jungle","top"],["fighter"],["aggressive","carry"],"ionia",2,["medieval","fantasy"],["animal"]],
+["Xayah","Xayah",["bot"],["adc"],["aggressive","carry"],"ionia",3,["medieval","fantasy"],["animal","spirit"]],
+["Xerath","Xerath",["mid","support"],["mage"],["aggressive","carry"],"shurima",3,["ancient"],["spirit","entity"]],
+["Xin Zhao","XinZhao",["jungle","top"],["fighter"],["aggressive","carry"],"demacia",1,["medieval","fantasy"],["human"]],
+["Yasuo","Yasuo",["mid","top"],["fighter","mage"],["aggressive","carry"],"ionia",4,["medieval","fantasy"],["human"]],
+["Yone","Yone",["mid","top"],["fighter","mage"],["aggressive","carry"],"ionia",4,["medieval","fantasy"],["human","spirit"]],
+["Yorick","Yorick",["top"],["fighter","mage"],["utility","carry"],"shadow_isles",3,["medieval","dark"],["human","undead"]],
+["Yuumi","Yuumi",["support"],["support","mage"],["utility","peel"],"bandle_city",2,["fantasy"],["animal"]],
+["Zac","Zac",["jungle","top"],["tank","fighter"],["engage","aggressive"],"zaun",3,["steampunk","horror"],["construct"]],
+["Zed","Zed",["mid","jungle"],["assassin"],["aggressive","carry"],"ionia",4,["medieval","dark"],["human"]],
+["Zeri","Zeri",["bot"],["adc"],["aggressive","carry"],"zaun",4,["steampunk","future"],["human"]],
+["Ziggs","Ziggs",["mid","bot","support"],["mage"],["aggressive","carry"],"bandle_city",2,["steampunk","fantasy"],["yordle"]],
+["Zilean","Zilean",["support","mid"],["support","mage"],["utility","passive"],"runeterra",3,["ancient","cosmic"],["human"]],
+["Zoe","Zoe",["mid"],["mage"],["aggressive","carry"],"targon",4,["cosmic","fantasy"],["human","god"]],
+["Zyra","Zyra",["mid","support"],["mage","support"],["aggressive","utility"],"ixtal",3,["ancient","nature"],["plant","spirit"]],
+["Ambessa","Ambessa",["top"],["fighter"],["aggressive","carry"],"noxus",3,["medieval","fantasy"],["human"]]
+];
+
+const champMap=new Map();
+C.forEach(c=>{if(!champMap.has(c[0]))champMap.set(c[0],c)});
+const CHAMPIONS=Array.from(champMap.values()).map(c=>({
+  name:c[0],apiId:c[1],lanes:c[2],archetypes:c[3],styles:c[4],
+  faction:c[5],difficulty:c[6],universes:c[7],types:c[8]
+}));
+
+// BIOS
+const BIOS={
+fr:{
+"Aatrox":"Un guerrier Darkin qui renaît de ses cendres et déchaîne une destruction absolue.",
+"Ahri":"Femme-renarde ionienne enchanteresse qui vole les âmes de ses proies.",
+"Akali":"Assassin solitaire de l'Ionia qui frappe dans l'ombre sans pitié.",
+"Akshan":"Aventurier shurimien qui ressuscite ses alliés en tuant leurs meurtriers.",
+"Alistar":"Colosse mi-taureau emprisonné par Noxus, libéré pour protéger les innocents.",
+"Amumu":"Antique momie shurimienne maudite qui cherche désespérément un ami.",
+"Anivia":"Oiseau-phoenix glacial du Freljord qui renaît de ses cendres.",
+"Annie":"Enfant prodige pyromancien qui invoque l'ours de feu Tibbers.",
+"Aphelios":"Ascète de Targon armé de cinq armes lunaires aux effets distincts.",
+"Ashe":"Reine du Freljord dont les flèches de glace ralentissent et révèlent.",
+"Aurelion Sol":"Dragon cosmique qui a forgé des galaxies entières, aujourd'hui esclave de Targon.",
+"Aurora":"Vastaya du Freljord qui voit et traverse le monde des esprits.",
+"Azir":"Pharaon ressuscité qui commande une armée de soldats de sable.",
+"Bard":"Entité cosmique mystérieuse qui maintient l'équilibre des portails.",
+"Bel'Veth":"Entité du Vide née de la destruction d'une ville entière.",
+"Blitzcrank":"Robot à vapeur de Zaun dont le poing à ressort happe les ennemis.",
+"Brand":"Esprit de feu du Freljord qui consume tout sur son passage.",
+"Braum":"Géant bienveillant du Freljord qui protège ses amis avec son bouclier.",
+"Briar":"Expérience noxienne assoiffée de sang, à peine retenue par son bandeau.",
+"Caitlyn":"Shérif d'élite de Piltover avec une précision de tir inégalée.",
+"Camille":"Cyborg élégante de Piltover, chirurgicale dans sa précision létale.",
+"Cassiopeia":"Noble noxienne transformée en femme-serpent par une ancienne magie.",
+"Cho'Gath":"Créature du Vide qui dévore ses ennemis pour grandir indéfiniment.",
+"Corki":"Yordle pilote de combat qui bombarde ses ennemis depuis les airs.",
+"Darius":"Le plus redouté des généraux noxiens, maître de l'exécution sanglante.",
+"Diana":"Aspect de la Lune, combattante cosmique qui abat les arrogants.",
+"Dr. Mundo":"Monstre autoproclamé docteur qui absorbe tout et se régénère infiniment.",
+"Draven":"Gladiateur noxien narcissique qui jongle avec des haches rotatives.",
+"Ekko":"Génie de Zaun qui manipule le temps pour inverser ses erreurs.",
+"Elise":"Araignée-femme des Îles Obscures qui tisse des toiles mortelles.",
+"Evelynn":"Démon des délices qui séduit ses victimes avant de les détruire.",
+"Ezreal":"Explorateur-archéologue de Piltover armé d'un gantelet arcaniste.",
+"Fiddlesticks":"Entité ancienne qui surgit pour moissonner les âmes dans la panique.",
+"Fiora":"La meilleure dueliste de Démacia, dont la lame est aussi aiguisée que l'esprit.",
+"Fizz":"Créature des abysses malicieuse qui joue à cache-cache avec la mort.",
+"Galio":"Colosse de pierre magique de Démacia qui protège contre la magie.",
+"Gangplank":"Pirate légendaire de Bilgewater, imprévisible et dévastateur.",
+"Garen":"Guerrier vertueux de Démacia qui tourne comme une tornade d'acier.",
+"Gnar":"Yordle préhistorique qui se transforme en monstre rageur.",
+"Gragas":"Brasseur titanesque du Freljord qui se bat aussi bien qu'il boit.",
+"Graves":"Mercenaire de Bilgewater à l'humeur changeante et au fusil dévastateur.",
+"Gwen":"Poupée enchantée des Îles Obscures qui taille à travers les brumes.",
+"Hecarim":"Spectre équestre des Îles Obscures qui charge à une vitesse terrifiante.",
+"Heimerdinger":"Yordle inventeur génial qui déploie des tourelles à plasma sur le terrain.",
+"Hwei":"Peintre ionien qui donne vie à ses tableaux pour combattre.",
+"Illaoi":"Prêtresse d'une divinité des abysses qui invoque des tentacules géants.",
+"Irelia":"Danseuse de lames ionienne d'une beauté et d'une léthalité absolues.",
+"Ivern":"Ancien humain transformé en esprit de la forêt, il protège la faune.",
+"Janna":"Esprit du vent protecteur qui disperse les attaquants et soigne ses alliés.",
+"Jarvan IV":"Prince héritier de Démacia, meneur de charge inébranlable.",
+"Jax":"Guerrier légendaire sans faction — le meilleur combattant du monde.",
+"Jayce":"Ingénieur inventif de Piltover qui alterne marteau et canon.",
+"Jhin":"Artiste-tueur ionien qui compose ses meurtres comme des œuvres d'art.",
+"Jinx":"Anarchiste de Zaun qui sème le chaos avec ses armes déjantées.",
+"K'Sante":"Guerrier shurimien d'élite, chasseur de monstres de Nazumah.",
+"Kai'Sa":"Survivante du Vide fusionnée avec un organisme symbiote.",
+"Kalista":"Revenant des Îles Obscures qui juge ceux qui ont trahi leurs serments.",
+"Karma":"Grande prêtresse ionienne qui renforce ses alliés tout en attaquant.",
+"Karthus":"Mort-vivant lyrique qui chante la mort et frappe toute la carte.",
+"Kassadin":"Père modifié pour résister au Vide qui téléporte sans arrêt.",
+"Katarina":"Assassin noxienne impitoyable qui se téléporte entre les adversaires vaincus.",
+"Kayle":"Ange divin de Démacia qui évolue vers une puissance dévastatrice.",
+"Kayn":"Guerrier ionien qui lutte contre la possession d'une arme Darkin.",
+"Kennen":"Yordle ninja ionien maître de la foudre et de la vitesse.",
+"Kha'Zix":"Insecte du Vide qui évolue en tuant des proies isolées.",
+"Kindred":"Double entité cosmique de la mort — l'agneau et le loup.",
+"Kled":"Yordle furieux noxien monté sur son skarner Skaarl.",
+"Kog'Maw":"Larve du Vide qui crache de l'acide corrosif sur de très longues portées.",
+"LeBlanc":"Illusionniste noxienne qui crée des copies et assassine dans la confusion.",
+"Lee Sin":"Moine aveugle ionien qui voit avec son âme, d'une précision légendaire.",
+"Leona":"Aspect du Soleil dont l'engagement dévastateur provoque des explosions solaires.",
+"Lillia":"Esprit-cerf ionien timide qui envoie ses ennemis dans un sommeil magique.",
+"Lissandra":"Ancienne sorcière du Freljord qui emprisonne ses ennemis dans la glace.",
+"Lucian":"Chasseur démacien qui traque les esprits corrompus des Îles Obscures.",
+"Lulu":"Yordle dotée de pouvoirs féeriques qui transforme les ennemis en créatures.",
+"Lux":"Mage démacienne qui dissimule ses pouvoirs dans un royaume anti-magie.",
+"Malphite":"Monolithe de roche primordiale qui écrase tout sur son passage.",
+"Malzahar":"Prophète du Vide qui prépare l'invasion des Voidborns.",
+"Maokai":"Arbre-esprit des Îles Obscures imprégné d'une magie morbide.",
+"Master Yi":"Dernier maître du style Wuju, inarrêtable en fin de partie.",
+"Milio":"Jeune garçon d'Ixtal qui soigne ses alliés avec le feu ancestral.",
+"Miss Fortune":"Chasseuse de primes redoutée de Bilgewater animée par la vengeance.",
+"Mordekaiser":"Revenant impérial qui emprisonne les âmes dans son Royaume de la Mort.",
+"Morgana":"Ange déchu de Démacia qui emprisonne les méchants dans des liens noirs.",
+"Naafiri":"Darkin emprisonné dans une meute de chacals qui chasse en groupe.",
+"Nami":"Myrmidon des mers dont les vagues et soins soutiennent l'équipe.",
+"Nasus":"Dieu-chacal shurimien qui prend sa véritable puissance avec le temps.",
+"Nautilus":"Matelot englouti fusionné à son armure qui harponne tout ce qu'il voit.",
+"Neeko":"Vastaya-lézard d'Ixtal qui peut se transformer en n'importe quel allié.",
+"Nidalee":"Chamane d'Ixtal qui se transforme en cougar pour traquer ses proies.",
+"Nilah":"Ascète guerrière qui se nourrit de bonheur pour combattre.",
+"Nocturne":"Démon des rêves qui plonge le monde dans l'obscurité pour chasser.",
+"Nunu & Willump":"Garçon et son Yéti géant — ils roulent sur tout, littéralement.",
+"Olaf":"Viking du Freljord qui se bat mieux quand il est presque mort.",
+"Orianna":"Robot d'acier qui contrôle une balle mécanique avec une précision parfaite.",
+"Ornn":"Dieu-bélier du Freljord qui forge des objets légendaires en plein combat.",
+"Pantheon":"Aspect de la guerre incarné dans un guerrier invincible.",
+"Poppy":"Yordle démacienne qui cherche le héros du destin tout en le devenant.",
+"Pyke":"Harponneur mort-vivant de Bilgewater qui dresse sa liste de meurtres.",
+"Qiyana":"Princesse d'Ixtal arrogante qui manipule les éléments naturels.",
+"Quinn":"Ranger d'élite démacienne accompagnée de son aigle royal Valor.",
+"Rakan":"Vastaya-oiseau ionien danseur qui charme autant qu'il combat.",
+"Rammus":"Créature blindée de Shurima qui roule sur ses ennemis.",
+"Rek'Sai":"Créature du Vide qui creuse des tunnels pour surprendre ses proies.",
+"Rell":"Cavalière noxienne qui brise son armure pour en faire des armes.",
+"Renata Glasc":"Baronne chimiste de Zaun qui contrôle ses ennemis comme des marionnettes.",
+"Renekton":"Dieu-crocodile shurimien ivre de rage et de carnage.",
+"Rengar":"Vastaya lion qui chasse les proies les plus dangereuses du monde.",
+"Riven":"Ex-général noxienne qui combat pour se racheter de ses crimes.",
+"Rumble":"Yordle dans un mechasuite artisanal dévastateur.",
+"Ryze":"Archimage errant qui porte le poids de la connaissance universelle.",
+"Samira":"Mercenaire noxienne qui monte en style pour déclencher des torrents.",
+"Sejuani":"Guerrière du Freljord chevauchant son sanglier de guerre Bristle.",
+"Senna":"Chasseuse d'esprits libérée de sa lanterne après des années d'emprisonnement.",
+"Seraphine":"Artiste de Piltover/Zaun qui amplifie ses alliés avec sa musique magique.",
+"Sett":"Combattant de fosse mi-humain mi-vastaya, redoutable dans la mêlée.",
+"Shaco":"Joker démoniaque qui manipule l'environnement avec des boîtes piégées.",
+"Shen":"Ninja ionien qui téléporte pour protéger ses alliés partout sur la carte.",
+"Shyvana":"Sang-dragon démacien qui se transforme en dragonne dévastatrice.",
+"Singed":"Alchimiste fou de Zaun qui laisse une traînée de poison dans son sillage.",
+"Sion":"Colosse noxien mort-vivant d'une puissance terrifiante.",
+"Sivir":"Mercenaire shurimienne maniante un chakram mortel qui rebondit.",
+"Skarner":"Scorpion cristallin de Shurima qui impale et traîne ses proies.",
+"Smolder":"Jeune dragonnet noxien adorable mais de plus en plus dévastateur.",
+"Sona":"Musicienne démacienne muette dont la musique soigne et ralentit.",
+"Soraka":"Esprit stellaire déchu qui sacrifie sa vie pour soigner ses alliés.",
+"Swain":"Grand général de Noxus lié à un démon corneille omniscient.",
+"Sylas":"Mage démacien emprisonné qui vole les ultimes de ses ennemis.",
+"Syndra":"Mage ionienne d'une puissance immense qu'elle peine à contrôler.",
+"Tahm Kench":"Démon sous forme de silure géant qui avale alliés et ennemis.",
+"Taliyah":"Jeune mage shurimienne qui façonne la roche comme de l'argile.",
+"Talon":"Assassin noxien parkouriste qui glisse sur les toits comme une ombre.",
+"Taric":"Aspect Targonien gardien de la beauté et protecteur absolu.",
+"Teemo":"Yordle scout qui démine subtilement le terrain avec des champignons.",
+"Thresh":"Spectre des Îles Obscures qui collecte des âmes et enchaîne ses ennemis.",
+"Tristana","Yordle canonnière enthousiaste qui saute sur ses ennemis.",
+"Trundle":"Troll du Freljord qui vole les statistiques de ses ennemis.",
+"Tryndamere":"Berserker qui refuse de mourir grâce à sa rage pure.",
+"Twisted Fate":"Tricheur professionnel de Bilgewater qui manipule le destin.",
+"Twitch":"Rat-magi de Zaun qui se cache puis empoisonne tout.",
+"Udyr":"Chamane du Freljord qui canalise les esprits des animaux.",
+"Urgot":"Mi-homme mi-machine, exécuteur impitoyable des faibles.",
+"Varus":"Archer ionien habité par un esprit Darkin assoiffé de sang.",
+"Vayne":"Chasseuse démacienne qui traque les créatures des ténèbres.",
+"Veigar":"Yordle qui se prend pour le Seigneur des Ténèbres ultime.",
+"Vel'Koz":"Entité du Vide qui déconstruit tout ce qu'elle observe.",
+"Vex":"Yordle morose des Îles Obscures allergique au bonheur.",
+"Vi":"Ex-criminelle au poing blindé qui punch ses ennemis dans les airs.",
+"Viego":"Roi mort-vivant dont le deuil a brisé le monde.",
+"Viktor":"Scientifique de Zaun qui se remplace pièce par pièce par la machine.",
+"Vladimir":"Vampire noxien immortel qui se nourrit du sang de ses ennemis.",
+"Volibear":"Dieu-ours du Freljord, force de la nature déchaînée.",
+"Warwick":"Homme-loup bioamélioré de Zaun qui traque les proies ensanglantées.",
+"Wukong":"Roi Singe ionien malicieux aux bâtons de combat légendaires.",
+"Xayah":"Vastaya-oiseau ionienne révolutionnaire dont les plumes-lames décapitent.",
+"Xerath":"Énergie magique shurimienne emprisonnée dans une armure de pierre.",
+"Xin Zhao":"Lancier d'élite démacien qui plonge sans hésiter dans la mêlée.",
+"Yasuo":"Épéiste ionien injustement accusé qui affronte son destin avec le vent.",
+"Yone":"Frère d'Yasuo revenu du royaume des morts avec une lame d'azakana.",
+"Yorick":"Fossoyeur des Îles Obscures qui lève une armée de goules.",
+"Yuumi":"Chatte yordle qui s'attache à ses alliés pour les renforcer.",
+"Zac":"Blob élastique biomagique de Zaun qui rebondit et engage de loin.",
+"Zed":"Chef de l'Ordre des Ombres qui weaponise sa propre ombre.",
+"Zeri":"Guerrière électrique de Zaun dont les balles d'éclair percent tout.",
+"Ziggs":"Yordle bombardier qui raffole des explosions et des bombes.",
+"Zilean":"Archimage temporel d'Icathia qui manipule le temps pour ses alliés.",
+"Zoe":"Messagère cosmique espiègle et capricieuse de l'aube et du crépuscule.",
+"Zyra":"Plante-humaine d'Ixtal qui fait pousser un jardin mortel en combat.",
+"Ambessa":"Générale légendaire de Noxus, de fer et de sang."
+},
+en:{
+"Aatrox":"A Darkin warrior who rises from the dead and unleashes absolute destruction.",
+"Ahri":"A nine-tailed fox from Ionia who enchants prey and steals their essence.",
+"Akali":"A lone assassin who strikes from the shadows with ruthless precision.",
+"Akshan":"A rogue sentinel who revives allies by killing their murderers.",
+"Alistar":"A mighty minotaur enslaved by Noxus, now fighting to protect the innocent.",
+"Amumu":"A lonely ancient mummy from Shurima desperately searching for a friend.",
+"Anivia":"An ice phoenix of the Freljord who endlessly dies and is reborn.",
+"Annie":"A terrifyingly powerful child mage who summons the great fire bear Tibbers.",
+"Aphelios":"A Lunari ascetic wielding five unique celestial weapons.",
+"Ashe":"The Freljord queen whose ice arrows slow and reveal enemies.",
+"Aurelion Sol":"A cosmic dragon who forged galaxies, now enslaved by Targon's magic.",
+"Aurora":"A Freljord Vastaya spirit-walker who sees and crosses into the spirit realm.",
+"Azir":"A resurrected Shuriman emperor commanding an army of sand soldiers.",
+"Bard":"A mysterious cosmic entity who wanders Runeterra maintaining the balance.",
+"Bel'Veth":"A terrifying Void entity born from the consumption of an entire city.",
+"Blitzcrank":"A steam-powered Zaun robot with a rocket-powered magnetic fist.",
+"Brand":"A Freljordian fire spirit that burns everything in its path.",
+"Braum":"A gentle giant of the Freljord who protects all with his mighty shield.",
+"Briar":"A bloodthirsty Noxian experiment barely restrained by her headpiece.",
+"Caitlyn":"Piltover's elite marksman and sheriff with unmatched precision.",
+"Camille":"A precise Piltover cyborg with lethally sharp bladed legs.",
+"Cassiopeia":"A Noxian noble cursed with a serpentine body after touching an ancient tomb.",
+"Cho'Gath":"A Void creature that consumes enemies to grow endlessly larger.",
+"Corki":"A brave Yordle pilot who bombards enemies from his custom airship.",
+"Darius":"Noxus's most feared general, master of the bloody execution.",
+"Diana":"The Aspect of the Moon, a swift cosmic warrior who punishes the arrogant.",
+"Dr. Mundo":"A self-proclaimed Zaun doctor who absorbs everything and regenerates.",
+"Draven":"A narcissistic Noxian gladiator who juggles spinning axes.",
+"Ekko":"A Zaun genius who built a device to rewind time and fix mistakes.",
+"Elise":"A spider-woman of the Shadow Isles who weaves deadly webs.",
+"Evelynn":"A demon of delight who seduces victims before destroying them.",
+"Ezreal":"A Piltover explorer-archaeologist armed with an ancient arcanist gauntlet.",
+"Fiddlesticks":"An ancient entity that emerges from darkness to harvest souls in a panic.",
+"Fiora":"Demacia's greatest duelist, whose blade is as sharp as her wit.",
+"Fizz":"A playful creature of the deep sea who dodges every attack.",
+"Galio":"A magical stone colossus of Demacia who protects against magic.",
+"Gangplank":"Bilgewater's most feared pirate, cunning and utterly ruthless.",
+"Garen":"A virtuous Demacian warrior who spins in an unstoppable storm of steel.",
+"Gnar":"A prehistoric Yordle who transforms into a rampaging monster when enraged.",
+"Gragas","A massive drunken brawler of the Freljord who brews and battles.",
+"Graves":"A Bilgewater outlaw with a volatile temper and a devastating shotgun.",
+"Gwen":"An enchanted Shadow Isles doll who cuts through the mist with magic scissors.",
+"Hecarim":"A spectral centaur of the Shadow Isles who charges at terrifying speed.",
+"Heimerdinger":"A brilliant Yordle inventor who deploys plasma turrets in battle.",
+"Hwei":"An Ionian painter who brings his brushstrokes to life as devastating attacks.",
+"Illaoi":"A priestess of the God-Whale who summons massive tentacles in battle.",
+"Irelia":"An Ionian blade dancer of absolute beauty and lethality.",
+"Ivern":"An ancient human turned forest spirit who protects all wildlife.",
+"Janna":"A wind spirit who disperses attackers and heals her allies.",
+"Jarvan IV":"The crown prince of Demacia, an unyielding leader of charges.",
+"Jax":"A legendary warrior without faction — the greatest combatant in the world.",
+"Jayce":"A creative Piltover engineer who alternates between a hammer and a cannon.",
+"Jhin":"An Ionian artist-killer who composes murders as elaborate works of art.",
+"Jinx":"A Zaun anarchist who revels in chaos with her deranged arsenal.",
+"K'Sante":"An elite Shuriman monster hunter from the city of Nazumah.",
+"Kai'Sa":"A Void survivor fused with a symbiotic organism.",
+"Kalista":"A Shadow Isles revenant who judges those who betrayed their sacred oaths.",
+"Karma":"An Ionian high priestess who strengthens allies while attacking.",
+"Karthus":"A lyrical lich who sings of death and can strike anywhere on the map.",
+"Kassadin":"A Void-modified mage who teleports endlessly to resist corruption.",
+"Katarina":"A ruthless Noxian assassin who resets by leaping between dying enemies.",
+"Kayle":"A Demacian divine angel who evolves into a devastating power.",
+"Kayn":"An Ionian warrior fighting to control a sentient Darkin scythe.",
+"Kennen":"An ancient Yordle ninja who channels the speed of lightning.",
+"Kha'Zix":"A Void predator that hunts and evolves by consuming isolated prey.",
+"Kindred":"The twin cosmic essence of death — the Lamb and the Wolf.",
+"Kled":"A furious Noxian Yordle mounted on his de-scaled Skaarl.",
+"Kog'Maw":"A Void larva that spits corrosive acid at incredible range.",
+"LeBlanc":"A Noxian illusionist who creates copies and assassinates in the confusion.",
+"Lee Sin":"A blind Ionian monk who sees with his spirit and fights with legend-level precision.",
+"Leona":"The Aspect of the Sun whose devastating engages cause solar explosions.",
+"Lillia":"A shy Ionian deer spirit who puts enemies to sleep with her magic.",
+"Lissandra":"An ancient Freljord witch who encases her enemies in ice.",
+"Lucian":"A Demacian hunter who tracks the corrupted spirits of the Shadow Isles.",
+"Lulu":"A Yordle with fairy powers who transforms enemies into harmless critters.",
+"Lux":"A Demacian mage who hides her powers in an anti-magic kingdom.",
+"Malphite":"A primordial rock monolith who crushes everything in his path.",
+"Malzahar":"A Void prophet preparing the invasion of the Voidborn.",
+"Maokai":"A Shadow Isles tree-spirit imbued with morbid magic.",
+"Master Yi":"The last master of the Wuju style, unstoppable in the late game.",
+"Milio":"A young Ixtal boy who heals his allies with ancestral fire magic.",
+"Miss Fortune":"Bilgewater's feared bounty hunter driven by relentless vengeance.",
+"Mordekaiser":"An imperial revenant who imprisons souls in his Death Realm.",
+"Morgana":"A fallen Demacian angel who binds the wicked in chains of dark magic.",
+"Naafiri":"A Darkin imprisoned in a pack of hunting jackals.",
+"Nami":"A Marai mermaid whose waves and heals support the entire team.",
+"Nasus":"A Shuriman god-warrior who grows unstoppable with the passage of time.",
+"Nautilus":"An engulfed sailor fused to his suit who harpooons anything he sees.",
+"Neeko":"An Ixtal Vastaya lizard who can transform into any ally.",
+"Nidalee":"An Ixtal huntress who shapeshifts into a cougar to stalk prey.",
+"Nilah":"An ascetic warrior who channels joy into devastating combat power.",
+"Nocturne":"A nightmare demon who plunges the world into darkness to hunt.",
+"Nunu & Willump":"A boy and his giant Yeti best friends who crush everything.",
+"Olaf":"A Freljord viking who fights best when nearly dead.",
+"Orianna":"A clockwork robot who controls a magical ball with perfect precision.",
+"Ornn":"A Freljord demigod who forges legendary items mid-battle.",
+"Pantheon":"The Aspect of War incarnated in an invincible warrior.",
+"Poppy":"A Demacian Yordle who seeks the hero of destiny while becoming one herself.",
+"Pyke":"An undead Bilgewater harpooner who maintains a meticulous kill list.",
+"Qiyana":"An arrogant Ixtal princess who wields the power of natural elements.",
+"Quinn":"An elite Demacian ranger accompanied by her royal eagle Valor.",
+"Rakan":"An Ionian bird-Vastaya dancer who charms as much as he fights.",
+"Rammus":"An armored Shuriman creature who rolls over his enemies.",
+"Rek'Sai":"A Void creature who tunnels underground to ambush unsuspecting prey.",
+"Rell":"A Noxian rider who shatters her armor to wield it as a weapon.",
+"Renata Glasc":"A Zaun chem-baroness who controls enemies like corporate puppets.",
+"Renekton":"A Shuriman god-crocodile drunk on rage and carnage.",
+"Rengar":"A lion Vastaya who hunts the most dangerous prey in the world.",
+"Riven":"A former Noxian general fighting to atone for her crimes.",
+"Rumble":"A Yordle in a devastating homemade mech suit.",
+"Ryze":"A wandering archmage who bears the burden of universal knowledge.",
+"Samira":"A Noxian mercenary who builds style to unleash a torrent of bullets.",
+"Sejuani":"A Freljord warrior riding her war boar Bristle.",
+"Senna":"A spirit-trapper freed from her lantern prison after years of captivity.",
+"Seraphine":"A Piltover/Zaun artist who amplifies allies with her magical music.",
+"Sett":"A half-vastaya pit fighter from Ionia's underground rings.",
+"Shaco":"A demonic jester who manipulates the environment with trick boxes.",
+"Shen":"An Ionian ninja who teleports to protect allies anywhere on the map.",
+"Shyvana":"A Demacian half-dragon who transforms into a devastating dragoness.",
+"Singed":"A mad Zaun alchemist who leaves a trail of deadly poison.",
+"Sion":"A terrifyingly powerful Noxian undead colossus.",
+"Sivir":"A Shuriman mercenary wielding a deadly ricochet chakram.",
+"Skarner":"A crystalline Shuriman scorpion who impales and drags his prey.",
+"Smolder":"An adorable but increasingly devastating young Noxian dragonling.",
+"Sona":"A mute Demacian musician whose music heals and slows time.",
+"Soraka":"A fallen star spirit who sacrifices her own life to heal others.",
+"Swain":"Noxus's Grand General bound to an omniscient demonic raven.",
+"Sylas":"An imprisoned Demacian mage who steals enemies' ultimate abilities.",
+"Syndra":"An immensely powerful Ionian mage who struggles to control her power.",
+"Tahm Kench":"A demon in the form of a giant catfish who swallows allies and enemies.",
+"Taliyah":"A young Shuriman mage who shapes rock and stone like clay.",
+"Talon":"A parkour Noxian assassin who glides across rooftops like a shadow.",
+"Taric":"A Targonian Aspect guardian of beauty and absolute protector.",
+"Teemo":"A Yordle scout who secretly poisons the terrain with mushroom traps.",
+"Thresh":"A Shadow Isles spirit who collects souls and shackles all who cross him.",
+"Tristana":"An enthusiastic Yordle cannoneer who leaps into battle.",
+"Trundle":"A Freljord troll who steals his enemies' stats.",
+"Tryndamere":"A berserker who refuses to die through sheer rage.",
+"Twisted Fate":"A professional Bilgewater cheat who can manipulate fate itself.",
+"Twitch":"A Zaun plague rat who lurks invisible then poisons everything.",
+"Udyr":"A Freljord shaman who channels the spirits of four primal animals.",
+"Urgot":"Half-man half-machine, a merciless Zaun executioner of the weak.",
+"Varus":"An Ionian archer possessed by a Darkin spirit craving blood.",
+"Vayne":"A Demacian hunter who tracks and destroys creatures of the night.",
+"Veigar":"A Yordle who earnestly believes himself the ultimate Lord of Darkness.",
+"Vel'Koz":"A Void entity that disintegrates everything it observes to gain knowledge.",
+"Vex":"A gloomy Shadow Isles Yordle allergic to happiness.",
+"Vi":"A former criminal turned Piltover enforcer who punches everything.",
+"Viego":"An undead king whose grief for his queen shattered the world.",
+"Viktor":"A Zaun scientist who replaced his body with machine parts for perfection.",
+"Vladimir":"An immortal Noxian vampire who feeds on his enemies' blood.",
+"Volibear":"The Freljord demigod of storms, an unchained force of nature.",
+"Warwick":"A bioaugmented Zaun wolf-man who hunts the guilty.",
+"Wukong":"A mischievous Ionian Monkey King wielding a legendary staff.",
+"Xayah":"An Ionian bird-Vastaya rebel whose razor feathers decapitate enemies.",
+"Xerath":"Ancient Shuriman magical energy imprisoned in a stone shell.",
+"Xin Zhao":"An elite Demacian lance-fighter who charges without hesitation.",
+"Yasuo":"An Ionian swordsman falsely accused of murder who fights with wind.",
+"Yone":"Yasuo's brother returned from the spirit realm with an azakana blade.",
+"Yorick":"A Shadow Isles gravedigger who raises an army of ghouls.",
+"Yuumi":"A magical Yordle cat who attaches to allies to empower them.",
+"Zac":"A Zaun elastic blob who bounces and engages from long range.",
+"Zed":"The Master of Shadows who weaponizes his own shadow to kill.",
+"Zeri":"An electric Zaun fighter whose lightning bullets pierce everything.",
+"Ziggs":"A Yordle explosives maniac who loves nothing more than a big explosion.",
+"Zilean":"An ancient Icathian time mage who manipulates time to aid allies.",
+"Zoe":"A cosmic trickster and Targon's capricious messenger of twilight.",
+"Zyra":"An Ixtal plant-entity who grows a deadly garden of roots in combat.",
+"Ambessa":"A legendary Noxian general of iron will and fierce battlefield dominance."
+}};
+
+// =============================================
+// QUIZ STEPS CONFIG
+// =============================================
+function STEPS(t){return[
+{id:"rank",lbl:t.s0_lbl,q:t.s0_q,sub:t.s0_sub,type:"rank",multi:false,opts:[
+  {v:"iron",icon:"🔩",n:t.s0_iron,d:t.s0_iron_d},
+  {v:"bronze",icon:"🥉",n:t.s0_bronze,d:t.s0_bronze_d},
+  {v:"silver",icon:"🪙",n:t.s0_silver,d:t.s0_silver_d},
+  {v:"gold",icon:"🥇",n:t.s0_gold,d:t.s0_gold_d},
+  {v:"platinum",icon:"💎",n:t.s0_plat,d:t.s0_plat_d},
+  {v:"emerald",icon:"💚",n:t.s0_emerald,d:t.s0_emerald_d},
+  {v:"diamond",icon:"🔷",n:t.s0_diamond,d:t.s0_diamond_d},
+  {v:"master",icon:"🔮",n:t.s0_master,d:t.s0_master_d}
+]},
+{id:"lane",lbl:t.s1_lbl,q:t.s1_q,sub:t.s1_sub,type:"c3",multi:false,opts:[
+  {v:"top",icon:"🛡️",n:t.s1_top,d:t.s1_top_d},
+  {v:"jungle",icon:"🌲",n:t.s1_jungle,d:t.s1_jungle_d},
+  {v:"mid",icon:"⚡",n:t.s1_mid,d:t.s1_mid_d},
+  {v:"bot",icon:"🏹",n:t.s1_bot,d:t.s1_bot_d},
+  {v:"support",icon:"💛",n:t.s1_support,d:t.s1_support_d},
+  {v:"any",icon:"🎯",n:t.s1_any,d:t.s1_any_d}
+]},
+{id:"archetype",lbl:t.s2_lbl,q:t.s2_q,sub:t.s2_sub,type:"c3",multi:false,opts:[
+  {v:"tank",icon:"🏰",n:t.s2_tank,d:t.s2_tank_d},
+  {v:"mage",icon:"🔮",n:t.s2_mage,d:t.s2_mage_d},
+  {v:"assassin",icon:"🗡️",n:t.s2_assassin,d:t.s2_assassin_d},
+  {v:"adc",icon:"🎯",n:t.s2_adc,d:t.s2_adc_d},
+  {v:"support",icon:"✨",n:t.s2_support,d:t.s2_support_d},
+  {v:"fighter",icon:"⚔️",n:t.s2_fighter,d:t.s2_fighter_d}
+]},
+{id:"style",lbl:t.s3_lbl,q:t.s3_q,sub:t.s3_sub,type:"c2",multi:true,opts:[
+  {v:"aggressive",icon:"🔥",n:t.s3_aggressive,d:t.s3_aggressive_d},
+  {v:"passive",icon:"🧊",n:t.s3_passive,d:t.s3_passive_d},
+  {v:"carry",icon:"💥",n:t.s3_carry,d:t.s3_carry_d},
+  {v:"utility",icon:"🔧",n:t.s3_utility,d:t.s3_utility_d},
+  {v:"engage",icon:"🌪️",n:t.s3_engage,d:t.s3_engage_d},
+  {v:"peel",icon:"🛡️",n:t.s3_peel,d:t.s3_peel_d}
+]},
+{id:"faction",lbl:t.s4_lbl,q:t.s4_q,sub:t.s4_sub,type:"faction",multi:false,opts:[
+  {v:"demacia",icon:"⚜️",n:t.s4_demacia},
+  {v:"noxus",icon:"🗡️",n:t.s4_noxus},
+  {v:"ionia",icon:"🌸",n:t.s4_ionia},
+  {v:"freljord",icon:"❄️",n:t.s4_freljord},
+  {v:"shurima",icon:"☀️",n:t.s4_shurima},
+  {v:"piltover",icon:"⚙️",n:t.s4_piltover},
+  {v:"zaun",icon:"🧪",n:t.s4_zaun},
+  {v:"bilgewater",icon:"⚓",n:t.s4_bilgewater},
+  {v:"shadow_isles",icon:"💀",n:t.s4_shadow},
+  {v:"targon",icon:"🌟",n:t.s4_targon},
+  {v:"void",icon:"👁️",n:t.s4_void},
+  {v:"ixtal",icon:"🌿",n:t.s4_ixtal},
+  {v:"bandle_city",icon:"🍄",n:t.s4_bandle},
+  {v:"runeterra",icon:"🌍",n:t.s4_any}
+]},
+{id:"difficulty",lbl:t.s5_lbl,q:t.s5_q,sub:t.s5_sub,type:"c2",multi:false,opts:[
+  {v:1,icon:"🌱",n:t.s5_1,d:t.s5_1_d},
+  {v:2,icon:"📗",n:t.s5_2,d:t.s5_2_d},
+  {v:3,icon:"📘",n:t.s5_3,d:t.s5_3_d},
+  {v:4,icon:"📕",n:t.s5_4,d:t.s5_4_d},
+  {v:5,icon:"💎",n:t.s5_5,d:t.s5_5_d},
+  {v:0,icon:"🎲",n:t.s5_0,d:t.s5_0_d}
+]},
+{id:"universe",lbl:t.s6_lbl,q:t.s6_q,sub:t.s6_sub,type:"c3",multi:true,opts:[
+  {v:"medieval",icon:"🏰",n:t.s6_medieval,d:t.s6_medieval_d},
+  {v:"steampunk",icon:"⚙️",n:t.s6_steampunk,d:t.s6_steampunk_d},
+  {v:"cosmic",icon:"🌌",n:t.s6_cosmic,d:t.s6_cosmic_d},
+  {v:"ancient",icon:"🏛️",n:t.s6_ancient,d:t.s6_ancient_d},
+  {v:"dark",icon:"💀",n:t.s6_dark,d:t.s6_dark_d},
+  {v:"nature",icon:"🌿",n:t.s6_nature,d:t.s6_nature_d},
+  {v:"pirate",icon:"🏴‍☠️",n:t.s6_pirate,d:t.s6_pirate_d},
+  {v:"future",icon:"🤖",n:t.s6_future,d:t.s6_future_d},
+  {v:"void",icon:"👁️",n:t.s6_void,d:t.s6_void_d}
+]},
+{id:"type",lbl:t.s7_lbl,q:t.s7_q,sub:t.s7_sub,type:"c3",multi:true,opts:[
+  {v:"human",icon:"🧑",n:t.s7_human,d:t.s7_human_d},
+  {v:"animal",icon:"🐺",n:t.s7_animal,d:t.s7_animal_d},
+  {v:"construct",icon:"🤖",n:t.s7_construct,d:t.s7_construct_d},
+  {v:"god",icon:"⚡",n:t.s7_god,d:t.s7_god_d},
+  {v:"demon",icon:"😈",n:t.s7_demon,d:t.s7_demon_d},
+  {v:"undead",icon:"💀",n:t.s7_undead,d:t.s7_undead_d},
+  {v:"yordle",icon:"🍄",n:t.s7_yordle,d:t.s7_yordle_d},
+  {v:"void_entity",icon:"👁️",n:t.s7_void_e,d:t.s7_void_e_d},
+  {v:"spirit",icon:"✨",n:t.s7_spirit,d:t.s7_spirit_d}
+]}
+]}
+
+// =============================================
+// STATE
+// =============================================
+const RANK_TO_DIFF={iron:[1,2],bronze:[1,2],silver:[2,3],gold:[2,3],platinum:[3,4],emerald:[3,4],diamond:[4,5],master:[4,5]};
+let lang='fr', step=0, answers={};
+
+function detectLang(){
+  const p=new URLSearchParams(location.search).get('lang');
+  if(p&&I18N[p])return p;
+  const b=navigator.language.toLowerCase();
+  if(b.startsWith('es'))return'es';
+  if(b.startsWith('en'))return'en';
+  return'fr';
+}
+
+function setLang(l){
+  lang=l;
+  document.documentElement.lang=l;
+  document.querySelectorAll('.lang-btn').forEach(b=>b.classList.toggle('active',b.textContent.includes(l.toUpperCase())));
+  updateStaticText();
+  renderStep();
+}
+
+function updateStaticText(){
+  const t=I18N[lang];
+  document.getElementById('h-logo').textContent=t.logo;
+  document.getElementById('h-title').textContent=t.title;
+  document.getElementById('h-sub').textContent=t.sub;
+  document.querySelector('title').textContent=lang==='en'?'Which LoL Champion Are You? | League of Legends Quiz 2025':lang==='es'?'¿Qué Campeón de LoL Eres? | Quiz League of Legends 2025':'Quel Champion LoL es-tu ? | Quiz League of Legends 2025';
+  document.querySelector('meta[name="description"]').content=lang==='en'?'Discover which League of Legends champion matches your playstyle. Free quiz among 165 champions — personalized results in seconds.':lang==='es'?'Descubre qué campeón de League of Legends se adapta a tu estilo. Quiz gratuito entre 165 campeones.':'Découvre quel champion League of Legends correspond à ton style de jeu. Quiz gratuit parmi 165 champions.';
+}
+
+// =============================================
+// RENDER QUIZ
+// =============================================
+function initDots(){
+  const d=document.getElementById('step-dots');
+  const steps=STEPS(I18N[lang]);
+  d.innerHTML=steps.map((_,i)=>`<div class="step-dot" id="dot-${i}"></div>`).join('');
+}
+
+function updateProgress(){
+  const t=I18N[lang];
+  const steps=STEPS(t);
+  const pct=Math.round((step/steps.length)*100);
+  document.getElementById('prog-fill').style.width=pct+'%';
+  document.getElementById('prog-step').textContent=t.step_of.replace('{n}',step+1);
+  document.getElementById('prog-pct').textContent=pct+'%';
+  steps.forEach((_,i)=>{
+    const dot=document.getElementById('dot-'+i);
+    if(dot)dot.className='step-dot'+(i===step?' active':i<step?' done':'');
+  });
+}
+
+function renderStep(){
+  const t=I18N[lang];
+  const steps=STEPS(t);
+  const s=steps[step];
+  updateProgress();
+  const saved=answers[s.id];
+  const isSel=v=>s.multi?(Array.isArray(saved)&&saved.includes(v)):saved===v||saved==v;
+  let inner='';
+  if(s.type==='rank'){
+    inner=`<div class="rank-grid">`+s.opts.map(o=>`
+      <div class="rank-card ${isSel(o.v)?'sel':''}" onclick="pick('${s.id}','${o.v}',${s.multi},this)">
+        <span class="rank-icon">${o.icon}</span>
+        <div class="rank-name">${o.n}</div>
+        <div class="rank-desc">${o.d}</div>
+      </div>`).join('')+`</div>`;
+  } else if(s.type==='faction'){
+    inner=`<div class="fact-grid">`+s.opts.map(o=>`
+      <div class="fact-card ${isSel(o.v)?'sel':''}" onclick="pick('${s.id}','${o.v}',${s.multi},this)">
+        <span class="fact-icon">${o.icon}</span>
+        <div class="fact-name">${o.n}</div>
+      </div>`).join('')+`</div>`;
+  } else {
+    inner=`<div class="opts ${s.type}">`+s.opts.map(o=>{
+      const val=typeof o.v==='number'?o.v:`'${o.v}'`;
+      return`<div class="opt ${isSel(o.v)?'sel':''}" onclick="pick('${s.id}',${val},${s.multi},this)">
+        <span class="opt-icon">${o.icon}</span>
+        <div class="opt-name">${o.n}</div>
+        <div class="opt-desc">${o.d}</div>
+      </div>`;}).join('')+`</div>`;
+  }
+  const totalSteps=steps.length;
+  document.getElementById('question-area').innerHTML=`
+    <div class="question-card">
+      <div class="q-step">${t.step_of.replace('{n}',step+1)} — ${s.lbl}</div>
+      <div class="q-text">${s.q}</div>
+      <div class="q-sub">${s.sub}</div>
+      ${s.multi?`<p class="multi-hint">${t.multi_hint}</p>`:''}
+      <div class="gold-line"></div>
+      ${inner}
+      <div class="nav-row">
+        ${step>0?`<button class="btn btn-back" onclick="prevStep()">${t.back}</button>`:''}
+        <button class="btn btn-next" id="btn-next" onclick="nextStep()" disabled>
+          ${step<totalSteps-1?t.next:t.finish}
+        </button>
+      </div>
+    </div>`;
+  checkBtn();
+}
+
+function pick(id,val,multi,el){
+  if(multi){
+    if(!answers[id])answers[id]=[];
+    const a=answers[id],i=a.indexOf(val);
+    if(i>=0){a.splice(i,1);el.classList.remove('sel');}
+    else{a.push(val);el.classList.add('sel');}
+  } else {
+    answers[id]=val;
+    el.closest('.rank-grid,.fact-grid,.opts').querySelectorAll('.rank-card,.fact-card,.opt').forEach(c=>c.classList.remove('sel'));
+    el.classList.add('sel');
+  }
+  checkBtn();
+}
+
+function checkBtn(){
+  const s=STEPS(I18N[lang])[step];
+  const a=answers[s.id];
+  const ok=s.multi?(a&&a.length>0):(a!==undefined&&a!==null);
+  const btn=document.getElementById('btn-next');
+  if(btn)btn.disabled=!ok;
+}
+
+function nextStep(){
+  const steps=STEPS(I18N[lang]);
+  if(step<steps.length-1){step++;renderStep();scrollTo({top:0,behavior:'smooth'});}
+  else showResults();
+}
+
+function prevStep(){
+  if(step>0){step--;renderStep();scrollTo({top:0,behavior:'smooth'});}
+}
+
+// =============================================
+// SCORING
+// =============================================
+function score(c){
+  const t=I18N[lang];
+  let s=0,max=0,reasons=[];
+  const rank=answers.rank||'gold';
+  const prefDiffs=RANK_TO_DIFF[rank]||[2,3];
+
+  // Lane 28pts
+  max+=28;
+  const lane=answers.lane;
+  if(!lane||lane==='any')s+=14;
+  else if(c.lanes.includes(lane)){s+=28;reasons.push(t.reason_lane);}
+
+  // Archetype 25pts
+  max+=25;
+  const arch=answers.archetype;
+  if(arch&&c.archetypes.includes(arch)){s+=25;reasons.push(t.reason_role);}
+  else if(arch){const close={tank:['fighter'],fighter:['tank','assassin'],mage:['support','assassin'],assassin:['fighter','mage'],support:['mage'],adc:['fighter']};if(close[arch]&&close[arch].some(a=>c.archetypes.includes(a)))s+=10;}
+
+  // Style 20pts
+  max+=20;
+  const styles=answers.style||[];
+  if(styles.length>0){const m=styles.filter(st=>c.styles.includes(st)).length;s+=Math.round((m/styles.length)*20);if(m>0)reasons.push(t.reason_style);}else s+=10;
+
+  // Faction 15pts
+  max+=15;
+  const faction=answers.faction;
+  if(!faction||faction==='runeterra')s+=8;
+  else if(c.faction===faction||c.faction==='darkin'&&faction==='noxus'){s+=15;reasons.push(t.reason_faction);}
+
+  // Difficulty 15pts (adjusted by rank)
+  max+=15;
+  const diff=answers.difficulty;
+  if(!diff||diff===0){
+    if(prefDiffs.includes(c.difficulty)){s+=15;reasons.push(t.reason_diff);}
+    else if(Math.abs(c.difficulty-prefDiffs[0])<=1)s+=8;
+    else s+=3;
+  } else {
+    const dist=Math.abs(c.difficulty-diff);
+    if(dist===0){s+=15;reasons.push(t.reason_diff);}
+    else if(dist===1)s+=9;
+    else if(dist===2)s+=4;
+  }
+
+  // Universe 10pts
+  max+=10;
+  const univs=answers.universe||[];
+  if(univs.length>0){const m=univs.filter(u=>c.universes.includes(u)).length;s+=Math.round((m/univs.length)*10);if(m>0)reasons.push(t.reason_univ);}else s+=5;
+
+  // Type 10pts
+  max+=10;
+  const types=answers.type||[];
+  if(types.length>0){const m=types.filter(tp=>c.types.includes(tp)).length;s+=Math.round((m/types.length)*10);if(m>0)reasons.push(t.reason_type);}else s+=5;
+
+  return{c,s,pct:Math.min(99,Math.round((s/max)*100)),reasons};
+}
+
+// =============================================
+// RESULTS
+// =============================================
+const DIFF_CLR=['','#4CAF50','#8BC34A','#FFC107','#FF5722','#F44336'];
+const FACT_NAMES={demacia:'Démacia/Demacia',noxus:'Noxus',ionia:'Ionie/Ionia',freljord:'Freljord',shurima:'Shurima',piltover:'Piltover',zaun:'Zaun',bilgewater:'Bilgewater',shadow_isles:'Shadow Isles',targon:'Targon',void:'Void',ixtal:'Ixtal',bandle_city:'Bandle City',darkin:'Darkin',runeterra:'Runeterra'};
+
+function showResults(){
+  document.getElementById('quiz').style.display='none';
+  const res=document.getElementById('results');
+  res.style.display='block';
+  const t=I18N[lang];
+  document.getElementById('res-title').textContent=t.res_title;
+  document.getElementById('res-sub').textContent=t.res_sub;
+  document.getElementById('btn-restart').textContent=t.restart;
+
+  const scored=CHAMPIONS.map(score).sort((a,b)=>b.s-a.s).slice(0,5);
+  const ranks=['🥇','🥈','🥉','4️⃣','5️⃣'];
+  const bios=BIOS[lang]||BIOS.en;
+
+  document.getElementById('champ-list').innerHTML=scored.map((r,i)=>{
+    const c=r.c;
+    const img=`https://ddragon.leagueoflegends.com/cdn/img/champion/loading/${c.apiId}_0.jpg`;
+    const bio=bios[c.name]||BIOS.en[c.name]||'';
+    const lanes=c.lanes.map(l=>`<span class="tag tag-l">${t['tag_'+l]||l}</span>`).join('');
+    const archs=c.archetypes.map(a=>`<span class="tag tag-a">${t['tag_'+a]||a}</span>`).join('');
+    const fact=`<span class="tag tag-f">${FACT_NAMES[c.faction]||c.faction}</span>`;
+    const dc=DIFF_CLR[c.difficulty]||'#888';
+    const diff=`<span class="tag tag-d" style="border:1px solid ${dc}44;color:${dc}">${(t.diff_labels||[])[c.difficulty]||''}</span>`;
+    const reasons=r.reasons.map(r=>`<span class="reason-tag">${r}</span>`).join('');
+    const opgg=`https://www.op.gg/champions/${c.name.toLowerCase().replace(/[^a-z]/g,'')}`;
+    const mobafire=`https://www.mobafire.com/league-of-legends/${c.name.toLowerCase().replace(/[^a-z]/g,'-')}-guide`;
+    return`<article class="champ-card" style="animation-delay:${i*.12}s">
+      <div class="champ-img-wrap">
+        <img class="champ-img" src="${img}" alt="${c.name} League of Legends champion" loading="lazy" onerror="this.style.background='#1a2d40'">
+        <div class="champ-rank">${ranks[i]}</div>
+      </div>
+      <div class="champ-info">
+        <div>
+          <div class="champ-name">${c.name}</div>
+          <div class="match-row">
+            <span class="match-pct">${r.pct}%</span>
+            <div class="match-bar"><div class="match-fill" style="width:0%" data-w="${r.pct}%"></div></div>
+          </div>
+        </div>
+        <div class="champ-tags">${lanes}${archs}${fact}${diff}</div>
+        <p class="champ-bio">${bio}</p>
+        ${reasons?`<div class="reasons">${reasons}</div>`:''}
+        <div class="champ-links">
+          <a class="champ-link link-opgg" href="${opgg}" target="_blank" rel="noopener">${t.link_stats}</a>
+          <a class="champ-link link-guide" href="${mobafire}" target="_blank" rel="noopener">${t.link_guide}</a>
+        </div>
+      </div>
+    </article>`;
+  }).join('');
+
+  // animate bars
+  setTimeout(()=>document.querySelectorAll('.match-fill').forEach(el=>el.style.width=el.dataset.w),200);
+
+  // Affiliation
+  renderAff(scored[0]?scored[0].c:null);
+  scrollTo({top:0,behavior:'smooth'});
+}
+
+function renderAff(topChamp){
+  const t=I18N[lang];
+  const rank=answers.rank||'gold';
+  const isLow=['iron','bronze','silver'].includes(rank);
+  const isMid=['gold','platinum','emerald'].includes(rank);
+  const badge=isLow?t.coaching_badge_iron:isMid?t.coaching_badge_gold:t.coaching_badge_dia;
+  const champSlug=topChamp?topChamp.name.toLowerCase().replace(/[^a-z]/g,''):'ahri';
+
+  document.getElementById('aff-section').innerHTML=`
+    <h2 class="aff-title">${t.aff_title}</h2>
+    <p class="aff-sub">${t.aff_sub}</p>
+    <div class="aff-grid">
+      <a class="aff-card" href="https://www.proguides.com/?utm_source=lolpersonality&utm_medium=quiz&utm_campaign=result" target="_blank" rel="noopener sponsored">
+        <span class="aff-icon">🎓</span>
+        <div class="aff-card-title">${t.aff_coaching_title}</div>
+        <div class="aff-coaching-badge">${badge}</div>
+        <div class="aff-card-desc">${t.aff_coaching_desc}</div>
+        <span class="aff-cta">${t.aff_coaching_cta}</span>
+      </a>
+      <a class="aff-card" href="https://www.op.gg/champions/${champSlug}?utm_source=lolpersonality" target="_blank" rel="noopener">
+        <span class="aff-icon">📊</span>
+        <div class="aff-card-title">${t.aff_stats_title}</div>
+        <div class="aff-card-desc">${t.aff_stats_desc}</div>
+        <span class="aff-cta">${t.aff_stats_cta}</span>
+      </a>
+      <a class="aff-card" href="https://amzn.to/lol-gaming-setup?utm_source=lolpersonality&utm_medium=quiz" target="_blank" rel="noopener sponsored">
+        <span class="aff-icon">🖱️</span>
+        <div class="aff-card-title">${t.aff_gear_title}</div>
+        <div class="aff-card-desc">${t.aff_gear_desc}</div>
+        <span class="aff-cta">${t.aff_gear_cta}</span>
+      </a>
+      <a class="aff-card" href="https://store.steampowered.com/?utm_source=lolpersonality" target="_blank" rel="noopener">
+        <span class="aff-icon">🎨</span>
+        <div class="aff-card-title">${t.aff_skins_title}</div>
+        <div class="aff-card-desc">${t.aff_skins_desc}</div>
+        <span class="aff-cta">${t.aff_skins_cta}</span>
+      </a>
+    </div>`;
+}
+
+function restart(){
+  step=0;answers={};
+  document.getElementById('quiz').style.display='block';
+  document.getElementById('results').style.display='none';
+  initDots();renderStep();
+  scrollTo({top:0,behavior:'smooth'});
+}
+
+// INIT
+lang=detectLang();
+document.documentElement.lang=lang;
+document.querySelectorAll('.lang-btn').forEach(b=>b.classList.toggle('active',b.textContent.includes(lang.toUpperCase())));
+updateStaticText();
+initDots();
+renderStep();
+</script>
+</body>
+</html>

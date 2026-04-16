@@ -1,0 +1,283 @@
+---
+/**
+ * AffiliateBlock — sélection aléatoire côté CLIENT à chaque chargement.
+ * Le serveur envoie tous les blocs candidats en JSON → le JS choisit au hasard.
+ * Fonctionne même si la page HTML est mise en cache (Nginx, CDN).
+ */
+
+export interface Props {
+  placement: string
+  variant?: 'card' | 'banner'
+  roles?: string[]
+  locale?: string
+}
+
+const { placement, variant = 'card', roles = [], locale = 'fr' } = Astro.props
+
+const PAYLOAD_URL = import.meta.env.PAYLOAD_API_URL || 'http://payload:3000'
+const AFFILIATE_TAG = import.meta.env.AMAZON_AFFILIATE_TAG || ''
+
+function injectTag(url: string): string {
+  if (!AFFILIATE_TAG || !url) return url
+  try {
+    const u = new URL(url)
+    u.searchParams.set('tag', AFFILIATE_TAG)
+    return u.toString()
+  } catch { return url }
+}
+
+const LANE_TO_ROLE: Record<string, string> = {
+  bot: 'adc', adc: 'adc', mid: 'mage', support: 'support', jungle: 'jungle', top: 'tank',
+}
+const ARCHETYPE_TO_ROLE: Record<string, string> = {
+  mage: 'mage', assassin: 'assassin', marksman: 'adc',
+  tank: 'tank', fighter: 'fighter', support: 'support',
+  bruiser: 'fighter', enchanter: 'support',
+}
+
+const targetRoles = [...new Set(
+  roles.map((r: string) => LANE_TO_ROLE[r.toLowerCase()] || ARCHETYPE_TO_ROLE[r.toLowerCase()] || r)
+)]
+
+// Fetch tous les blocs actifs pour ce placement
+let candidates: any[] = []
+try {
+  const res = await fetch(
+    `${PAYLOAD_URL}/api/affiliate-blocks?where[placement][equals]=${placement}&where[active][equals]=true&limit=50`
+  )
+  const data = await res.json()
+  const docs: any[] = data.docs ?? []
+
+  if (docs.length > 0) {
+    // Filtrage par locale : blocs de la locale courante en priorité, fallback sur 'all'
+    const localeMatches = docs.filter((d: any) => d.locale === locale)
+    const localePool = localeMatches.length > 0
+      ? localeMatches
+      : docs.filter((d: any) => !d.locale || d.locale === 'all')
+
+    const pool = localePool.length > 0 ? localePool : docs
+
+    if (targetRoles.length > 0) {
+      const matching = pool.filter((d: any) =>
+        targetRoles.some((r: string) => (d.roles ?? ['all']).includes(r))
+      )
+      const fallback = pool.filter((d: any) => (d.roles ?? ['all']).includes('all'))
+      candidates = matching.length > 0 ? matching : fallback.length > 0 ? fallback : pool
+    } else {
+      candidates = pool
+    }
+  }
+} catch { /* Payload unreachable — silent fail */ }
+
+if (candidates.length === 0) return
+
+// Sérialiser pour le client (affiliate tag injecté ici côté serveur)
+const blocksData = candidates.map((b: any) => ({
+  name:         b.product?.name       ?? '',
+  tagline:      b.product?.tagline    ?? '',
+  imageUrl:     b.product?.imageUrl   ?? '',
+  affiliateUrl: injectTag(b.product?.affiliateUrl ?? ''),
+  ctaText:      b.product?.ctaText    ?? "Voir l'offre →",
+  badge:        b.product?.badge      ?? '',
+  disclosure:   b.disclosure          ?? '',
+}))
+---
+
+<div
+  class="aff-slot"
+  data-aff-slot
+  data-variant={variant}
+  data-blocks={JSON.stringify(blocksData)}
+  aria-live="polite"
+></div>
+
+<script>
+  type AffBlock = {
+    name: string; tagline: string; imageUrl: string
+    affiliateUrl: string; ctaText: string; badge: string; disclosure: string
+  }
+
+  function renderCard(b: AffBlock): string {
+    return `
+      <aside class="aff-card gradient-border" data-aff-block data-variant="card" aria-label="Offre partenaire : ${b.name}">
+        <div class="aff-card-glow" aria-hidden="true"></div>
+        ${b.badge ? `<span class="aff-badge">${b.badge}</span>` : ''}
+        <div class="aff-card-inner">
+          ${b.imageUrl ? `
+            <div class="aff-img-wrap">
+              <img class="aff-img" src="${b.imageUrl}" alt="${b.name}" loading="lazy" width="80" height="80" />
+            </div>` : ''}
+          <div class="aff-body">
+            <p class="aff-label">Offre Recommandée</p>
+            <p class="aff-name">${b.name}</p>
+            ${b.tagline ? `<p class="aff-tagline">${b.tagline}</p>` : ''}
+            <a class="aff-cta" href="${b.affiliateUrl}" target="_blank" rel="noopener noreferrer sponsored">
+              ${b.ctaText}
+            </a>
+          </div>
+        </div>
+        ${b.disclosure ? `<p class="aff-disclosure">${b.disclosure}</p>` : ''}
+      </aside>`
+  }
+
+  function renderBanner(b: AffBlock): string {
+    return `
+      <aside class="aff-banner" data-aff-block data-variant="banner" aria-label="Offre partenaire : ${b.name}">
+        <div class="aff-banner-bg" aria-hidden="true"></div>
+        ${b.badge ? `<span class="aff-badge aff-badge--banner">${b.badge}</span>` : ''}
+        <div class="aff-banner-inner">
+          ${b.imageUrl ? `
+            <div class="aff-img-wrap aff-img-wrap--sm">
+              <img class="aff-img" src="${b.imageUrl}" alt="${b.name}" loading="lazy" width="56" height="56" />
+            </div>` : ''}
+          <div class="aff-body">
+            <p class="aff-label">Offre Partenaire</p>
+            <p class="aff-name">${b.name}</p>
+            ${b.tagline ? `<p class="aff-tagline">${b.tagline}</p>` : ''}
+          </div>
+          <a class="aff-cta aff-cta--banner" href="${b.affiliateUrl}" target="_blank" rel="noopener noreferrer sponsored">
+            ${b.ctaText}
+          </a>
+        </div>
+        ${b.disclosure ? `<p class="aff-disclosure">${b.disclosure}</p>` : ''}
+      </aside>`
+  }
+
+  function pickAndRender(slot: HTMLElement) {
+    const blocks: AffBlock[] = JSON.parse(slot.dataset.blocks || '[]')
+    if (!blocks.length) return
+    const block = blocks[Math.floor(Math.random() * blocks.length)]
+    const variant = slot.dataset.variant as 'card' | 'banner'
+    slot.innerHTML = variant === 'card' ? renderCard(block) : renderBanner(block)
+  }
+
+  // Consent
+  function applyConsent(marketing: boolean) {
+    document.querySelectorAll<HTMLElement>('[data-aff-block]').forEach(el => {
+      el.style.display = marketing ? '' : 'none'
+    })
+    // Slots pas encore rendus
+    document.querySelectorAll<HTMLElement>('[data-aff-slot]').forEach(slot => {
+      if (marketing && !slot.innerHTML.trim()) pickAndRender(slot)
+      else if (!marketing) slot.style.display = 'none'
+    })
+  }
+
+  function checkConsent() {
+    try {
+      const raw = localStorage.getItem('lolp_consent')
+      if (!raw) {
+        // Pas encore de choix — on affiche
+        document.querySelectorAll<HTMLElement>('[data-aff-slot]').forEach(pickAndRender)
+        return
+      }
+      const c = JSON.parse(raw)
+      if (c.marketing) {
+        document.querySelectorAll<HTMLElement>('[data-aff-slot]').forEach(pickAndRender)
+      }
+      applyConsent(c.marketing)
+    } catch {
+      document.querySelectorAll<HTMLElement>('[data-aff-slot]').forEach(pickAndRender)
+    }
+  }
+
+  document.addEventListener('DOMContentLoaded', checkConsent)
+  window.addEventListener('consent-updated', (e: Event) => {
+    applyConsent((e as CustomEvent).detail.marketing)
+  })
+</script>
+
+<style is:global>
+  .aff-slot:empty { display: none; }
+
+  /* ── Shared ── */
+  .aff-label {
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 0.62rem; font-weight: 700;
+    letter-spacing: 0.15em; text-transform: uppercase;
+    color: var(--gold); opacity: 0.8; margin-bottom: 0.2rem;
+  }
+  .aff-name {
+    font-weight: 700; font-size: 0.95rem;
+    color: var(--text-light, #e1e6f0); line-height: 1.2;
+  }
+  .aff-tagline {
+    font-size: 0.78rem; color: var(--text-muted, #8892b0);
+    margin-top: 0.25rem; line-height: 1.4;
+  }
+  .aff-cta {
+    display: inline-flex; align-items: center; gap: 0.35rem;
+    margin-top: 0.75rem;
+    background: linear-gradient(135deg, #d4a43f 0%, #c89b3c 50%, #b8873a 100%);
+    color: #08090d; font-family: 'Rajdhani', sans-serif;
+    font-weight: 700; font-size: 0.85rem; letter-spacing: 0.06em;
+    text-transform: uppercase; padding: 0.5rem 1.1rem;
+    border-radius: 5px; text-decoration: none; width: fit-content;
+    transition: transform 0.2s var(--ease-out, cubic-bezier(0.22,1,0.36,1)), box-shadow 0.2s;
+    animation: pulse-glow 3s ease-in-out infinite;
+  }
+  .aff-cta:hover {
+    transform: translateY(-2px) scale(1.02);
+    box-shadow: 0 6px 20px rgba(200,155,60,0.4); animation: none;
+  }
+  .aff-badge {
+    position: absolute; top: -0.6rem; right: 1rem;
+    background: linear-gradient(135deg, var(--blue, #0bc4e3), #0892c8);
+    color: #050810; font-family: 'Rajdhani', sans-serif;
+    font-size: 0.62rem; font-weight: 700; padding: 0.2rem 0.6rem;
+    border-radius: 20px; text-transform: uppercase; letter-spacing: 0.08em;
+    box-shadow: var(--glow-blue, 0 0 24px rgba(11,196,227,0.2));
+  }
+  .aff-disclosure {
+    font-size: 0.6rem; color: var(--text-dim, #4a5568);
+    margin-top: 0.75rem; width: 100%;
+  }
+  .aff-img { width: 100%; height: 100%; object-fit: contain; display: block; border-radius: 6px; }
+
+  /* ── Card ── */
+  .aff-card {
+    position: relative;
+    background: var(--glass-bg, rgba(15,18,28,0.75));
+    backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px);
+    border: 1px solid rgba(200,155,60,0.22); border-radius: 10px;
+    padding: 1.6rem 1.25rem 1.25rem; overflow: visible;
+    margin: 1.5rem 0; margin-top: 2rem;
+    transition: border-color 0.3s, box-shadow 0.3s;
+  }
+  .aff-card:hover { border-color: rgba(200,155,60,0.45); box-shadow: 0 0 24px rgba(200,155,60,0.25); }
+  .aff-card-glow {
+    position: absolute; top: -60px; right: -60px;
+    width: 200px; height: 200px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(200,155,60,0.08) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .aff-card-inner { display: flex; gap: 1rem; align-items: flex-start; position: relative; z-index: 1; }
+  .aff-img-wrap {
+    width: 72px; height: 72px; border-radius: 8px;
+    border: 1px solid rgba(200,155,60,0.2); flex-shrink: 0; overflow: hidden;
+  }
+  .aff-body { flex: 1; display: flex; flex-direction: column; }
+
+  /* ── Banner ── */
+  .aff-banner {
+    position: relative; overflow: visible;
+    border-radius: 10px; border: 1px solid rgba(200,155,60,0.3);
+    padding: 1.1rem 1.5rem; margin: 1.5rem 0; margin-top: 2rem;
+    transition: border-color 0.3s, box-shadow 0.3s;
+  }
+  .aff-banner:hover { border-color: rgba(200,155,60,0.5); box-shadow: 0 0 24px rgba(200,155,60,0.25); }
+  .aff-banner-bg {
+    position: absolute; inset: 0; border-radius: 10px;
+    background: linear-gradient(135deg, rgba(200,155,60,0.1) 0%, rgba(11,196,227,0.06) 50%, rgba(168,85,247,0.06) 100%);
+    pointer-events: none;
+  }
+  .aff-banner-inner { position: relative; z-index: 1; display: flex; align-items: center; gap: 1rem; flex-wrap: wrap; }
+  .aff-img-wrap--sm {
+    width: 54px; height: 54px; border-radius: 6px;
+    border: 1px solid rgba(200,155,60,0.2); flex-shrink: 0; overflow: hidden;
+  }
+  .aff-banner .aff-body { flex: 1; min-width: 140px; }
+  .aff-badge--banner { position: absolute; top: -0.55rem; right: 1rem; }
+  .aff-cta--banner { margin-top: 0; flex-shrink: 0; }
+  .aff-banner .aff-disclosure { position: relative; z-index: 1; margin-top: 0.5rem; }
+</style>

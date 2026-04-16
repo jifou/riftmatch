@@ -1,0 +1,23 @@
+{
+  "name": "lol-personality",
+  "version": "1.0.0",
+  "description": "Trouve ton champion League of Legends en 5 questions",
+  "type": "module",
+  "scripts": {
+    "start": "npx serve . -p 3000 --no-clipboard",
+    "dev": "npx serve . -p 3000 -s",
+    "serve": "npx http-server . -p 3000 --cors -c-1",
+    "seed": "node scripts/seed.mjs",
+    "seed:update": "node scripts/seed.mjs --update",
+    "seed:dry": "node scripts/seed.mjs --dry-run",
+    "seed:docker": "docker compose --profile seed run --rm seed",
+    "seed:docker:update": "SEED_ARGS=--update docker compose --profile seed run --rm seed",
+    "seed:docker:dry": "SEED_ARGS=--dry-run docker compose --profile seed run --rm seed"
+  },
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "mongodb": "^6.0.0"
+  },
+  "keywords": ["lol", "league-of-legends", "quiz", "pwa"],
+  "license": "MIT"
+}

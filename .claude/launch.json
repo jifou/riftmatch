@@ -1,0 +1,39 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "Astro dev",
+      "runtimeExecutable": "npm",
+      "runtimeArgs": ["run", "dev:preview"],
+      "cwd": "astro",
+      "port": 4321,
+      "autoPort": false
+    },
+    {
+      "name": "Payload CMS (Docker)",
+      "runtimeExecutable": "docker",
+      "runtimeArgs": ["compose", "up", "--build"],
+      "port": 3001,
+      "autoPort": false
+    },
+    {
+      "name": "Payload Admin (proxy)",
+      "runtimeExecutable": "node",
+      "runtimeArgs": ["payload-proxy.mjs"],
+      "port": 3010
+    },
+    {
+      "name": "Dev local (npx serve)",
+      "runtimeExecutable": "npx",
+      "runtimeArgs": ["serve", ".", "-s"],
+      "port": 3000,
+      "autoPort": true
+    },
+    {
+      "name": "Dev local (http-server)",
+      "runtimeExecutable": "npx",
+      "runtimeArgs": ["http-server", ".", "-p", "3000", "--cors", "-c-1"],
+      "port": 3000
+    }
+  ]
+}

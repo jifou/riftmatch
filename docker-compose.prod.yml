@@ -1,0 +1,103 @@
+# ══════════════════════════════════════════════════════════════════════════════
+#  docker-compose.prod.yml — RiftMatch PRODUCTION (Hostinger VPS)
+#
+#  Fichier STANDALONE — utilisé seul sur le VPS :
+#    cd /root/riftmatch
+#    docker compose -f docker-compose.prod.yml up -d --build
+#
+#  Prérequis : Traefik tourne déjà sur le réseau "web-proxy"
+#  SSL géré par Traefik (myresolver Let's Encrypt) — pas de certbot ici.
+# ══════════════════════════════════════════════════════════════════════════════
+
+services:
+
+  # ── MongoDB (réseau interne uniquement) ─────────────────────────────────────
+  mongo:
+    image: mongo:7
+    container_name: lolp_mongo
+    restart: unless-stopped
+    volumes:
+      - mongo_data:/data/db
+    networks:
+      - riftmatch_net
+    healthcheck:
+      test: ["CMD", "mongosh", "--eval", "db.adminCommand('ping')"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # ── Payload CMS (réseau interne uniquement) ──────────────────────────────────
+  payload:
+    build:
+      context: ./payload
+      dockerfile: Dockerfile
+    container_name: lolp_payload
+    restart: unless-stopped
+    environment:
+      MONGODB_URI: mongodb://mongo:27017/lolpersonnality
+      PAYLOAD_SECRET: ${PAYLOAD_SECRET}           # REQUIS — pas de fallback
+      PAYLOAD_PUBLIC_SERVER_URL: https://riftmatch.io
+      FRONTEND_URL: https://riftmatch.io
+      PORT: 3000
+      NODE_ENV: production
+    depends_on:
+      mongo:
+        condition: service_healthy
+    volumes:
+      - payload_uploads:/app/uploads
+    networks:
+      - riftmatch_net
+
+  # ── Astro Frontend (réseau interne uniquement) ───────────────────────────────
+  astro:
+    build:
+      context: ./astro
+      dockerfile: Dockerfile
+    container_name: lolp_astro
+    restart: unless-stopped
+    environment:
+      PAYLOAD_API_URL: http://payload:3000
+      AMAZON_AFFILIATE_TAG: ${AMAZON_AFFILIATE_TAG:-}
+      PORT: 4321
+      NODE_ENV: production
+    depends_on:
+      - payload
+    networks:
+      - riftmatch_net
+
+  # ── Nginx — routeur interne + point d'entrée Traefik ────────────────────────
+  nginx:
+    image: nginx:alpine
+    container_name: lolp_nginx
+    restart: unless-stopped
+    volumes:
+      - ./nginx/default.conf:/etc/nginx/conf.d/default.conf:ro
+    depends_on:
+      - payload
+      - astro
+    networks:
+      - riftmatch_net   # communication avec astro / payload
+      - web-proxy       # découverte par Traefik
+    labels:
+      - "traefik.enable=true"
+      # Routeur HTTPS principal
+      - "traefik.http.routers.riftmatch.rule=Host(`riftmatch.io`) || Host(`www.riftmatch.io`)"
+      - "traefik.http.routers.riftmatch.entrypoints=websecure"
+      - "traefik.http.routers.riftmatch.tls.certresolver=myresolver"
+      - "traefik.http.services.riftmatch.loadbalancer.server.port=80"
+      - "traefik.docker.network=web-proxy"
+      # Middleware : redirect www → non-www
+      - "traefik.http.middlewares.riftmatch-nowww.redirectregex.regex=^https://www\\.riftmatch\\.io/(.*)"
+      - "traefik.http.middlewares.riftmatch-nowww.redirectregex.replacement=https://riftmatch.io/$${1}"
+      - "traefik.http.middlewares.riftmatch-nowww.redirectregex.permanent=true"
+      - "traefik.http.routers.riftmatch.middlewares=riftmatch-nowww"
+
+networks:
+  riftmatch_net:
+    driver: bridge
+  web-proxy:
+    external: true   # réseau Traefik existant
+
+volumes:
+  mongo_data:
+  payload_uploads:

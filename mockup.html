@@ -1,0 +1,839 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>LoL Personality – Trouve ton champion</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@700;900&family=Inter:wght@300;400;500;600&display=swap');
+
+    :root {
+      --gold: #C89B3C;
+      --gold-light: #F0E6B2;
+      --dark: #0A0E1A;
+      --dark2: #0F1628;
+      --dark3: #1A2035;
+      --blue: #0BC4E3;
+      --purple: #8B5CF6;
+      --red: #EF4444;
+      --text: #C8AA6E;
+      --text-light: #F0E6B2;
+      --text-muted: #5B6070;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background: var(--dark);
+      font-family: 'Inter', sans-serif;
+      color: var(--text-light);
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    /* ─── BACKGROUND ─────────────────────────────── */
+    .bg-overlay {
+      position: fixed; inset: 0; z-index: 0;
+      background:
+        radial-gradient(ellipse at 20% 50%, rgba(139,92,246,0.08) 0%, transparent 60%),
+        radial-gradient(ellipse at 80% 20%, rgba(200,155,60,0.06) 0%, transparent 50%),
+        radial-gradient(ellipse at 50% 100%, rgba(11,196,227,0.06) 0%, transparent 50%);
+    }
+
+    /* ─── SCREENS ─────────────────────────────────── */
+    .screen {
+      display: none;
+      position: relative; z-index: 1;
+      min-height: 100vh;
+      padding: 2rem 1rem;
+    }
+    .screen.active { display: flex; flex-direction: column; align-items: center; justify-content: center; }
+
+    /* ─── LOGO / HEADER ──────────────────────────── */
+    .logo {
+      font-family: 'Cinzel', serif;
+      font-size: clamp(1.8rem, 5vw, 2.8rem);
+      font-weight: 900;
+      background: linear-gradient(135deg, var(--gold), var(--gold-light), var(--gold));
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      letter-spacing: 0.05em;
+      text-align: center;
+      margin-bottom: 0.3rem;
+    }
+    .logo-sub {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      text-align: center;
+      margin-bottom: 3rem;
+    }
+
+    /* ─── WELCOME SCREEN ─────────────────────────── */
+    .welcome-title {
+      font-family: 'Cinzel', serif;
+      font-size: clamp(1.3rem, 4vw, 2rem);
+      text-align: center;
+      color: var(--gold-light);
+      margin-bottom: 0.8rem;
+    }
+    .welcome-sub {
+      font-size: 0.95rem;
+      color: var(--text-muted);
+      text-align: center;
+      margin-bottom: 3rem;
+      max-width: 500px;
+    }
+
+    /* ─── PATH CARDS ─────────────────────────────── */
+    .paths-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      gap: 1rem;
+      width: 100%;
+      max-width: 720px;
+    }
+
+    .path-card {
+      background: linear-gradient(135deg, var(--dark2), var(--dark3));
+      border: 1px solid rgba(200,155,60,0.2);
+      border-radius: 12px;
+      padding: 1.5rem 1rem;
+      text-align: center;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+    }
+    .path-card::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: linear-gradient(135deg, transparent, rgba(200,155,60,0.05));
+      opacity: 0; transition: opacity 0.3s;
+    }
+    .path-card:hover {
+      border-color: var(--gold);
+      transform: translateY(-4px);
+      box-shadow: 0 8px 30px rgba(200,155,60,0.15);
+    }
+    .path-card:hover::before { opacity: 1; }
+
+    .path-icon { font-size: 2.2rem; margin-bottom: 0.7rem; display: block; }
+    .path-label {
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--gold-light);
+      line-height: 1.3;
+    }
+    .path-desc {
+      font-size: 0.72rem;
+      color: var(--text-muted);
+      margin-top: 0.3rem;
+    }
+
+    /* ─── QUIZ SCREEN ─────────────────────────────── */
+    .quiz-header {
+      width: 100%; max-width: 600px;
+      display: flex; align-items: center; gap: 1rem;
+      margin-bottom: 2.5rem;
+    }
+    .quiz-back {
+      background: none; border: 1px solid rgba(200,155,60,0.3);
+      color: var(--gold); font-size: 1.2rem;
+      width: 36px; height: 36px;
+      border-radius: 8px; cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      transition: all 0.2s;
+      flex-shrink: 0;
+    }
+    .quiz-back:hover { background: rgba(200,155,60,0.1); border-color: var(--gold); }
+
+    .progress-bar-wrap {
+      flex: 1;
+      background: var(--dark3);
+      border-radius: 99px; height: 6px; overflow: hidden;
+    }
+    .progress-bar-fill {
+      height: 100%;
+      background: linear-gradient(90deg, var(--gold), var(--gold-light));
+      border-radius: 99px;
+      transition: width 0.5s ease;
+    }
+    .progress-label {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      flex-shrink: 0;
+    }
+
+    .quiz-path-badge {
+      font-size: 0.72rem;
+      font-weight: 600;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--gold);
+      background: rgba(200,155,60,0.1);
+      border: 1px solid rgba(200,155,60,0.3);
+      padding: 0.25rem 0.75rem;
+      border-radius: 99px;
+      margin-bottom: 1rem;
+      text-align: center;
+    }
+
+    .quiz-question {
+      font-family: 'Cinzel', serif;
+      font-size: clamp(1.1rem, 3vw, 1.5rem);
+      color: var(--gold-light);
+      text-align: center;
+      max-width: 560px;
+      margin-bottom: 2.5rem;
+      line-height: 1.5;
+    }
+
+    .answers-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.85rem;
+      width: 100%; max-width: 560px;
+    }
+
+    .answer-btn {
+      background: var(--dark2);
+      border: 1px solid rgba(200,155,60,0.2);
+      border-radius: 10px;
+      padding: 1rem 1.2rem;
+      text-align: left;
+      cursor: pointer;
+      transition: all 0.25s;
+      color: var(--text-light);
+      font-size: 0.88rem;
+      font-family: 'Inter', sans-serif;
+      line-height: 1.4;
+      display: flex; align-items: center; gap: 0.7rem;
+    }
+    .answer-btn .ans-icon { font-size: 1.3rem; flex-shrink: 0; }
+    .answer-btn:hover {
+      border-color: var(--gold);
+      background: rgba(200,155,60,0.08);
+      transform: translateX(3px);
+    }
+    .answer-btn.selected {
+      border-color: var(--gold);
+      background: rgba(200,155,60,0.12);
+      color: var(--gold-light);
+    }
+
+    /* ─── RESULTS SCREEN ─────────────────────────── */
+    .results-title {
+      font-family: 'Cinzel', serif;
+      font-size: clamp(1.1rem, 3vw, 1.6rem);
+      color: var(--gold-light);
+      text-align: center;
+      margin-bottom: 0.5rem;
+    }
+    .results-sub {
+      font-size: 0.85rem; color: var(--text-muted);
+      text-align: center; margin-bottom: 3rem;
+    }
+
+    .champions-row {
+      display: flex;
+      align-items: flex-end;
+      gap: 1.2rem;
+      justify-content: center;
+      flex-wrap: wrap;
+      width: 100%; max-width: 800px;
+      margin-bottom: 3rem;
+    }
+
+    /* Secondary champions */
+    .champ-card {
+      background: var(--dark2);
+      border: 1px solid rgba(200,155,60,0.25);
+      border-radius: 14px;
+      width: 200px;
+      overflow: hidden;
+      transition: all 0.3s;
+      cursor: pointer;
+      position: relative;
+    }
+    .champ-card:hover {
+      border-color: rgba(200,155,60,0.5);
+      transform: translateY(-3px);
+    }
+
+    /* TOP champion */
+    .champ-card.top {
+      width: 230px;
+      border: 2px solid var(--gold);
+      box-shadow:
+        0 0 25px rgba(200,155,60,0.3),
+        0 0 60px rgba(200,155,60,0.1),
+        inset 0 0 20px rgba(200,155,60,0.05);
+      z-index: 2;
+    }
+
+    .crown {
+      position: absolute;
+      top: -22px; left: 50%;
+      transform: translateX(-50%);
+      font-size: 1.8rem;
+      filter: drop-shadow(0 0 8px rgba(200,155,60,0.8));
+      animation: float 2s ease-in-out infinite;
+    }
+    @keyframes float {
+      0%,100% { transform: translateX(-50%) translateY(0); }
+      50% { transform: translateX(-50%) translateY(-5px); }
+    }
+
+    .best-badge {
+      position: absolute;
+      top: 10px; right: 10px;
+      background: linear-gradient(135deg, var(--gold), #a07830);
+      color: var(--dark);
+      font-size: 0.62rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 0.2rem 0.5rem;
+      border-radius: 99px;
+    }
+
+    .champ-splash {
+      width: 100%; aspect-ratio: 3/4;
+      object-fit: cover;
+      display: block;
+      background: linear-gradient(135deg, var(--dark3), #1e2a4a);
+      position: relative;
+    }
+    .champ-splash-placeholder {
+      width: 100%; aspect-ratio: 3/4;
+      background: linear-gradient(135deg, var(--dark3), #1e2a4a);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 3.5rem;
+      position: relative;
+    }
+
+    .champ-info { padding: 1rem; }
+    .champ-name {
+      font-family: 'Cinzel', serif;
+      font-size: 1rem;
+      color: var(--gold-light);
+      margin-bottom: 0.2rem;
+    }
+    .top .champ-name { font-size: 1.1rem; }
+
+    .champ-role {
+      font-size: 0.72rem;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      margin-bottom: 0.6rem;
+    }
+
+    .champ-tags { display: flex; gap: 0.3rem; flex-wrap: wrap; margin-bottom: 0.7rem; }
+    .tag {
+      font-size: 0.65rem;
+      padding: 0.2rem 0.5rem;
+      border-radius: 99px;
+      border: 1px solid;
+    }
+    .tag.fighter { border-color: #EF4444; color: #EF4444; background: rgba(239,68,68,0.08); }
+    .tag.mage { border-color: #8B5CF6; color: #8B5CF6; background: rgba(139,92,246,0.08); }
+    .tag.assassin { border-color: #0BC4E3; color: #0BC4E3; background: rgba(11,196,227,0.08); }
+    .tag.support { border-color: #22C55E; color: #22C55E; background: rgba(34,197,94,0.08); }
+    .tag.marksman { border-color: var(--gold); color: var(--gold); background: rgba(200,155,60,0.08); }
+    .tag.tank { border-color: #94A3B8; color: #94A3B8; background: rgba(148,163,184,0.08); }
+
+    .champ-desc {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      line-height: 1.5;
+      margin-bottom: 0.8rem;
+    }
+
+    .difficulty-bar {
+      display: flex; align-items: center; gap: 0.5rem;
+      margin-bottom: 0.8rem;
+    }
+    .diff-label { font-size: 0.65rem; color: var(--text-muted); width: 60px; }
+    .diff-dots { display: flex; gap: 3px; }
+    .diff-dot {
+      width: 8px; height: 8px; border-radius: 50%;
+      background: var(--dark3);
+      border: 1px solid rgba(200,155,60,0.3);
+    }
+    .diff-dot.filled { background: var(--gold); border-color: var(--gold); }
+
+    .champ-cta {
+      width: 100%;
+      padding: 0.6rem;
+      border-radius: 8px;
+      font-size: 0.78rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s;
+      font-family: 'Inter', sans-serif;
+      border: none;
+    }
+    .top .champ-cta {
+      background: linear-gradient(135deg, var(--gold), #a07830);
+      color: var(--dark);
+    }
+    .top .champ-cta:hover { filter: brightness(1.1); transform: scale(1.02); }
+    .champ-card:not(.top) .champ-cta {
+      background: transparent;
+      border: 1px solid rgba(200,155,60,0.3);
+      color: var(--gold);
+    }
+    .champ-card:not(.top) .champ-cta:hover { background: rgba(200,155,60,0.08); }
+
+    /* ─── AD PLACEMENTS ───────────────────────────── */
+    .ad-banner {
+      width: 100%; max-width: 728px;
+      background: linear-gradient(135deg, #0d1117, #1a1f2e);
+      border: 1px dashed rgba(200,155,60,0.25);
+      border-radius: 10px;
+      padding: 0.8rem 1.5rem;
+      display: flex; align-items: center; justify-content: space-between;
+      margin: 1.5rem 0;
+      position: relative;
+    }
+    .ad-label {
+      position: absolute; top: -9px; left: 12px;
+      font-size: 0.6rem; color: var(--text-muted);
+      background: var(--dark); padding: 0 6px;
+      letter-spacing: 0.1em; text-transform: uppercase;
+    }
+    .ad-content { font-size: 0.8rem; color: var(--text-muted); }
+    .ad-cta-btn {
+      background: linear-gradient(135deg, #22C55E, #16a34a);
+      color: white; border: none;
+      padding: 0.45rem 1rem; border-radius: 6px;
+      font-size: 0.78rem; font-weight: 600; cursor: pointer;
+    }
+
+    .affiliate-row {
+      display: flex; gap: 0.8rem; flex-wrap: wrap;
+      justify-content: center;
+      width: 100%; max-width: 800px;
+      margin: 1rem 0;
+    }
+    .affiliate-card {
+      background: var(--dark2);
+      border: 1px solid rgba(34,197,94,0.2);
+      border-radius: 10px;
+      padding: 0.8rem 1.2rem;
+      display: flex; align-items: center; gap: 0.8rem;
+      cursor: pointer;
+      transition: all 0.2s;
+      font-size: 0.78rem;
+    }
+    .affiliate-card:hover { border-color: #22C55E; transform: translateY(-2px); }
+    .aff-icon { font-size: 1.5rem; }
+    .aff-text { color: var(--text-muted); }
+    .aff-name { font-weight: 600; color: var(--text-light); display: block; }
+    .aff-badge {
+      font-size: 0.6rem; color: #22C55E;
+      background: rgba(34,197,94,0.1);
+      border: 1px solid rgba(34,197,94,0.3);
+      padding: 0.15rem 0.4rem; border-radius: 99px;
+      text-transform: uppercase; letter-spacing: 0.08em;
+    }
+
+    /* Sidebar ad mockup */
+    .page-with-sidebar {
+      display: flex; gap: 2rem; align-items: flex-start;
+      width: 100%; max-width: 1100px; justify-content: center;
+    }
+    .sidebar-ad {
+      width: 160px; flex-shrink: 0;
+      background: var(--dark2);
+      border: 1px dashed rgba(200,155,60,0.2);
+      border-radius: 10px;
+      height: 350px;
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      gap: 0.5rem;
+      font-size: 0.72rem; color: var(--text-muted);
+    }
+
+    /* ─── RESTART BTN ─────────────────────────────── */
+    .restart-btn {
+      background: transparent;
+      border: 1px solid rgba(200,155,60,0.3);
+      color: var(--gold);
+      padding: 0.7rem 2rem;
+      border-radius: 8px;
+      font-size: 0.85rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.2s;
+      font-family: 'Inter', sans-serif;
+      letter-spacing: 0.05em;
+    }
+    .restart-btn:hover { background: rgba(200,155,60,0.08); border-color: var(--gold); }
+
+    /* ─── ANNOTATIONS ─────────────────────────────── */
+    .annotation {
+      display: inline-flex; align-items: center; gap: 0.4rem;
+      font-size: 0.7rem; color: #0BC4E3;
+      background: rgba(11,196,227,0.08);
+      border: 1px solid rgba(11,196,227,0.2);
+      border-radius: 6px; padding: 0.3rem 0.6rem;
+      margin: 0.3rem;
+    }
+    .annotations-wrap {
+      display: flex; flex-wrap: wrap; justify-content: center;
+      margin-top: 1.5rem; max-width: 720px;
+    }
+
+    /* ─── NAV SCREENS ─────────────────────────────── */
+    .nav-dots {
+      display: flex; gap: 0.5rem; justify-content: center;
+      margin-top: 2rem;
+    }
+    .nav-dot {
+      width: 8px; height: 8px; border-radius: 50%;
+      background: var(--dark3); border: 1px solid rgba(200,155,60,0.3);
+      cursor: pointer; transition: all 0.2s;
+    }
+    .nav-dot.active { background: var(--gold); border-color: var(--gold); }
+
+    /* scroll dot on mobile */
+    @media (max-width: 600px) {
+      .answers-grid { grid-template-columns: 1fr; }
+      .champions-row { flex-direction: column; align-items: center; }
+      .champ-card, .champ-card.top { width: 90%; max-width: 280px; }
+      .page-with-sidebar .sidebar-ad { display: none; }
+    }
+  </style>
+</head>
+<body>
+<div class="bg-overlay"></div>
+
+<!-- ══════════════════════════════════════════════
+     SCREEN 1 — WELCOME / PATH SELECTION
+══════════════════════════════════════════════ -->
+<div class="screen active" id="screen-welcome">
+  <div class="logo">LoL Personality</div>
+  <div class="logo-sub">Discover your champion</div>
+
+  <!-- Top banner ad -->
+  <div class="ad-banner" style="max-width:720px">
+    <div class="ad-label">Publicité</div>
+    <div class="ad-content">🖱️ <strong style="color:var(--gold-light)">SteelSeries Arctis Nova Pro</strong> — Le casque des champions</div>
+    <button class="ad-cta-btn">Voir l'offre →</button>
+  </div>
+
+  <p class="welcome-title">Comment tu veux choisir ton champion ?</p>
+  <p class="welcome-sub">Réponds à 5 questions et on te trouve le champion parfait pour toi.</p>
+
+  <div class="paths-grid">
+    <div class="path-card" onclick="startPath('character')">
+      <span class="path-icon">🎭</span>
+      <div class="path-label">Mon caractère</div>
+      <div class="path-desc">Introverti, stratège, impulsif…</div>
+    </div>
+    <div class="path-card" onclick="startPath('mood')">
+      <span class="path-icon">⚡</span>
+      <div class="path-label">Mon humeur</div>
+      <div class="path-desc">Comment tu te sens là, maintenant</div>
+    </div>
+    <div class="path-card" onclick="startPath('tastes')">
+      <span class="path-icon">🎮</span>
+      <div class="path-label">Mes goûts</div>
+      <div class="path-desc">Films, persos, univers préférés</div>
+    </div>
+    <div class="path-card" onclick="startPath('playstyle')">
+      <span class="path-icon">🗡️</span>
+      <div class="path-label">Mon style de jeu</div>
+      <div class="path-desc">Carry, tank, soutien, assassin…</div>
+    </div>
+    <div class="path-card" onclick="startPath('universe')">
+      <span class="path-icon">🌍</span>
+      <div class="path-label">L'univers</div>
+      <div class="path-desc">Démon, chevalier, mage, créature</div>
+    </div>
+    <div class="path-card" onclick="startPath('difficulty')">
+      <span class="path-icon">🎯</span>
+      <div class="path-label">La difficulté</div>
+      <div class="path-desc">Simple ou challenge max</div>
+    </div>
+  </div>
+
+  <div class="annotations-wrap">
+    <span class="annotation">📍 SEO : H1 contenant "quel champion LoL jouer"</span>
+    <span class="annotation">📢 Pub : Banner 728×90 au-dessus du fold</span>
+    <span class="annotation">🌐 i18n : Langue détectée automatiquement</span>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════
+     SCREEN 2 — QUIZ (exemple : humeur)
+══════════════════════════════════════════════ -->
+<div class="screen" id="screen-quiz">
+  <div class="quiz-header" style="max-width:600px;width:100%">
+    <button class="quiz-back" onclick="showScreen('screen-welcome')">←</button>
+    <div class="progress-bar-wrap">
+      <div class="progress-bar-fill" id="progress-fill" style="width:20%"></div>
+    </div>
+    <span class="progress-label" id="progress-label">1 / 5</span>
+  </div>
+
+  <div class="quiz-path-badge" id="quiz-badge">⚡ Humeur</div>
+  <div class="quiz-question" id="quiz-question">
+    Sur une échelle de 1 à 5, ton énergie du moment ?
+  </div>
+
+  <div class="answers-grid" id="answers-container">
+    <button class="answer-btn" onclick="nextQuestion(this, 1)">
+      <span class="ans-icon">😴</span>
+      <span>1 — Presque en mode veille</span>
+    </button>
+    <button class="answer-btn" onclick="nextQuestion(this, 2)">
+      <span class="ans-icon">😌</span>
+      <span>2 — Tranquille, relax</span>
+    </button>
+    <button class="answer-btn" onclick="nextQuestion(this, 3)">
+      <span class="ans-icon">😎</span>
+      <span>3 — Correct, dans le game</span>
+    </button>
+    <button class="answer-btn" onclick="nextQuestion(this, 4)">
+      <span class="ans-icon">🔥</span>
+      <span>4 — Chaud, prêt à jouer</span>
+    </button>
+    <button class="answer-btn" onclick="nextQuestion(this, 5)" style="grid-column:1/-1">
+      <span class="ans-icon">⚡</span>
+      <span>5 — Énergie maximale, let's GO</span>
+    </button>
+  </div>
+
+  <div class="annotations-wrap">
+    <span class="annotation">📍 SEO : URL /quiz/humeur/q1 — breadcrumb visible</span>
+    <span class="annotation">📢 Pub : Interstitiel léger entre Q3 et Q4</span>
+    <span class="annotation">✅ UX : Réponse sélectionnée → auto-avance 400ms</span>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════
+     SCREEN 3 — RESULTS
+══════════════════════════════════════════════ -->
+<div class="screen" id="screen-results">
+
+  <div class="logo">LoL Personality</div>
+  <p class="results-title">Tes champions idéaux ont été trouvés ✨</p>
+  <p class="results-sub">Basé sur ton humeur · Résultat personnalisé</p>
+
+  <div class="page-with-sidebar" style="align-items:flex-start">
+
+    <!-- Left sidebar ad -->
+    <div class="sidebar-ad">
+      <div style="font-size:1.5rem">🖥️</div>
+      <div style="text-align:center;padding:0 0.5rem">Moniteur gaming 144Hz</div>
+      <div style="font-size:0.65rem;color:var(--gold);margin-top:0.3rem">Pub · Amazon</div>
+    </div>
+
+    <!-- Champions -->
+    <div style="flex:1;display:flex;flex-direction:column;align-items:center">
+      <div class="champions-row">
+
+        <!-- Champion 2 — Secondary -->
+        <div class="champ-card">
+          <div class="champ-splash-placeholder">🔵</div>
+          <div class="champ-info">
+            <div class="champ-name">Lux</div>
+            <div class="champ-role">Mage · Mid / Support</div>
+            <div class="champ-tags">
+              <span class="tag mage">Mage</span>
+              <span class="tag support">Soutien</span>
+            </div>
+            <div class="champ-desc">"Pour les joueurs qui aiment contrôler le tempo à distance."</div>
+            <div class="difficulty-bar">
+              <span class="diff-label">Difficulté</span>
+              <div class="diff-dots">
+                <div class="diff-dot filled"></div>
+                <div class="diff-dot filled"></div>
+                <div class="diff-dot"></div>
+              </div>
+            </div>
+            <button class="champ-cta">Voir le guide →</button>
+          </div>
+        </div>
+
+        <!-- Champion 1 — TOP PICK -->
+        <div class="champ-card top" style="margin-top: 30px; position:relative">
+          <div class="crown">👑</div>
+          <div class="best-badge">Meilleur choix</div>
+          <div class="champ-splash-placeholder" style="font-size:4.5rem">🔴</div>
+          <div class="champ-info">
+            <div class="champ-name">Jinx</div>
+            <div class="champ-role">Tireur · Botlane</div>
+            <div class="champ-tags">
+              <span class="tag marksman">Tireur</span>
+              <span class="tag fighter">Chaos</span>
+            </div>
+            <div class="champ-desc">"Parfait pour ton énergie max — détruire les ennemis avec style et vitesse d'attaque explosive."</div>
+            <div class="difficulty-bar">
+              <span class="diff-label">Difficulté</span>
+              <div class="diff-dots">
+                <div class="diff-dot filled"></div>
+                <div class="diff-dot filled"></div>
+                <div class="diff-dot"></div>
+              </div>
+            </div>
+            <button class="champ-cta">Jouer Jinx maintenant →</button>
+          </div>
+        </div>
+
+        <!-- Champion 3 — Secondary -->
+        <div class="champ-card">
+          <div class="champ-splash-placeholder">🟣</div>
+          <div class="champ-info">
+            <div class="champ-name">Ekko</div>
+            <div class="champ-role">Assassin · Mid / Jungle</div>
+            <div class="champ-tags">
+              <span class="tag assassin">Assassin</span>
+              <span class="tag mage">Mage</span>
+            </div>
+            <div class="champ-desc">"Pour ceux qui veulent de la vitesse et du style avec une mécanique de rewind unique."</div>
+            <div class="difficulty-bar">
+              <span class="diff-label">Difficulté</span>
+              <div class="diff-dots">
+                <div class="diff-dot filled"></div>
+                <div class="diff-dot filled"></div>
+                <div class="diff-dot filled"></div>
+              </div>
+            </div>
+            <button class="champ-cta">Voir le guide →</button>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Affiliate row -->
+      <div style="font-size:0.7rem;color:var(--text-muted);margin-bottom:0.7rem;text-transform:uppercase;letter-spacing:0.1em">
+        🔗 Les joueurs de Jinx utilisent aussi
+      </div>
+      <div class="affiliate-row">
+        <div class="affiliate-card">
+          <div class="aff-icon">🖱️</div>
+          <div class="aff-text">
+            <span class="aff-name">Logitech G Pro X</span>
+            Souris esport 25 600 DPI
+          </div>
+          <span class="aff-badge">Afflilié</span>
+        </div>
+        <div class="affiliate-card">
+          <div class="aff-icon">🎮</div>
+          <div class="aff-text">
+            <span class="aff-name">Skin Jinx Arcane</span>
+            Disponible sur la boutique
+          </div>
+          <span class="aff-badge">Partenaire</span>
+        </div>
+        <div class="affiliate-card">
+          <div class="aff-icon">📖</div>
+          <div class="aff-text">
+            <span class="aff-name">Guide Jinx S14</span>
+            Masterclass tier S
+          </div>
+          <span class="aff-badge">Affil.</span>
+        </div>
+      </div>
+
+      <!-- Bottom banner ad -->
+      <div class="ad-banner">
+        <div class="ad-label">Publicité</div>
+        <div class="ad-content">⌨️ <strong style="color:var(--gold-light)">Keychron K8 Pro</strong> — Le clavier préféré des streamers LoL</div>
+        <button class="ad-cta-btn">Voir l'offre →</button>
+      </div>
+
+      <button class="restart-btn" onclick="showScreen('screen-welcome')">↩ Recommencer avec un autre parcours</button>
+    </div>
+
+    <!-- Right sidebar ad -->
+    <div class="sidebar-ad">
+      <div style="font-size:1.5rem">🎧</div>
+      <div style="text-align:center;padding:0 0.5rem">Casque gaming surround 7.1</div>
+      <div style="font-size:0.65rem;color:var(--gold);margin-top:0.3rem">Pub · Amazon</div>
+    </div>
+
+  </div>
+
+  <div class="annotations-wrap">
+    <span class="annotation">📍 SEO : Page résultat indexable /resultat/jinx — rich snippet "Meilleur champion"</span>
+    <span class="annotation">📢 Pub : Sidebar 160×600 + Banner 728×90 footer</span>
+    <span class="annotation">🔗 Affil. : Souris, claviers, skins, guides coaching</span>
+    <span class="annotation">📤 Social : Bouton "Partager mon champion" → viralité</span>
+  </div>
+
+</div>
+
+<!-- ══════════════════════════════════════════════
+     NAV DOTS
+══════════════════════════════════════════════ -->
+<div class="nav-dots">
+  <div class="nav-dot active" onclick="showScreen('screen-welcome')" title="Accueil"></div>
+  <div class="nav-dot" onclick="showScreen('screen-quiz')" title="Quiz"></div>
+  <div class="nav-dot" onclick="showScreen('screen-results')" title="Résultats"></div>
+</div>
+
+<script>
+  const screens = ['screen-welcome','screen-quiz','screen-results'];
+
+  function showScreen(id) {
+    screens.forEach(s => {
+      document.getElementById(s).classList.remove('active');
+    });
+    document.getElementById(id).classList.add('active');
+    // update nav dots
+    document.querySelectorAll('.nav-dot').forEach((d,i) => {
+      d.classList.toggle('active', screens[i] === id);
+    });
+    window.scrollTo(0,0);
+  }
+
+  function startPath(path) {
+    const badges = {
+      character: '🎭 Caractère',
+      mood: '⚡ Humeur',
+      tastes: '🎮 Goûts',
+      playstyle: '🗡️ Style de jeu',
+      universe: '🌍 Univers',
+      difficulty: '🎯 Difficulté'
+    };
+    document.getElementById('quiz-badge').textContent = badges[path] || path;
+    showScreen('screen-quiz');
+  }
+
+  let currentQ = 1;
+  function nextQuestion(btn, val) {
+    // visual feedback
+    document.querySelectorAll('.answer-btn').forEach(b => b.classList.remove('selected'));
+    btn.classList.add('selected');
+
+    currentQ++;
+    if (currentQ > 5) {
+      setTimeout(() => { showScreen('screen-results'); currentQ = 1; }, 400);
+      return;
+    }
+    const pct = (currentQ / 5) * 100;
+    document.getElementById('progress-fill').style.width = pct + '%';
+    document.getElementById('progress-label').textContent = currentQ + ' / 5';
+
+    // Fake next questions for demo
+    const questions = [
+      "Sur une échelle de 1 à 5, ton énergie du moment ?",
+      "T'as envie de quoi ce soir ?",
+      "T'as besoin de te défouler ou de te concentrer ?",
+      "T'es en mode solitaire ou teamplay aujourd'hui ?",
+      "Une victoire rapide ou une partie épique longue ?"
+    ];
+    setTimeout(() => {
+      document.getElementById('quiz-question').textContent = questions[currentQ-1] || questions[0];
+      document.querySelectorAll('.answer-btn').forEach(b => b.classList.remove('selected'));
+    }, 350);
+  }
+</script>
+</body>
+</html>
