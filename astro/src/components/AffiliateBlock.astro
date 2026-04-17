@@ -15,7 +15,7 @@ export interface Props {
 const { placement, variant = 'card', roles = [], locale = 'fr' } = Astro.props
 
 const PAYLOAD_URL = import.meta.env.PAYLOAD_API_URL || 'http://payload:3000'
-const AFFILIATE_TAG = import.meta.env.AMAZON_AFFILIATE_TAG || ''
+const AFFILIATE_TAG = import.meta.env.AMAZON_AFFILIATE_TAG || process.env.AMAZON_AFFILIATE_TAG || ''
 
 function injectTag(url: string): string {
   if (!AFFILIATE_TAG || !url) return url
