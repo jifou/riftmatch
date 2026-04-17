@@ -3,6 +3,8 @@ WORKDIR /app
 COPY package*.json ./
 RUN npm install --legacy-peer-deps
 COPY . .
+ARG PAYLOAD_PUBLIC_SERVER_URL=https://riftmatch.io
+ENV PAYLOAD_PUBLIC_SERVER_URL=$PAYLOAD_PUBLIC_SERVER_URL
 RUN npm run build
 
 FROM node:20-alpine AS runner
