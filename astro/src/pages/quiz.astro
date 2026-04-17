@@ -1,13 +1,13 @@
 ---
 import Layout from '../layouts/Layout.astro'
-import { QUIZ, LEVEL_QUESTION, UI } from '../i18n'
+import { QUIZ, COMMON_QUESTIONS, UI } from '../i18n'
 import { CHAMPIONS } from '../data/champions'
 import AffiliateBlock from '../components/AffiliateBlock.astro'
 
 const locale = Astro.cookies.get('locale')?.value || 'fr'
 const safeLocale = (QUIZ as any)[locale] ? locale : 'fr'
 const quizData = (QUIZ as any)[safeLocale]
-const levelQ = (LEVEL_QUESTION as any)[safeLocale]
+const commonQ = (COMMON_QUESTIONS as any)[safeLocale] || (COMMON_QUESTIONS as any).fr
 const t = (UI as any)[safeLocale] || (UI as any).fr
 ---
 
@@ -53,7 +53,7 @@ const t = (UI as any)[safeLocale] || (UI as any).fr
     <div id="quiz-app"
       data-champions={JSON.stringify(CHAMPIONS)}
       data-quiz={JSON.stringify(quizData)}
-      data-levelq={JSON.stringify(levelQ)}
+      data-commonq={JSON.stringify(commonQ)}
       data-i18n={JSON.stringify({
         tierSDesc:       t.quizPage.tierSDesc,
         tierADesc:       t.quizPage.tierADesc,
@@ -123,7 +123,7 @@ const t = (UI as any)[safeLocale] || (UI as any).fr
   const app = document.getElementById('quiz-app')!
   const champions = JSON.parse((app as HTMLElement).dataset.champions || '[]')
   const quizData = JSON.parse((app as HTMLElement).dataset.quiz || '{}')
-  const levelQ = JSON.parse((app as HTMLElement).dataset.levelq || '{}')
+  const commonQuestions = JSON.parse((app as HTMLElement).dataset.commonq || '[]')
   const i18n = JSON.parse((app as HTMLElement).dataset.i18n || '{}')
 
   const _tierSDesc        = i18n.tierSDesc        || ''
@@ -138,11 +138,10 @@ const t = (UI as any)[safeLocale] || (UI as any).fr
 
   const currentPath = new URLSearchParams(window.location.search).get('path') || 'character'
   const pathQuestions = quizData[currentPath]?.questions || []
-  const allQuestions = [levelQ, ...pathQuestions]
+  const allQuestions = [...commonQuestions, ...pathQuestions]
   const totalSteps = allQuestions.length
 
   let step = 0
-  let playerLevel = 1
   let answers: number[] = []
 
   function init() {
@@ -160,9 +159,7 @@ const t = (UI as any)[safeLocale] || (UI as any).fr
     fill.style.width = `${pct}%`
     document.getElementById('prog-count')!.textContent = `${step + 1}/${totalSteps}`
     document.getElementById('quiz-q')!.textContent = q.q
-    document.getElementById('quiz-badge')!.textContent = step === 0
-      ? (q.badge || '🎮 Niveau')
-      : `⚡ Question ${step} / ${totalSteps - 1}`
+    document.getElementById('quiz-badge')!.textContent = q.badge || `⚡ Question ${step + 1} / ${totalSteps}`
 
     const container = document.getElementById('answers')!
     container.innerHTML = ''
@@ -179,7 +176,7 @@ const t = (UI as any)[safeLocale] || (UI as any).fr
       })
     }
 
-    q.a.forEach((ans: { i: string; t: string; level?: number }, idx: number) => {
+    q.a.forEach((ans: { i: string; t: string }, idx: number) => {
       const btn = document.createElement('button')
       btn.className = 'answer-btn'
       btn.innerHTML = `
@@ -187,17 +184,13 @@ const t = (UI as any)[safeLocale] || (UI as any).fr
         <span class="ans-text">${ans.t}</span>
         <span class="ans-arrow" aria-hidden="true">→</span>
       `
-      btn.onclick = () => pickAnswer(idx, ans)
+      btn.onclick = () => pickAnswer(idx)
       container.appendChild(btn)
     })
   }
 
-  function pickAnswer(idx: number, ans: { level?: number }) {
-    if (step === 0) {
-      playerLevel = ans.level ?? idx
-    } else {
-      answers.push(idx)
-    }
+  function pickAnswer(idx: number) {
+    answers.push(idx)
     step++
     if (step < totalSteps) {
       renderQuestion()
@@ -209,10 +202,6 @@ const t = (UI as any)[safeLocale] || (UI as any).fr
   function goBack() {
     if (step === 0) {
       window.location.href = '/'
-    } else if (step === 1) {
-      step--
-      playerLevel = 1
-      renderQuestion()
     } else {
       step--
       answers.pop()
@@ -249,7 +238,7 @@ const t = (UI as any)[safeLocale] || (UI as any).fr
       })
     }, 300)
 
-    const results = calculateResults(champions, currentPath, answers, playerLevel)
+    const results = calculateResults(champions, currentPath, answers)
     const wrapper = document.getElementById('champs-wrapper')!
 
     const tiers = [
