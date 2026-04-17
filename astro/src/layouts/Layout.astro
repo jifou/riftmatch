@@ -91,6 +91,43 @@ const quizHref = '/quiz'  // pas de variante URL par locale
     <!-- Slot pour JSON-LD et meta spécifiques par page -->
     <slot name="head" />
 
+    <!-- Google Analytics 4 — chargé uniquement si PUBLIC_GA_ID défini -->
+    <!-- Respecte le consentement analytics via l'event consent-updated -->
+    {import.meta.env.PUBLIC_GA_ID && (
+      <>
+        <script async src={`https://www.googletagmanager.com/gtag/js?id=${import.meta.env.PUBLIC_GA_ID}`}></script>
+        <script define:vars={{ gaId: import.meta.env.PUBLIC_GA_ID }}>
+          window.dataLayer = window.dataLayer || []
+          function gtag() { window.dataLayer.push(arguments) }
+          gtag('js', new Date())
+
+          // Consent mode v2 — refusé par défaut, activé via le banner
+          gtag('consent', 'default', {
+            analytics_storage: 'denied',
+            ad_storage: 'denied',
+            wait_for_update: 500,
+          })
+
+          gtag('config', gaId, { send_page_view: false })
+
+          // Écoute le consentement du banner cookie
+          window.addEventListener('consent-updated', (e) => {
+            const consent = e.detail
+            gtag('consent', 'update', {
+              analytics_storage: consent.analytics ? 'granted' : 'denied',
+              ad_storage: consent.marketing ? 'granted' : 'denied',
+            })
+            if (consent.analytics) {
+              gtag('event', 'page_view', {
+                page_title: document.title,
+                page_location: window.location.href,
+              })
+            }
+          })
+        </script>
+      </>
+    )}
+
     <style is:global>
       :root {
         /* Core palette */
