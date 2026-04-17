@@ -8,7 +8,7 @@ const PRODUCTS = {
   logitech: {
     name: 'Logitech G Pro X Superlight 2',
     tagline: 'La souris des pros LoL — légère, précise, sans fil',
-    imageUrl: 'https://resource.logitechg.com/w_692,c_lpad,ar_1:1,q_auto,f_auto,dpr_1.0/d_transparent.gif/content/dam/gaming/en/products/pro-x2-superlight/pro-x2-superlight-gallery-1-black.png',
+    imageUrl: 'https://m.media-amazon.com/images/I/61rEjGq9daL._AC_SL1500_.jpg',
     affiliateUrl: 'https://www.amazon.fr/dp/B09NBQN3X2',
     ctaText: 'Voir sur Amazon →',
     badge: 'Pro Gamers',
@@ -16,7 +16,7 @@ const PRODUCTS = {
   steelseries: {
     name: 'SteelSeries Arctis Nova 3',
     tagline: 'Le casque gaming des champions LoL',
-    imageUrl: 'https://media.steelseriescdn.com/thumbs/catalog/items/61631/a22b9b2433b84266915eb4d5cd0af24f.png.500x400_q100_crop-fit_optimize.png',
+    imageUrl: 'https://m.media-amazon.com/images/I/61RMB7XVPBL._AC_SL1500_.jpg',
     affiliateUrl: 'https://www.amazon.fr/dp/B0B3VGNFCP',
     ctaText: "Voir l'offre →",
     badge: 'Top Ventes',
@@ -24,7 +24,7 @@ const PRODUCTS = {
   hyperx: {
     name: 'HyperX Cloud III',
     tagline: 'Audio spatial 3D pour entendre chaque pas ennemi',
-    imageUrl: 'https://media.kingston.com/hyperx/feature/aa-hx-headset-cloud-alpha-black-red-1-lg.jpg',
+    imageUrl: 'https://m.media-amazon.com/images/I/71YGhfZ9+YL._AC_SL1500_.jpg',
     affiliateUrl: 'https://www.amazon.fr/dp/B0BZMQD9HB',
     ctaText: 'Voir sur Amazon →',
     badge: '',
