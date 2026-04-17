@@ -24,6 +24,8 @@ const currentLocale = hasLocalePrefix
   : (Astro.cookies.get('locale')?.value || 'fr')
 const tl = UI[currentLocale] || UI.fr
 
+const gaId = import.meta.env.PUBLIC_GA_ID || process.env.PUBLIC_GA_ID || ''
+
 const BASE_URL = 'https://riftmatch.io'
 const canonicalURL = new URL(Astro.url.pathname, BASE_URL).toString()
 const ogImage = image.startsWith('http') ? image : `${BASE_URL}${image}`
@@ -96,10 +98,10 @@ const quizHref = '/quiz'  // pas de variante URL par locale
 
     <!-- Google Analytics 4 — chargé uniquement si PUBLIC_GA_ID défini -->
     <!-- Respecte le consentement analytics via l'event consent-updated -->
-    {import.meta.env.PUBLIC_GA_ID && (
+    {gaId && (
       <>
-        <script async src={`https://www.googletagmanager.com/gtag/js?id=${import.meta.env.PUBLIC_GA_ID}`}></script>
-        <script define:vars={{ gaId: import.meta.env.PUBLIC_GA_ID }}>
+        <script async src={`https://www.googletagmanager.com/gtag/js?id=${gaId}`}></script>
+        <script define:vars={{ gaId }}>
           window.dataLayer = window.dataLayer || []
           function gtag() { window.dataLayer.push(arguments) }
           gtag('js', new Date())
