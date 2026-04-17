@@ -9,6 +9,7 @@ FROM node:20-alpine AS runner
 WORKDIR /app
 ENV NODE_ENV=production
 COPY --from=builder /app/dist ./dist
+COPY --from=builder /app/build ./build
 COPY --from=builder /app/package*.json ./
 RUN npm install --omit=dev --legacy-peer-deps
 EXPOSE 3000
