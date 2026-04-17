@@ -26,9 +26,10 @@ async function run() {
 
   // Charger tous les fichiers de migration (sauf runner.ts lui-même)
   const migrationsDir = path.resolve(__dirname)
+  const ext = __filename.endsWith('.ts') ? '.ts' : '.js'
   const files = fs
     .readdirSync(migrationsDir)
-    .filter(f => f.endsWith('.ts') && f !== 'runner.ts')
+    .filter(f => f.endsWith(ext) && !f.startsWith('runner'))
     .sort() // ordre alphabétique = ordre numérique (001-, 002-, ...)
 
   if (files.length === 0) {
