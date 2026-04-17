@@ -168,7 +168,10 @@ const quizHref = '/quiz'  // pas de variante URL par locale
 
       *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-      html { scroll-behavior: smooth; }
+      html {
+        scroll-behavior: smooth;
+        overflow-x: hidden; /* iOS Safari : body seul ne suffit pas */
+      }
 
       body {
         font-family: 'Inter', sans-serif;
@@ -177,6 +180,7 @@ const quizHref = '/quiz'  // pas de variante URL par locale
         min-height: 100vh;
         padding-top: 64px;
         overflow-x: hidden;
+        width: 100%;
       }
 
       /* Global background texture */

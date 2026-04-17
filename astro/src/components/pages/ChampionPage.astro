@@ -206,7 +206,7 @@ const homePath = '/'  // homepage n'a pas de variante URL par locale
 </Layout>
 
 <style>
-  .champ-page { max-width: 960px; margin: 0 auto; padding: 1rem 1.25rem 5rem; }
+  .champ-page { max-width: 960px; margin: 0 auto; padding: 1rem 1.25rem 5rem; overflow-x: hidden; }
   .back-link { display:inline-flex;align-items:center;gap:.4rem;color:var(--text-muted);text-decoration:none;font-size:.82rem;font-family:'Rajdhani',sans-serif;font-weight:600;letter-spacing:.06em;text-transform:uppercase;margin-bottom:1.5rem;padding:.35rem .75rem;border:1px solid rgba(255,255,255,.07);border-radius:20px;transition:color .2s,border-color .2s,background .2s; }
   .back-link:hover { color:var(--gold);border-color:rgba(200,155,60,.3);background:rgba(200,155,60,.05); }
   .splash-wrap { position:relative;border-radius:12px;overflow:hidden;margin-bottom:2rem;border:1px solid rgba(200,155,60,.15);box-shadow:0 20px 60px rgba(0,0,0,.5); }
@@ -249,6 +249,6 @@ const homePath = '/'  // homepage n'a pas de variante URL par locale
   .diff-track { height:4px;background:rgba(255,255,255,.08);border-radius:2px;margin-bottom:.45rem;overflow:hidden; }
   .diff-fill { height:100%;border-radius:2px;transition:width .6s var(--ease-out); }
   .diff-num { font-family:'Rajdhani',sans-serif;font-size:.75rem;font-weight:700;text-transform:uppercase;letter-spacing:.06em; }
-  @media (max-width:768px) { .champ-page{padding:1rem 1rem 4rem}.content-grid{grid-template-columns:1fr}.thumb-col{position:static;top:auto;flex-direction:row;justify-content:center;flex-wrap:wrap}.champ-thumb{width:90px;height:90px}.diff-meter{max-width:200px}.quiz-cta{max-width:200px;font-size:.78rem} }
+  @media (max-width:900px) { .champ-page{padding:1rem 1rem 4rem}.content-grid{grid-template-columns:1fr}.thumb-col{position:static;top:auto;flex-direction:row;justify-content:center;flex-wrap:wrap}.champ-thumb{width:90px;height:90px}.diff-meter{max-width:200px}.quiz-cta{max-width:200px;font-size:.78rem} }
   @media (max-width:480px) { .champ-page{padding:.75rem .75rem 3rem}.splash-img{height:280px}.splash-content{padding:1.25rem 1rem}.champ-name{font-size:clamp(1.4rem,5vw,2.4rem)}.info-card{padding:1rem;margin-bottom:.9rem}.stats-grid{grid-template-columns:1fr} }
 </style>
