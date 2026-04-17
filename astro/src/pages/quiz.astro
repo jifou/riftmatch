@@ -490,48 +490,47 @@ const t = (UI as any)[safeLocale] || (UI as any).fr
   }
 
   .results-header {
-    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
     margin-bottom: 1rem;
-    padding: 1.1rem 1rem 0.9rem;
-    border-radius: 12px;
-    border: 1px solid rgba(200,155,60,0.1);
+    padding: 0.55rem 1.1rem;
+    border-radius: 10px;
+    border: 1px solid rgba(200,155,60,0.12);
     background: rgba(14,17,24,0.5);
   }
   .results-icon {
-    font-size: 2rem;
-    margin-bottom: 0.4rem;
+    font-size: 1.1rem;
     animation: crown-float 3s ease-in-out infinite;
     display: inline-block;
+    flex-shrink: 0;
   }
   .results-title {
     font-family: 'Cinzel', serif;
-    font-size: clamp(1.2rem, 3.5vw, 1.6rem);
+    font-size: 0.9rem;
     color: var(--gold-light);
-    margin-bottom: 0.3rem;
-    text-shadow: 0 0 20px rgba(200,155,60,0.3);
+    text-shadow: 0 0 16px rgba(200,155,60,0.3);
+    white-space: nowrap;
   }
   .results-sub {
-    font-size: 0.82rem;
-    color: var(--text-muted);
-    max-width: 380px;
-    margin: 0 auto 0.6rem;
-    line-height: 1.5;
+    display: none;
   }
   .results-tiers-legend {
     display: flex;
     align-items: center;
-    justify-content: center;
     gap: 0.5rem;
     font-family: 'Rajdhani', sans-serif;
-    font-size: 0.75rem;
+    font-size: 0.72rem;
     font-weight: 600;
     color: var(--text-muted);
     letter-spacing: 0.06em;
+    flex-shrink: 0;
   }
-  .legend-item { display: flex; align-items: center; gap: 0.3rem; }
+  .legend-item { display: flex; align-items: center; gap: 0.25rem; }
   .legend-item b {
     font-family: 'Cinzel', serif;
-    font-size: 0.9rem;
+    font-size: 0.82rem;
     font-weight: 900;
   }
   .legend-sep { opacity: 0.3; }
