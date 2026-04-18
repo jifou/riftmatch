@@ -310,20 +310,8 @@ const t = (UI as any)[safeLocale] || (UI as any).fr
       `
     }).join('')}</div>`
 
-    // Mobile option 3 : hero S + mini A/B row, tout visible d'un coup
-    if (window.innerWidth <= 600) {
-      // Empêcher le pull-to-refresh qui perturbe l'interaction
-      document.body.style.overscrollBehavior = 'contain'
-      // Bouton refaire flottant sur la S card
-      const sCard = wrapper.querySelector<HTMLElement>('.champ-result--s')
-      if (sCard) {
-        const refaire = document.createElement('a')
-        refaire.href = '/quiz'
-        refaire.className = 'mobile-refaire-btn'
-        refaire.textContent = '↩ Refaire'
-        sCard.appendChild(refaire)
-      }
-    }
+    // Scroll vers le haut pour voir les résultats
+    window.scrollTo({ top: 0, behavior: 'instant' })
   }
 
   init()
@@ -669,34 +657,15 @@ const t = (UI as any)[safeLocale] || (UI as any).fr
     /* Textes plus lisibles sur fond sombre */
     .quiz-container.results-active .champ-result-name { color: #fff; }
 
-    /* Masquer les blocs non-carousel sur mobile (affiliate, restart) */
+    /* Blocs affiliate + restart visibles et scrollables sous les cartes */
     .quiz-container.results-active .aff-card,
-    .quiz-container.results-active .aff-banner,
+    .quiz-container.results-active .aff-banner {
+      margin: 0.75rem 0.5rem 0;
+    }
     .quiz-container.results-active .restart-btn {
-      display: none !important;
+      margin: 0.5rem 0.5rem 1rem;
     }
 
-    /* Bouton refaire flottant sur la carte S */
-    .mobile-refaire-btn {
-      position: absolute;
-      bottom: 1rem;
-      right: 1rem;
-      z-index: 10;
-      font-family: 'Rajdhani', sans-serif;
-      font-size: 0.75rem;
-      font-weight: 700;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      color: rgba(255,255,255,0.55);
-      text-decoration: none;
-      padding: 0.35rem 0.7rem;
-      border: 1px solid rgba(255,255,255,0.15);
-      border-radius: 20px;
-      background: rgba(9,11,16,0.5);
-      backdrop-filter: blur(4px);
-      transition: color 0.2s, border-color 0.2s;
-    }
-    .mobile-refaire-btn:hover { color: var(--gold); border-color: rgba(200,155,60,0.4); }
 
     /* Indicateur de pagination (points) */
     .mobile-dots {
