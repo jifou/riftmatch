@@ -226,8 +226,8 @@ const t = (UI as any)[safeLocale] || (UI as any).fr
       if (window.innerWidth <= 600) {
         resultsScreen.style.display = 'flex'
         resultsScreen.style.flexDirection = 'column'
-        resultsScreen.style.height = `calc(100dvh - 64px)`
-        resultsScreen.style.overflow = 'hidden'
+        resultsScreen.style.height = 'auto'
+        resultsScreen.style.overflow = 'visible'
         resultsScreen.style.width = '100vw'
         resultsScreen.style.marginLeft = '0'
         resultsScreen.style.transform = 'none'
@@ -559,15 +559,15 @@ const t = (UI as any)[safeLocale] || (UI as any).fr
   }
 
   @media (max-width: 600px) {
-    /* Results screen : plein viewport */
+    /* Results screen : pleine largeur, scroll libre */
     .quiz-container.results-active #results-screen {
       width: 100vw;
       margin-left: 0;
       transform: none;
-      height: calc(100dvh - 64px); /* viewport - navbar fixe */
+      height: auto;
       display: flex;
       flex-direction: column;
-      overflow: hidden;
+      overflow: visible;
     }
 
     /* Header ultra-compact */
@@ -595,11 +595,8 @@ const t = (UI as any)[safeLocale] || (UI as any).fr
 
     /* ── Option 3 : Hero S + mini A/B row ── */
 
-    /* Wrapper = conteneur sans scroll */
+    /* Wrapper cartes */
     .quiz-container.results-active .champs-wrapper {
-      flex: 1;
-      min-height: 0;
-      overflow: hidden;
       margin: 0;
       width: 100vw;
       padding: 0.5rem 0.5rem 0;
@@ -610,11 +607,10 @@ const t = (UI as any)[safeLocale] || (UI as any).fr
     .quiz-container.results-active .results-grid {
       display: grid !important;
       grid-template-columns: 1fr 1fr;
-      grid-template-rows: 58% 42%;
+      grid-template-rows: 380px 220px;
       grid-template-areas:
         "s s"
         "a b";
-      height: 100%;
       gap: 0.4rem;
       padding: 0;
     }
