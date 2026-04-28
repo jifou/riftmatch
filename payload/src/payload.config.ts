@@ -8,6 +8,8 @@ import Pages from './collections/Pages'
 import AffiliateBlocks from './collections/AffiliateBlocks'
 import ChampionContent from './collections/ChampionContent'
 import Migrations from './collections/Migrations'
+import News from './collections/News'
+import PatchNotes from './collections/PatchNotes'
 
 export default buildConfig({
   serverURL: process.env.PAYLOAD_PUBLIC_SERVER_URL || 'http://localhost:3000',
@@ -20,7 +22,7 @@ export default buildConfig({
     },
   },
   editor: slateEditor({}),
-  collections: [Users, Pages, AffiliateBlocks, ChampionContent, Migrations],
+  collections: [Users, Pages, AffiliateBlocks, ChampionContent, Migrations, News, PatchNotes],
   db: mongooseAdapter({
     url: process.env.MONGODB_URI || 'mongodb://mongo:27017/lolpersonnality',
   }),
