@@ -1,0 +1,118 @@
+---
+/**
+ * SourceLink — Affiche un bloc "Source officielle" en bas d'article.
+ * Affiché uniquement si sourceUrl est renseigné.
+ * Bon pour le SEO : lien sortant vers une source authoritative sans nofollow.
+ */
+export interface Props {
+  sourceUrl?: string
+  locale?: string
+}
+
+const { sourceUrl, locale = 'fr' } = Astro.props
+
+if (!sourceUrl) return
+
+// Extraire le domaine pour l'afficher proprement
+let displayDomain = sourceUrl
+try {
+  displayDomain = new URL(sourceUrl).hostname.replace('www.', '')
+} catch { /* keep raw url */ }
+
+const LABELS: Record<string, { heading: string; cta: string; disclaimer: string }> = {
+  fr: {
+    heading: 'Source officielle',
+    cta: `Lire l'article original sur ${displayDomain} →`,
+    disclaimer: 'Cet article se base sur des informations publiées par la source ci-dessus.',
+  },
+  en: {
+    heading: 'Official source',
+    cta: `Read the original article on ${displayDomain} →`,
+    disclaimer: 'This article is based on information published by the source above.',
+  },
+  es: {
+    heading: 'Fuente oficial',
+    cta: `Leer el artículo original en ${displayDomain} →`,
+    disclaimer: 'Este artículo está basado en información publicada por la fuente anterior.',
+  },
+}
+
+const l = LABELS[locale] ?? LABELS.fr
+---
+
+<aside class="source-link" aria-label={l.heading}>
+  <div class="source-link-inner">
+    <div class="source-link-left">
+      <svg class="source-icon" viewBox="0 0 24 24" fill="none" width="16" height="16" aria-hidden="true">
+        <path d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M14 4h6m0 0v6m0-6L10 14" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+      <span class="source-heading">{l.heading}</span>
+    </div>
+    <a
+      href={sourceUrl}
+      target="_blank"
+      rel="noopener noreferrer"
+      class="source-cta"
+    >
+      {l.cta}
+    </a>
+  </div>
+  <p class="source-disclaimer">{l.disclaimer}</p>
+</aside>
+
+<style>
+  .source-link {
+    margin-top: 2.5rem;
+    padding: 1rem 1.25rem;
+    border: 1px solid rgba(200,155,60,0.25);
+    border-left: 3px solid var(--gold, #c89b3c);
+    border-radius: 0 8px 8px 0;
+    background: rgba(200,155,60,0.05);
+  }
+
+  .source-link-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+  }
+
+  .source-link-left {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .source-icon {
+    color: var(--gold, #c89b3c);
+    flex-shrink: 0;
+  }
+
+  .source-heading {
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--gold, #c89b3c);
+  }
+
+  .source-cta {
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 0.875rem;
+    font-weight: 700;
+    color: var(--text-light, #e1e6f0);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+  .source-cta:hover { color: var(--gold, #c89b3c); }
+
+  .source-disclaimer {
+    margin-top: 0.5rem;
+    font-size: 0.7rem;
+    color: var(--text-dim, #4a5568);
+    line-height: 1.4;
+  }
+</style>

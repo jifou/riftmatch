@@ -1,6 +1,7 @@
 ---
 import Layout from '../../layouts/Layout.astro'
 import AffiliateBlock from '../AffiliateBlock.astro'
+import SourceLink from '../SourceLink.astro'
 
 const { slug } = Astro.params
 const PAYLOAD_URL = import.meta.env.PAYLOAD_API_URL || 'http://payload:3000'
@@ -282,6 +283,9 @@ const isPbe  = patch.type === 'pbe'
             <p>Revenez bientôt ou consultez la <a href="https://www.leagueoflegends.com/fr-fr/news/tags/patch-notes/" target="_blank" rel="noopener noreferrer">page officielle Riot</a>.</p>
           </div>
         )}
+
+        <!-- ── Source officielle ────────────────────────── -->
+        <SourceLink sourceUrl={patch.sourceUrl} locale={locale} />
 
         <!-- ── Affiliate block ──────────────────────────── -->
         <div class="pn-aff-wrap">

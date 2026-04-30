@@ -87,6 +87,14 @@ const PatchNotes: CollectionConfig = {
       label: 'Contenu complet',
       type: 'richText',
     },
+    {
+      name: 'sourceUrl',
+      label: 'Source officielle (URL)',
+      type: 'text',
+      admin: {
+        description: 'Ex: https://www.leagueoflegends.com/fr-fr/news/game-updates/patch-26-9-notes/ — affiché automatiquement en bas de page avec un lien SEO.',
+      },
+    },
   ],
 }
 

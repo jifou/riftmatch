@@ -98,6 +98,14 @@ const News: CollectionConfig = {
       ],
       admin: { description: 'Ex: Ahri, ADC, Patch 14.8' },
     },
+    {
+      name: 'sourceUrl',
+      label: 'Source officielle (URL)',
+      type: 'text',
+      admin: {
+        description: 'Lien vers l\'article original (Riot, ESPN, Inven…) — affiché automatiquement en bas de page avec un lien SEO.',
+      },
+    },
   ],
 }
 

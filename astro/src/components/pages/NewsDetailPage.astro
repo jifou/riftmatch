@@ -1,6 +1,7 @@
 ---
 import Layout from '../../layouts/Layout.astro'
 import AffiliateBlock from '../AffiliateBlock.astro'
+import SourceLink from '../SourceLink.astro'
 
 const { slug } = Astro.params
 const PAYLOAD_URL = import.meta.env.PAYLOAD_API_URL || 'http://payload:3000'
@@ -154,6 +155,9 @@ const catLabel = catLabels[article.category] ?? article.category
       {htmlContent && (
         <div class="article-content prose" set:html={htmlContent} />
       )}
+
+      <!-- ── Source officielle ─────────────────────────────── -->
+      <SourceLink sourceUrl={article.sourceUrl} locale={locale} />
 
       <!-- ── Affiliate block ───────────────────────────────── -->
       <div class="news-aff-wrap">
