@@ -1,0 +1,401 @@
+---
+import Layout from '../../layouts/Layout.astro'
+import AffiliateBlock from '../AffiliateBlock.astro'
+
+const { slug } = Astro.params
+const PAYLOAD_URL = import.meta.env.PAYLOAD_API_URL || 'http://payload:3000'
+
+const locale = Astro.cookies.get('locale')?.value || 'fr'
+const dateLocale = locale === 'en' ? 'en-GB' : locale === 'es' ? 'es-ES' : 'fr-FR'
+
+let article: any = null
+try {
+  // Locale courante d'abord, fallback sur n'importe quelle locale
+  let res = await fetch(`${PAYLOAD_URL}/api/news?where[slug][equals]=${slug}&where[status][equals]=published&where[locale][equals]=${locale}&limit=1`)
+  let data = await res.json()
+  article = data.docs?.[0] ?? null
+  if (!article) {
+    res = await fetch(`${PAYLOAD_URL}/api/news?where[slug][equals]=${slug}&where[status][equals]=published&limit=1`)
+    data = await res.json()
+    article = data.docs?.[0] ?? null
+  }
+} catch { /* silent fail */ }
+
+if (!article) return Astro.redirect('/news')
+
+const CATEGORY_LABELS: Record<string, Record<string, string>> = {
+  fr: { news: 'Actualité', champion: 'Champion', meta: 'Méta', esports: 'Esports', announcement: 'Annonce Riot', update: 'Mise à jour' },
+  en: { news: 'News', champion: 'Champion', meta: 'Meta', esports: 'Esports', announcement: 'Riot Announcement', update: 'Update' },
+  es: { news: 'Noticia', champion: 'Campeón', meta: 'Meta', esports: 'Esports', announcement: 'Anuncio Riot', update: 'Actualización' },
+}
+const catLabels = CATEGORY_LABELS[locale] ?? CATEGORY_LABELS.fr
+
+const CATEGORY_COLORS: Record<string, string> = {
+  news: 'var(--blue)', champion: 'var(--gold)', meta: 'var(--neon)',
+  esports: '#22c55e', announcement: 'var(--red)', update: '#f97316',
+}
+
+const UI_LABELS: Record<string, { back: string; backAll: string; quiz: string; by: string; tags: string }> = {
+  fr: { back: '← Toutes les news', backAll: '← Retour aux news', quiz: 'Trouver mon champion →', by: 'Par', tags: 'Tags :' },
+  en: { back: '← All news', backAll: '← Back to news', quiz: 'Find my champion →', by: 'By', tags: 'Tags:' },
+  es: { back: '← Todas las noticias', backAll: '← Volver a noticias', quiz: 'Encontrar mi campeón →', by: 'Por', tags: 'Etiquetas:' },
+}
+const ui = UI_LABELS[locale] ?? UI_LABELS.fr
+
+function formatDate(d: string) {
+  if (!d) return ''
+  return new Date(d).toLocaleDateString(dateLocale, { day: 'numeric', month: 'long', year: 'numeric' })
+}
+
+// ── Rich text renderer (Slate → HTML) ──────────────────────────
+type SlateNode = {
+  type?: string; text?: string; bold?: boolean; italic?: boolean
+  underline?: boolean; strikethrough?: boolean; code?: boolean
+  url?: string; newTab?: boolean; children?: SlateNode[]
+}
+
+function renderNodes(nodes: SlateNode[]): string {
+  if (!nodes?.length) return ''
+  return nodes.map(n => renderNode(n)).join('')
+}
+
+function renderNode(node: SlateNode): string {
+  if (node.text !== undefined) {
+    let t = node.text.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
+    if (node.bold)          t = `<strong>${t}</strong>`
+    if (node.italic)        t = `<em>${t}</em>`
+    if (node.underline)     t = `<u>${t}</u>`
+    if (node.strikethrough) t = `<s>${t}</s>`
+    if (node.code)          t = `<code>${t}</code>`
+    return t
+  }
+  const inner = renderNodes(node.children || [])
+  switch (node.type) {
+    case 'h1': return `<h1>${inner}</h1>`
+    case 'h2': return `<h2>${inner}</h2>`
+    case 'h3': return `<h3>${inner}</h3>`
+    case 'h4': return `<h4>${inner}</h4>`
+    case 'ul': return `<ul>${inner}</ul>`
+    case 'ol': return `<ol>${inner}</ol>`
+    case 'li': return `<li>${inner}</li>`
+    case 'blockquote': return `<blockquote>${inner}</blockquote>`
+    case 'link': {
+      const href = node.url || '#'
+      const target = node.newTab ? ' target="_blank" rel="noopener noreferrer"' : ''
+      return `<a href="${href}"${target}>${inner}</a>`
+    }
+    default: return inner ? `<p>${inner}</p>` : ''
+  }
+}
+
+const htmlContent = renderNodes(article.content || [])
+const catColor = CATEGORY_COLORS[article.category] ?? 'var(--gold)'
+const catLabel = catLabels[article.category] ?? article.category
+---
+
+<Layout
+  title={`${article.title} | RiftMatch News`}
+  description={article.excerpt || `${article.title} — RiftMatch actualités League of Legends`}
+  image={article.coverImage || '/og-image.jpg'}
+>
+  <Fragment slot="head">
+    <meta property="og:type" content="article" />
+    {article.publishedAt && <meta property="article:published_time" content={article.publishedAt} />}
+  </Fragment>
+
+  <main class="news-article">
+
+    <!-- ── Cover image ──────────────────────────────────── -->
+    {article.coverImage && (
+      <div class="article-cover">
+        <img src={article.coverImage} alt={article.title} class="article-cover-img" loading="eager" />
+        <div class="article-cover-overlay"></div>
+      </div>
+    )}
+
+    <div class="article-container">
+
+      <!-- ── Back nav ────────────────────────────────────── -->
+      <a href="/news" class="back-link">{ui.back}</a>
+
+      <!-- ── Article header ─────────────────────────────── -->
+      <header class="article-header">
+        <div class="article-meta-top">
+          <span class="cat-badge" style={`--cat-color: ${catColor}`}>{catLabel}</span>
+          {article.tags?.length > 0 && article.tags.slice(0, 3).map((t: any) => (
+            <span class="tag-pill">#{t.tag}</span>
+          ))}
+        </div>
+        <h1 class="article-title">{article.title}</h1>
+        {article.excerpt && (
+          <p class="article-excerpt">{article.excerpt}</p>
+        )}
+        <div class="article-meta-bottom">
+          <span class="meta-item">
+            <svg viewBox="0 0 24 24" fill="none" width="14" height="14" aria-hidden="true">
+              <rect x="3" y="4" width="18" height="18" rx="2" stroke="currentColor" stroke-width="2"/>
+              <path d="M16 2v4M8 2v4M3 10h18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+            </svg>
+            {formatDate(article.publishedAt)}
+          </span>
+          {article.author && (
+            <span class="meta-item">
+              <svg viewBox="0 0 24 24" fill="none" width="14" height="14" aria-hidden="true">
+                <circle cx="12" cy="8" r="4" stroke="currentColor" stroke-width="2"/>
+                <path d="M4 20c0-4 3.6-7 8-7s8 3 8 7" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+              </svg>
+              {article.author}
+            </span>
+          )}
+        </div>
+      </header>
+
+      <!-- ── Rich text content ───────────────────────────── -->
+      {htmlContent && (
+        <div class="article-content prose" set:html={htmlContent} />
+      )}
+
+      <!-- ── Affiliate block ───────────────────────────────── -->
+      <div class="news-aff-wrap">
+        <AffiliateBlock variant="banner" locale={locale} />
+      </div>
+
+      <!-- ── Tags footer ─────────────────────────────────── -->
+      {article.tags?.length > 0 && (
+        <footer class="article-tags">
+          <span class="tags-label">{ui.tags}</span>
+          {article.tags.map((t: any) => (
+            <span class="tag-pill">#{t.tag}</span>
+          ))}
+        </footer>
+      )}
+
+      <!-- ── Back CTA ─────────────────────────────────────── -->
+      <div class="article-back-cta">
+        <a href="/news" class="back-cta-link">{ui.backAll}</a>
+        <a href="/quiz" class="quiz-cta">{ui.quiz}</a>
+      </div>
+
+    </div>
+  </main>
+</Layout>
+
+<style>
+  .news-article {
+    max-width: 100%;
+  }
+
+  /* ── Cover ─────────────────────────────────────────── */
+  .article-cover {
+    position: relative;
+    width: 100%;
+    max-height: 420px;
+    overflow: hidden;
+  }
+  .article-cover-img {
+    width: 100%;
+    height: 420px;
+    object-fit: cover;
+    display: block;
+  }
+  .article-cover-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to bottom, rgba(9,11,16,0.1) 0%, rgba(9,11,16,0.85) 100%);
+  }
+
+  /* ── Container ─────────────────────────────────────── */
+  .article-container {
+    max-width: 780px;
+    margin: 0 auto;
+    padding: 2rem 1.25rem 5rem;
+  }
+
+  /* ── Back link ─────────────────────────────────────── */
+  .back-link {
+    display: inline-block;
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: var(--text-muted);
+    text-decoration: none;
+    margin-bottom: 1.75rem;
+    transition: color 0.2s;
+    cursor: pointer;
+  }
+  .back-link:hover { color: var(--gold); }
+
+  /* ── Header ────────────────────────────────────────── */
+  .article-header {
+    margin-bottom: 2.5rem;
+  }
+  .article-meta-top {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+    margin-bottom: 1rem;
+  }
+  .cat-badge {
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--cat-color, var(--gold));
+    background: color-mix(in srgb, var(--cat-color, var(--gold)) 12%, transparent);
+    border: 1px solid color-mix(in srgb, var(--cat-color, var(--gold)) 40%, transparent);
+    padding: 0.2rem 0.6rem;
+    border-radius: 4px;
+  }
+  .tag-pill {
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 0.72rem;
+    font-weight: 600;
+    color: var(--text-muted);
+    background: var(--dark4);
+    padding: 0.15rem 0.5rem;
+    border-radius: 4px;
+    border: 1px solid var(--glass-border);
+  }
+  .article-title {
+    font-family: 'Russo One', sans-serif;
+    font-size: clamp(1.5rem, 3.5vw, 2.4rem);
+    color: var(--text-light);
+    line-height: 1.2;
+    margin-bottom: 1rem;
+  }
+  .article-excerpt {
+    font-size: 1.1rem;
+    color: var(--text-muted);
+    line-height: 1.65;
+    margin-bottom: 1.25rem;
+    padding-left: 1rem;
+    border-left: 3px solid var(--gold);
+  }
+  .article-meta-bottom {
+    display: flex;
+    align-items: center;
+    gap: 1.25rem;
+    flex-wrap: wrap;
+  }
+  .meta-item {
+    display: flex;
+    align-items: center;
+    gap: 0.35rem;
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 0.82rem;
+    font-weight: 600;
+    color: var(--text-dim);
+  }
+
+  /* ── Prose / rich text ─────────────────────────────── */
+  .prose {
+    color: var(--text-light);
+    font-size: 1rem;
+    line-height: 1.75;
+  }
+  .prose :global(h2) {
+    font-family: 'Russo One', sans-serif;
+    font-size: 1.4rem;
+    color: var(--text-light);
+    margin: 2.5rem 0 1rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid var(--glass-border);
+  }
+  .prose :global(h3) {
+    font-family: 'Russo One', sans-serif;
+    font-size: 1.1rem;
+    color: var(--gold-light);
+    margin: 1.75rem 0 0.75rem;
+  }
+  .prose :global(p) {
+    margin-bottom: 1.25rem;
+    color: var(--text-muted);
+  }
+  .prose :global(strong) { color: var(--text-light); }
+  .prose :global(em) { color: var(--gold-light); font-style: italic; }
+  .prose :global(ul), .prose :global(ol) {
+    padding-left: 1.5rem;
+    margin-bottom: 1.25rem;
+    color: var(--text-muted);
+  }
+  .prose :global(li) { margin-bottom: 0.4rem; }
+  .prose :global(blockquote) {
+    margin: 1.5rem 0;
+    padding: 1rem 1.25rem;
+    background: var(--dark3);
+    border-left: 3px solid var(--gold);
+    border-radius: 0 8px 8px 0;
+    color: var(--text-muted);
+    font-style: italic;
+  }
+  .prose :global(code) {
+    font-family: 'Courier New', monospace;
+    font-size: 0.875em;
+    background: var(--dark4);
+    padding: 0.15em 0.4em;
+    border-radius: 3px;
+    color: var(--blue);
+  }
+  .prose :global(a) {
+    color: var(--gold);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+  .prose :global(a:hover) { color: var(--gold-light); }
+
+  /* ── Tags footer ───────────────────────────────────── */
+  .article-tags {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+    margin-top: 3rem;
+    padding-top: 1.25rem;
+    border-top: 1px solid var(--glass-border);
+  }
+  .tags-label {
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 0.8rem;
+    font-weight: 700;
+    color: var(--text-dim);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+  }
+
+  /* ── Back CTA ──────────────────────────────────────── */
+  .article-back-cta {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 3rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--glass-border);
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+  .back-cta-link {
+    font-family: 'Rajdhani', sans-serif;
+    font-weight: 700;
+    font-size: 0.9rem;
+    color: var(--text-muted);
+    text-decoration: none;
+    transition: color 0.2s;
+    cursor: pointer;
+  }
+  .back-cta-link:hover { color: var(--gold); }
+  .quiz-cta {
+    font-family: 'Rajdhani', sans-serif;
+    font-weight: 700;
+    font-size: 0.9rem;
+    color: var(--dark);
+    background: var(--gold);
+    padding: 0.5rem 1.25rem;
+    border-radius: 6px;
+    text-decoration: none;
+    transition: background 0.2s;
+    cursor: pointer;
+  }
+  .quiz-cta:hover { background: var(--gold-light); }
+</style>

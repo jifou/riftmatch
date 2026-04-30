@@ -1,18 +1,18 @@
 ---
 /**
- * AffiliateBlock — sélection aléatoire côté CLIENT à chaque chargement.
- * Le serveur envoie tous les blocs candidats en JSON → le JS choisit au hasard.
+ * AffiliateBlock — 1 produit = 1 bloc, s'affiche partout.
+ * Le serveur récupère tous les blocs actifs → le JS en choisit un au hasard.
+ * L'URL est résolue côté serveur selon la locale du visiteur.
  * Fonctionne même si la page HTML est mise en cache (Nginx, CDN).
  */
 
 export interface Props {
-  placement: string
   variant?: 'card' | 'banner'
-  roles?: string[]
+  roles?: string[]   // Pour cibler par rôle sur les fiches champion
   locale?: string
 }
 
-const { placement, variant = 'card', roles = [], locale = 'fr' } = Astro.props
+const { variant = 'card', roles = [], locale = 'fr' } = Astro.props
 
 const PAYLOAD_URL = import.meta.env.PAYLOAD_API_URL || 'http://payload:3000'
 const AFFILIATE_TAG = import.meta.env.AMAZON_AFFILIATE_TAG || process.env.AMAZON_AFFILIATE_TAG || ''
@@ -21,9 +21,26 @@ function injectTag(url: string): string {
   if (!AFFILIATE_TAG || !url) return url
   try {
     const u = new URL(url)
-    u.searchParams.set('tag', AFFILIATE_TAG)
+    if (!u.searchParams.has('tag')) u.searchParams.set('tag', AFFILIATE_TAG)
     return u.toString()
   } catch { return url }
+}
+
+/**
+ * Résout l'URL affiliée depuis links[].
+ * Priorité : locale exacte → fr (fallback) → premier lien disponible.
+ */
+function resolveUrl(doc: any, targetLocale: string): string {
+  const links: { locale: string; url: string }[] = doc.links ?? []
+  if (links.length > 0) {
+    const exact = links.find(l => l.locale === targetLocale)
+    if (exact?.url) return injectTag(exact.url)
+    const frFallback = links.find(l => l.locale === 'fr')
+    if (frFallback?.url) return injectTag(frFallback.url)
+    const first = links.find(l => l.url)
+    if (first?.url) return injectTag(first.url)
+  }
+  return ''
 }
 
 const LANE_TO_ROLE: Record<string, string> = {
@@ -39,48 +56,41 @@ const targetRoles = [...new Set(
   roles.map((r: string) => LANE_TO_ROLE[r.toLowerCase()] || ARCHETYPE_TO_ROLE[r.toLowerCase()] || r)
 )]
 
-// Fetch tous les blocs actifs pour ce placement
+// ── Fetch tous les blocs actifs ─────────────────────────────────────────────
 let candidates: any[] = []
 try {
   const res = await fetch(
-    `${PAYLOAD_URL}/api/affiliate-blocks?where[placement][equals]=${placement}&where[active][equals]=true&limit=50`
+    `${PAYLOAD_URL}/api/affiliate-blocks?where[active][equals]=true&limit=100`
   )
   const data = await res.json()
   const docs: any[] = data.docs ?? []
 
   if (docs.length > 0) {
-    // Filtrage par locale : blocs de la locale courante en priorité, fallback sur 'all'
-    const localeMatches = docs.filter((d: any) => d.locale === locale)
-    const localePool = localeMatches.length > 0
-      ? localeMatches
-      : docs.filter((d: any) => !d.locale || d.locale === 'all')
-
-    const pool = localePool.length > 0 ? localePool : docs
-
+    // Filtrage par rôle (si fourni, pour les fiches champion)
     if (targetRoles.length > 0) {
-      const matching = pool.filter((d: any) =>
+      const matching = docs.filter((d: any) =>
         targetRoles.some((r: string) => (d.roles ?? ['all']).includes(r))
       )
-      const fallback = pool.filter((d: any) => (d.roles ?? ['all']).includes('all'))
-      candidates = matching.length > 0 ? matching : fallback.length > 0 ? fallback : pool
+      const fallback = docs.filter((d: any) => (d.roles ?? ['all']).includes('all'))
+      candidates = matching.length > 0 ? matching : fallback.length > 0 ? fallback : docs
     } else {
-      candidates = pool
+      candidates = docs
     }
   }
 } catch { /* Payload unreachable — silent fail */ }
 
 if (candidates.length === 0) return
 
-// Sérialiser pour le client (affiliate tag injecté ici côté serveur)
+// Sérialiser pour le client (URL résolue ici côté serveur selon la locale)
 const blocksData = candidates.map((b: any) => ({
-  name:         b.product?.name       ?? '',
-  tagline:      b.product?.tagline    ?? '',
-  imageUrl:     b.product?.imageUrl   ?? '',
-  affiliateUrl: injectTag(b.product?.affiliateUrl ?? ''),
-  ctaText:      b.product?.ctaText    ?? "Voir l'offre →",
-  badge:        b.product?.badge      ?? '',
-  disclosure:   b.disclosure          ?? '',
-}))
+  name:         b.product?.name    ?? '',
+  tagline:      b.product?.tagline ?? '',
+  imageUrl:     b.product?.imageUrl ?? '',
+  affiliateUrl: resolveUrl(b, locale),
+  ctaText:      b.product?.ctaText ?? "Voir sur Amazon →",
+  badge:        b.product?.badge   ?? '',
+  disclosure:   b.disclosure       ?? '',
+})).filter(b => b.affiliateUrl) // Exclure les blocs sans URL pour cette locale
 ---
 
 <div
@@ -151,12 +161,10 @@ const blocksData = candidates.map((b: any) => ({
     slot.innerHTML = variant === 'card' ? renderCard(block) : renderBanner(block)
   }
 
-  // Consent
   function applyConsent(marketing: boolean) {
     document.querySelectorAll<HTMLElement>('[data-aff-block]').forEach(el => {
       el.style.display = marketing ? '' : 'none'
     })
-    // Slots pas encore rendus
     document.querySelectorAll<HTMLElement>('[data-aff-slot]').forEach(slot => {
       if (marketing && !slot.innerHTML.trim()) pickAndRender(slot)
       else if (!marketing) slot.style.display = 'none'
@@ -167,7 +175,6 @@ const blocksData = candidates.map((b: any) => ({
     try {
       const raw = localStorage.getItem('lolp_consent')
       if (!raw) {
-        // Pas encore de choix — on affiche
         document.querySelectorAll<HTMLElement>('[data-aff-slot]').forEach(pickAndRender)
         return
       }

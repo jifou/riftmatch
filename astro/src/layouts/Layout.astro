@@ -304,6 +304,8 @@ const quizHref = '/quiz'  // pas de variante URL par locale
           {contentPages.length > 0 && (
             <a href={guidesHref} class="nav-link nav-link--desktop">{tl.nav.guides}</a>
           )}
+          <a href="/news" class="nav-link nav-link--desktop">{tl.nav.news}</a>
+          <a href="/patch-notes" class="nav-link nav-link--desktop">{tl.nav.patchNotes}</a>
           <a href="/#champions" class="nav-link nav-link--desktop">{tl.nav.champions}</a>
 
           <!-- Language switcher — desktop uniquement -->
@@ -337,6 +339,8 @@ const quizHref = '/quiz'  // pas de variante URL par locale
             {contentPages.length > 0 && (
               <a href={guidesHref} class="mobile-nav-link">{tl.nav.guides}</a>
             )}
+            <a href="/news" class="mobile-nav-link">{tl.nav.news}</a>
+            <a href="/patch-notes" class="mobile-nav-link">{tl.nav.patchNotes}</a>
             <a href="/#champions" class="mobile-nav-link">{tl.nav.champions}</a>
             <a href={quizHref} class="mobile-nav-link mobile-nav-link--cta">
               <svg viewBox="0 0 24 24" fill="none" aria-hidden="true" width="16" height="16"><circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="2"/><path d="M12 8v4l2.5 2.5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>

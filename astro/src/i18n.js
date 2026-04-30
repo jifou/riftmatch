@@ -367,6 +367,8 @@ export const UI = {
   fr: {
     nav: {
       guides:       'Guides',
+      news:         'News',
+      patchNotes:   'Patch Notes',
       champions:    'Champions',
       quiz:         'Quiz',
       logoAriaLabel:'RiftMatch – Accueil',
@@ -475,6 +477,8 @@ export const UI = {
   en: {
     nav: {
       guides:       'Guides',
+      news:         'News',
+      patchNotes:   'Patch Notes',
       champions:    'Champions',
       quiz:         'Quiz',
       logoAriaLabel:'RiftMatch – Home',
@@ -583,6 +587,8 @@ export const UI = {
   es: {
     nav: {
       guides:       'Guías',
+      news:         'Noticias',
+      patchNotes:   'Notas de parche',
       champions:    'Campeones',
       quiz:         'Quiz',
       logoAriaLabel:'RiftMatch – Inicio',

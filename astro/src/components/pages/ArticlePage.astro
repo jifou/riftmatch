@@ -168,7 +168,7 @@ const articleSchema = {
         </p>
       </header>
       <article class="prose" set:html={htmlContent} />
-      <div class="aff-wrap"><AffiliateBlock placement="article-content" variant="banner" locale={locale} /></div>
+      <div class="aff-wrap"><AffiliateBlock variant="banner" locale={locale} /></div>
       <nav class="page-footer-nav">
         <a href={guidesPath} class="back-link">{ta.backLink}</a>
         <a href={quizPath} class="cta-btn">{ta.quizCta}</a>
@@ -215,7 +215,7 @@ const articleSchema = {
             </div>
           )}
           <div class="sidebar-aff">
-            <AffiliateBlock placement="article-sidebar" variant="card" locale={locale} />
+            <AffiliateBlock variant="card" locale={locale} />
           </div>
           <a href={quizPath} class="sidebar-quiz-cta">
             <span class="sidebar-quiz-label">{ta.sidebarQuizLabel}</span>
@@ -225,7 +225,7 @@ const articleSchema = {
         </aside>
       </div>
 
-      <div class="aff-wrap"><AffiliateBlock placement="article-content" variant="banner" locale={locale} /></div>
+      <div class="aff-wrap"><AffiliateBlock variant="banner" locale={locale} /></div>
       <nav class="page-footer-nav">
         <a href={guidesPath} class="back-link">{ta.backLink}</a>
         <a href={quizPath} class="cta-btn">{ta.quizCta}</a>
@@ -262,14 +262,14 @@ const articleSchema = {
             </div>
             {i === 2 && (
               <div class="listicle-aff-inline">
-                <AffiliateBlock placement="article-content" variant="banner" locale={locale} />
+                <AffiliateBlock variant="banner" locale={locale} />
               </div>
             )}
           </div>
         ))}
       </div>
 
-      <div class="aff-wrap" style="margin-top: 2.5rem;"><AffiliateBlock placement="article-content" variant="banner" locale={locale} /></div>
+      <div class="aff-wrap" style="margin-top: 2.5rem;"><AffiliateBlock variant="banner" locale={locale} /></div>
       <nav class="page-footer-nav">
         <a href={guidesPath} class="back-link">{ta.backLink}</a>
         <a href={quizPath} class="cta-btn">{ta.quizCta}</a>

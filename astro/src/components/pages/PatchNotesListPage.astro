@@ -1,0 +1,486 @@
+---
+import Layout from '../../layouts/Layout.astro'
+
+const PAYLOAD_URL = import.meta.env.PAYLOAD_API_URL || 'http://payload:3000'
+
+let patches: any[] = []
+try {
+  const res = await fetch(`${PAYLOAD_URL}/api/patch-notes?where[status][equals]=published&limit=50&sort=-publishedAt`)
+  const data = await res.json()
+  patches = data.docs ?? []
+} catch { /* silent fail */ }
+
+function formatDate(d: string) {
+  if (!d) return ''
+  return new Date(d).toLocaleDateString('fr-FR', { day: 'numeric', month: 'long', year: 'numeric' })
+}
+
+// Separate live and PBE
+const live = patches.filter((p: any) => p.type === 'live')
+const pbe  = patches.filter((p: any) => p.type === 'pbe')
+const latest = live[0] ?? null
+const previousPatches = live.slice(1)
+---
+
+<Layout
+  title="Patch Notes League of Legends | RiftMatch"
+  description="Tous les patch notes League of Legends — Live et PBE. Buffs, nerfs, changements d'items et mises à jour du Rift."
+>
+  <main class="pn-page">
+
+    <!-- ── Hero ────────────────────────────────────────── -->
+    <header class="pn-hero">
+      <p class="pn-eyebrow">Patch Notes</p>
+      <h1 class="pn-title">Mises à jour <span class="gold">du Rift</span></h1>
+      <p class="pn-sub">Suivez tous les changements — PBE en preview et patches officiels Live</p>
+    </header>
+
+    {patches.length === 0 ? (
+      <div class="pn-empty">
+        <p>Aucun patch note disponible pour le moment.</p>
+      </div>
+    ) : (
+      <>
+        <!-- ── Latest patch — big card ─────────────────── -->
+        {latest && (
+          <section class="latest-section">
+            <div class="latest-label">
+              <span class="live-dot"></span>
+              Dernier patch officiel
+            </div>
+            <a href={`/patch-notes/${latest.slug}`} class="latest-card gradient-border">
+              {latest.coverImage && (
+                <div class="latest-img-wrap">
+                  <img src={latest.coverImage} alt={latest.title} loading="eager" class="latest-img" />
+                  <div class="latest-img-overlay"></div>
+                </div>
+              )}
+              <div class="latest-body">
+                <div class="latest-badges">
+                  <span class="version-badge">{latest.version}</span>
+                  <span class="type-badge type-live">Live</span>
+                </div>
+                <h2 class="latest-title">{latest.title}</h2>
+                {latest.excerpt && <p class="latest-excerpt">{latest.excerpt}</p>}
+                {latest.highlights && latest.highlights.length > 0 && (
+                  <ul class="latest-highlights">
+                    {latest.highlights.slice(0, 4).map((h: any) => (
+                      <li class="highlight-item">{h.text}</li>
+                    ))}
+                  </ul>
+                )}
+                <div class="latest-footer">
+                  <span class="pn-date">{formatDate(latest.publishedAt)}</span>
+                  <span class="read-more">Voir le patch complet →</span>
+                </div>
+              </div>
+            </a>
+          </section>
+        )}
+
+        <!-- ── PBE Preview ──────────────────────────────── -->
+        {pbe.length > 0 && (
+          <section class="pbe-section">
+            <h2 class="section-title">
+              <span class="pbe-icon">🧪</span>
+              PBE — En test
+            </h2>
+            <ul class="pbe-list">
+              {pbe.map((p: any) => (
+                <li>
+                  <a href={`/patch-notes/${p.slug}`} class="pbe-card">
+                    <div class="pbe-left">
+                      <span class="version-badge version-badge--sm">{p.version}</span>
+                      <span class="type-badge type-pbe">PBE</span>
+                    </div>
+                    <div class="pbe-center">
+                      <p class="pbe-title">{p.title}</p>
+                      {p.excerpt && <p class="pbe-excerpt">{p.excerpt}</p>}
+                    </div>
+                    <div class="pbe-right">
+                      <span class="pn-date">{formatDate(p.publishedAt)}</span>
+                      <span class="card-cta">Lire →</span>
+                    </div>
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </section>
+        )}
+
+        <!-- ── Archive des patchs ───────────────────────── -->
+        {previousPatches.length > 0 && (
+          <section class="archive-section">
+            <h2 class="section-title">Archives</h2>
+            <ul class="archive-grid">
+              {previousPatches.map((p: any) => (
+                <li>
+                  <a href={`/patch-notes/${p.slug}`} class="archive-card">
+                    {p.coverImage && (
+                      <div class="archive-img-wrap">
+                        <img src={p.coverImage} alt={p.title} loading="lazy" class="archive-img" />
+                      </div>
+                    )}
+                    <div class="archive-body">
+                      <div class="archive-badges">
+                        <span class="version-badge version-badge--sm">{p.version}</span>
+                        <span class="type-badge type-live">Live</span>
+                      </div>
+                      <h3 class="archive-title">{p.title}</h3>
+                      <span class="pn-date">{formatDate(p.publishedAt)}</span>
+                    </div>
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </section>
+        )}
+      </>
+    )}
+  </main>
+</Layout>
+
+<style>
+  .pn-page {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 3rem 1.25rem 6rem;
+  }
+
+  /* ── Hero ──────────────────────────────────────────── */
+  .pn-hero {
+    text-align: center;
+    margin-bottom: 3.5rem;
+  }
+  .pn-eyebrow {
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--blue);
+    margin-bottom: 0.5rem;
+  }
+  .pn-title {
+    font-family: 'Russo One', sans-serif;
+    font-size: clamp(2rem, 5vw, 3.5rem);
+    color: var(--text-light);
+    margin-bottom: 0.75rem;
+  }
+  .gold { color: var(--gold); }
+  .pn-sub {
+    font-size: 1rem;
+    color: var(--text-muted);
+    max-width: 520px;
+    margin: 0 auto;
+  }
+  .pn-empty {
+    text-align: center;
+    padding: 4rem 2rem;
+    color: var(--text-muted);
+  }
+
+  /* ── Badges ────────────────────────────────────────── */
+  .version-badge {
+    font-family: 'Russo One', sans-serif;
+    font-size: 1.1rem;
+    color: var(--gold);
+    background: rgba(200,155,60,0.1);
+    border: 1px solid rgba(200,155,60,0.3);
+    padding: 0.25rem 0.75rem;
+    border-radius: 6px;
+    letter-spacing: 0.05em;
+  }
+  .version-badge--sm {
+    font-size: 0.85rem;
+    padding: 0.15rem 0.5rem;
+  }
+  .type-badge {
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    padding: 0.2rem 0.6rem;
+    border-radius: 4px;
+  }
+  .type-live {
+    color: #22c55e;
+    background: rgba(34,197,94,0.1);
+    border: 1px solid rgba(34,197,94,0.3);
+  }
+  .type-pbe {
+    color: var(--neon);
+    background: rgba(168,85,247,0.1);
+    border: 1px solid rgba(168,85,247,0.3);
+  }
+  .pn-date {
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 0.8rem;
+    color: var(--text-dim);
+    font-weight: 600;
+  }
+  .read-more {
+    font-family: 'Rajdhani', sans-serif;
+    font-weight: 700;
+    font-size: 0.9rem;
+    color: var(--gold);
+  }
+
+  /* ── Latest section ────────────────────────────────── */
+  .latest-section { margin-bottom: 4rem; }
+  .latest-label {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: #22c55e;
+    margin-bottom: 1rem;
+  }
+  .live-dot {
+    display: inline-block;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: #22c55e;
+    box-shadow: 0 0 8px #22c55e;
+    animation: pulse-live 2s infinite;
+  }
+  @keyframes pulse-live {
+    0%, 100% { opacity: 1; box-shadow: 0 0 8px #22c55e; }
+    50%       { opacity: 0.7; box-shadow: 0 0 16px #22c55e; }
+  }
+
+  .latest-card {
+    display: grid;
+    grid-template-columns: 480px 1fr;
+    min-height: 340px;
+    background: var(--dark3);
+    border: 1px solid var(--glass-border);
+    border-radius: 14px;
+    overflow: hidden;
+    text-decoration: none;
+    color: inherit;
+    transition: transform 0.2s var(--ease-out), box-shadow 0.2s;
+    cursor: pointer;
+  }
+  .latest-card:hover {
+    transform: translateY(-3px);
+    box-shadow: var(--glow-gold);
+  }
+  .latest-img-wrap {
+    position: relative;
+    overflow: hidden;
+  }
+  .latest-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.4s var(--ease-out);
+  }
+  .latest-card:hover .latest-img { transform: scale(1.04); }
+  .latest-img-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to right, transparent 60%, var(--dark3) 100%);
+  }
+  .latest-body {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 2.5rem 2rem;
+    gap: 1rem;
+  }
+  .latest-badges {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+  }
+  .latest-title {
+    font-family: 'Russo One', sans-serif;
+    font-size: clamp(1.1rem, 2.2vw, 1.6rem);
+    color: var(--text-light);
+    line-height: 1.25;
+  }
+  .latest-excerpt {
+    color: var(--text-muted);
+    font-size: 0.9rem;
+    line-height: 1.6;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+  .latest-highlights {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+  }
+  .highlight-item {
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    padding-left: 1rem;
+    position: relative;
+  }
+  .highlight-item::before {
+    content: '▸';
+    position: absolute;
+    left: 0;
+    color: var(--gold);
+  }
+  .latest-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  /* ── PBE section ───────────────────────────────────── */
+  .pbe-section { margin-bottom: 3rem; }
+  .section-title {
+    font-family: 'Russo One', sans-serif;
+    font-size: 1.2rem;
+    color: var(--text-light);
+    margin-bottom: 1.25rem;
+    padding-bottom: 0.75rem;
+    border-bottom: 1px solid var(--glass-border);
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+  .pbe-icon { font-size: 1rem; }
+  .pbe-list { list-style: none; display: flex; flex-direction: column; gap: 0.75rem; }
+  .pbe-card {
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    align-items: center;
+    gap: 1rem;
+    background: var(--dark3);
+    border: 1px solid rgba(168,85,247,0.2);
+    border-radius: 10px;
+    padding: 1rem 1.25rem;
+    text-decoration: none;
+    color: inherit;
+    transition: border-color 0.2s, background 0.2s;
+    cursor: pointer;
+  }
+  .pbe-card:hover {
+    border-color: rgba(168,85,247,0.5);
+    background: rgba(168,85,247,0.06);
+  }
+  .pbe-left {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    min-width: 120px;
+  }
+  .pbe-center { flex: 1; }
+  .pbe-title {
+    font-family: 'Rajdhani', sans-serif;
+    font-weight: 700;
+    font-size: 1rem;
+    color: var(--text-light);
+    margin-bottom: 0.2rem;
+  }
+  .pbe-excerpt {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+  .pbe-right {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 0.25rem;
+  }
+  .card-cta {
+    font-family: 'Rajdhani', sans-serif;
+    font-weight: 700;
+    font-size: 0.8rem;
+    color: var(--gold);
+  }
+
+  /* ── Archive ───────────────────────────────────────── */
+  .archive-section {}
+  .archive-grid {
+    list-style: none;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1.25rem;
+  }
+  .archive-card {
+    display: flex;
+    flex-direction: column;
+    background: var(--dark3);
+    border: 1px solid var(--glass-border);
+    border-radius: 10px;
+    overflow: hidden;
+    text-decoration: none;
+    color: inherit;
+    transition: transform 0.2s var(--ease-out), box-shadow 0.2s;
+    cursor: pointer;
+  }
+  .archive-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 24px rgba(200,155,60,0.1);
+  }
+  .archive-img-wrap {
+    aspect-ratio: 16/9;
+    overflow: hidden;
+  }
+  .archive-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s;
+  }
+  .archive-card:hover .archive-img { transform: scale(1.05); }
+  .archive-body {
+    padding: 0.85rem 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+  }
+  .archive-badges {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+  }
+  .archive-title {
+    font-family: 'Rajdhani', sans-serif;
+    font-weight: 700;
+    font-size: 0.9rem;
+    color: var(--text-light);
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    margin-top: 0.1rem;
+  }
+
+  /* ── Responsive ────────────────────────────────────── */
+  @media (max-width: 1024px) {
+    .archive-grid { grid-template-columns: repeat(3, 1fr); }
+    .latest-card { grid-template-columns: 1fr 1fr; }
+  }
+  @media (max-width: 768px) {
+    .archive-grid { grid-template-columns: repeat(2, 1fr); }
+    .latest-card { grid-template-columns: 1fr; min-height: auto; }
+    .latest-img-wrap { aspect-ratio: 16/9; }
+    .latest-img-overlay { background: linear-gradient(to top, var(--dark3) 0%, transparent 60%); }
+    .pbe-card { grid-template-columns: 1fr; }
+    .pbe-left { min-width: auto; }
+    .pbe-right { flex-direction: row; align-items: center; }
+  }
+  @media (max-width: 480px) {
+    .archive-grid { grid-template-columns: 1fr 1fr; }
+  }
+</style>

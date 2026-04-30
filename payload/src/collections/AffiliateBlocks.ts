@@ -1,15 +1,5 @@
 import { CollectionConfig } from 'payload/types'
 
-const PLACEMENTS = [
-  { label: 'Homepage — sous le hero', value: 'homepage-hero' },
-  { label: 'Quiz résultats — sous les champions', value: 'quiz-results' },
-  { label: 'Quiz résultats — bannière bas', value: 'quiz-results-bottom' },
-  { label: 'Page champion — sidebar', value: 'champion-sidebar' },
-  { label: 'Article — bannière en fin de contenu', value: 'article-content' },
-  { label: 'Guide — sidebar sticky (colonne droite)', value: 'article-sidebar' },
-]
-
-// Contextes champion — un produit peut cibler plusieurs rôles/archétypes
 const ROLES = [
   { label: '🎯 ADC / Bot (précision, skillshots)', value: 'adc' },
   { label: '🧙 Mage / Mid (réflexes, APM)', value: 'mage' },
@@ -21,52 +11,32 @@ const ROLES = [
   { label: '✨ Tous rôles (générique)', value: 'all' },
 ]
 
-const LOCALES = [
-  { label: '🌍 Toutes les langues (fallback)', value: 'all' },
-  { label: '🇫🇷 Français', value: 'fr' },
-  { label: '🇬🇧 English', value: 'en' },
-  { label: '🇪🇸 Español', value: 'es' },
+const LINK_LOCALES = [
+  { label: '🇫🇷 Français (amazon.fr)', value: 'fr' },
+  { label: '🇬🇧 English (amazon.co.uk / .com)', value: 'en' },
+  { label: '🇪🇸 Español (amazon.es)', value: 'es' },
 ]
 
 const AffiliateBlocks: CollectionConfig = {
   slug: 'affiliate-blocks',
   admin: {
     useAsTitle: 'title',
-    defaultColumns: ['title', 'placement', 'locale', 'active', 'updatedAt'],
-    description: 'Blocs de publicité affiliée. Un bloc par emplacement.',
+    defaultColumns: ['title', 'active', 'updatedAt'],
+    description:
+      '1 produit = 1 bloc. S\'affiche en rotation aléatoire sur toutes les pages du site. Configurer les liens par langue pour chaque marché.',
   },
   access: {
     read: () => true,
   },
   fields: [
+    // ── Identité ─────────────────────────────────────────────────
     {
       name: 'title',
-      label: 'Titre interne (non affiché)',
+      label: 'Nom interne',
       type: 'text',
       required: true,
       admin: {
-        description: 'Ex: "SteelSeries Arctis Nova Pro — Homepage"',
-      },
-    },
-    {
-      name: 'placement',
-      label: 'Emplacement',
-      type: 'select',
-      required: true,
-      options: PLACEMENTS,
-      admin: {
-        description: 'Plusieurs produits peuvent partager un emplacement — un sera affiché aléatoirement.',
-      },
-    },
-    {
-      name: 'locale',
-      label: 'Langue / Marché',
-      type: 'select',
-      required: true,
-      defaultValue: 'all',
-      options: LOCALES,
-      admin: {
-        description: 'Affiche ce bloc uniquement pour cette langue. "Toutes les langues" = fallback si aucun bloc spécifique n\'existe.',
+        description: 'Ex: "Logitech G Pro X Superlight 2" — identifiant visible uniquement dans l\'admin.',
       },
     },
     {
@@ -74,18 +44,43 @@ const AffiliateBlocks: CollectionConfig = {
       label: 'Actif',
       type: 'checkbox',
       defaultValue: true,
-    },
-    {
-      name: 'roles',
-      label: 'Rôles ciblés',
-      type: 'select',
-      hasMany: true,
-      options: ROLES,
-      defaultValue: ['all'],
       admin: {
-        description: 'Sur les fiches champion, ce produit s\'affiche en priorité pour ces rôles. "Tous rôles" = fallback universel.',
+        description: 'Décocher pour retirer ce produit de la rotation sans le supprimer.',
       },
     },
+
+    // ── Liens par marché ─────────────────────────────────────────
+    {
+      name: 'links',
+      label: 'Liens affiliés par marché',
+      type: 'array',
+      required: true,
+      minRows: 1,
+      admin: {
+        description:
+          'Ajouter un lien par langue/marché. Le site choisit automatiquement le bon lien selon la langue du visiteur (fallback FR si la langue est absente).',
+      },
+      fields: [
+        {
+          name: 'locale',
+          label: 'Marché',
+          type: 'select',
+          required: true,
+          options: LINK_LOCALES,
+        },
+        {
+          name: 'url',
+          label: 'URL affiliée (avec tag de tracking)',
+          type: 'text',
+          required: true,
+          admin: {
+            description: 'Ex: https://www.amazon.fr/dp/B0C...?tag=riftmatch-21',
+          },
+        },
+      ],
+    },
+
+    // ── Produit ──────────────────────────────────────────────────
     {
       name: 'product',
       label: 'Produit',
@@ -93,51 +88,55 @@ const AffiliateBlocks: CollectionConfig = {
       fields: [
         {
           name: 'name',
-          label: 'Nom du produit',
+          label: 'Nom affiché',
           type: 'text',
           required: true,
+          admin: { description: 'Ex: "Logitech G Pro X Superlight 2"' },
         },
         {
           name: 'tagline',
           label: 'Accroche courte',
           type: 'text',
-          admin: {
-            description: 'Ex: "Le casque des champions LoL"',
-          },
+          admin: { description: 'Ex: "La souris des pros LoL — légère, précise, sans fil"' },
         },
         {
           name: 'imageUrl',
-          label: 'URL de l\'image produit',
+          label: 'Image produit (URL)',
           type: 'text',
           admin: {
-            description: 'URL absolue vers l\'image (CDN affilié ou upload)',
-          },
-        },
-        {
-          name: 'affiliateUrl',
-          label: 'Lien affilié',
-          type: 'text',
-          required: true,
-          admin: {
-            description: 'URL avec tracking affilié (Amazon, etc.)',
+            description: 'URL absolue vers l\'image (Amazon CDN, upload, etc.)',
           },
         },
         {
           name: 'ctaText',
           label: 'Texte du bouton',
           type: 'text',
-          defaultValue: 'Voir l\'offre →',
+          defaultValue: 'Voir sur Amazon →',
         },
         {
           name: 'badge',
           label: 'Badge optionnel',
           type: 'text',
-          admin: {
-            description: 'Ex: "Recommandé", "Promo -20%"',
-          },
+          admin: { description: 'Ex: "Recommandé", "Promo -20%", "Top Ventes"' },
         },
       ],
     },
+
+    // ── Ciblage rôles (optionnel, fiches champion) ───────────────
+    {
+      name: 'roles',
+      label: 'Rôles ciblés (optionnel)',
+      type: 'select',
+      hasMany: true,
+      options: ROLES,
+      defaultValue: ['all'],
+      admin: {
+        description:
+          'Sur les fiches champion, ce produit s\'affiche en priorité pour ces rôles. Laisser "Tous rôles" pour apparaître partout.',
+      },
+    },
+
+    // ── Mention légale ───────────────────────────────────────────
     {
       name: 'disclosure',
       label: 'Mention légale',

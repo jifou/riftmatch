@@ -1,0 +1,420 @@
+---
+import Layout from '../../layouts/Layout.astro'
+
+const PAYLOAD_URL = import.meta.env.PAYLOAD_API_URL || 'http://payload:3000'
+
+// Locale depuis cookie (même pattern que GuidesPage)
+const locale = Astro.cookies.get('locale')?.value || 'fr'
+const dateLocale = locale === 'en' ? 'en-GB' : locale === 'es' ? 'es-ES' : 'fr-FR'
+
+let news: any[] = []
+try {
+  let res = await fetch(`${PAYLOAD_URL}/api/news?where[status][equals]=published&where[or][0][locale][equals]=${locale}&where[or][1][locale][equals]=all&limit=50&sort=-publishedAt`)
+  let data = await res.json()
+  news = data.docs ?? []
+  if (news.length === 0) {
+    res = await fetch(`${PAYLOAD_URL}/api/news?where[status][equals]=published&limit=50&sort=-publishedAt`)
+    data = await res.json()
+    news = data.docs ?? []
+  }
+} catch { /* silent fail */ }
+
+const CATEGORY_LABELS: Record<string, Record<string, string>> = {
+  fr: { news: 'Actualité', champion: 'Champion', meta: 'Méta', esports: 'Esports', announcement: 'Annonce Riot', update: 'Mise à jour' },
+  en: { news: 'News', champion: 'Champion', meta: 'Meta', esports: 'Esports', announcement: 'Riot Announcement', update: 'Update' },
+  es: { news: 'Noticia', champion: 'Campeón', meta: 'Meta', esports: 'Esports', announcement: 'Anuncio Riot', update: 'Actualización' },
+}
+const catLabels = CATEGORY_LABELS[locale] ?? CATEGORY_LABELS.fr
+
+const CATEGORY_COLORS: Record<string, string> = {
+  news: 'var(--blue)', champion: 'var(--gold)', meta: 'var(--neon)',
+  esports: '#22c55e', announcement: 'var(--red)', update: '#f97316',
+}
+
+function formatDate(d: string) {
+  if (!d) return ''
+  return new Date(d).toLocaleDateString(dateLocale, { day: 'numeric', month: 'long', year: 'numeric' })
+}
+
+const featured = news[0] ?? null
+const rest = news.slice(1)
+
+const TITLES: Record<string, { title: string; desc: string; eyebrow: string; heading: string; sub: string; readMore: string; all: string; empty: string }> = {
+  fr: { title: 'News League of Legends | RiftMatch', desc: "Toute l'actualité League of Legends : patches, champions, méta, esports et annonces Riot Games.", eyebrow: 'Actualités', heading: 'News LoL', sub: 'Patches, champions, méta, esports — tout ce qui se passe dans le Rift', readMore: "Lire l'article →", all: 'Dernières actualités', empty: 'Aucune actualité disponible.' },
+  en: { title: 'League of Legends News | RiftMatch', desc: 'All League of Legends news: patches, champions, meta, esports and Riot announcements.', eyebrow: 'News', heading: 'LoL News', sub: 'Patches, champions, meta, esports — everything happening in the Rift', readMore: 'Read article →', all: 'Latest news', empty: 'No news available yet.' },
+  es: { title: 'Noticias de League of Legends | RiftMatch', desc: 'Toda la actualidad de League of Legends: parches, campeones, meta, esports y anuncios de Riot.', eyebrow: 'Noticias', heading: 'Noticias LoL', sub: 'Parches, campeones, meta, esports — todo lo que pasa en el Rift', readMore: 'Leer artículo →', all: 'Últimas noticias', empty: 'No hay noticias disponibles.' },
+}
+const t = TITLES[locale] ?? TITLES.fr
+---
+
+<Layout
+  title={t.title}
+  description={t.desc}
+>
+  <main class="news-page">
+
+    <!-- ── Hero header ─────────────────────────────────── -->
+    <header class="news-hero">
+      <p class="news-eyebrow">{t.eyebrow}</p>
+      <h1 class="news-title">{t.heading.split(' ')[0]} <span class="gold">{t.heading.split(' ').slice(1).join(' ')}</span></h1>
+      <p class="news-sub">{t.sub}</p>
+    </header>
+
+    {news.length === 0 ? (
+      <div class="news-empty">
+        <p>{t.empty}</p>
+      </div>
+    ) : (
+      <>
+        <!-- ── Featured card ──────────────────────────────── -->
+        {featured && (
+          <a href={`/news/${featured.slug}`} class="featured-card gradient-border">
+            <div class="featured-image-wrap">
+              {featured.coverImage
+                ? <img src={featured.coverImage} alt={featured.title} loading="eager" class="featured-img" />
+                : <div class="featured-img-placeholder"></div>
+              }
+              <div class="featured-overlay"></div>
+            </div>
+            <div class="featured-body">
+              <div class="featured-meta">
+                <span class="cat-badge" style={`--cat-color: ${CATEGORY_COLORS[featured.category] ?? 'var(--gold)'}`}>
+                  {catLabels[featured.category] ?? featured.category}
+                </span>
+              </div>
+              <h2 class="featured-title">{featured.title}</h2>
+              {featured.excerpt && <p class="featured-excerpt">{featured.excerpt}</p>}
+              <div class="featured-footer">
+                <span class="news-date">{formatDate(featured.publishedAt)}</span>
+                <span class="read-more">{t.readMore}</span>
+              </div>
+            </div>
+          </a>
+        )}
+
+        <!-- ── News grid ─────────────────────────────────── -->
+        {rest.length > 0 && (
+          <section class="news-grid-section">
+            <h2 class="section-title">{t.all}</h2>
+            <ul class="news-grid">
+              {rest.map((item: any) => (
+                <li>
+                  <a href={`/news/${item.slug}`} class="news-card">
+                    <div class="card-image-wrap">
+                      {item.coverImage
+                        ? <img src={item.coverImage} alt={item.title} loading="lazy" class="card-img" />
+                        : <div class="card-img-placeholder"></div>
+                      }
+                      <span class="cat-badge card-badge" style={`--cat-color: ${CATEGORY_COLORS[item.category] ?? 'var(--gold)'}`}>
+                        {catLabels[item.category] ?? item.category}
+                      </span>
+                    </div>
+                    <div class="card-body">
+                      <h3 class="card-title">{item.title}</h3>
+                      {item.excerpt && <p class="card-excerpt">{item.excerpt}</p>}
+                      <div class="card-footer">
+                        <span class="news-date">{formatDate(item.publishedAt)}</span>
+                        <span class="card-cta">Lire →</span>
+                      </div>
+                    </div>
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </section>
+        )}
+      </>
+    )}
+  </main>
+</Layout>
+
+<style>
+  .news-page {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 3rem 1.25rem 6rem;
+  }
+
+  /* ── Hero ──────────────────────────────────────────── */
+  .news-hero {
+    text-align: center;
+    margin-bottom: 3rem;
+  }
+  .news-eyebrow {
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 0.5rem;
+  }
+  .news-title {
+    font-family: 'Russo One', sans-serif;
+    font-size: clamp(2rem, 5vw, 3.5rem);
+    color: var(--text-light);
+    margin-bottom: 0.75rem;
+  }
+  .gold { color: var(--gold); }
+  .news-sub {
+    font-size: 1rem;
+    color: var(--text-muted);
+    max-width: 520px;
+    margin: 0 auto;
+  }
+
+  /* ── Empty ─────────────────────────────────────────── */
+  .news-empty {
+    text-align: center;
+    padding: 4rem 2rem;
+    color: var(--text-muted);
+  }
+  .back-link {
+    display: inline-block;
+    margin-top: 1rem;
+    color: var(--gold);
+    text-decoration: none;
+    font-family: 'Rajdhani', sans-serif;
+    font-weight: 600;
+  }
+
+  /* ── Featured card ─────────────────────────────────── */
+  .featured-card {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    min-height: 360px;
+    background: var(--dark3);
+    border: 1px solid var(--glass-border);
+    border-radius: 14px;
+    overflow: hidden;
+    text-decoration: none;
+    color: inherit;
+    transition: transform 0.2s var(--ease-out), box-shadow 0.2s;
+    margin-bottom: 4rem;
+    cursor: pointer;
+  }
+  .featured-card:hover {
+    transform: translateY(-3px);
+    box-shadow: var(--glow-gold);
+  }
+  .featured-image-wrap {
+    position: relative;
+    overflow: hidden;
+  }
+  .featured-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.4s var(--ease-out);
+  }
+  .featured-card:hover .featured-img {
+    transform: scale(1.04);
+  }
+  .featured-img-placeholder {
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, var(--dark4) 0%, var(--dark2) 100%);
+    min-height: 360px;
+  }
+  .featured-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to right, transparent 50%, var(--dark3) 100%);
+  }
+  .featured-body {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 2.5rem 2rem;
+    gap: 0.75rem;
+  }
+  .featured-meta {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+  }
+  .featured-tag {
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--gold);
+    border: 1px solid var(--gold);
+    padding: 0.15rem 0.6rem;
+    border-radius: 4px;
+  }
+  .featured-title {
+    font-family: 'Russo One', sans-serif;
+    font-size: clamp(1.2rem, 2.5vw, 1.8rem);
+    color: var(--text-light);
+    line-height: 1.25;
+  }
+  .featured-excerpt {
+    color: var(--text-muted);
+    font-size: 0.95rem;
+    line-height: 1.6;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+  .featured-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 0.5rem;
+  }
+
+  /* ── Category badges ───────────────────────────────── */
+  .cat-badge {
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--cat-color, var(--gold));
+    background: color-mix(in srgb, var(--cat-color, var(--gold)) 12%, transparent);
+    border: 1px solid color-mix(in srgb, var(--cat-color, var(--gold)) 40%, transparent);
+    padding: 0.2rem 0.6rem;
+    border-radius: 4px;
+  }
+
+  /* ── News date ─────────────────────────────────────── */
+  .news-date {
+    font-size: 0.8rem;
+    color: var(--text-dim);
+    font-family: 'Rajdhani', sans-serif;
+    font-weight: 600;
+  }
+  .read-more {
+    font-family: 'Rajdhani', sans-serif;
+    font-weight: 700;
+    font-size: 0.85rem;
+    color: var(--gold);
+    letter-spacing: 0.05em;
+  }
+
+  /* ── Grid section ──────────────────────────────────── */
+  .news-grid-section {}
+  .section-title {
+    font-family: 'Russo One', sans-serif;
+    font-size: 1.25rem;
+    color: var(--text-light);
+    margin-bottom: 1.5rem;
+    padding-bottom: 0.75rem;
+    border-bottom: 1px solid var(--glass-border);
+  }
+  .news-grid {
+    list-style: none;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+  }
+
+  /* ── News card ─────────────────────────────────────── */
+  .news-card {
+    display: flex;
+    flex-direction: column;
+    background: var(--dark3);
+    border: 1px solid var(--glass-border);
+    border-radius: 12px;
+    overflow: hidden;
+    text-decoration: none;
+    color: inherit;
+    transition: transform 0.2s var(--ease-out), box-shadow 0.2s, border-color 0.2s;
+    cursor: pointer;
+    height: 100%;
+  }
+  .news-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 32px rgba(200,155,60,0.12);
+    border-color: rgba(200,155,60,0.35);
+  }
+  .card-image-wrap {
+    position: relative;
+    aspect-ratio: 16/9;
+    overflow: hidden;
+  }
+  .card-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.4s var(--ease-out);
+  }
+  .news-card:hover .card-img {
+    transform: scale(1.05);
+  }
+  .card-img-placeholder {
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, var(--dark4) 0%, var(--dark2) 100%);
+  }
+  .card-badge {
+    position: absolute;
+    top: 0.5rem;
+    left: 0.5rem;
+  }
+  .card-body {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    padding: 1.1rem;
+    gap: 0.5rem;
+  }
+  .card-title {
+    font-family: 'Russo One', sans-serif;
+    font-size: 0.95rem;
+    line-height: 1.3;
+    color: var(--text-light);
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+  .card-excerpt {
+    font-size: 0.82rem;
+    color: var(--text-muted);
+    line-height: 1.55;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    flex: 1;
+  }
+  .card-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 0.25rem;
+  }
+  .card-cta {
+    font-family: 'Rajdhani', sans-serif;
+    font-weight: 700;
+    font-size: 0.8rem;
+    color: var(--gold);
+  }
+
+  /* ── Responsive ────────────────────────────────────── */
+  @media (max-width: 900px) {
+    .news-grid { grid-template-columns: repeat(2, 1fr); }
+  }
+
+  @media (max-width: 640px) {
+    .featured-card {
+      grid-template-columns: 1fr;
+      min-height: auto;
+    }
+    .featured-image-wrap {
+      aspect-ratio: 16/9;
+    }
+    .featured-img-placeholder { min-height: 200px; }
+    .featured-overlay {
+      background: linear-gradient(to top, var(--dark3) 0%, transparent 60%);
+    }
+    .featured-body {
+      padding: 1.5rem 1rem;
+    }
+    .news-grid { grid-template-columns: 1fr; }
+  }
+</style>
