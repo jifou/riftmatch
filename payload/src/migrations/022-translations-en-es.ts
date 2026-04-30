@@ -202,7 +202,7 @@ export const up: MigrationModule['up'] = async (payload) => {
     const res = await payload.find({ collection: 'patch-notes', where: { slug: { equals: slug } }, limit: 1 })
     const doc = res.docs[0]
     if (!doc) continue
-    const existingContent: any[] = doc.content || []
+    const existingContent: any[] = (doc.content as any[]) || []
     const officialLinkBlock = {
       type: 'p',
       children: [
