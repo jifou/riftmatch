@@ -15,7 +15,7 @@ const articles = [
     category: 'esports',
     author: 'RiftMatch',
     publishedAt: DISCLOSURE_DATE,
-    coverImage: 'https://cmsassets.rgpub.io/sanity/images/dsfx7636/news_live/c5b5258034a7e4c34fc360db44a5af4703ec9d9b-1920x1080.jpg',
+    coverImage: 'https://cmsassets.rgpub.io/sanity/images/dsfx7636/news_live/2eeffc27c7d611657950840ad3f7b8086b367a20-1920x1080.jpg',
     excerpt: 'La semaine 7 du LEC Spring Split 2026 s\'est jouée en live au Madrid Arena (8-10 mai). Team Vitality termine première, Fnatic et Team Heretics manquent les playoffs.',
     sourceUrl: 'https://lolesports.com/tournament/115548424304940735',
     tags: [
@@ -94,7 +94,7 @@ const articles = [
     category: 'esports',
     author: 'RiftMatch',
     publishedAt: DISCLOSURE_DATE,
-    coverImage: 'https://cmsassets.rgpub.io/sanity/images/dsfx7636/news_live/c5b5258034a7e4c34fc360db44a5af4703ec9d9b-1920x1080.jpg',
+    coverImage: 'https://cmsassets.rgpub.io/sanity/images/dsfx7636/news_live/2eeffc27c7d611657950840ad3f7b8086b367a20-1920x1080.jpg',
     excerpt: 'Week 7 of the LEC Spring Split 2026 was played live at Madrid Arena (May 8-10). Team Vitality finish first, while Fnatic and Team Heretics miss the playoffs.',
     sourceUrl: 'https://lolesports.com/tournament/115548424304940735',
     tags: [
