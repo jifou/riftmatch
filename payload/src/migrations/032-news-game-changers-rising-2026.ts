@@ -18,7 +18,7 @@ const articles = [
     coverImage:
       'https://cmsassets.rgpub.io/sanity/images/dsfx7636/news_live/c5b5258034a7e4c34fc360db44a5af4703ec9d9b-1920x1080.jpg',
     excerpt:
-      'Le LoL Game Changers Rising fait son grand retour en 2026 avec un calendrier inédit de 5 étapes mensuelles, du 29 mai jusqu'aux playoffs d'octobre. Riot Games confirme également la continuité du programme pour 2027.',
+      "Le LoL Game Changers Rising fait son grand retour en 2026 avec un calendrier inédit de 5 étapes mensuelles, du 29 mai jusqu'aux playoffs d'octobre. Riot Games confirme également la continuité du programme pour 2027.",
     sourceUrl: 'https://lolesports.com/en-GB/news/league-of-legends-game-changers-returns',
     tags: [
       { tag: 'LoL' },
