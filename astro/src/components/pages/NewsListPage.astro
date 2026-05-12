@@ -9,11 +9,11 @@ const dateLocale = locale === 'en' ? 'en-GB' : locale === 'es' ? 'es-ES' : 'fr-F
 
 let news: any[] = []
 try {
-  let res = await fetch(`${PAYLOAD_URL}/api/news?where[status][equals]=published&where[or][0][locale][equals]=${locale}&where[or][1][locale][equals]=all&limit=50&sort=-publishedAt`)
+  let res = await fetch(`${PAYLOAD_URL}/api/news?where[status][equals]=published&where[or][0][locale][equals]=${locale}&where[or][1][locale][equals]=all&limit=100&sort=-publishedAt`)
   let data = await res.json()
   news = data.docs ?? []
   if (news.length === 0) {
-    res = await fetch(`${PAYLOAD_URL}/api/news?where[status][equals]=published&limit=50&sort=-publishedAt`)
+    res = await fetch(`${PAYLOAD_URL}/api/news?where[status][equals]=published&limit=100&sort=-publishedAt`)
     data = await res.json()
     news = data.docs ?? []
   }
@@ -31,6 +31,22 @@ const CATEGORY_COLORS: Record<string, string> = {
   esports: '#22c55e', announcement: 'var(--red)', update: '#f97316',
 }
 
+const TYPE_META: Record<string, { label: string; color: string }> = {
+  lck:             { label: 'LCK',           color: '#3b82f6' },
+  lec:             { label: 'LEC',           color: '#a855f7' },
+  lpl:             { label: 'LPL',           color: '#ef4444' },
+  international:   { label: 'International', color: '#14b8a6' },
+  'autres-regions':{ label: 'Autres régions',color: '#f97316' },
+  riot:            { label: 'RIOT',          color: '#c89b3c' },
+}
+
+const SUBTYPE_LABELS: Record<string, Record<string, string>> = {
+  fr: { resultats: 'Résultats', mercato: 'Mercato', other: 'Autre' },
+  en: { resultats: 'Results',   mercato: 'Transfers', other: 'Other' },
+  es: { resultats: 'Resultados',mercato: 'Mercado',   other: 'Otro'  },
+}
+const subLabels = SUBTYPE_LABELS[locale] ?? SUBTYPE_LABELS.fr
+
 function formatDate(d: string) {
   if (!d) return ''
   return new Date(d).toLocaleDateString(dateLocale, { day: 'numeric', month: 'long', year: 'numeric' })
@@ -39,18 +55,15 @@ function formatDate(d: string) {
 const featured = news[0] ?? null
 const rest = news.slice(1)
 
-const TITLES: Record<string, { title: string; desc: string; eyebrow: string; heading: string; sub: string; readMore: string; all: string; empty: string }> = {
-  fr: { title: 'News League of Legends | RiftMatch', desc: "Toute l'actualité League of Legends : patches, champions, méta, esports et annonces Riot Games.", eyebrow: 'Actualités', heading: 'News LoL', sub: 'Patches, champions, méta, esports — tout ce qui se passe dans le Rift', readMore: "Lire l'article →", all: 'Dernières actualités', empty: 'Aucune actualité disponible.' },
-  en: { title: 'League of Legends News | RiftMatch', desc: 'All League of Legends news: patches, champions, meta, esports and Riot announcements.', eyebrow: 'News', heading: 'LoL News', sub: 'Patches, champions, meta, esports — everything happening in the Rift', readMore: 'Read article →', all: 'Latest news', empty: 'No news available yet.' },
-  es: { title: 'Noticias de League of Legends | RiftMatch', desc: 'Toda la actualidad de League of Legends: parches, campeones, meta, esports y anuncios de Riot.', eyebrow: 'Noticias', heading: 'Noticias LoL', sub: 'Parches, campeones, meta, esports — todo lo que pasa en el Rift', readMore: 'Leer artículo →', all: 'Últimas noticias', empty: 'No hay noticias disponibles.' },
+const TITLES: Record<string, { title: string; desc: string; eyebrow: string; heading: string; sub: string; readMore: string; all: string; empty: string; filterLigue: string; filterType: string; filterAll: string; noResult: string }> = {
+  fr: { title: 'News League of Legends | RiftMatch', desc: "Toute l'actualité League of Legends : patches, champions, méta, esports et annonces Riot Games.", eyebrow: 'Actualités', heading: 'News LoL', sub: 'Patches, champions, méta, esports — tout ce qui se passe dans le Rift', readMore: "Lire l'article →", all: 'Dernières actualités', empty: 'Aucune actualité disponible.', filterLigue: 'Ligue', filterType: 'Type', filterAll: 'Tous', noResult: 'Aucun article ne correspond à ces filtres.' },
+  en: { title: 'League of Legends News | RiftMatch', desc: 'All League of Legends news: patches, champions, meta, esports and Riot announcements.', eyebrow: 'News', heading: 'LoL News', sub: 'Patches, champions, meta, esports — everything happening in the Rift', readMore: 'Read article →', all: 'Latest news', empty: 'No news available yet.', filterLigue: 'League', filterType: 'Type', filterAll: 'All', noResult: 'No articles match these filters.' },
+  es: { title: 'Noticias de League of Legends | RiftMatch', desc: 'Toda la actualidad de League of Legends: parches, campeones, meta, esports y anuncios de Riot.', eyebrow: 'Noticias', heading: 'Noticias LoL', sub: 'Parches, campeones, meta, esports — todo lo que pasa en el Rift', readMore: 'Leer artículo →', all: 'Últimas noticias', empty: 'No hay noticias disponibles.', filterLigue: 'Liga', filterType: 'Tipo', filterAll: 'Todos', noResult: 'Ningún artículo coincide con estos filtros.' },
 }
 const t = TITLES[locale] ?? TITLES.fr
 ---
 
-<Layout
-  title={t.title}
-  description={t.desc}
->
+<Layout title={t.title} description={t.desc}>
   <main class="news-page">
 
     <!-- ── Hero header ─────────────────────────────────── -->
@@ -61,14 +74,48 @@ const t = TITLES[locale] ?? TITLES.fr
     </header>
 
     {news.length === 0 ? (
-      <div class="news-empty">
-        <p>{t.empty}</p>
-      </div>
+      <div class="news-empty"><p>{t.empty}</p></div>
     ) : (
       <>
+        <!-- ── Filtres ─────────────────────────────────── -->
+        <div class="filter-bar" id="filter-bar">
+          <div class="filter-row">
+            <span class="filter-label">{t.filterLigue}</span>
+            <div class="filter-pills">
+              <button class="pill active" data-type="">
+                {t.filterAll}
+              </button>
+              {Object.entries(TYPE_META).map(([val, meta]) => (
+                <button class="pill" data-type={val} style={`--pill-color:${meta.color}`}>
+                  {meta.label}
+                </button>
+              ))}
+            </div>
+          </div>
+          <div class="filter-row">
+            <span class="filter-label">{t.filterType}</span>
+            <div class="filter-pills">
+              <button class="pill sub active" data-sub="">
+                {t.filterAll}
+              </button>
+              {Object.entries(subLabels).map(([val, label]) => (
+                <button class="pill sub" data-sub={val}>
+                  {label}
+                </button>
+              ))}
+            </div>
+          </div>
+        </div>
+
         <!-- ── Featured card ──────────────────────────────── -->
         {featured && (
-          <a href={`/news/${featured.slug}`} class="featured-card gradient-border">
+          <a
+            href={`/news/${featured.slug}`}
+            class="featured-card gradient-border"
+            id="featured-card"
+            data-newstype={featured.newsType ?? ''}
+            data-newssubtype={featured.newsSubtype ?? ''}
+          >
             <div class="featured-image-wrap">
               {featured.coverImage
                 ? <img src={featured.coverImage} alt={featured.title} loading="eager" class="featured-img" />
@@ -78,6 +125,14 @@ const t = TITLES[locale] ?? TITLES.fr
             </div>
             <div class="featured-body">
               <div class="featured-meta">
+                {featured.newsType && (
+                  <span class="type-badge" style={`--pill-color:${TYPE_META[featured.newsType]?.color ?? 'var(--gold)'}`}>
+                    {TYPE_META[featured.newsType]?.label ?? featured.newsType}
+                  </span>
+                )}
+                {featured.newsSubtype && (
+                  <span class="subtype-badge">{subLabels[featured.newsSubtype] ?? featured.newsSubtype}</span>
+                )}
                 <span class="cat-badge" style={`--cat-color: ${CATEGORY_COLORS[featured.category] ?? 'var(--gold)'}`}>
                   {catLabels[featured.category] ?? featured.category}
                 </span>
@@ -94,11 +149,11 @@ const t = TITLES[locale] ?? TITLES.fr
 
         <!-- ── News grid ─────────────────────────────────── -->
         {rest.length > 0 && (
-          <section class="news-grid-section">
+          <section class="news-grid-section" id="grid-section">
             <h2 class="section-title">{t.all}</h2>
-            <ul class="news-grid">
+            <ul class="news-grid" id="news-grid">
               {rest.map((item: any) => (
-                <li>
+                <li class="news-card-item" data-newstype={item.newsType ?? ''} data-newssubtype={item.newsSubtype ?? ''}>
                   <a href={`/news/${item.slug}`} class="news-card">
                     <div class="card-image-wrap">
                       {item.coverImage
@@ -110,6 +165,16 @@ const t = TITLES[locale] ?? TITLES.fr
                       </span>
                     </div>
                     <div class="card-body">
+                      <div class="card-tags">
+                        {item.newsType && (
+                          <span class="type-badge small" style={`--pill-color:${TYPE_META[item.newsType]?.color ?? 'var(--gold)'}`}>
+                            {TYPE_META[item.newsType]?.label ?? item.newsType}
+                          </span>
+                        )}
+                        {item.newsSubtype && (
+                          <span class="subtype-badge small">{subLabels[item.newsSubtype] ?? item.newsSubtype}</span>
+                        )}
+                      </div>
                       <h3 class="card-title">{item.title}</h3>
                       {item.excerpt && <p class="card-excerpt">{item.excerpt}</p>}
                       <div class="card-footer">
@@ -121,12 +186,69 @@ const t = TITLES[locale] ?? TITLES.fr
                 </li>
               ))}
             </ul>
+            <p class="no-result" id="no-result" style="display:none">{t.noResult}</p>
           </section>
         )}
       </>
     )}
   </main>
 </Layout>
+
+<script>
+  const typeButtons = document.querySelectorAll<HTMLButtonElement>('.pill[data-type]')
+  const subButtons  = document.querySelectorAll<HTMLButtonElement>('.pill[data-sub]')
+  const featuredCard = document.getElementById('featured-card')
+  const gridItems   = document.querySelectorAll<HTMLElement>('.news-card-item')
+  const noResult    = document.getElementById('no-result')
+
+  let activeType = ''
+  let activeSub  = ''
+
+  function matches(el: HTMLElement) {
+    const t = el.dataset.newstype ?? ''
+    const s = el.dataset.newssubtype ?? ''
+    const typeOk = activeType === '' || t === activeType
+    const subOk  = activeSub  === '' || s === activeSub
+    return typeOk && subOk
+  }
+
+  function applyFilters() {
+    // Featured card
+    if (featuredCard) {
+      featuredCard.style.display = matches(featuredCard) ? '' : 'none'
+    }
+
+    // Grid items
+    let visible = 0
+    gridItems.forEach(item => {
+      const show = matches(item)
+      item.style.display = show ? '' : 'none'
+      if (show) visible++
+    })
+
+    // No-result message
+    const featuredVisible = featuredCard && featuredCard.style.display !== 'none'
+    if (noResult) noResult.style.display = (!featuredVisible && visible === 0) ? '' : 'none'
+  }
+
+  typeButtons.forEach(btn => {
+    btn.addEventListener('click', () => {
+      typeButtons.forEach(b => b.classList.remove('active'))
+      btn.classList.add('active')
+      activeType = btn.dataset.type ?? ''
+      applyFilters()
+    })
+  })
+
+  subButtons.forEach(btn => {
+    btn.addEventListener('click', () => {
+      subButtons.forEach(b => b.classList.remove('active'))
+      btn.classList.add('active')
+      activeSub = btn.dataset.sub ?? ''
+      applyFilters()
+    })
+  })
+</script>
 
 <style>
   .news-page {
@@ -138,7 +260,7 @@ const t = TITLES[locale] ?? TITLES.fr
   /* ── Hero ──────────────────────────────────────────── */
   .news-hero {
     text-align: center;
-    margin-bottom: 3rem;
+    margin-bottom: 2.5rem;
   }
   .news-eyebrow {
     font-family: 'Rajdhani', sans-serif;
@@ -169,13 +291,101 @@ const t = TITLES[locale] ?? TITLES.fr
     padding: 4rem 2rem;
     color: var(--text-muted);
   }
-  .back-link {
-    display: inline-block;
-    margin-top: 1rem;
-    color: var(--gold);
-    text-decoration: none;
+
+  /* ── Filter bar ────────────────────────────────────── */
+  .filter-bar {
+    background: var(--dark3);
+    border: 1px solid var(--glass-border);
+    border-radius: 12px;
+    padding: 1rem 1.25rem;
+    margin-bottom: 2.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+  .filter-row {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+  }
+  .filter-label {
     font-family: 'Rajdhani', sans-serif;
-    font-weight: 600;
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--text-dim);
+    min-width: 3.5rem;
+    flex-shrink: 0;
+  }
+  .filter-pills {
+    display: flex;
+    gap: 0.4rem;
+    flex-wrap: wrap;
+  }
+  .pill {
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    padding: 0.3rem 0.8rem;
+    border-radius: 999px;
+    border: 1px solid var(--glass-border);
+    background: transparent;
+    color: var(--text-muted);
+    cursor: pointer;
+    transition: all 0.15s ease;
+    white-space: nowrap;
+  }
+  .pill:hover {
+    border-color: var(--pill-color, var(--gold));
+    color: var(--pill-color, var(--gold));
+    background: color-mix(in srgb, var(--pill-color, var(--gold)) 10%, transparent);
+  }
+  .pill.active {
+    border-color: var(--pill-color, var(--gold));
+    color: var(--pill-color, var(--gold));
+    background: color-mix(in srgb, var(--pill-color, var(--gold)) 15%, transparent);
+  }
+  .pill.sub.active {
+    border-color: var(--text-muted);
+    color: var(--text-light);
+    background: color-mix(in srgb, var(--text-muted) 15%, transparent);
+  }
+  .pill.sub:hover {
+    border-color: var(--text-muted);
+    color: var(--text-light);
+    background: color-mix(in srgb, var(--text-muted) 10%, transparent);
+  }
+
+  /* ── Type / subtype badges ─────────────────────────── */
+  .type-badge {
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 0.68rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--pill-color, var(--gold));
+    background: color-mix(in srgb, var(--pill-color, var(--gold)) 15%, transparent);
+    border: 1px solid color-mix(in srgb, var(--pill-color, var(--gold)) 40%, transparent);
+    padding: 0.2rem 0.55rem;
+    border-radius: 4px;
+  }
+  .subtype-badge {
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 0.68rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--text-dim);
+    border: 1px solid var(--glass-border);
+    padding: 0.2rem 0.55rem;
+    border-radius: 4px;
+  }
+  .type-badge.small, .subtype-badge.small {
+    font-size: 0.62rem;
+    padding: 0.1rem 0.45rem;
   }
 
   /* ── Featured card ─────────────────────────────────── */
@@ -231,18 +441,8 @@ const t = TITLES[locale] ?? TITLES.fr
   .featured-meta {
     display: flex;
     align-items: center;
-    gap: 0.75rem;
-  }
-  .featured-tag {
-    font-family: 'Rajdhani', sans-serif;
-    font-size: 0.7rem;
-    font-weight: 700;
-    letter-spacing: 0.15em;
-    text-transform: uppercase;
-    color: var(--gold);
-    border: 1px solid var(--gold);
-    padding: 0.15rem 0.6rem;
-    border-radius: 4px;
+    gap: 0.5rem;
+    flex-wrap: wrap;
   }
   .featured-title {
     font-family: 'Russo One', sans-serif;
@@ -280,7 +480,7 @@ const t = TITLES[locale] ?? TITLES.fr
     border-radius: 4px;
   }
 
-  /* ── News date ─────────────────────────────────────── */
+  /* ── News date / read more ─────────────────────────── */
   .news-date {
     font-size: 0.8rem;
     color: var(--text-dim);
@@ -296,7 +496,6 @@ const t = TITLES[locale] ?? TITLES.fr
   }
 
   /* ── Grid section ──────────────────────────────────── */
-  .news-grid-section {}
   .section-title {
     font-family: 'Russo One', sans-serif;
     font-size: 1.25rem;
@@ -310,6 +509,12 @@ const t = TITLES[locale] ?? TITLES.fr
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 1.5rem;
+  }
+  .no-result {
+    text-align: center;
+    color: var(--text-muted);
+    padding: 3rem 0;
+    font-size: 0.95rem;
   }
 
   /* ── News card ─────────────────────────────────────── */
@@ -342,9 +547,7 @@ const t = TITLES[locale] ?? TITLES.fr
     object-fit: cover;
     transition: transform 0.4s var(--ease-out);
   }
-  .news-card:hover .card-img {
-    transform: scale(1.05);
-  }
+  .news-card:hover .card-img { transform: scale(1.05); }
   .card-img-placeholder {
     width: 100%;
     height: 100%;
@@ -360,7 +563,13 @@ const t = TITLES[locale] ?? TITLES.fr
     flex-direction: column;
     flex: 1;
     padding: 1.1rem;
-    gap: 0.5rem;
+    gap: 0.4rem;
+  }
+  .card-tags {
+    display: flex;
+    gap: 0.35rem;
+    flex-wrap: wrap;
+    margin-bottom: 0.1rem;
   }
   .card-title {
     font-family: 'Russo One', sans-serif;
@@ -399,22 +608,18 @@ const t = TITLES[locale] ?? TITLES.fr
   @media (max-width: 900px) {
     .news-grid { grid-template-columns: repeat(2, 1fr); }
   }
-
   @media (max-width: 640px) {
     .featured-card {
       grid-template-columns: 1fr;
       min-height: auto;
     }
-    .featured-image-wrap {
-      aspect-ratio: 16/9;
-    }
+    .featured-image-wrap { aspect-ratio: 16/9; }
     .featured-img-placeholder { min-height: 200px; }
     .featured-overlay {
       background: linear-gradient(to top, var(--dark3) 0%, transparent 60%);
     }
-    .featured-body {
-      padding: 1.5rem 1rem;
-    }
+    .featured-body { padding: 1.5rem 1rem; }
     .news-grid { grid-template-columns: 1fr; }
+    .filter-label { min-width: 2.5rem; }
   }
 </style>

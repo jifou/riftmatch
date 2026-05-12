@@ -4,7 +4,7 @@ const News: CollectionConfig = {
   slug: 'news',
   admin: {
     useAsTitle: 'title',
-    defaultColumns: ['title', 'category', 'locale', 'status', 'publishedAt'],
+    defaultColumns: ['title', 'newsType', 'newsSubtype', 'locale', 'status', 'publishedAt'],
     description: 'Articles et actualités League of Legends.',
   },
   access: { read: () => true },
@@ -34,8 +34,33 @@ const News: CollectionConfig = {
       type: 'text',
     },
     {
+      name: 'newsType',
+      label: 'Ligue / Type de news',
+      type: 'select',
+      options: [
+        { label: '🇰🇷 LCK', value: 'lck' },
+        { label: '🇪🇺 LEC', value: 'lec' },
+        { label: '🇨🇳 LPL', value: 'lpl' },
+        { label: '🌏 International (Worlds / MSI / First Stand)', value: 'international' },
+        { label: '🌐 Autres régions (LCS, CBLOL, LLA…)', value: 'autres-regions' },
+        { label: '⚡ RIOT Games', value: 'riot' },
+      ],
+      admin: { description: 'Ligue ou thème principal de l\'article.' },
+    },
+    {
+      name: 'newsSubtype',
+      label: 'Sous-type',
+      type: 'select',
+      options: [
+        { label: '🏆 Résultats', value: 'resultats' },
+        { label: '💼 Mercato', value: 'mercato' },
+        { label: '📌 Autre', value: 'other' },
+      ],
+      admin: { description: 'Catégorie fine pour le filtrage.' },
+    },
+    {
       name: 'category',
-      label: 'Catégorie',
+      label: 'Catégorie (legacy)',
       type: 'select',
       required: true,
       defaultValue: 'news',
