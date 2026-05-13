@@ -106,21 +106,14 @@ const catLabel = catLabels[article.category] ?? article.category
 
   <main class="news-article">
 
-    <!-- ── Cover image ──────────────────────────────────── -->
-    {article.coverImage && (
-      <div class="article-cover">
-        <img src={article.coverImage} alt={article.title} class="article-cover-img" loading="eager" />
-        <div class="article-cover-overlay"></div>
-      </div>
-    )}
-
-    <div class="article-container">
-
-      <!-- ── Back nav ────────────────────────────────────── -->
-      <a href="/news" class="back-link">{ui.back}</a>
-
-      <!-- ── Article header ─────────────────────────────── -->
-      <header class="article-header">
+    <!-- ── Hero full-bleed avec titre en overlay ─────── -->
+    <div class="article-hero">
+      {article.coverImage && (
+        <img src={article.coverImage} alt={article.title} class="article-hero-img" loading="eager" />
+      )}
+      <div class="article-hero-overlay"></div>
+      <div class="article-hero-content">
+        <a href="/news" class="back-link-hero">{ui.back}</a>
         <div class="article-meta-top">
           <span class="cat-badge" style={`--cat-color: ${catColor}`}>{catLabel}</span>
           {article.tags?.length > 0 && article.tags.slice(0, 3).map((t: any) => (
@@ -149,7 +142,10 @@ const catLabel = catLabels[article.category] ?? article.category
             </span>
           )}
         </div>
-      </header>
+      </div>
+    </div>
+
+    <div class="article-container">
 
       <!-- ── Rich text content ───────────────────────────── -->
       {htmlContent && (
@@ -187,49 +183,62 @@ const catLabel = catLabels[article.category] ?? article.category
     max-width: 100%;
   }
 
-  /* ── Cover ─────────────────────────────────────────── */
-  .article-cover {
+  /* ── Hero full-bleed ───────────────────────────────── */
+  .article-hero {
     position: relative;
     width: 100%;
-    max-height: 420px;
+    height: clamp(460px, 62vh, 780px);
     overflow: hidden;
+    display: flex;
+    align-items: flex-end;
   }
-  .article-cover-img {
-    width: 100%;
-    height: 420px;
-    object-fit: cover;
-    display: block;
-  }
-  .article-cover-overlay {
+  .article-hero-img {
     position: absolute;
     inset: 0;
-    background: linear-gradient(to bottom, rgba(9,11,16,0.1) 0%, rgba(9,11,16,0.85) 100%);
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center 20%;
+    display: block;
   }
+  .article-hero-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      to bottom,
+      rgba(9,11,16,0.05) 0%,
+      rgba(9,11,16,0.25) 30%,
+      rgba(9,11,16,0.75) 65%,
+      rgba(9,11,16,0.97) 100%
+    );
+  }
+  .article-hero-content {
+    position: relative;
+    z-index: 2;
+    width: 100%;
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 0 2rem 2.5rem;
+  }
+  .back-link-hero {
+    display: inline-block;
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 0.82rem;
+    font-weight: 700;
+    color: rgba(255,255,255,0.55);
+    text-decoration: none;
+    margin-bottom: 1.25rem;
+    transition: color 0.2s;
+    cursor: pointer;
+    letter-spacing: 0.04em;
+  }
+  .back-link-hero:hover { color: var(--gold); }
 
   /* ── Container ─────────────────────────────────────── */
   .article-container {
-    max-width: 780px;
+    max-width: 900px;
     margin: 0 auto;
-    padding: 2rem 1.25rem 5rem;
-  }
-
-  /* ── Back link ─────────────────────────────────────── */
-  .back-link {
-    display: inline-block;
-    font-family: 'Rajdhani', sans-serif;
-    font-size: 0.85rem;
-    font-weight: 700;
-    color: var(--text-muted);
-    text-decoration: none;
-    margin-bottom: 1.75rem;
-    transition: color 0.2s;
-    cursor: pointer;
-  }
-  .back-link:hover { color: var(--gold); }
-
-  /* ── Header ────────────────────────────────────────── */
-  .article-header {
-    margin-bottom: 2.5rem;
+    padding: 2.5rem 2rem 6rem;
   }
   .article-meta-top {
     display: flex;
@@ -262,17 +271,18 @@ const catLabel = catLabels[article.category] ?? article.category
   }
   .article-title {
     font-family: 'Russo One', sans-serif;
-    font-size: clamp(1.5rem, 3.5vw, 2.4rem);
-    color: var(--text-light);
-    line-height: 1.2;
-    margin-bottom: 1rem;
+    font-size: clamp(1.6rem, 3vw, 2.75rem);
+    color: #ffffff;
+    line-height: 1.15;
+    margin-bottom: 0.75rem;
+    text-shadow: 0 2px 12px rgba(0,0,0,0.5);
   }
   .article-excerpt {
-    font-size: 1.1rem;
-    color: var(--text-muted);
-    line-height: 1.65;
-    margin-bottom: 1.25rem;
-    padding-left: 1rem;
+    font-size: 1.05rem;
+    color: rgba(255,255,255,0.72);
+    line-height: 1.6;
+    margin-bottom: 1rem;
+    padding-left: 0.9rem;
     border-left: 3px solid var(--gold);
   }
   .article-meta-bottom {
@@ -288,7 +298,7 @@ const catLabel = catLabels[article.category] ?? article.category
     font-family: 'Rajdhani', sans-serif;
     font-size: 0.82rem;
     font-weight: 600;
-    color: var(--text-dim);
+    color: rgba(255,255,255,0.5);
   }
 
   /* ── Prose / rich text ─────────────────────────────── */
@@ -400,4 +410,36 @@ const catLabel = catLabels[article.category] ?? article.category
     cursor: pointer;
   }
   .quiz-cta:hover { background: var(--gold-light); }
+
+  /* ── Large screens (1440px+) ───────────────────────── */
+  @media (min-width: 1440px) {
+    .article-hero-content {
+      padding: 0 3rem 3.5rem;
+    }
+    .article-container {
+      padding: 3rem 2rem 7rem;
+    }
+  }
+  @media (min-width: 2000px) {
+    .article-hero-content {
+      max-width: 1100px;
+      padding: 0 3rem 4rem;
+    }
+    .article-container {
+      max-width: 1100px;
+    }
+  }
+
+  /* ── Mobile ────────────────────────────────────────── */
+  @media (max-width: 640px) {
+    .article-hero {
+      height: clamp(380px, 70vw, 500px);
+    }
+    .article-hero-content {
+      padding: 0 1rem 1.75rem;
+    }
+    .article-container {
+      padding: 1.5rem 1rem 4rem;
+    }
+  }
 </style>
