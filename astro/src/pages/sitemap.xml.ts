@@ -17,15 +17,25 @@ export const GET: APIRoute = async () => {
   // ── Fetch des guides depuis Payload ─────────────────────────────
   const PAYLOAD_URL = import.meta.env.PAYLOAD_API_URL || 'http://payload:3000'
   let contentPages: { slug: string; locale: string; updatedAt?: string }[] = []
+  let newsArticles: { slug: string; updatedAt?: string; publishedAt?: string }[] = []
   try {
-    const res  = await fetch(`${PAYLOAD_URL}/api/pages?limit=100&sort=slug`, { signal: AbortSignal.timeout(3000) })
-    const data = await res.json()
-    contentPages = (data.docs ?? []).map((p: any) => ({
+    const [pagesRes, newsRes] = await Promise.all([
+      fetch(`${PAYLOAD_URL}/api/pages?limit=100&sort=slug`, { signal: AbortSignal.timeout(3000) }),
+      fetch(`${PAYLOAD_URL}/api/news?where[status][equals]=published&limit=200&sort=-publishedAt`, { signal: AbortSignal.timeout(3000) }),
+    ])
+    const pagesData = await pagesRes.json()
+    contentPages = (pagesData.docs ?? []).map((p: any) => ({
       slug:      p.slug,
       locale:    p.locale || 'fr',
       updatedAt: p.updatedAt?.split('T')[0] ?? TODAY,
     }))
-  } catch { /* Payload KO — sitemap sans guides */ }
+    const newsData = await newsRes.json()
+    newsArticles = (newsData.docs ?? []).map((n: any) => ({
+      slug:        n.slug,
+      updatedAt:   (n.updatedAt || n.publishedAt)?.split('T')[0] ?? TODAY,
+      publishedAt: n.publishedAt?.split('T')[0] ?? TODAY,
+    }))
+  } catch { /* Payload KO — sitemap sans guides/news */ }
 
   // ── Toutes les URLs ──────────────────────────────────────────────
   type Entry = { url: string; priority: string; changefreq: string; lastmod: string }
@@ -55,6 +65,19 @@ export const GET: APIRoute = async () => {
       priority:   '0.7',
       changefreq: 'monthly',
       lastmod:    page.updatedAt ?? TODAY,
+    })
+  }
+
+  // News listing
+  entries.push({ url: '/news', priority: '0.85', changefreq: 'daily', lastmod: TODAY })
+
+  // Articles news individuels (les slugs sont uniques par locale, pas de préfixe URL)
+  for (const article of newsArticles) {
+    entries.push({
+      url:        `/news/${article.slug}`,
+      priority:   '0.75',
+      changefreq: 'monthly',
+      lastmod:    article.updatedAt ?? TODAY,
     })
   }
 
