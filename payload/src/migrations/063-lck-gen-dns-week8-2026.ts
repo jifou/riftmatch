@@ -29,7 +29,7 @@ const articles = [
         type: 'p',
         children: [
           {
-            text: "Ce dimanche 24 mai 2026, Gen.G a poursuivi sa marche implacable en dominant DN SOOPers 2-0 lors de la huitième semaine des LCK 2026 Rounds 1-2. Une nouvelle victoire qui confirme que rien ni personne ne semble capable d'arrêter la machine Gen.G en saison régulière cette année.",
+            text: "Ce dimanche 24 mai 2026, Gen.G a poursuivi sa marche implacable en dominant DN SOOPers 2-0 lors de la huitième semaine des LCK 2026 Rounds 1-2. Une nouvelle victoire qui confirme que rien ni personne ne semble capable d\'arrêter la machine Gen.G en saison régulière cette année.",
           },
         ],
       },
@@ -41,7 +41,7 @@ const articles = [
         type: 'p',
         children: [
           {
-            text: "DN SOOPers traversent la pire période de l'histoire de la LCK. Avec cette nouvelle défaite, la série de défaites consécutives de l'organisation atteint désormais 26 — un record absolu dans la compétition coréenne. Pourtant, les ambitions étaient grandes en début de saison : l'arrivée de deokdam et Peter depuis KT Rolster, ainsi que l'ex-milieu de BRION Clozer, devait apporter une bouffée d'air frais. Mais les synergies n'ont jamais pris. La résignation en cours de saison de leur entraîneur principal Odin a symbolisé la profondeur de la crise. Éliminés de toute course au Road to MSI depuis plusieurs semaines, les SOOPers jouent désormais pour l'honneur.",
+            text: "DN SOOPers traversent la pire période de l\'histoire de la LCK. Avec cette nouvelle défaite, la série de défaites consécutives de l\'organisation atteint désormais 26 — un record absolu dans la compétition coréenne. Pourtant, les ambitions étaient grandes en début de saison : l\'arrivée de deokdam et Peter depuis KT Rolster, ainsi que l\'ex-milieu de BRION Clozer, devait apporter une bouffée d\'air frais. Mais les synergies n\'ont jamais pris. La résignation en cours de saison de leur entraîneur principal Odin a symbolisé la profondeur de la crise. Éliminés de toute course au Road to MSI depuis plusieurs semaines, les SOOPers jouent désormais pour l\'honneur.",
           },
         ],
       },
@@ -53,7 +53,7 @@ const articles = [
         type: 'p',
         children: [
           {
-            text: "De l'autre côté du spectre se trouvent Kiin, Canyon, Chovy, Ruler et Duro — un cinq majeur qui n'a toujours pas concédé la moindre série depuis le début des Rounds 1-2. Gen.G est en passe de répéter — voire d'égaler — leur propre exploit historique : le 18-0 en saison régulière réalisé en 2025. Les victoires ne sont pas toujours faciles (quelques parties serrées ont rappelé que les adversaires existent), mais la régularité de l'équipe est tout simplement implacable. Canyon domine les jungles coréennes, Chovy reste indiscutablement le meilleur mid-laner du monde, et Ruler continue de porter l'attaque avec une constance remarquable.",
+            text: "De l\'autre côté du spectre se trouvent Kiin, Canyon, Chovy, Ruler et Duro — un cinq majeur qui n\'a toujours pas concédé la moindre série depuis le début des Rounds 1-2. Gen.G est en passe de répéter — voire d\'égaler — leur propre exploit historique : le 18-0 en saison régulière réalisé en 2025. Les victoires ne sont pas toujours faciles (quelques parties serrées ont rappelé que les adversaires existent), mais la régularité de l\'équipe est tout simplement implacable. Canyon domine les jungles coréennes, Chovy reste indiscutablement le meilleur mid-laner du monde, et Ruler continue de porter l\'attaque avec une constance remarquable.",
           },
         ],
       },
@@ -65,7 +65,7 @@ const articles = [
         type: 'p',
         children: [
           {
-            text: "En deuxième match de la soirée, T1 a dominé HANJIN BRION 2-0, consolidant leur position dans la course aux dernières places qualificatives pour le Road to MSI. La semaine 9 s'annonce décisive : Dplus KIA et BRION se disputent encore les derniers tickets, et chaque série comptera double dans ce sprint final.",
+            text: "En deuxième match de la soirée, T1 a dominé HANJIN BRION 2-0, consolidant leur position dans la course aux dernières places qualificatives pour le Road to MSI. La semaine 9 s\'annonce décisive : Dplus KIA et BRION se disputent encore les derniers tickets, et chaque série comptera double dans ce sprint final.",
           },
         ],
       },
@@ -73,7 +73,7 @@ const articles = [
         type: 'blockquote',
         children: [
           {
-            text: "Gen.G est en route pour un second 18-0 historique consécutif. La LCK 2026 pourrait bien s'achever avec une dynasty plus dominante encore qu'en 2025.",
+            text: "Gen.G est en route pour un second 18-0 historique consécutif. La LCK 2026 pourrait bien s\'achever avec une dynasty plus dominante encore qu\'en 2025.",
           },
         ],
       },
@@ -124,7 +124,7 @@ const articles = [
         type: 'p',
         children: [
           {
-            text: "Gen.G's Kiin, Canyon, Chovy, Ruler and Duro remain undefeated in series play since the very first week of Rounds 1-2. Their form puts them firmly on course to match — or surpass — their legendary 18-0 regular season from 2025. While a handful of matches have been tighter than expected, the five-man core has never been truly threatened. Canyon continues to dictate the pace from the jungle, Chovy remains the best mid-laner in the world, and Ruler's ADC play has been flawless.",
+            text: "Gen.G\'s Kiin, Canyon, Chovy, Ruler and Duro remain undefeated in series play since the very first week of Rounds 1-2. Their form puts them firmly on course to match — or surpass — their legendary 18-0 regular season from 2025. While a handful of matches have been tighter than expected, the five-man core has never been truly threatened. Canyon continues to dictate the pace from the jungle, Chovy remains the best mid-laner in the world, and Ruler\'s ADC play has been flawless.",
           },
         ],
       },
@@ -136,7 +136,7 @@ const articles = [
         type: 'p',
         children: [
           {
-            text: "In the evening's second match, T1 dispatched HANJIN BRION 2-0, keeping themselves in a strong position as the regular season approaches its final stretch. With Week 9 on the horizon, the Road to MSI race remains alive — Dplus KIA and BRION are still scrapping for the final qualifying spots, and every remaining series will count.",
+            text: "In the evening\'s second match, T1 dispatched HANJIN BRION 2-0, keeping themselves in a strong position as the regular season approaches its final stretch. With Week 9 on the horizon, the Road to MSI race remains alive — Dplus KIA and BRION are still scrapping for the final qualifying spots, and every remaining series will count.",
           },
         ],
       },

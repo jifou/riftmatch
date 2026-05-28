@@ -34,7 +34,7 @@ const articles = [
         type: 'p',
         children: [
           {
-            text: "Après sept semaines de saison régulière — dont une tournée à guichets fermés au Madrid Arena —, la LEC Spring 2026 entre dans son acte final. Le bracket des six-team playoffs a été révélé le 11 mai : les demi-finales de l'upper bracket opposeront Team Vitality à Movistar KOI le vendredi 23 mai, et Karmine Corp à G2 Esports le samedi 24. Les deux vainqueurs se retrouveront en demi-finale supérieure le lundi 25, et cette victoire vaudra non seulement une place en grande finale mais aussi la qualification directe pour le Mid-Season Invitational 2026.",
+            text: "Après sept semaines de saison régulière — dont une tournée à guichets fermés au Madrid Arena —, la LEC Spring 2026 entre dans son acte final. Le bracket des six-team playoffs a été révélé le 11 mai : les demi-finales de l\'upper bracket opposeront Team Vitality à Movistar KOI le vendredi 23 mai, et Karmine Corp à G2 Esports le samedi 24. Les deux vainqueurs se retrouveront en demi-finale supérieure le lundi 25, et cette victoire vaudra non seulement une place en grande finale mais aussi la qualification directe pour le Mid-Season Invitational 2026.",
           },
         ],
       },
@@ -46,7 +46,7 @@ const articles = [
         type: 'p',
         children: [
           {
-            text: "G2 Esports et Karmine Corp sont les deux formations les plus populaires d'Europe, et leur opposition cristallise la saison. G2 a remporté la finale de LEC Versus 2026 face à KC sur le score de 3-2, puis a confirmé sa supériorité récente en les balayant 2-0 lors du Roadtrip de Madrid (8 mai), soit le jour d'ouverture de la semaine 7. G2 n'a pas manqué un MSI depuis 2022. Karmine Corp, de son côté, a semblé quasi inarrêtable pendant la quasi-totalité de la saison régulière avant de trébucher lors du dernier week-end, concédant deux défaites qui ont rebattu les cartes de la tête de série.",
+            text: "G2 Esports et Karmine Corp sont les deux formations les plus populaires d\'Europe, et leur opposition cristallise la saison. G2 a remporté la finale de LEC Versus 2026 face à KC sur le score de 3-2, puis a confirmé sa supériorité récente en les balayant 2-0 lors du Roadtrip de Madrid (8 mai), soit le jour d\'ouverture de la semaine 7. G2 n\'a pas manqué un MSI depuis 2022. Karmine Corp, de son côté, a semblé quasi inarrêtable pendant la quasi-totalité de la saison régulière avant de trébucher lors du dernier week-end, concédant deux défaites qui ont rebattu les cartes de la tête de série.",
           },
         ],
       },
@@ -58,7 +58,7 @@ const articles = [
         type: 'p',
         children: [
           {
-            text: "Team Vitality a terminé première de la saison régulière et a exercé son droit de choisir son adversaire en demi-finale upper, optant pour Movistar KOI. La seed 2 de Karmine Corp a ainsi hérité de G2 dans l'autre match. Les équipes éliminées au premier tour (GIANTX et Natus Vincere complètent le tableau à six) rejoindront le lower bracket pour tenter une remontée. Le format est une double élimination : toutes les rencontres sont des best-of-five.",
+            text: "Team Vitality a terminé première de la saison régulière et a exercé son droit de choisir son adversaire en demi-finale upper, optant pour Movistar KOI. La seed 2 de Karmine Corp a ainsi hérité de G2 dans l\'autre match. Les équipes éliminées au premier tour (GIANTX et Natus Vincere complètent le tableau à six) rejoindront le lower bracket pour tenter une remontée. Le format est une double élimination : toutes les rencontres sont des best-of-five.",
           },
         ],
       },
@@ -70,7 +70,7 @@ const articles = [
         type: 'p',
         children: [
           {
-            text: "Le Mid-Season Invitational 2026 se tiendra du 28 juin au 12 juillet à Daejeon, en Corée du Sud. Onze équipes s'affronteront, dont les deux meilleures de chaque grande ligue (LCK, LCS, LCP, LEC, LPL) plus le champion du CBLOL. Bilibili Gaming, vainqueur du First Stand 2026, envoie les deux seeds LPL directement en bracket stage. Secret Whales (LCP) est à ce jour la seule équipe qualifiée, après avoir dominé leur split avec un bilan parfait. La LEC livrera ses deux noms fin mai.",
+            text: "Le Mid-Season Invitational 2026 se tiendra du 28 juin au 12 juillet à Daejeon, en Corée du Sud. Onze équipes s\'affronteront, dont les deux meilleures de chaque grande ligue (LCK, LCS, LCP, LEC, LPL) plus le champion du CBLOL. Bilibili Gaming, vainqueur du First Stand 2026, envoie les deux seeds LPL directement en bracket stage. Secret Whales (LCP) est à ce jour la seule équipe qualifiée, après avoir dominé leur split avec un bilan parfait. La LEC livrera ses deux noms fin mai.",
           },
         ],
       },
@@ -78,7 +78,7 @@ const articles = [
         type: 'blockquote',
         children: [
           {
-            text: "Les playoffs LEC Spring 2026 s'annoncent comme les plus relevés de ces dernières années. G2 vs Karmine Corp pourrait bien redéfinir la hiérarchie européenne — et le vainqueur portera le drapeau de la région à MSI 2026 à Daejeon.",
+            text: "Les playoffs LEC Spring 2026 s\'annoncent comme les plus relevés de ces dernières années. G2 vs Karmine Corp pourrait bien redéfinir la hiérarchie européenne — et le vainqueur portera le drapeau de la région à MSI 2026 à Daejeon.",
           },
         ],
       },
@@ -149,7 +149,7 @@ const articles = [
         type: 'p',
         children: [
           {
-            text: "The Mid-Season Invitational 2026 runs from June 28 to July 12 in Daejeon, South Korea, featuring 11 teams from the world's top regions. The LEC will send its champion and runner-up — the champion advances directly to the bracket stage while the runner-up enters play-ins. Bilibili Gaming (LPL), winner of First Stand 2026, already secured both LPL seeds into the bracket stage. Secret Whales (LCP) are currently the only team fully confirmed for MSI after an undefeated split. Europe's two representatives will be decided by the end of May.",
+            text: "The Mid-Season Invitational 2026 runs from June 28 to July 12 in Daejeon, South Korea, featuring 11 teams from the world\'s top regions. The LEC will send its champion and runner-up — the champion advances directly to the bracket stage while the runner-up enters play-ins. Bilibili Gaming (LPL), winner of First Stand 2026, already secured both LPL seeds into the bracket stage. Secret Whales (LCP) are currently the only team fully confirmed for MSI after an undefeated split. Europe\'s two representatives will be decided by the end of May.",
           },
         ],
       },
@@ -157,7 +157,7 @@ const articles = [
         type: 'blockquote',
         children: [
           {
-            text: "The LEC Spring 2026 playoffs may be the most competitive in years. Whoever wins between G2 and Karmine Corp will carry Europe's hopes to Daejeon — and both teams have everything to prove.",
+            text: "The LEC Spring 2026 playoffs may be the most competitive in years. Whoever wins between G2 and Karmine Corp will carry Europe\'s hopes to Daejeon — and both teams have everything to prove.",
           },
         ],
       },

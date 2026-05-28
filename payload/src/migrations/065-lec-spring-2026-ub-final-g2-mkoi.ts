@@ -18,7 +18,7 @@ const articles = [
     publishedAt: DATE,
     coverImage: 'https://img.youtube.com/vi/ZhMr2ACKXsE/maxresdefault.jpg',
     excerpt:
-      'Ce 25 mai 2026, G2 Esports et Movistar KOI s'affrontent en finale Upper Bracket des LEC Spring Playoffs. Le vainqueur accède directement à la grande finale du 7 juin à Berlin.',
+      'Ce 25 mai 2026, G2 Esports et Movistar KOI s\'affrontent en finale Upper Bracket des LEC Spring Playoffs. Le vainqueur accède directement à la grande finale du 7 juin à Berlin.',
     sourceUrl: 'https://liquipedia.net/leagueoflegends/LEC/2026/Spring/Playoffs',
     tags: [
       { tag: 'LEC' },
@@ -32,7 +32,7 @@ const articles = [
         type: 'p',
         children: [
           {
-            text: 'Le rideau vient de tomber sur les demi-finales du bracket supérieur des LEC Spring 2026 Playoffs. Ce 25 mai à 17h CEST, c'est au Riot Games Arena de Berlin que G2 Esports et Movistar KOI s'affrontent pour décrocher un billet direct pour la grande finale du 7 juin. L'enjeu est immense : titre LEC, qualification MSI 2026 à Daejeon et spot à l'Esports World Cup de Paris.',
+            text: 'Le rideau vient de tomber sur les demi-finales du bracket supérieur des LEC Spring 2026 Playoffs. Ce 25 mai à 17h CEST, c\'est au Riot Games Arena de Berlin que G2 Esports et Movistar KOI s\'affrontent pour décrocher un billet direct pour la grande finale du 7 juin. L\'enjeu est immense : titre LEC, qualification MSI 2026 à Daejeon et spot à l\'Esports World Cup de Paris.',
           },
         ],
       },
@@ -44,7 +44,7 @@ const articles = [
         type: 'p',
         children: [
           {
-            text: 'G2 Esports s'est qualifié le 23 mai en disposant de Karmine Corp sur le score de 3-1. Malgré deux cartes serrées concédées à KC, les coéquipiers de Caps ont su élever leur niveau dans les moments décisifs. Caps, qui a récemment évoqué l'évolution de son style de jeu, semble plus complet que jamais en mi-saison.',
+            text: 'G2 Esports s\'est qualifié le 23 mai en disposant de Karmine Corp sur le score de 3-1. Malgré deux cartes serrées concédées à KC, les coéquipiers de Caps ont su élever leur niveau dans les moments décisifs. Caps, qui a récemment évoqué l\'évolution de son style de jeu, semble plus complet que jamais en mi-saison.',
           },
         ],
       },
@@ -52,7 +52,7 @@ const articles = [
         type: 'p',
         children: [
           {
-            text: 'De son côté, Movistar KOI a réalisé l'exploit d'un sweep parfait face à Team Vitality (3-0) le 24 mai. La maîtrise du Fearless Draft affichée par MKOI a laissé Vitality sans réponse : chaque draft semblait construite pour étouffer les atouts adverses. L'équipe espagnole aborde cette finale avec une confiance et une préparation tactique exemplaires.',
+            text: 'De son côté, Movistar KOI a réalisé l\'exploit d\'un sweep parfait face à Team Vitality (3-0) le 24 mai. La maîtrise du Fearless Draft affichée par MKOI a laissé Vitality sans réponse : chaque draft semblait construite pour étouffer les atouts adverses. L\'équipe espagnole aborde cette finale avec une confiance et une préparation tactique exemplaires.',
           },
         ],
       },
@@ -64,7 +64,7 @@ const articles = [
         type: 'p',
         children: [
           {
-            text: 'Le format double-élimination signifie que le vainqueur de cette rencontre (BO5, Fearless Draft) accède directement à la grande finale sans avoir à repasser par le bracket inférieur. Le perdant, lui, devra affronter KC ou VIT en Lower Bracket — deux adversaires qui auront soif de revanche. L'avantage d'éviter ce marathon est considérable, surtout à l'approche du MSI.',
+            text: 'Le format double-élimination signifie que le vainqueur de cette rencontre (BO5, Fearless Draft) accède directement à la grande finale sans avoir à repasser par le bracket inférieur. Le perdant, lui, devra affronter KC ou VIT en Lower Bracket — deux adversaires qui auront soif de revanche. L\'avantage d\'éviter ce marathon est considérable, surtout à l\'approche du MSI.',
           },
         ],
       },
@@ -84,7 +84,7 @@ const articles = [
         type: 'blockquote',
         children: [
           {
-            text: 'G2 vs MKOI, 17h CEST — Le Riot Games Arena de Berlin accueille ce soir l'une des plus grandes affiches du LEC Spring 2026. Suivez le match en direct sur la chaîne officielle LEC.',
+            text: 'G2 vs MKOI, 17h CEST — Le Riot Games Arena de Berlin accueille ce soir l\'une des plus grandes affiches du LEC Spring 2026. Suivez le match en direct sur la chaîne officielle LEC.',
           },
         ],
       },
@@ -136,13 +136,13 @@ const articles = [
         type: 'p',
         children: [
           {
-            text: 'Movistar KOI, on the other hand, delivered a ruthless 3-0 sweep over Team Vitality on May 24. Their command of Fearless Draft was on full display — each game draft seemed tailored to nullify Vitality's strengths. MKOI arrives at this final riding an exceptional wave of momentum and tactical confidence.',
+            text: 'Movistar KOI, on the other hand, delivered a ruthless 3-0 sweep over Team Vitality on May 24. Their command of Fearless Draft was on full display — each game draft seemed tailored to nullify Vitality\'s strengths. MKOI arrives at this final riding an exceptional wave of momentum and tactical confidence.',
           },
         ],
       },
       {
         type: 'h2',
-        children: [{ text: 'What's at stake in the Upper Bracket Final' }],
+        children: [{ text: 'What\'s at stake in the Upper Bracket Final' }],
       },
       {
         type: 'p',

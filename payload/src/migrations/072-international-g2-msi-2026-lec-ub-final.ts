@@ -27,7 +27,7 @@ const articles = [
     content: [
       {
         type: 'p',
-        children: [{ text: 'Le 25 mai 2026, dans une Upper Bracket Final des LEC Spring Playoffs qui restera dans les mémoires, G2 Esports a réalisé l'impensable : après être tombé 0-2 face à Movistar KOI, le club berlinois a enchaîné trois victoires consécutives pour s'imposer 3-2 et décrocher son ticket pour le MSI 2026 à Daejeon, Corée du Sud.' }],
+        children: [{ text: 'Le 25 mai 2026, dans une Upper Bracket Final des LEC Spring Playoffs qui restera dans les mémoires, G2 Esports a réalisé l\'impensable : après être tombé 0-2 face à Movistar KOI, le club berlinois a enchaîné trois victoires consécutives pour s\'imposer 3-2 et décrocher son ticket pour le MSI 2026 à Daejeon, Corée du Sud.' }],
       },
       {
         type: 'h2',
@@ -35,7 +35,7 @@ const articles = [
       },
       {
         type: 'p',
-        children: [{ text: 'MKOI avait pourtant débuté en patron. Leur maîtrise du Fearless Draft leur a permis de remporter les deux premières games de façon convaincante, laissant G2 dans une position quasi-intenable. Mais dès la Game 3, l'équipe de Caps a renoué avec son meilleur niveau, offrant des drafts plus propres et un macro jeu irréprochable. La Game 5 fut le théâtre du moment décisif : Labrov, sur Soraka, a flashé vers l'avant pour réduire au silence l'Azir de Jojopyun. BrokenBlade, sur Malphite, a immédiatement enchaîné. G2 a alors pris le contrôle de la partie et ne l'a plus lâché, signant un reverse sweep qui a électrisé le Riot Games Arena de Berlin.' }],
+        children: [{ text: 'MKOI avait pourtant débuté en patron. Leur maîtrise du Fearless Draft leur a permis de remporter les deux premières games de façon convaincante, laissant G2 dans une position quasi-intenable. Mais dès la Game 3, l\'équipe de Caps a renoué avec son meilleur niveau, offrant des drafts plus propres et un macro jeu irréprochable. La Game 5 fut le théâtre du moment décisif : Labrov, sur Soraka, a flashé vers l\'avant pour réduire au silence l\'Azir de Jojopyun. BrokenBlade, sur Malphite, a immédiatement enchaîné. G2 a alors pris le contrôle de la partie et ne l\'a plus lâché, signant un reverse sweep qui a électrisé le Riot Games Arena de Berlin.' }],
       },
       {
         type: 'h2',
@@ -43,7 +43,7 @@ const articles = [
       },
       {
         type: 'p',
-        children: [{ text: 'Cette qualification est la cinquième consécutive pour G2 Esports sur la scène internationale de mi-saison, et leur onzième finale LEC d'affilée — une régularité sans équivalent en Europe. À Daejeon du 28 juin au 12 juillet, G2 sera le premier représentant européen, fort de son run jusqu'en finale du First Stand 2026 et d'une victoire 3-0 retentissante face à Gen.G. L'Europe regarde vers la Corée avec espoir et confiance.' }],
+        children: [{ text: 'Cette qualification est la cinquième consécutive pour G2 Esports sur la scène internationale de mi-saison, et leur onzième finale LEC d\'affilée — une régularité sans équivalent en Europe. À Daejeon du 28 juin au 12 juillet, G2 sera le premier représentant européen, fort de son run jusqu\'en finale du First Stand 2026 et d\'une victoire 3-0 retentissante face à Gen.G. L\'Europe regarde vers la Corée avec espoir et confiance.' }],
       },
       {
         type: 'blockquote',

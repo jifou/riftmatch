@@ -40,7 +40,7 @@ const articles = [
         type: 'p',
         children: [
           {
-            text: 'Smolder reçoit un nerf en urgence, ajouté tardivement par Riot Phroxzon. Le jeune dragon avait bénéficié du Deathfire Touch dans le patch précédent, ce qui a considérablement renforcé son early game et l'a propulsé en tête des pick en mid. Senna sera également impactée de manière indirecte : une modification du Black Cleaver lui retire une synergie non intentionnelle qui la rendait dominante en support. Le Cleaver se voit doté d'un cooldown interne dans son interaction avec Deathfire Touch, ce qui rééquilibre l'ensemble du pool de champions qui en dépend.',
+            text: 'Smolder reçoit un nerf en urgence, ajouté tardivement par Riot Phroxzon. Le jeune dragon avait bénéficié du Deathfire Touch dans le patch précédent, ce qui a considérablement renforcé son early game et l\'a propulsé en tête des pick en mid. Senna sera également impactée de manière indirecte : une modification du Black Cleaver lui retire une synergie non intentionnelle qui la rendait dominante en support. Le Cleaver se voit doté d\'un cooldown interne dans son interaction avec Deathfire Touch, ce qui rééquilibre l\'ensemble du pool de champions qui en dépend.',
           },
         ],
       },
@@ -52,7 +52,7 @@ const articles = [
         type: 'p',
         children: [
           {
-            text: 'Du côté des buffs, quatre champions voient leur puissance augmenter : Ambessa, Galio, Wukong et Zeri. Les supports tank bénéficient également d'un environnement plus favorable grâce aux améliorations apportées aux runes Aftershock et Gardien, ainsi qu'à l'item Solari de Locket du fer, dont les statistiques défensives sont revues à la hausse.',
+            text: 'Du côté des buffs, quatre champions voient leur puissance augmenter : Ambessa, Galio, Wukong et Zeri. Les supports tank bénéficient également d\'un environnement plus favorable grâce aux améliorations apportées aux runes Aftershock et Gardien, ainsi qu\'à l\'item Solari de Locket du fer, dont les statistiques défensives sont revues à la hausse.',
           },
         ],
       },
@@ -110,7 +110,7 @@ const articles = [
         type: 'p',
         children: [
           {
-            text: 'Smolder receives a last-minute nerf flagged by Riot Phroxzon. The young dragon benefited greatly from gaining access to Deathfire Touch in Patch 26.10, which boosted his early game and vaulted him to the top of mid-lane picks. Senna is also hit indirectly: an unintended interaction between Black Cleaver and Deathfire Touch that pushed her to the top of the support pool will be addressed through an internal cooldown on the item's stacking behavior.',
+            text: 'Smolder receives a last-minute nerf flagged by Riot Phroxzon. The young dragon benefited greatly from gaining access to Deathfire Touch in Patch 26.10, which boosted his early game and vaulted him to the top of mid-lane picks. Senna is also hit indirectly: an unintended interaction between Black Cleaver and Deathfire Touch that pushed her to the top of the support pool will be addressed through an internal cooldown on the item\'s stacking behavior.',
           },
         ],
       },

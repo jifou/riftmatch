@@ -9,7 +9,7 @@ const DATE = '2026-05-24T08:00:00.000Z'
 
 const articles = [
   {
-    title: "EWC 2026 se jouera à Paris : G2 et Karmine Corp déjà qualifiés depuis l'EMEA",
+    title: "EWC 2026 se jouera à Paris : G2 et Karmine Corp déjà qualifiés depuis l\'EMEA",
     slug: 'ewc-2026-paris-g2-kc-emea-fr',
     locale: 'fr',
     status: 'published',
@@ -20,7 +20,7 @@ const articles = [
     publishedAt: DATE,
     coverImage: 'https://img.youtube.com/vi/w3KR-B_qSz8/maxresdefault.jpg',
     excerpt:
-      "L'Esports World Cup 2026 quitte Riyad pour Paris suite aux tensions géopolitiques au Moyen-Orient. G2 Esports et Karmine Corp ont déjà décroché les deux places EMEA disponibles, avec 16 équipes attendues à partir du 15 juillet.",
+      "L\'Esports World Cup 2026 quitte Riyad pour Paris suite aux tensions géopolitiques au Moyen-Orient. G2 Esports et Karmine Corp ont déjà décroché les deux places EMEA disponibles, avec 16 équipes attendues à partir du 15 juillet.",
     sourceUrl: 'https://lolesports.com/en-GB/leagues/first_stand,lec,msi,worlds',
     tags: [{ tag: 'LoL' }, { tag: 'Esports' }, { tag: 'EWC' }, { tag: 'International' }],
     content: [
@@ -28,7 +28,7 @@ const articles = [
         type: 'p',
         children: [
           {
-            text: "L'Esports World Cup 2026 ne se déroulera plus à Riyad, en Arabie Saoudite. Le 20 mai, l'Esports Foundation a officialisé le transfert de l'événement vers Paris, en France, invoquant les incertitudes régionales liées au conflit Iran-Arabie Saoudite. C'est la première fois depuis sa création sous le nom Gamers8 que l'EWC quitte la péninsule arabique.",
+            text: "L\'Esports World Cup 2026 ne se déroulera plus à Riyad, en Arabie Saoudite. Le 20 mai, l\'Esports Foundation a officialisé le transfert de l\'événement vers Paris, en France, invoquant les incertitudes régionales liées au conflit Iran-Arabie Saoudite. C\'est la première fois depuis sa création sous le nom Gamers8 que l\'EWC quitte la péninsule arabique.",
           },
         ],
       },
@@ -40,19 +40,19 @@ const articles = [
         type: 'p',
         children: [
           {
-            text: "Le tournoi LoL à l'EWC 2026 se tiendra du 15 juillet avec une prize pool d'environ 600 000 dollars pour le vainqueur. Le nombre d'équipes participantes passe de 12 en 2025 à 16 cette année, signe de l'ambition croissante du circuit. Gen.G, champion sortant, est directement invité. Les champions de chaque grande ligue (LEC, LCS, LCK, LPL, LCP, CBLOL) se qualifient via leur titre régional, les places restantes étant disputées via des qualifiers en ligne.",
+            text: "Le tournoi LoL à l\'EWC 2026 se tiendra du 15 juillet avec une prize pool d\'environ 600 000 dollars pour le vainqueur. Le nombre d\'équipes participantes passe de 12 en 2025 à 16 cette année, signe de l\'ambition croissante du circuit. Gen.G, champion sortant, est directement invité. Les champions de chaque grande ligue (LEC, LCS, LCK, LPL, LCP, CBLOL) se qualifient via leur titre régional, les places restantes étant disputées via des qualifiers en ligne.",
           },
         ],
       },
       {
         type: 'h2',
-        children: [{ text: "G2 et Karmine Corp : l'EMEA a ses représentants" }],
+        children: [{ text: "G2 et Karmine Corp : l\'EMEA a ses représentants" }],
       },
       {
         type: 'p',
         children: [
           {
-            text: "Du côté de l'EMEA, le qualifier s'est achevé le 17 mai avec deux équipes qualifiées. G2 Esports a remporté la grande finale contre Karmine Corp 3-0, dominant du début à la fin avec notamment un Game 3 autoritaire sur un score de kills de 27-6. Les deux équipes rejoignent donc Paris, confirmant que la grande rivalité franco-européenne continuera sur la scène internationale. KOI a terminé troisième mais repart bredouille.",
+            text: "Du côté de l\'EMEA, le qualifier s\'est achevé le 17 mai avec deux équipes qualifiées. G2 Esports a remporté la grande finale contre Karmine Corp 3-0, dominant du début à la fin avec notamment un Game 3 autoritaire sur un score de kills de 27-6. Les deux équipes rejoignent donc Paris, confirmant que la grande rivalité franco-européenne continuera sur la scène internationale. KOI a terminé troisième mais repart bredouille.",
           },
         ],
       },
@@ -64,7 +64,7 @@ const articles = [
         type: 'p',
         children: [
           {
-            text: "Les qualifiers Korea (LCK) se jouent ce week-end des 25-26 mai, avec T1 et Dplus KIA en finale du bracket supérieur. Sentinels a décroché la place nord-américaine, Team Secret représente l'APAC. Le tableau complet sera connu d'ici fin juin, avant le grand rendez-vous estival sous la Tour Eiffel.",
+            text: "Les qualifiers Korea (LCK) se jouent ce week-end des 25-26 mai, avec T1 et Dplus KIA en finale du bracket supérieur. Sentinels a décroché la place nord-américaine, Team Secret représente l\'APAC. Le tableau complet sera connu d\'ici fin juin, avant le grand rendez-vous estival sous la Tour Eiffel.",
           },
         ],
       },
@@ -72,7 +72,7 @@ const articles = [
         type: 'blockquote',
         children: [
           {
-            text: "Paris 2026 : un EWC inédit hors d'Arabie Saoudite, avec la promesse d'un tournoi LoL plus relevé que jamais avec 16 clubs des quatre coins du globe.",
+            text: "Paris 2026 : un EWC inédit hors d\'Arabie Saoudite, avec la promesse d\'un tournoi LoL plus relevé que jamais avec 16 clubs des quatre coins du globe.",
           },
         ],
       },
@@ -98,7 +98,7 @@ const articles = [
         type: 'p',
         children: [
           {
-            text: "The Esports World Cup 2026 will not be held in Riyadh, Saudi Arabia after all. On May 20, the Esports Foundation officially announced the event's relocation to Paris, France, citing regional uncertainty stemming from the Iran-Saudi conflict. This marks the first time since the tournament's inception under the Gamers8 brand that the EWC will take place outside the Arabian Peninsula.",
+            text: "The Esports World Cup 2026 will not be held in Riyadh, Saudi Arabia after all. On May 20, the Esports Foundation officially announced the event\'s relocation to Paris, France, citing regional uncertainty stemming from the Iran-Saudi conflict. This marks the first time since the tournament\'s inception under the Gamers8 brand that the EWC will take place outside the Arabian Peninsula.",
           },
         ],
       },
@@ -122,7 +122,7 @@ const articles = [
         type: 'p',
         children: [
           {
-            text: "The EMEA qualifier wrapped up on May 17. G2 Esports swept Karmine Corp 3-0 in the grand final, capping a dominant run with a stunning 27-6 Game 3. Both teams are heading to Paris, ensuring Europe's fiercest rivalry will play out on the biggest international stage. KOI finished third but miss out on a spot.",
+            text: "The EMEA qualifier wrapped up on May 17. G2 Esports swept Karmine Corp 3-0 in the grand final, capping a dominant run with a stunning 27-6 Game 3. Both teams are heading to Paris, ensuring Europe\'s fiercest rivalry will play out on the biggest international stage. KOI finished third but miss out on a spot.",
           },
         ],
       },
