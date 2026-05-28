@@ -131,7 +131,7 @@ export const up: MigrationModule['up'] = async (payload) => {
         },
         {
           type: 'h4',
-          children: [{ text: 'Dr. Mundo — L\'Homme qui Fait Ce qu\'il Veut' }],
+          children: [{ text: "Dr. Mundo — L'Homme qui Fait Ce qu'il Veut" }],
         },
         {
           type: 'ul',
@@ -195,11 +195,11 @@ export const up: MigrationModule['up'] = async (payload) => {
       content: [
         {
           type: 'h2',
-          children: [{ text: 'WASD en ranked — c\'est officiel' }],
+          children: [{ text: "WASD en ranked — c'est officiel" }],
         },
         {
           type: 'p',
-          children: [{ text: 'Annoncé depuis des mois, le mode de déplacement WASD est désormais activé en files Solo/Duo et Flex à partir du patch 26.9. Les keybinds sont entièrement personnalisables et peuvent varier d\'un champion à l\'autre, une fonctionnalité très attendue par les joueurs habitués aux FPS.' }],
+          children: [{ text: "Annoncé depuis des mois, le mode de déplacement WASD est désormais activé en files Solo/Duo et Flex à partir du patch 26.9. Les keybinds sont entièrement personnalisables et peuvent varier d'un champion à l'autre, une fonctionnalité très attendue par les joueurs habitués aux FPS." }],
         },
         {
           type: 'h2',
@@ -207,7 +207,7 @@ export const up: MigrationModule['up'] = async (payload) => {
         },
         {
           type: 'p',
-          children: [{ text: 'Riot ramène deux runes iconiques de l\'ancien système dans la Saison 2 : Deathfire Touch et Stormraider\'s Surge. Ces runes s\'intègrent dans le nouveau système et ouvrent des voies de build alternatives sur plusieurs champions, notamment les assassins AP et les bruisers rapides.' }],
+          children: [{ text: "Riot ramène deux runes iconiques de l'ancien système dans la Saison 2 : Deathfire Touch et Stormraider's Surge. Ces runes s'intègrent dans le nouveau système et ouvrent des voies de build alternatives sur plusieurs champions, notamment les assassins AP et les bruisers rapides." }],
         },
         {
           type: 'h2',
@@ -216,7 +216,7 @@ export const up: MigrationModule['up'] = async (payload) => {
         {
           type: 'ul',
           children: [
-            { type: 'li', children: [{ text: 'Top lane : bonus d\'XP lors de la participation aux teamfights pour réduire l\'isolement du role' }] },
+            { type: 'li', children: [{ text: "Top lane : bonus d'XP lors de la participation aux teamfights pour réduire l'isolement du role" }] },
             { type: 'li', children: [{ text: 'Mid lane : perd le recall amélioré, gagne un petit bonus AD et AP passif' }] },
           ],
         },
@@ -226,7 +226,7 @@ export const up: MigrationModule['up'] = async (payload) => {
         },
         {
           type: 'p',
-          children: [{ text: 'Riot a confirmé que le prochain champion prévu dans la Saison 2 sera un assassin AP jouant mid lane. Aucun nom ni kit révélé pour l\'instant, mais les teasers visuels disponibles sur les réseaux suggèrent une esthétique liée au lore de Noxus. À surveiller dans les prochaines semaines.' }],
+          children: [{ text: "Riot a confirmé que le prochain champion prévu dans la Saison 2 sera un assassin AP jouant mid lane. Aucun nom ni kit révélé pour l'instant, mais les teasers visuels disponibles sur les réseaux suggèrent une esthétique liée au lore de Noxus. À surveiller dans les prochaines semaines." }],
         },
         {
           type: 'h2',
@@ -234,7 +234,7 @@ export const up: MigrationModule['up'] = async (payload) => {
         },
         {
           type: 'p',
-          children: [{ text: 'Le mode Arena revient avec une nouvelle map, de nouveaux Augments et un système d\'événements inédit. La Saison 2 durera six patches, plus courte que d\'habitude, avec une cadence de mise à jour accélérée.' }],
+          children: [{ text: "Le mode Arena revient avec une nouvelle map, de nouveaux Augments et un système d'événements inédit. La Saison 2 durera six patches, plus courte que d'habitude, avec une cadence de mise à jour accélérée." }],
         },
         {
           type: 'h2',
@@ -293,8 +293,8 @@ export const up: MigrationModule['up'] = async (payload) => {
           type: 'ul',
           children: [
             { type: 'li', children: [{ text: 'S — Warwick (buff passif), Vi, Jarvan IV' }] },
-            { type: 'li', children: [{ text: 'A — Hecarim, Lillia (buff niveau), Kha\'Zix' }] },
-            { type: 'li', children: [{ text: 'B — Dr. Mundo (double nerf monstre), Bel\'Veth' }] },
+            { type: 'li', children: [{ text: "A — Hecarim, Lillia (buff niveau), Kha'Zix" }] },
+            { type: 'li', children: [{ text: "B — Dr. Mundo (double nerf monstre), Bel'Veth" }] },
           ],
         },
         {
@@ -318,7 +318,7 @@ export const up: MigrationModule['up'] = async (payload) => {
           children: [
             { type: 'li', children: [{ text: 'S — Lucian (buff E), Jinx, Caitlyn' }] },
             { type: 'li', children: [{ text: 'A — Zeri (ajustée, portée passive +50), Jhin, Xayah' }] },
-            { type: 'li', children: [{ text: 'B — Miss Fortune, Kai\'Sa' }] },
+            { type: 'li', children: [{ text: "B — Miss Fortune, Kai'Sa" }] },
           ],
         },
         {

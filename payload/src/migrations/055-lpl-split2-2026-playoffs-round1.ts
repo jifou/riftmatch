@@ -34,7 +34,7 @@ const articles = [
       },
       {
         type: 'h2',
-        children: [{ text: 'BLG implacable, NIP n\'a pas tenu le choc' }],
+        children: [{ text: "BLG implacable, NIP n'a pas tenu le choc" }],
       },
       {
         type: 'p',
@@ -46,13 +46,13 @@ const articles = [
       },
       {
         type: 'h2',
-        children: [{ text: 'JDG s\'en sort au tie-break contre TES' }],
+        children: [{ text: "JDG s'en sort au tie-break contre TES" }],
       },
       {
         type: 'p',
         children: [
           {
-            text: 'JD Gaming ont eu beaucoup plus de fil à retordre. Face à Top Esports et leur top-laner Bai "369" Jia-Hao, la série est allée jusqu\'au game 5. JDG ont finalement cracké la résistance de TES pour s\'imposer 3-2 et rejoindre BLG en demi-finales. Les deux équipes étaient à égalité en saison régulière (8-5), et la tension sur le Summoner\'s Rift l\'a confirmé.',
+            text: "JD Gaming ont eu beaucoup plus de fil à retordre. Face à Top Esports et leur top-laner Bai \"369\" Jia-Hao, la série est allée jusqu'au game 5. JDG ont finalement cracké la résistance de TES pour s'imposer 3-2 et rejoindre BLG en demi-finales. Les deux équipes étaient à égalité en saison régulière (8-5), et la tension sur le Summoner's Rift l'a confirmé.",
           },
         ],
       },
@@ -64,7 +64,7 @@ const articles = [
         type: 'p',
         children: [
           {
-            text: 'La prochaine étape s\'annonce épique. BLG retrouve JDG, l\'équipe qu\'ils ont battue 3-1 en finale du Split 1. Mais JDG a faim de revanche. En parallèle, Anyone\'s Legend affronte la série AL vs TES, avec le mid-laner Lin "Creme" Jian de TES comme danger principal. Les deux vainqueurs des demies se qualifieront directement pour le Mid-Season Invitational 2026.',
+            text: "La prochaine étape s'annonce épique. BLG retrouve JDG, l'équipe qu'ils ont battue 3-1 en finale du Split 1. Mais JDG a faim de revanche. En parallèle, Anyone's Legend affronte la série AL vs TES, avec le mid-laner Lin \"Creme\" Jian de TES comme danger principal. Les deux vainqueurs des demies se qualifieront directement pour le Mid-Season Invitational 2026.",
           },
         ],
       },
@@ -110,7 +110,7 @@ const articles = [
         type: 'p',
         children: [
           {
-            text: 'Powered by ADC Park "Viper" Do-hyeon and jungler Peng "XUN" Li-xun, BLG cruised through all three games against NIP. Their regular season record of 11-2 (85% win rate), the best in Group Ascend, was a clear indication of where this series was heading. Head coach Yang "Daeny" Dae-in\'s macro game plan left NIP with no answers throughout the series.',
+            text: "Powered by ADC Park \"Viper\" Do-hyeon and jungler Peng \"XUN\" Li-xun, BLG cruised through all three games against NIP. Their regular season record of 11-2 (85% win rate), the best in Group Ascend, was a clear indication of where this series was heading. Head coach Yang \"Daeny\" Dae-in's macro game plan left NIP with no answers throughout the series.",
           },
         ],
       },
@@ -134,7 +134,7 @@ const articles = [
         type: 'p',
         children: [
           {
-            text: 'BLG and JDG are set for a massive rematch — BLG beat JDG 3-1 in the Split 1 Finals. JDG now has a chance for revenge. In the other semifinal, Anyone\'s Legend takes on TES. The two winners will advance to the Grand Final and secure their spot at the 2026 Mid-Season Invitational.',
+            text: "BLG and JDG are set for a massive rematch — BLG beat JDG 3-1 in the Split 1 Finals. JDG now has a chance for revenge. In the other semifinal, Anyone's Legend takes on TES. The two winners will advance to the Grand Final and secure their spot at the 2026 Mid-Season Invitational.",
           },
         ],
       },
@@ -204,7 +204,7 @@ const articles = [
         type: 'p',
         children: [
           {
-            text: 'El próximo duelo entre BLG y JDG es el más esperado del torneo. BLG ya venció a JDG 3-1 en la gran final del Split 1, y JDG llega sediento de revancha. En la otra semifinal, Anyone\'s Legend se medirá a TES. Los dos ganadores disputarán la Gran Final y se clasificarán para el Mid-Season Invitational 2026.',
+            text: "El próximo duelo entre BLG y JDG es el más esperado del torneo. BLG ya venció a JDG 3-1 en la gran final del Split 1, y JDG llega sediento de revancha. En la otra semifinal, Anyone's Legend se medirá a TES. Los dos ganadores disputarán la Gran Final y se clasificarán para el Mid-Season Invitational 2026.",
           },
         ],
       },

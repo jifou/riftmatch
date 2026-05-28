@@ -50,7 +50,7 @@ export const up: MigrationModule['up'] = async (payload) => {
         },
         {
           type: 'p',
-          children: [{ text: 'T1 a annoncé ce mardi la prolongation de contrat de Ryu "Keria" Min-seok pour deux nouvelles saisons — jusqu\'à fin 2028. Le support coréen, considéré depuis plusieurs années comme le meilleur à son poste au monde, avait laissé planer le doute sur son avenir lors des rumeurs de transfert vers une équipe LPL en début d\'année.' }],
+          children: [{ text: "T1 a annoncé ce mardi la prolongation de contrat de Ryu \"Keria\" Min-seok pour deux nouvelles saisons — jusqu'à fin 2028. Le support coréen, considéré depuis plusieurs années comme le meilleur à son poste au monde, avait laissé planer le doute sur son avenir lors des rumeurs de transfert vers une équipe LPL en début d'année." }],
         },
         {
           type: 'h2',
@@ -58,11 +58,11 @@ export const up: MigrationModule['up'] = async (payload) => {
         },
         {
           type: 'p',
-          children: [{ text: 'Keria forme avec Gumayusi la botlane la plus titrée de la décennie. Sa capacité à s\'adapter à tous les metas de support — engage, enchanteresse, poke — en fait un pilier irremplaçable. Depuis son arrivée chez T1 en 2021, l\'équipe a remporté quatre titres mondiaux, dont deux auxquels Keria a participé directement en tant que starter.' }],
+          children: [{ text: "Keria forme avec Gumayusi la botlane la plus titrée de la décennie. Sa capacité à s'adapter à tous les metas de support — engage, enchanteresse, poke — en fait un pilier irremplaçable. Depuis son arrivée chez T1 en 2021, l'équipe a remporté quatre titres mondiaux, dont deux auxquels Keria a participé directement en tant que starter." }],
         },
         {
           type: 'p',
-          children: [{ text: 'Son association avec Faker, qui continue lui aussi sa carrière à 29 ans, donne à T1 une stabilité de roster rare dans l\'esport compétitif. La direction a clairement fait le choix de la continuité face aux offres massives venues de Chine.' }],
+          children: [{ text: "Son association avec Faker, qui continue lui aussi sa carrière à 29 ans, donne à T1 une stabilité de roster rare dans l'esport compétitif. La direction a clairement fait le choix de la continuité face aux offres massives venues de Chine." }],
         },
         {
           type: 'h2',
@@ -70,7 +70,7 @@ export const up: MigrationModule['up'] = async (payload) => {
         },
         {
           type: 'blockquote',
-          children: [{ text: '"Je voulais gagner encore avec cette équipe, avec ces joueurs. T1, c\'est ma maison. On n\'a pas terminé ce qu\'on a commencé." — Keria, lors de la conférence de presse officielle' }],
+          children: [{ text: "\"Je voulais gagner encore avec cette équipe, avec ces joueurs. T1, c'est ma maison. On n'a pas terminé ce qu'on a commencé.\" — Keria, lors de la conférence de presse officielle" }],
         },
         {
           type: 'h2',
@@ -78,7 +78,7 @@ export const up: MigrationModule['up'] = async (payload) => {
         },
         {
           type: 'p',
-          children: [{ text: 'T1 aborde le second split de la saison régulière LCK avec un effectif stabilisé. Leur prochaine échéance majeure est le MSI 2026 prévu en juin, où ils espèrent décrocher le titre face aux représentants LPL, qui dominent la scène internationale depuis le début de l\'année.' }],
+          children: [{ text: "T1 aborde le second split de la saison régulière LCK avec un effectif stabilisé. Leur prochaine échéance majeure est le MSI 2026 prévu en juin, où ils espèrent décrocher le titre face aux représentants LPL, qui dominent la scène internationale depuis le début de l'année." }],
         },
         {
           type: 'ul',
@@ -106,7 +106,7 @@ export const up: MigrationModule['up'] = async (payload) => {
         'Le PBE 16.9 test une série de nerfs sur les supports engage et des buffs pour relancer plusieurs junglers en difficulté. Prévu en Live le 13 mai 2026.',
       highlights: [
         { text: '🔺 Nidalee — Heal W augmenté en forme humaine' },
-        { text: '🔺 Kha\'Zix — Dégâts Q isolés +10' },
+        { text: "🔺 Kha'Zix — Dégâts Q isolés +10" },
         { text: '🔺 Tristana — AD de base 56 → 58' },
         { text: '🔻 Nautilus — Cooldown R augmenté' },
         { text: '🔻 Leona — Ratio de stun E réduit' },
@@ -117,7 +117,7 @@ export const up: MigrationModule['up'] = async (payload) => {
       content: [
         {
           type: 'p',
-          children: [{ text: 'Ces changements sont en cours de test sur le PBE et peuvent être modifiés ou annulés avant la sortie officielle du patch 16.9, prévue le 13 mai 2026. Les chiffres ci-dessous reflètent l\'état des tests au 28 avril.' }],
+          children: [{ text: "Ces changements sont en cours de test sur le PBE et peuvent être modifiés ou annulés avant la sortie officielle du patch 16.9, prévue le 13 mai 2026. Les chiffres ci-dessous reflètent l'état des tests au 28 avril." }],
         },
         {
           type: 'h2',
@@ -144,7 +144,7 @@ export const up: MigrationModule['up'] = async (payload) => {
         },
         {
           type: 'h4',
-          children: [{ text: 'Kha\'Zix' }],
+          children: [{ text: "Kha'Zix" }],
         },
         {
           type: 'ul',
@@ -189,7 +189,7 @@ export const up: MigrationModule['up'] = async (payload) => {
         {
           type: 'ul',
           children: [
-            { type: 'li', children: [{ text: 'E — Zenith Blade : La durée d\'immobilisation à l\'arrivée passe de 0.5s → 0.25s' }] },
+            { type: 'li', children: [{ text: "E — Zenith Blade : La durée d'immobilisation à l'arrivée passe de 0.5s → 0.25s" }] },
           ],
         },
         {
@@ -220,7 +220,7 @@ export const up: MigrationModule['up'] = async (payload) => {
         },
         {
           type: 'p',
-          children: [{ text: 'L\'objectif est de rendre la progression de Smolder plus lisible et de récompenser davantage les joueurs qui atteignent les paliers élevés.' }],
+          children: [{ text: "L'objectif est de rendre la progression de Smolder plus lisible et de récompenser davantage les joueurs qui atteignent les paliers élevés." }],
         },
         {
           type: 'h4',
@@ -229,7 +229,7 @@ export const up: MigrationModule['up'] = async (payload) => {
         {
           type: 'ul',
           children: [
-            { type: 'li', children: [{ text: 'P — Drakehound\'s Step : Le délai entre deux dashes normalisé à 0.4s (était variable selon le ping)' }] },
+            { type: 'li', children: [{ text: "P — Drakehound's Step : Le délai entre deux dashes normalisé à 0.4s (était variable selon le ping)" }] },
           ],
         },
         {
@@ -263,7 +263,7 @@ export const up: MigrationModule['up'] = async (payload) => {
         },
         {
           type: 'p',
-          children: [{ text: 'Les camps Gromp et Pierre-Corbeau voient leur or réduit de 5 pièces chacun pour ralentir légèrement le tempo d\'XP des junglers qui abusent du clear rapide sans participer aux combats.' }],
+          children: [{ text: "Les camps Gromp et Pierre-Corbeau voient leur or réduit de 5 pièces chacun pour ralentir légèrement le tempo d'XP des junglers qui abusent du clear rapide sans participer aux combats." }],
         },
         {
           type: 'h2',
@@ -274,7 +274,7 @@ export const up: MigrationModule['up'] = async (payload) => {
           children: [
             { type: 'li', children: [{ text: 'Corrigé : le passif de Statikk Shiv ne se déclenchait pas correctement sur les cibles sous un bouclier' }] },
             { type: 'li', children: [{ text: 'Corrigé : Ambessa pouvait traverser certains murs non intentionnels avec son E' }] },
-            { type: 'li', children: [{ text: 'Corrigé : l\'animation de recall de Smolder se coupait sur les skins légendaires' }] },
+            { type: 'li', children: [{ text: "Corrigé : l'animation de recall de Smolder se coupait sur les skins légendaires" }] },
           ],
         },
       ],

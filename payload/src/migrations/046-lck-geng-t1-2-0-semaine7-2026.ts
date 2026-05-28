@@ -26,7 +26,7 @@ const articles = [
     content: [
       {
         type: 'p',
-        children: [{ text: 'La semaine 7 de la LCK 2026 Rounds 1-2 a livré son choc tant attendu ce samedi 16 mai au LoL Park de Jongno, à Séoul : Gen.G Esports a dominé T1 de bout en bout pour s\'imposer sur le score de 2-0. Une victoire qui porte à 8 le nombre de succès consécutifs pour les champions du LCK Cup 2026.' }],
+        children: [{ text: "La semaine 7 de la LCK 2026 Rounds 1-2 a livré son choc tant attendu ce samedi 16 mai au LoL Park de Jongno, à Séoul : Gen.G Esports a dominé T1 de bout en bout pour s'imposer sur le score de 2-0. Une victoire qui porte à 8 le nombre de succès consécutifs pour les champions du LCK Cup 2026." }],
       },
       {
         type: 'h2',
@@ -34,11 +34,11 @@ const articles = [
       },
       {
         type: 'p',
-        children: [{ text: 'Avant la rencontre, le midlaner Chovy avait déclaré sans détour : "Nous allons maintenir notre niveau de jeu et battre T1." Une promesse tenue avec autorité. Épaulé par Canyon en jungle et Ruler en bot lane, Chovy a imposé sa loi à chaque phase du jeu. Dès la mi-game, Gen.G contrôlait l\'accès aux objectifs, enchaînant les Dragons et forçant T1 à gérer une pression constante sur toute la carte.' }],
+        children: [{ text: "Avant la rencontre, le midlaner Chovy avait déclaré sans détour : \"Nous allons maintenir notre niveau de jeu et battre T1.\" Une promesse tenue avec autorité. Épaulé par Canyon en jungle et Ruler en bot lane, Chovy a imposé sa loi à chaque phase du jeu. Dès la mi-game, Gen.G contrôlait l'accès aux objectifs, enchaînant les Dragons et forçant T1 à gérer une pression constante sur toute la carte." }],
       },
       {
         type: 'p',
-        children: [{ text: 'Dans les deux manches, la recette est restée identique : une phase de laning serrée, un teamfight clé qui brise l\'égalité en faveur de Gen.G, puis une prise de Baron suivie d\'un siège du Nexus sans appel. Kiin en top a tenu son couloir avec solidité, tandis que Duro en support a facilité chaque engagement décisif avec une précision redoutable.' }],
+        children: [{ text: "Dans les deux manches, la recette est restée identique : une phase de laning serrée, un teamfight clé qui brise l'égalité en faveur de Gen.G, puis une prise de Baron suivie d'un siège du Nexus sans appel. Kiin en top a tenu son couloir avec solidité, tandis que Duro en support a facilité chaque engagement décisif avec une précision redoutable." }],
       },
       {
         type: 'h2',
@@ -46,11 +46,11 @@ const articles = [
       },
       {
         type: 'p',
-        children: [{ text: 'Du côté de T1, Faker et ses coéquipiers n\'ont pas réussi à trouver la faille. Malgré quelques échanges prometteurs en début de partie, T1 s\'est systématiquement retrouvé en position réactive face à une Gen.G qui dictait les termes du combat. Peyz en bot lane et Oner en jungle n\'ont pas réussi à renverser la domination écrasante des adversaires. Gen.G sait exactement quand et comment frapper.' }],
+        children: [{ text: "Du côté de T1, Faker et ses coéquipiers n'ont pas réussi à trouver la faille. Malgré quelques échanges prometteurs en début de partie, T1 s'est systématiquement retrouvé en position réactive face à une Gen.G qui dictait les termes du combat. Peyz en bot lane et Oner en jungle n'ont pas réussi à renverser la domination écrasante des adversaires. Gen.G sait exactement quand et comment frapper." }],
       },
       {
         type: 'p',
-        children: [{ text: 'Avec 8 victoires de suite, Gen.G s\'installe sans discussion comme le grand favori pour le titre de la saison régulière LCK 2026. Les regards se tournent désormais vers la fin du split et la course à la qualification pour l\'Esports World Cup qui se profile à l\'horizon estival.' }],
+        children: [{ text: "Avec 8 victoires de suite, Gen.G s'installe sans discussion comme le grand favori pour le titre de la saison régulière LCK 2026. Les regards se tournent désormais vers la fin du split et la course à la qualification pour l'Esports World Cup qui se profile à l'horizon estival." }],
       },
       {
         type: 'blockquote',
@@ -83,7 +83,7 @@ const articles = [
       },
       {
         type: 'p',
-        children: [{ text: 'Before the match, Gen.G\'s mid laner Chovy stated with quiet confidence: "We\'ll maintain our form and win against T1." He made good on those words. Supported by Canyon in the jungle and Ruler in the bot lane, Gen.G controlled the tempo of both games from start to finish. They consistently stacked Dragons, secured crucial Baron buffs, and sieged T1\'s base with precision. Top laner Kiin held his side of the map firmly, while support Duro enabled Gen.G\'s aggressive engage patterns throughout.' }],
+        children: [{ text: "Before the match, Gen.G's mid laner Chovy stated with quiet confidence: \"We'll maintain our form and win against T1.\" He made good on those words. Supported by Canyon in the jungle and Ruler in the bot lane, Gen.G controlled the tempo of both games from start to finish. They consistently stacked Dragons, secured crucial Baron buffs, and sieged T1's base with precision. Top laner Kiin held his side of the map firmly, while support Duro enabled Gen.G's aggressive engage patterns throughout." }],
       },
       {
         type: 'p',
@@ -95,7 +95,7 @@ const articles = [
       },
       {
         type: 'p',
-        children: [{ text: 'T1, despite fielding the legendary Faker and a revamped roster with Peyz in the bot lane and Oner in the jungle, could not find a way through Gen.G\'s coordinated machine. Promising early skirmishes failed to translate into meaningful advantages, and T1 found themselves constantly reacting rather than dictating. It was a stark reminder that even one of the most storied rosters in LCK history cannot match Gen.G\'s current momentum.' }],
+        children: [{ text: "T1, despite fielding the legendary Faker and a revamped roster with Peyz in the bot lane and Oner in the jungle, could not find a way through Gen.G's coordinated machine. Promising early skirmishes failed to translate into meaningful advantages, and T1 found themselves constantly reacting rather than dictating. It was a stark reminder that even one of the most storied rosters in LCK history cannot match Gen.G's current momentum." }],
       },
       {
         type: 'p',

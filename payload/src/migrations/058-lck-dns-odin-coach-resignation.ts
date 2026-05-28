@@ -28,7 +28,7 @@ const articles = [
         type: 'p',
         children: [
           {
-            text: 'C\'est officiel : DN SOOPers et leur head coach Ju "oDin" Yeong-dal se séparent. La décision, annoncée le 19 mai 2026, intervient après une saison cauchemardesque pour la franchise coréenne, calée à 1-13 dans la saison régulière LCK 2026. La série de 13 défaites consécutives en best-of-3 — et 26 maps perdues de suite — est la plus longue de toute l\'histoire de la Ligue coréenne.',
+            text: "C'est officiel : DN SOOPers et leur head coach Ju \"oDin\" Yeong-dal se séparent. La décision, annoncée le 19 mai 2026, intervient après une saison cauchemardesque pour la franchise coréenne, calée à 1-13 dans la saison régulière LCK 2026. La série de 13 défaites consécutives en best-of-3 — et 26 maps perdues de suite — est la plus longue de toute l'histoire de la Ligue coréenne.",
           },
         ],
       },
@@ -40,7 +40,7 @@ const articles = [
         type: 'p',
         children: [
           {
-            text: 'Le paradoxe de DNS en 2026 est frappant. L\'organisation avait pourtant misé gros cet hiver en recrutant Seo "deokdam" Dae-gil et Jeong "Peter" Yoon-su, le duo bot lane finaliste des Worlds 2025 sous les couleurs de KT Rolster. Sur le papier, cette paire était l\'une des plus redoutables du circuit. En pratique, la mayonnaise n\'a jamais pris : communication, meta, adaptation tactique — tout a semblé dysfonctionnel d\'emblée.',
+            text: "Le paradoxe de DNS en 2026 est frappant. L'organisation avait pourtant misé gros cet hiver en recrutant Seo \"deokdam\" Dae-gil et Jeong \"Peter\" Yoon-su, le duo bot lane finaliste des Worlds 2025 sous les couleurs de KT Rolster. Sur le papier, cette paire était l'une des plus redoutables du circuit. En pratique, la mayonnaise n'a jamais pris : communication, meta, adaptation tactique — tout a semblé dysfonctionnel d'emblée.",
           },
         ],
       },
@@ -52,7 +52,7 @@ const articles = [
         type: 'p',
         children: [
           {
-            text: 'Face à l\'ampleur du désastre, Ju "oDin" Yeong-dal a tenu à assumer : "J\'ai décidé de quitter l\'équipe pour prendre mes responsabilités en tant que head coach pour ces mauvais résultats." L\'assistant coach Yu "Ggoong" Byeong-jun lui succède en attendant qu\'une solution pérenne soit trouvée. L\'organisation a aussi évoqué le retour progressif de deokdam et Peter dans le cinq de base, après que DDoiV et Enosh avaient été intégrés en cours de route pour tenter d\'enrayer la spirale.',
+            text: "Face à l'ampleur du désastre, Ju \"oDin\" Yeong-dal a tenu à assumer : \"J'ai décidé de quitter l'équipe pour prendre mes responsabilités en tant que head coach pour ces mauvais résultats.\" L'assistant coach Yu \"Ggoong\" Byeong-jun lui succède en attendant qu'une solution pérenne soit trouvée. L'organisation a aussi évoqué le retour progressif de deokdam et Peter dans le cinq de base, après que DDoiV et Enosh avaient été intégrés en cours de route pour tenter d'enrayer la spirale.",
           },
         ],
       },
@@ -64,7 +64,7 @@ const articles = [
         type: 'p',
         children: [
           {
-            text: 'DNS dispute encore la fin de la saison régulière, avec des matchs contre KRX et GEN prévus cette semaine. La relégation et la place dans le Rise Group semblent les seuls enjeux restants pour une équipe déjà éliminée de toute course aux playoffs. La question désormais est de savoir si l\'organisation peut stabiliser son projet pour 2027, ou si d\'autres départs sont à attendre avant la fin de la saison.',
+            text: "DNS dispute encore la fin de la saison régulière, avec des matchs contre KRX et GEN prévus cette semaine. La relégation et la place dans le Rise Group semblent les seuls enjeux restants pour une équipe déjà éliminée de toute course aux playoffs. La question désormais est de savoir si l'organisation peut stabiliser son projet pour 2027, ou si d'autres départs sont à attendre avant la fin de la saison.",
           },
         ],
       },
@@ -110,7 +110,7 @@ const articles = [
         type: 'p',
         children: [
           {
-            text: 'The collapse is all the more striking given DN SOOPers\' ambitious offseason. The organization invested heavily in Seo "deokdam" Dae-gil and Jeong "Peter" Yoon-su — KT Rolster\'s bot lane duo and 2025 World Championship Grand Finalists. On paper, it was one of the strongest bot sides in the LCK. In practice, the team never found its footing, struggling with coordination, meta adaptation, and in-game decision-making throughout the split.',
+            text: "The collapse is all the more striking given DN SOOPers' ambitious offseason. The organization invested heavily in Seo \"deokdam\" Dae-gil and Jeong \"Peter\" Yoon-su — KT Rolster's bot lane duo and 2025 World Championship Grand Finalists. On paper, it was one of the strongest bot sides in the LCK. In practice, the team never found its footing, struggling with coordination, meta adaptation, and in-game decision-making throughout the split.",
           },
         ],
       },
@@ -122,7 +122,7 @@ const articles = [
         type: 'p',
         children: [
           {
-            text: '"I have decided to leave the team to take responsibility as head coach for the poor results," oDin stated in his departure message. Assistant coach Yu "Ggoong" Byeong-jun has been named interim head coach while the organization searches for a permanent replacement. DNS also confirmed that deokdam and Peter are expected to return to the starting lineup, after DDoiV and Enosh were fielded as substitutes in an attempt to reverse the team\'s fortunes.',
+            text: "\"I have decided to leave the team to take responsibility as head coach for the poor results,\" oDin stated in his departure message. Assistant coach Yu \"Ggoong\" Byeong-jun has been named interim head coach while the organization searches for a permanent replacement. DNS also confirmed that deokdam and Peter are expected to return to the starting lineup, after DDoiV and Enosh were fielded as substitutes in an attempt to reverse the team's fortunes.",
           },
         ],
       },
@@ -134,7 +134,7 @@ const articles = [
         type: 'p',
         children: [
           {
-            text: 'DN SOOPers still have matches remaining in the regular season, including clashes against KRX and GEN this week. With no path to the playoffs, the team\'s remaining games are essentially irrelevant in terms of standings. The focus now shifts to the offseason: can the organization rebuild a coherent structure around their talented-but-misfiring roster, or will further departures follow before the year is out?',
+            text: "DN SOOPers still have matches remaining in the regular season, including clashes against KRX and GEN this week. With no path to the playoffs, the team's remaining games are essentially irrelevant in terms of standings. The focus now shifts to the offseason: can the organization rebuild a coherent structure around their talented-but-misfiring roster, or will further departures follow before the year is out?",
           },
         ],
       },
@@ -142,7 +142,7 @@ const articles = [
         type: 'blockquote',
         children: [
           {
-            text: 'DN SOOPers\' 2026 season will go down as a cautionary tale in LCK history — a reminder that star power alone is no substitute for team identity and coaching stability.',
+            text: "DN SOOPers' 2026 season will go down as a cautionary tale in LCK history — a reminder that star power alone is no substitute for team identity and coaching stability.",
           },
         ],
       },

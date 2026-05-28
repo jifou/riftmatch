@@ -40,7 +40,7 @@ const articles = [
         type: 'p',
         children: [
           {
-            text: 'Smolder reçoit un nerf en urgence, ajouté tardivement par Riot Phroxzon. Le jeune dragon avait bénéficié du Deathfire Touch dans le patch précédent, ce qui a considérablement renforcé son early game et l\'a propulsé en tête des pick en mid. Senna sera également impactée de manière indirecte : une modification du Black Cleaver lui retire une synergie non intentionnelle qui la rendait dominante en support. Le Cleaver se voit doté d\'un cooldown interne dans son interaction avec Deathfire Touch, ce qui rééquilibre l\'ensemble du pool de champions qui en dépend.',
+            text: "Smolder reçoit un nerf en urgence, ajouté tardivement par Riot Phroxzon. Le jeune dragon avait bénéficié du Deathfire Touch dans le patch précédent, ce qui a considérablement renforcé son early game et l'a propulsé en tête des pick en mid. Senna sera également impactée de manière indirecte : une modification du Black Cleaver lui retire une synergie non intentionnelle qui la rendait dominante en support. Le Cleaver se voit doté d'un cooldown interne dans son interaction avec Deathfire Touch, ce qui rééquilibre l'ensemble du pool de champions qui en dépend.",
           },
         ],
       },
@@ -52,19 +52,19 @@ const articles = [
         type: 'p',
         children: [
           {
-            text: 'Du côté des buffs, quatre champions voient leur puissance augmenter : Ambessa, Galio, Wukong et Zeri. Les supports tank bénéficient également d\'un environnement plus favorable grâce aux améliorations apportées aux runes Aftershock et Gardien, ainsi qu\'à l\'item Solari de Locket du fer, dont les statistiques défensives sont revues à la hausse.',
+            text: "Du côté des buffs, quatre champions voient leur puissance augmenter : Ambessa, Galio, Wukong et Zeri. Les supports tank bénéficient également d'un environnement plus favorable grâce aux améliorations apportées aux runes Aftershock et Gardien, ainsi qu'à l'item Solari de Locket du fer, dont les statistiques défensives sont revues à la hausse.",
           },
         ],
       },
       {
         type: 'h2',
-        children: [{ text: 'Nouveaux skins : Eternal Aspects, Day Job 2026 et le mystérieux Vel\'Koz Spaghetti' }],
+        children: [{ text: "Nouveaux skins : Eternal Aspects, Day Job 2026 et le mystérieux Vel'Koz Spaghetti" }],
       },
       {
         type: 'p',
         children: [
           {
-            text: 'Sur le plan cosmétique, le Patch 26.11 introduit deux nouvelles lignes de skins : Eternal Aspects et Day Job 2026. Un skin non officiel surnommé "Spaghetti Vel\'Koz" a également été repéré sur le PBE, sa ligne officielle n\'ayant pas encore été annoncée par Riot Games. Les dates de disponibilité et les prix seront confirmés à l\'approche du déploiement.',
+            text: "Sur le plan cosmétique, le Patch 26.11 introduit deux nouvelles lignes de skins : Eternal Aspects et Day Job 2026. Un skin non officiel surnommé \"Spaghetti Vel'Koz\" a également été repéré sur le PBE, sa ligne officielle n'ayant pas encore été annoncée par Riot Games. Les dates de disponibilité et les prix seront confirmés à l'approche du déploiement.",
           },
         ],
       },
@@ -72,7 +72,7 @@ const articles = [
         type: 'blockquote',
         children: [
           {
-            text: 'Le Patch 26.11 s\'annonce comme un correctif ciblé après les déséquilibres créés par le Patch 26.10. Rendez-vous le 28 mai sur les serveurs live pour découvrir les notes complètes.',
+            text: "Le Patch 26.11 s'annonce comme un correctif ciblé après les déséquilibres créés par le Patch 26.10. Rendez-vous le 28 mai sur les serveurs live pour découvrir les notes complètes.",
           },
         ],
       },
@@ -110,7 +110,7 @@ const articles = [
         type: 'p',
         children: [
           {
-            text: 'Smolder receives a last-minute nerf flagged by Riot Phroxzon. The young dragon benefited greatly from gaining access to Deathfire Touch in Patch 26.10, which boosted his early game and vaulted him to the top of mid-lane picks. Senna is also hit indirectly: an unintended interaction between Black Cleaver and Deathfire Touch that pushed her to the top of the support pool will be addressed through an internal cooldown on the item\'s stacking behavior.',
+            text: "Smolder receives a last-minute nerf flagged by Riot Phroxzon. The young dragon benefited greatly from gaining access to Deathfire Touch in Patch 26.10, which boosted his early game and vaulted him to the top of mid-lane picks. Senna is also hit indirectly: an unintended interaction between Black Cleaver and Deathfire Touch that pushed her to the top of the support pool will be addressed through an internal cooldown on the item's stacking behavior.",
           },
         ],
       },
@@ -128,13 +128,13 @@ const articles = [
       },
       {
         type: 'h2',
-        children: [{ text: 'New skins: Eternal Aspects, Day Job 2026, and mysterious Spaghetti Vel\'Koz' }],
+        children: [{ text: "New skins: Eternal Aspects, Day Job 2026, and mysterious Spaghetti Vel'Koz" }],
       },
       {
         type: 'p',
         children: [
           {
-            text: 'Two new skin lines arrive with Patch 26.11: Eternal Aspects and Day Job 2026. A skin internally nicknamed "Spaghetti Vel\'Koz" was also spotted on the PBE, though Riot has not officially announced its skin line. Exact release dates and pricing will be confirmed closer to the patch launch on May 28.',
+            text: "Two new skin lines arrive with Patch 26.11: Eternal Aspects and Day Job 2026. A skin internally nicknamed \"Spaghetti Vel'Koz\" was also spotted on the PBE, though Riot has not officially announced its skin line. Exact release dates and pricing will be confirmed closer to the patch launch on May 28.",
           },
         ],
       },
@@ -198,13 +198,13 @@ const articles = [
       },
       {
         type: 'h2',
-        children: [{ text: 'Nuevas skins: Eternal Aspects, Day Job 2026 y el misterioso Vel\'Koz Spaghetti' }],
+        children: [{ text: "Nuevas skins: Eternal Aspects, Day Job 2026 y el misterioso Vel'Koz Spaghetti" }],
       },
       {
         type: 'p',
         children: [
           {
-            text: 'El Parche 26.11 introduce dos nuevas líneas de skins: Eternal Aspects y Day Job 2026. También se ha visto en el PBE una skin apodada internamente "Spaghetti Vel\'Koz", aunque Riot no ha anunciado oficialmente su línea. Las fechas exactas y precios se confirmarán cerca del lanzamiento del parche el 28 de mayo.',
+            text: "El Parche 26.11 introduce dos nuevas líneas de skins: Eternal Aspects y Day Job 2026. También se ha visto en el PBE una skin apodada internamente \"Spaghetti Vel'Koz\", aunque Riot no ha anunciado oficialmente su línea. Las fechas exactas y precios se confirmarán cerca del lanzamiento del parche el 28 de mayo.",
           },
         ],
       },

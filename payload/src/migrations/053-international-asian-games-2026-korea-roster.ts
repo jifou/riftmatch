@@ -28,19 +28,19 @@ const articles = [
         type: 'p',
         children: [
           {
-            text: 'Le 18 mai 2026, la Korea eSports Association (KeSPA) a officiellement annoncé les six joueurs sélectionnés pour représenter la Corée du Sud en League of Legends lors des Jeux Asiatiques 2026. La compétition se tiendra en septembre à Aichi-Nagoya, au Japon, où l\'esport figure une nouvelle fois au programme officiel en tant qu\'épreuve de médaille.',
+            text: "Le 18 mai 2026, la Korea eSports Association (KeSPA) a officiellement annoncé les six joueurs sélectionnés pour représenter la Corée du Sud en League of Legends lors des Jeux Asiatiques 2026. La compétition se tiendra en septembre à Aichi-Nagoya, au Japon, où l'esport figure une nouvelle fois au programme officiel en tant qu'épreuve de médaille.",
           },
         ],
       },
       {
         type: 'h2',
-        children: [{ text: 'La composition — six stars pour un objectif : l\'or' }],
+        children: [{ text: "La composition — six stars pour un objectif : l'or" }],
       },
       {
         type: 'p',
         children: [
           {
-            text: 'Le roster retenu par le coach Kang « Hirai » Dong-hoon réunit des joueurs issus de trois franchises LCK. En top lane, Choi « Zeus » Woo-je (Hanwha Life Esports) prend sa place. À la jungle, Kim « Canyon » Geon-bu (Gen.G) est le choix retenu. Le poste de mid est partagé entre la légende vivante Lee « Faker » Sang-hyeok (T1) et Kim « Zeka » Geon-woo (HLE). En bot lane, la duo HLE-T1 Gumayusi–Keria est reconduite : Lee « Gumayusi » Min-hyeong portera le rôle d\'ADC, Ryu « Keria » Min-seok celui de support.',
+            text: "Le roster retenu par le coach Kang « Hirai » Dong-hoon réunit des joueurs issus de trois franchises LCK. En top lane, Choi « Zeus » Woo-je (Hanwha Life Esports) prend sa place. À la jungle, Kim « Canyon » Geon-bu (Gen.G) est le choix retenu. Le poste de mid est partagé entre la légende vivante Lee « Faker » Sang-hyeok (T1) et Kim « Zeka » Geon-woo (HLE). En bot lane, la duo HLE-T1 Gumayusi–Keria est reconduite : Lee « Gumayusi » Min-hyeong portera le rôle d'ADC, Ryu « Keria » Min-seok celui de support.",
           },
         ],
       },
@@ -48,7 +48,7 @@ const articles = [
         type: 'p',
         children: [
           {
-            text: 'Trois joueurs de Hanwha Life Esports (Zeus, Zeka, Gumayusi) — actuellement en tête de la LCK 2026 — côtoient deux piliers de T1 (Faker, Keria) et le jungler de Gen.G. Canyon. L\'association ZFGK (Zeus, Faker, Gumayusi, Keria), cœur du roster T1 vainqueur des Worlds 2023 et 2024, se retrouve une fois de plus réunie sous les couleurs nationales.',
+            text: "Trois joueurs de Hanwha Life Esports (Zeus, Zeka, Gumayusi) — actuellement en tête de la LCK 2026 — côtoient deux piliers de T1 (Faker, Keria) et le jungler de Gen.G. Canyon. L'association ZFGK (Zeus, Faker, Gumayusi, Keria), cœur du roster T1 vainqueur des Worlds 2023 et 2024, se retrouve une fois de plus réunie sous les couleurs nationales.",
           },
         ],
       },
@@ -60,7 +60,7 @@ const articles = [
         type: 'p',
         children: [
           {
-            text: 'La sélection fait néanmoins des déçus. Moon « Oner » Hyeon-joon, jungler titulaire de T1, et Jeong « Chovy » Ji-hoon, mid laner de Gen.G et l\'un des meilleurs de sa génération, ne figurent pas dans la liste. Leur absence alimente déjà les débats dans la communauté coréenne. Les clubs et joueurs ont jusqu\'au 28 mai pour déposer un recours, et la validation officielle interviendra en juin.',
+            text: "La sélection fait néanmoins des déçus. Moon « Oner » Hyeon-joon, jungler titulaire de T1, et Jeong « Chovy » Ji-hoon, mid laner de Gen.G et l'un des meilleurs de sa génération, ne figurent pas dans la liste. Leur absence alimente déjà les débats dans la communauté coréenne. Les clubs et joueurs ont jusqu'au 28 mai pour déposer un recours, et la validation officielle interviendra en juin.",
           },
         ],
       },
@@ -72,7 +72,7 @@ const articles = [
         type: 'p',
         children: [
           {
-            text: 'Pour Lee « Faker » Sang-hyeok, cette sélection marque sa troisième présence aux Jeux Asiatiques, après 2018 (Palembang) et 2022 (Hangzhou). En 2022, la Corée avait décroché l\'or. L\'objectif est clairement d\'inscrire une deuxième médaille d\'or au palmarès national.',
+            text: "Pour Lee « Faker » Sang-hyeok, cette sélection marque sa troisième présence aux Jeux Asiatiques, après 2018 (Palembang) et 2022 (Hangzhou). En 2022, la Corée avait décroché l'or. L'objectif est clairement d'inscrire une deuxième médaille d'or au palmarès national.",
           },
         ],
       },
@@ -80,7 +80,7 @@ const articles = [
         type: 'blockquote',
         children: [
           {
-            text: 'Sur le papier, ce roster coréen est l\'un des plus compétitifs jamais envoyés à des Jeux Asiatiques. Rendez-vous en septembre à Aichi-Nagoya pour savoir si cette génération dorée convertira son talent en médaille olympique.',
+            text: "Sur le papier, ce roster coréen est l'un des plus compétitifs jamais envoyés à des Jeux Asiatiques. Rendez-vous en septembre à Aichi-Nagoya pour savoir si cette génération dorée convertira son talent en médaille olympique.",
           },
         ],
       },
@@ -126,7 +126,7 @@ const articles = [
         type: 'p',
         children: [
           {
-            text: 'Three players from Hanwha Life Esports — currently sitting at the top of the LCK 2026 standings — join two T1 veterans (Faker and Keria) and Gen.G\'s Canyon. Notably, the ZFGK core (Zeus, Faker, Gumayusi, Keria) that powered T1 to back-to-back Worlds titles in 2023 and 2024 is reunited under the Korean national flag.',
+            text: "Three players from Hanwha Life Esports — currently sitting at the top of the LCK 2026 standings — join two T1 veterans (Faker and Keria) and Gen.G's Canyon. Notably, the ZFGK core (Zeus, Faker, Gumayusi, Keria) that powered T1 to back-to-back Worlds titles in 2023 and 2024 is reunited under the Korean national flag.",
           },
         ],
       },
@@ -138,19 +138,19 @@ const articles = [
         type: 'p',
         children: [
           {
-            text: 'The selection has sparked debate in the Korean community. T1\'s starting jungler Moon "Oner" Hyeon-joon and Gen.G mid laner Jeong "Chovy" Ji-hoon, widely regarded as two of the best players in the world at their positions, were both left off the roster. Teams and players have until May 28 to file objections, and the final approval from KeSPA is expected in June.',
+            text: "The selection has sparked debate in the Korean community. T1's starting jungler Moon \"Oner\" Hyeon-joon and Gen.G mid laner Jeong \"Chovy\" Ji-hoon, widely regarded as two of the best players in the world at their positions, were both left off the roster. Teams and players have until May 28 to file objections, and the final approval from KeSPA is expected in June.",
           },
         ],
       },
       {
         type: 'h2',
-        children: [{ text: 'Faker\'s Third Asian Games Campaign' }],
+        children: [{ text: "Faker's Third Asian Games Campaign" }],
       },
       {
         type: 'p',
         children: [
           {
-            text: 'For Lee "Faker" Sang-hyeok, this marks his third Asian Games appearance, following Palembang 2018 and Hangzhou 2022. South Korea claimed the gold medal in 2022 in dominant fashion. With this star-studded squad, the goal is clear: repeat that achievement and cement the nation\'s dominance on the international stage.',
+            text: "For Lee \"Faker\" Sang-hyeok, this marks his third Asian Games appearance, following Palembang 2018 and Hangzhou 2022. South Korea claimed the gold medal in 2022 in dominant fashion. With this star-studded squad, the goal is clear: repeat that achievement and cement the nation's dominance on the international stage.",
           },
         ],
       },

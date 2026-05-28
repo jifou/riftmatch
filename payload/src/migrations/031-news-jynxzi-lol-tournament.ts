@@ -215,7 +215,7 @@ const articles = [
         type: 'blockquote',
         children: [
           {
-            text: '"This is the best stream I\'ve ever done." — Jynxzi. AloisNL added on X: "This was the most fun and hype I have ever had playing a competitive game."',
+            text: "\"This is the best stream I've ever done.\" — Jynxzi. AloisNL added on X: \"This was the most fun and hype I have ever had playing a competitive game.\"",
           },
         ],
       },

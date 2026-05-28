@@ -32,7 +32,7 @@ export const up: MigrationModule['up'] = async (payload) => {
         { text: '🔺 Quinn — dégâts monstres passif 50 → 75, Q 150% → 200%' },
         { text: '🔺 Heimerdinger — portée tourelles +20, durée vision E +0.25s' },
         { text: '🔺 Voidgrubs — dégâts vrais/s augmentés (6-24 → 8-32)' },
-        { text: '🔺 Heartsteel / Locket / Knight\'s Vow / Zeke\'s — buffs supports tanks' },
+        { text: "🔺 Heartsteel / Locket / Knight's Vow / Zeke's — buffs supports tanks" },
         { text: '🔻 Brand — armure de base 27 → 24' },
         { text: '🔻 Smolder — dégâts passifs Q et E nerfés' },
         { text: '🔻 Teemo — nerf' },
@@ -59,7 +59,7 @@ export const up: MigrationModule['up'] = async (payload) => {
         },
         {
           type: 'p',
-          children: [{ text: 'Le ratio de dégâts sur monstres de Moonsilver Blade (passif Diana) augmente de 40%. Ce buff cible directement sa vitesse de clear en jungle, où elle avait du mal à s\'imposer face à des junglers plus efficaces.' }],
+          children: [{ text: "Le ratio de dégâts sur monstres de Moonsilver Blade (passif Diana) augmente de 40%. Ce buff cible directement sa vitesse de clear en jungle, où elle avait du mal à s'imposer face à des junglers plus efficaces." }],
         },
         {
           type: 'h4',
@@ -67,7 +67,7 @@ export const up: MigrationModule['up'] = async (payload) => {
         },
         {
           type: 'p',
-          children: [{ text: 'Le cooldown du passif d\'Ekko par cible passe de 5 à 4 secondes. Ce changement améliore son rythme de clear en jungle, le rendant plus compétitif sur les camps où la fréquence du proc est critique.' }],
+          children: [{ text: "Le cooldown du passif d'Ekko par cible passe de 5 à 4 secondes. Ce changement améliore son rythme de clear en jungle, le rendant plus compétitif sur les camps où la fréquence du proc est critique." }],
         },
         {
           type: 'h4',
@@ -83,7 +83,7 @@ export const up: MigrationModule['up'] = async (payload) => {
         },
         {
           type: 'p',
-          children: [{ text: 'La portée des tourelles du Q passe de 530 à 550 (avec +50 supplémentaires contre les minions), et la durée de vision de son E passe de 1s à 1.25s. Ce correctif évite le cas où les tourelles perdent la vision d\'un minion et ne peuvent plus déclencher leur laser.' }],
+          children: [{ text: "La portée des tourelles du Q passe de 530 à 550 (avec +50 supplémentaires contre les minions), et la durée de vision de son E passe de 1s à 1.25s. Ce correctif évite le cas où les tourelles perdent la vision d'un minion et ne peuvent plus déclencher leur laser." }],
         },
         {
           type: 'h2',
@@ -95,7 +95,7 @@ export const up: MigrationModule['up'] = async (payload) => {
         },
         {
           type: 'p',
-          children: [{ text: 'L\'armure de base de Brand est réduite de 27 à 24. Ce nerf ciblé le rend plus vulnérable aux assauts physiques en lane, notamment face aux ADC et jungler AD.' }],
+          children: [{ text: "L'armure de base de Brand est réduite de 27 à 24. Ce nerf ciblé le rend plus vulnérable aux assauts physiques en lane, notamment face aux ADC et jungler AD." }],
         },
         {
           type: 'h4',
@@ -127,12 +127,12 @@ export const up: MigrationModule['up'] = async (payload) => {
         },
         {
           type: 'p',
-          children: [{ text: 'Le changement le plus important de ce patch est la refonte de l\'écosystème support. Riot cherche à ramener les supports engage et tank en botlane en bufant leurs outils et en nerfant les enchanteresses ranged.' }],
+          children: [{ text: "Le changement le plus important de ce patch est la refonte de l'écosystème support. Riot cherche à ramener les supports engage et tank en botlane en bufant leurs outils et en nerfant les enchanteresses ranged." }],
         },
         {
           type: 'ul',
           children: [
-            { type: 'li', children: [{ text: '🔺 Heartsteel, Locket of the Iron Solari, Knight\'s Vow, Zeke\'s Convergence — buffs en faveur des supports tanks/mêlée' }] },
+            { type: 'li', children: [{ text: "🔺 Heartsteel, Locket of the Iron Solari, Knight's Vow, Zeke's Convergence — buffs en faveur des supports tanks/mêlée" }] },
             { type: 'li', children: [{ text: '🔺 Aftershock & Guardian — runes buffées pour les supports engage' }] },
             { type: 'li', children: [{ text: '🔻 Moonstone Renewer, Helia, Dreammaker — nerfs enchanteresses' }] },
             { type: 'li', children: [{ text: '🔻 Aery — nerf de la rune, trop efficace sur les supports ranged' }] },
@@ -145,7 +145,7 @@ export const up: MigrationModule['up'] = async (payload) => {
         {
           type: 'ul',
           children: [
-            { type: 'li', children: [{ text: '⚙️ Deathfire Touch — passe en dégâts magiques (au lieu d\'adaptatifs) : retire l\'interaction non voulue avec Black Cleaver' }] },
+            { type: 'li', children: [{ text: "⚙️ Deathfire Touch — passe en dégâts magiques (au lieu d'adaptatifs) : retire l'interaction non voulue avec Black Cleaver" }] },
             { type: 'li', children: [{ text: '🔺 Voidgrubs — dégâts vrais par seconde augmentés de 6-24 à 8-32 (toujours x0.5 pour les ranged)' }] },
           ],
         },

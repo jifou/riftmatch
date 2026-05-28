@@ -26,15 +26,15 @@ const articles = [
     content: [
       {
         type: 'p',
-        children: [{ text: 'Le 25 mai 2026, T1 a validé sa place à l\'Esports World Cup 2026 en s\'imposant 3-1 face à Dplus KIA lors de la finale du bracket supérieur du qualifier LCK. Faker et ses coéquipiers représenteront la Corée à Paris pour la troisième année consécutive, confirmant leur statut de référence absolue de la scène internationale.' }],
+        children: [{ text: "Le 25 mai 2026, T1 a validé sa place à l'Esports World Cup 2026 en s'imposant 3-1 face à Dplus KIA lors de la finale du bracket supérieur du qualifier LCK. Faker et ses coéquipiers représenteront la Corée à Paris pour la troisième année consécutive, confirmant leur statut de référence absolue de la scène internationale." }],
       },
       {
         type: 'h2',
-        children: [{ text: 'Un parcours sans faute jusqu\'à la finale contre DK' }],
+        children: [{ text: "Un parcours sans faute jusqu'à la finale contre DK" }],
       },
       {
         type: 'p',
-        children: [{ text: 'T1 avait déjà impressionné en écartant HANJIN Brion 2-0 puis BNK FEARX 2-0 avant de retrouver Dplus KIA en finale du bracket supérieur. Face aux hommes de ShowMaker et Lucid, la série s\'est révélée plus disputée : DK a réussi à remporter la troisième manche, forçant T1 à aller en game 4. Mais Doran, Oner, Faker, Peyz et Keria ont tenu bon, clôturant le match avec autorité pour décrocher le précieux ticket parisien.' }],
+        children: [{ text: "T1 avait déjà impressionné en écartant HANJIN Brion 2-0 puis BNK FEARX 2-0 avant de retrouver Dplus KIA en finale du bracket supérieur. Face aux hommes de ShowMaker et Lucid, la série s'est révélée plus disputée : DK a réussi à remporter la troisième manche, forçant T1 à aller en game 4. Mais Doran, Oner, Faker, Peyz et Keria ont tenu bon, clôturant le match avec autorité pour décrocher le précieux ticket parisien." }],
       },
       {
         type: 'h2',
@@ -42,7 +42,7 @@ const articles = [
       },
       {
         type: 'p',
-        children: [{ text: 'Faker a lancé les hostilités sur Akali en game 1, imposant immédiatement son rythme avec des roams décisifs et des kills stratégiques. Sa performance sur Annie dans les games suivants a été tout aussi remarquable : un Flash Tibbers dévastateur lui a permis de retourner un teamfight crucial et d\'ouvrir la route de la victoire pour T1. La rencontre a attiré plus de 500 000 spectateurs en simultané — un chiffre éloquent pour un qualifier en ligne.' }],
+        children: [{ text: "Faker a lancé les hostilités sur Akali en game 1, imposant immédiatement son rythme avec des roams décisifs et des kills stratégiques. Sa performance sur Annie dans les games suivants a été tout aussi remarquable : un Flash Tibbers dévastateur lui a permis de retourner un teamfight crucial et d'ouvrir la route de la victoire pour T1. La rencontre a attiré plus de 500 000 spectateurs en simultané — un chiffre éloquent pour un qualifier en ligne." }],
       },
       {
         type: 'h2',
@@ -50,11 +50,11 @@ const articles = [
       },
       {
         type: 'p',
-        children: [{ text: 'Dplus KIA bascule dans le bracket inférieur et conserve une chance de décrocher le second slot coréen. T1, eux, ont déjà leur billet. Ils débarqueront à Paris du 15 au 19 juillet pour la compétition LoL de l\'EWC 2026, dotée d\'un prize pool de 2 millions de dollars. Gen.G, champions sortants de l\'EWC, bénéficient d\'une invitation directe et retrouveront T1 sur la scène internationale pour un affrontement 100 % coréen très attendu.' }],
+        children: [{ text: "Dplus KIA bascule dans le bracket inférieur et conserve une chance de décrocher le second slot coréen. T1, eux, ont déjà leur billet. Ils débarqueront à Paris du 15 au 19 juillet pour la compétition LoL de l'EWC 2026, dotée d'un prize pool de 2 millions de dollars. Gen.G, champions sortants de l'EWC, bénéficient d'une invitation directe et retrouveront T1 sur la scène internationale pour un affrontement 100 % coréen très attendu." }],
       },
       {
         type: 'blockquote',
-        children: [{ text: 'T1 s\'offre Paris pour la 3e fois de suite : Faker, Oner et Keria confirment que la meilleure équipe de Corée reste la meilleure équipe du monde.' }],
+        children: [{ text: "T1 s'offre Paris pour la 3e fois de suite : Faker, Oner et Keria confirment que la meilleure équipe de Corée reste la meilleure équipe du monde." }],
       },
     ],
   },
@@ -83,15 +83,15 @@ const articles = [
       },
       {
         type: 'p',
-        children: [{ text: 'T1 entered the upper bracket final on a dominant wave, having swept both HANJIN Brion 2-0 and BNK FearX 2-0 in earlier rounds. Dplus KIA proved to be the stiffest test, with ShowMaker and Lucid rallying to win Game 3 and deny T1 a clean series — but it wasn\'t enough. The roster of Doran, Oner, Faker, Peyz, and Keria closed out Game 4 with conviction to confirm their EWC berth.' }],
+        children: [{ text: "T1 entered the upper bracket final on a dominant wave, having swept both HANJIN Brion 2-0 and BNK FearX 2-0 in earlier rounds. Dplus KIA proved to be the stiffest test, with ShowMaker and Lucid rallying to win Game 3 and deny T1 a clean series — but it wasn't enough. The roster of Doran, Oner, Faker, Peyz, and Keria closed out Game 4 with conviction to confirm their EWC berth." }],
       },
       {
         type: 'h2',
-        children: [{ text: 'Faker\'s masterclass on Akali and Annie' }],
+        children: [{ text: "Faker's masterclass on Akali and Annie" }],
       },
       {
         type: 'p',
-        children: [{ text: 'Faker set the tone immediately, opening on Akali in Game 1 with calculated roams and decisive kills that gave T1 early control of the series. His Annie games were equally impactful: a clutch Flash Tibbers shifted the momentum in a pivotal teamfight and proved once again why the 30-year-old veteran remains a game-changer at the highest level. The match peaked at over 500,000 concurrent viewers — a remarkable figure for an online qualifier — underscoring T1\'s global appeal.' }],
+        children: [{ text: "Faker set the tone immediately, opening on Akali in Game 1 with calculated roams and decisive kills that gave T1 early control of the series. His Annie games were equally impactful: a clutch Flash Tibbers shifted the momentum in a pivotal teamfight and proved once again why the 30-year-old veteran remains a game-changer at the highest level. The match peaked at over 500,000 concurrent viewers — a remarkable figure for an online qualifier — underscoring T1's global appeal." }],
       },
       {
         type: 'h2',

@@ -28,7 +28,7 @@ const articles = [
         type: 'p',
         children: [
           {
-            text: 'La phase régulière du LPL Split 2 2026 s\'est achevée dimanche 18 mai avec BiliBili Gaming au sommet du Groupe Ascend. Quatre équipes — BLG, JD Gaming, Top Esports et Anyone\'s Legend — ont décroché leur qualification directe pour le bracket principal des playoffs. Mais pour les huit autres, la route passe par les Play-In baptisés "Knights Rivals", qui débutent ce samedi 23 mai.',
+            text: "La phase régulière du LPL Split 2 2026 s'est achevée dimanche 18 mai avec BiliBili Gaming au sommet du Groupe Ascend. Quatre équipes — BLG, JD Gaming, Top Esports et Anyone's Legend — ont décroché leur qualification directe pour le bracket principal des playoffs. Mais pour les huit autres, la route passe par les Play-In baptisés \"Knights Rivals\", qui débutent ce samedi 23 mai.",
           },
         ],
       },
@@ -40,7 +40,7 @@ const articles = [
         type: 'p',
         children: [
           {
-            text: 'Le coup d\'envoi des Play-In est donné ce matin avec Team WE, classé dans le bas du Groupe Ascend, qui accueille LNG Esports, meilleure équipe du Groupe Nirvana. En début d\'après-midi, Invictus Gaming et ThunderTalk Gaming s\'affrontent dans un deuxième BO5 décisif. Les deux vainqueurs valident leur billet pour les playoffs ; les deux perdants rentrent chez eux. Format éliminatoire direct : pas de deuxième chance.',
+            text: "Le coup d'envoi des Play-In est donné ce matin avec Team WE, classé dans le bas du Groupe Ascend, qui accueille LNG Esports, meilleure équipe du Groupe Nirvana. En début d'après-midi, Invictus Gaming et ThunderTalk Gaming s'affrontent dans un deuxième BO5 décisif. Les deux vainqueurs valident leur billet pour les playoffs ; les deux perdants rentrent chez eux. Format éliminatoire direct : pas de deuxième chance.",
           },
         ],
       },
@@ -52,7 +52,7 @@ const articles = [
         type: 'p',
         children: [
           {
-            text: 'La deuxième journée des Play-In opposera Ninjas in Pyjamas à EDward Gaming et Weibo Gaming à LGD Gaming. NiP, surprenant 5e du Groupe Ascend malgré une saison régulière compliquée, défie une équipe EDG qui a dominé le Groupe Nirvana. De son côté, Weibo Gaming — armé d\'un roster construit pour la reconquête — sera favori face à LGD. À l\'issue de ces quatre matchs, le bracket complet des playoffs LPL Split 2 2026 sera connu.',
+            text: "La deuxième journée des Play-In opposera Ninjas in Pyjamas à EDward Gaming et Weibo Gaming à LGD Gaming. NiP, surprenant 5e du Groupe Ascend malgré une saison régulière compliquée, défie une équipe EDG qui a dominé le Groupe Nirvana. De son côté, Weibo Gaming — armé d'un roster construit pour la reconquête — sera favori face à LGD. À l'issue de ces quatre matchs, le bracket complet des playoffs LPL Split 2 2026 sera connu.",
           },
         ],
       },
@@ -64,7 +64,7 @@ const articles = [
         type: 'p',
         children: [
           {
-            text: 'Le LPL Split 2 sert de qualification principale pour le Mid-Season Invitational 2026. Les deux finalistes du bracket playoffs décrocheront leur place à Daejeon, Corée du Sud. Pour les équipes en Play-In, chaque victoire compte double : accéder aux playoffs, c\'est rester dans la course au MSI. Tous les matchs des Knights Rivals se jouent en best-of-five avec le format Hard Fearless Draft — aucun champion ne peut être rejoué par le même joueur au sein d\'une même série.',
+            text: "Le LPL Split 2 sert de qualification principale pour le Mid-Season Invitational 2026. Les deux finalistes du bracket playoffs décrocheront leur place à Daejeon, Corée du Sud. Pour les équipes en Play-In, chaque victoire compte double : accéder aux playoffs, c'est rester dans la course au MSI. Tous les matchs des Knights Rivals se jouent en best-of-five avec le format Hard Fearless Draft — aucun champion ne peut être rejoué par le même joueur au sein d'une même série.",
           },
         ],
       },
@@ -72,7 +72,7 @@ const articles = [
         type: 'blockquote',
         children: [
           {
-            text: 'Quatre places, huit équipes, deux jours : les Play-In Knights Rivals du LPL Split 2 2026 s\'annoncent comme l\'un des moments les plus intenses de la saison. WE, LNG, iG et TT ouvrent le bal ce 23 mai.',
+            text: "Quatre places, huit équipes, deux jours : les Play-In Knights Rivals du LPL Split 2 2026 s'annoncent comme l'un des moments les plus intenses de la saison. WE, LNG, iG et TT ouvrent le bal ce 23 mai.",
           },
         ],
       },
@@ -98,7 +98,7 @@ const articles = [
         type: 'p',
         children: [
           {
-            text: 'With the LPL Split 2 2026 regular season concluded on May 18, BiliBili Gaming clinched first place in Group Ascend. Four teams — BLG, JD Gaming, Top Esports, and Anyone\'s Legend — secured direct seeds into the main playoff bracket. The remaining eight teams now face the "Knights Rivals" Play-In stage, which begins today, Saturday May 23.',
+            text: "With the LPL Split 2 2026 regular season concluded on May 18, BiliBili Gaming clinched first place in Group Ascend. Four teams — BLG, JD Gaming, Top Esports, and Anyone's Legend — secured direct seeds into the main playoff bracket. The remaining eight teams now face the \"Knights Rivals\" Play-In stage, which begins today, Saturday May 23.",
           },
         ],
       },
@@ -128,7 +128,7 @@ const articles = [
       },
       {
         type: 'h2',
-        children: [{ text: 'What\'s at Stake: Playoffs and International Qualification' }],
+        children: [{ text: "What's at Stake: Playoffs and International Qualification" }],
       },
       {
         type: 'p',
@@ -168,7 +168,7 @@ const articles = [
         type: 'p',
         children: [
           {
-            text: 'La fase regular del LPL Split 2 2026 concluyó el 18 de mayo con BiliBili Gaming coronándose en el Grupo Ascend. Cuatro equipos — BLG, JD Gaming, Top Esports y Anyone\'s Legend — obtuvieron clasificación directa al bracket principal de los playoffs. El resto de los equipos deberán pasar por los Play-In "Knights Rivals", que arrancan este sábado 23 de mayo.',
+            text: "La fase regular del LPL Split 2 2026 concluyó el 18 de mayo con BiliBili Gaming coronándose en el Grupo Ascend. Cuatro equipos — BLG, JD Gaming, Top Esports y Anyone's Legend — obtuvieron clasificación directa al bracket principal de los playoffs. El resto de los equipos deberán pasar por los Play-In \"Knights Rivals\", que arrancan este sábado 23 de mayo.",
           },
         ],
       },

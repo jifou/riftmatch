@@ -31,7 +31,7 @@ export const up: MigrationModule['up'] = async (payload) => {
         { text: '🔺 Wukong — buff clone' },
         { text: '🔺 Zeri — fix ultime' },
         { text: '🔺 Lichbane — buff système' },
-        { text: '🔺 Stormraider\'s Surge — buff système' },
+        { text: "🔺 Stormraider's Surge — buff système" },
         { text: '🔻 Zed — nerf mid lane' },
         { text: '🔻 Naafiri — nerf mid lane' },
         { text: '🔻 Shyvana — nerf' },
@@ -61,7 +61,7 @@ export const up: MigrationModule['up'] = async (payload) => {
         },
         {
           type: 'p',
-          children: [{ text: 'Galio profite d\'une amélioration de ses ratios AP, le poussant vers des builds plus orientés mage. Un buff bienvenu pour diversifier son expression.' }],
+          children: [{ text: "Galio profite d'une amélioration de ses ratios AP, le poussant vers des builds plus orientés mage. Un buff bienvenu pour diversifier son expression." }],
         },
         {
           type: 'h4',
@@ -77,7 +77,7 @@ export const up: MigrationModule['up'] = async (payload) => {
         },
         {
           type: 'p',
-          children: [{ text: 'Le correctif sur l\'ultime de Zeri règle un bug impactant sa fiabilité en teamfight. Indirectement un buff, puisque sa capacité signature fonctionnera désormais comme prévu.' }],
+          children: [{ text: "Le correctif sur l'ultime de Zeri règle un bug impactant sa fiabilité en teamfight. Indirectement un buff, puisque sa capacité signature fonctionnera désormais comme prévu." }],
         },
         {
           type: 'h2',
@@ -97,7 +97,7 @@ export const up: MigrationModule['up'] = async (payload) => {
         },
         {
           type: 'p',
-          children: [{ text: 'Naafiri était trop puissante en mid lane sur tous les Elos. Les nerfs ciblent son burst pour lui laisser de l\'espace sans qu\'elle écrase tous les matchups.' }],
+          children: [{ text: "Naafiri était trop puissante en mid lane sur tous les Elos. Les nerfs ciblent son burst pour lui laisser de l'espace sans qu'elle écrase tous les matchups." }],
         },
         {
           type: 'h4',
@@ -135,7 +135,7 @@ export const up: MigrationModule['up'] = async (payload) => {
           type: 'ul',
           children: [
             { type: 'li', children: [{ text: '🔺 Lichbane — statistiques améliorées, renforcement du profil burst mage' }] },
-            { type: 'li', children: [{ text: '🔺 Stormraider\'s Surge — buff des stats pour rendre l\'item plus compétitif' }] },
+            { type: 'li', children: [{ text: "🔺 Stormraider's Surge — buff des stats pour rendre l'item plus compétitif" }] },
             { type: 'li', children: [{ text: '🔻 Deathfire Touch — nerf de la rune, trop dominante dans plusieurs builds' }] },
             { type: 'li', children: [{ text: '🔻 Gluttonous Greaves — coût +50g, omnivamp par stack réduit de 1% → 0.6%' }] },
           ],
@@ -146,7 +146,7 @@ export const up: MigrationModule['up'] = async (payload) => {
         },
         {
           type: 'p',
-          children: [{ text: 'Arena change radicalement de format avec l\'introduction de 6 équipes de 3 joueurs (contre 8 équipes de 2 auparavant). De nouvelles maps, de nouveaux augments et des ajustements globaux accompagnent ce changement.' }],
+          children: [{ text: "Arena change radicalement de format avec l'introduction de 6 équipes de 3 joueurs (contre 8 équipes de 2 auparavant). De nouvelles maps, de nouveaux augments et des ajustements globaux accompagnent ce changement." }],
         },
         {
           type: 'blockquote',

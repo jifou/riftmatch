@@ -28,7 +28,7 @@ const articles = [
         type: 'p',
         children: [
           {
-            text: 'Les play-in Knights Rivals sont dans les livres d\'histoire et le bracket des playoffs LPL Split 2 2026 est désormais complet. À partir du 29 mai, quatre meilleures équipes de la phase Ascend retrouvent quatre survivants des play-in au Shenzhen LongGang BuJi Cultural & Sports Center. Tous les matchs sont au format best-of-five Hard Fearless Draft, qui interdit de répéter un champion joué dans la même partie. Tour d\'horizon des quatre quarts de finale.',
+            text: "Les play-in Knights Rivals sont dans les livres d'histoire et le bracket des playoffs LPL Split 2 2026 est désormais complet. À partir du 29 mai, quatre meilleures équipes de la phase Ascend retrouvent quatre survivants des play-in au Shenzhen LongGang BuJi Cultural & Sports Center. Tous les matchs sont au format best-of-five Hard Fearless Draft, qui interdit de répéter un champion joué dans la même partie. Tour d'horizon des quatre quarts de finale.",
           },
         ],
       },
@@ -40,7 +40,7 @@ const articles = [
         type: 'p',
         children: [
           {
-            text: 'JD Gaming aborde ces playoffs comme l\'un des grands favoris du tournoi. Avec leur jungle Knight et un ADC Ruler en pleine forme, JDG a montré une constance redoutable en saison régulière Ascend. En face, ThunderTalk Gaming a impressionné en play-in avec un sweep 3-0 propre contre Invictus Gaming. TT misera sur un draft agressif et une early game rapide pour prendre JDG de court — mais les Bleus partent favoris dans cette série et devront surtout éviter l\'euphorie des play-ins chez leur adversaire.',
+            text: "JD Gaming aborde ces playoffs comme l'un des grands favoris du tournoi. Avec leur jungle Knight et un ADC Ruler en pleine forme, JDG a montré une constance redoutable en saison régulière Ascend. En face, ThunderTalk Gaming a impressionné en play-in avec un sweep 3-0 propre contre Invictus Gaming. TT misera sur un draft agressif et une early game rapide pour prendre JDG de court — mais les Bleus partent favoris dans cette série et devront surtout éviter l'euphorie des play-ins chez leur adversaire.",
           },
         ],
       },
@@ -52,19 +52,19 @@ const articles = [
         type: 'p',
         children: [
           {
-            text: 'C\'est le choc de la phase de groupes. LGD Gaming arrive en outsider absolu après avoir renversé Weibo Gaming 3-2 dans l\'un des upsets les plus retentissants de la saison. Top Esports, avec 369 en top, Creme en mid et JackeyLove en ADC, reste sur papier la formation la plus équilibrée du bracket. Mais LGD a désormais la confiance d\'une équipe qui sait qu\'elle peut battre n\'importe qui. Ce quart de finale est la série à ne pas rater.',
+            text: "C'est le choc de la phase de groupes. LGD Gaming arrive en outsider absolu après avoir renversé Weibo Gaming 3-2 dans l'un des upsets les plus retentissants de la saison. Top Esports, avec 369 en top, Creme en mid et JackeyLove en ADC, reste sur papier la formation la plus équilibrée du bracket. Mais LGD a désormais la confiance d'une équipe qui sait qu'elle peut battre n'importe qui. Ce quart de finale est la série à ne pas rater.",
           },
         ],
       },
       {
         type: 'h2',
-        children: [{ text: 'Anyone\'s Legend vs EDward Gaming (30 mai, 17h CST)' }],
+        children: [{ text: "Anyone's Legend vs EDward Gaming (30 mai, 17h CST)" }],
       },
       {
         type: 'p',
         children: [
           {
-            text: 'Anyone\'s Legend est la seule équipe LPL à avoir conservé son roster intégral pour 2026 : Flandre (top), Tarzan (jungle), Shanks (mid), Hope (ADC) et Kael (support). Cette cohésion est leur plus grand atout face à EDward Gaming, qui a souffert contre NiP en play-in (3-2) avant de se qualifier. EDG reste dangereux — leur capacité à s\'adapter en cours de série est connue — mais AL sera difficile à déjouer avec un système aussi rodé.',
+            text: "Anyone's Legend est la seule équipe LPL à avoir conservé son roster intégral pour 2026 : Flandre (top), Tarzan (jungle), Shanks (mid), Hope (ADC) et Kael (support). Cette cohésion est leur plus grand atout face à EDward Gaming, qui a souffert contre NiP en play-in (3-2) avant de se qualifier. EDG reste dangereux — leur capacité à s'adapter en cours de série est connue — mais AL sera difficile à déjouer avec un système aussi rodé.",
           },
         ],
       },
@@ -76,7 +76,7 @@ const articles = [
         type: 'p',
         children: [
           {
-            text: 'BiliBili Gaming est l\'autre mastodonte de ces playoffs. Portés par l\'ADC coréen Viper et le jungler Xun, avec le coach Daeny aux manettes, BLG a le potentiel pour remporter ce split. Team WE a survécu au play-in en cinq games contre LNG, mais se retrouve face à une machine redoutable. WE devra s\'appuyer sur sa flexibilité de draft et sa solidité défensive pour créer la surprise — un exploit possible, mais qui demandera un WE au maximum de ses capacités.',
+            text: "BiliBili Gaming est l'autre mastodonte de ces playoffs. Portés par l'ADC coréen Viper et le jungler Xun, avec le coach Daeny aux manettes, BLG a le potentiel pour remporter ce split. Team WE a survécu au play-in en cinq games contre LNG, mais se retrouve face à une machine redoutable. WE devra s'appuyer sur sa flexibilité de draft et sa solidité défensive pour créer la surprise — un exploit possible, mais qui demandera un WE au maximum de ses capacités.",
           },
         ],
       },
@@ -84,7 +84,7 @@ const articles = [
         type: 'blockquote',
         children: [
           {
-            text: 'LGD-TES est le match à surveiller en priorité. Si LGD confirme son upset de Weibo, les demi-finales LPL risquent d\'être historiques. Rendez-vous le 29 mai pour le coup d\'envoi.',
+            text: "LGD-TES est le match à surveiller en priorité. Si LGD confirme son upset de Weibo, les demi-finales LPL risquent d'être historiques. Rendez-vous le 29 mai pour le coup d'envoi.",
           },
         ],
       },
@@ -122,7 +122,7 @@ const articles = [
         type: 'p',
         children: [
           {
-            text: 'JD Gaming head into the playoffs as one of the clearest title favorites. With Knight dominating in the mid lane and Ruler delivering consistent ADC performances, JDG showed steady top-tier play throughout Ascend. ThunderTalk earned their spot with a dominant 3-0 sweep of Invictus Gaming in the play-in, but a different challenge awaits. TT will look to draft aggressively and win the early game before JDG\'s macro superiority takes over. JDG are heavy favorites, but TT enters this series with real momentum.',
+            text: "JD Gaming head into the playoffs as one of the clearest title favorites. With Knight dominating in the mid lane and Ruler delivering consistent ADC performances, JDG showed steady top-tier play throughout Ascend. ThunderTalk earned their spot with a dominant 3-0 sweep of Invictus Gaming in the play-in, but a different challenge awaits. TT will look to draft aggressively and win the early game before JDG's macro superiority takes over. JDG are heavy favorites, but TT enters this series with real momentum.",
           },
         ],
       },
@@ -140,13 +140,13 @@ const articles = [
       },
       {
         type: 'h2',
-        children: [{ text: 'Anyone\'s Legend vs EDward Gaming (May 30, 17:00 CST)' }],
+        children: [{ text: "Anyone's Legend vs EDward Gaming (May 30, 17:00 CST)" }],
       },
       {
         type: 'p',
         children: [
           {
-            text: 'Anyone\'s Legend is the only LPL team that kept their entire roster intact heading into 2026: Flandre, Tarzan, Shanks, Hope, and Kael make up one of the most cohesive five-man units in the league. This consistency is their biggest weapon against EDward Gaming, who needed a full five games to get past NiP in the play-in. EDG are known for their in-series adaptability, but breaking down a well-drilled system like AL\'s is no easy task.',
+            text: "Anyone's Legend is the only LPL team that kept their entire roster intact heading into 2026: Flandre, Tarzan, Shanks, Hope, and Kael make up one of the most cohesive five-man units in the league. This consistency is their biggest weapon against EDward Gaming, who needed a full five games to get past NiP in the play-in. EDG are known for their in-series adaptability, but breaking down a well-drilled system like AL's is no easy task.",
           },
         ],
       },
@@ -158,7 +158,7 @@ const articles = [
         type: 'p',
         children: [
           {
-            text: 'BiliBili Gaming may be the strongest team in this bracket. Korean import ADC Viper, jungler Xun, and head coach Daeny form a loaded lineup that looks capable of going all the way. Team WE survived the play-in in five games against LNG, and their defensive playstyle and drafting flexibility give them a theoretical path to an upset. But BLG\'s teamfighting is arguably the best in the tournament, and WE will need a near-perfect performance across five games to pull it off.',
+            text: "BiliBili Gaming may be the strongest team in this bracket. Korean import ADC Viper, jungler Xun, and head coach Daeny form a loaded lineup that looks capable of going all the way. Team WE survived the play-in in five games against LNG, and their defensive playstyle and drafting flexibility give them a theoretical path to an upset. But BLG's teamfighting is arguably the best in the tournament, and WE will need a near-perfect performance across five games to pull it off.",
           },
         ],
       },
@@ -222,13 +222,13 @@ const articles = [
       },
       {
         type: 'h2',
-        children: [{ text: 'Anyone\'s Legend vs EDward Gaming (30 de mayo, 17:00 CST)' }],
+        children: [{ text: "Anyone's Legend vs EDward Gaming (30 de mayo, 17:00 CST)" }],
       },
       {
         type: 'p',
         children: [
           {
-            text: 'Anyone\'s Legend es el único equipo de la LPL que mantiene su quinteto intacto en 2026: Flandre, Tarzan, Shanks, Hope y Kael forman uno de los cinco hombres más cohesionados de la liga. Esa cohesión es su principal arma frente a EDward Gaming, que necesitó cinco partidas para superar a NiP en el play-in. EDG es conocido por su capacidad de adaptación dentro de las series, pero desmontar un sistema tan rodado como el de AL no resulta nada fácil.',
+            text: "Anyone's Legend es el único equipo de la LPL que mantiene su quinteto intacto en 2026: Flandre, Tarzan, Shanks, Hope y Kael forman uno de los cinco hombres más cohesionados de la liga. Esa cohesión es su principal arma frente a EDward Gaming, que necesitó cinco partidas para superar a NiP en el play-in. EDG es conocido por su capacidad de adaptación dentro de las series, pero desmontar un sistema tan rodado como el de AL no resulta nada fácil.",
           },
         ],
       },

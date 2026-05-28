@@ -59,7 +59,7 @@ const articles = [
       },
       {
         type: 'h2',
-        children: [{ text: 'T1 s\'impose également face à BRO' }],
+        children: [{ text: "T1 s'impose également face à BRO" }],
       },
       {
         type: 'p',

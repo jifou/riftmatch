@@ -29,7 +29,7 @@ const articles = [
         type: 'p',
         children: [
           {
-            text: 'G2 Esports a réalisé une démonstration de force samedi 16 mai en dominant Karmine Corp 3-0 dans le Best-of-5 de la finale upper bracket du qualificatif EMEA pour l\'Esports World Cup 2026. Sans concéder un seul mapa dans tout le qualificatif, G2 s\'est imposé comme la première équipe EMEA à décrocher son billet pour Riyad.',
+            text: "G2 Esports a réalisé une démonstration de force samedi 16 mai en dominant Karmine Corp 3-0 dans le Best-of-5 de la finale upper bracket du qualificatif EMEA pour l'Esports World Cup 2026. Sans concéder un seul mapa dans tout le qualificatif, G2 s'est imposé comme la première équipe EMEA à décrocher son billet pour Riyad.",
           },
         ],
       },
@@ -41,7 +41,7 @@ const articles = [
         type: 'p',
         children: [
           {
-            text: 'La domination de G2 Esports sur l\'ensemble du qualificatif a été totale. Après avoir éliminé Natus Vincere 2-0 en demi-finale, les Allemands ont récidivé face à Karmine Corp avec un sweep 3-0 net et sans appel. Le roster G2 a montré une maturité tactique et une régularité impressionnantes à chaque étape du bracket, ne laissant aucune fenêtre de réaction à leurs adversaires.',
+            text: "La domination de G2 Esports sur l'ensemble du qualificatif a été totale. Après avoir éliminé Natus Vincere 2-0 en demi-finale, les Allemands ont récidivé face à Karmine Corp avec un sweep 3-0 net et sans appel. Le roster G2 a montré une maturité tactique et une régularité impressionnantes à chaque étape du bracket, ne laissant aucune fenêtre de réaction à leurs adversaires.",
           },
         ],
       },
@@ -49,7 +49,7 @@ const articles = [
         type: 'p',
         children: [
           {
-            text: 'Pour Karmine Corp, cette défaite 0-3 n\'est pas une élimination : la formation française bascule dans le bracket inférieur et conserve une chance de se qualifier. Ce dimanche 17 mai, la KC affrontera le vainqueur du duel NAVI vs Movistar KOI dans un match à élimination directe pour décrocher la deuxième et dernière place qualificative EMEA à l\'EWC 2026.',
+            text: "Pour Karmine Corp, cette défaite 0-3 n'est pas une élimination : la formation française bascule dans le bracket inférieur et conserve une chance de se qualifier. Ce dimanche 17 mai, la KC affrontera le vainqueur du duel NAVI vs Movistar KOI dans un match à élimination directe pour décrocher la deuxième et dernière place qualificative EMEA à l'EWC 2026.",
           },
         ],
       },
@@ -61,7 +61,7 @@ const articles = [
         type: 'p',
         children: [
           {
-            text: 'Le programme du 17 mai s\'ouvre avec la demi-finale du bracket perdant entre Natus Vincere et Movistar KOI. Les deux équipes ont survécu en éliminant respectivement les Galions et GiantX lors de la journée du 15 mai. NAVI avait perdu face à G2 (0-2) tandis que MKOI avait chuté face à KC (0-2) en demi-finales upper. Tous deux ont faim de revanche et de qualification.',
+            text: "Le programme du 17 mai s'ouvre avec la demi-finale du bracket perdant entre Natus Vincere et Movistar KOI. Les deux équipes ont survécu en éliminant respectivement les Galions et GiantX lors de la journée du 15 mai. NAVI avait perdu face à G2 (0-2) tandis que MKOI avait chuté face à KC (0-2) en demi-finales upper. Tous deux ont faim de revanche et de qualification.",
           },
         ],
       },
@@ -69,7 +69,7 @@ const articles = [
         type: 'p',
         children: [
           {
-            text: 'L\'enjeu est colossal : il ne reste qu\'un seul ticket EMEA disponible pour l\'Esports World Cup 2026. L\'équipe qui s\'imposera en finale du bracket inférieur rejoindra G2 Esports à Riyad pour représenter l\'Europe du 15 au 19 juillet avec une prize pool globale de 2 millions de dollars.',
+            text: "L'enjeu est colossal : il ne reste qu'un seul ticket EMEA disponible pour l'Esports World Cup 2026. L'équipe qui s'imposera en finale du bracket inférieur rejoindra G2 Esports à Riyad pour représenter l'Europe du 15 au 19 juillet avec une prize pool globale de 2 millions de dollars.",
           },
         ],
       },
@@ -77,7 +77,7 @@ const articles = [
         type: 'blockquote',
         children: [
           {
-            text: 'G2 a prouvé ce week-end qu\'ils sont au-dessus du lot en EMEA. La vraie question maintenant : qui les rejoindra à Riyad — la Karmine Corp, NAVI ou Movistar KOI ?',
+            text: "G2 a prouvé ce week-end qu'ils sont au-dessus du lot en EMEA. La vraie question maintenant : qui les rejoindra à Riyad — la Karmine Corp, NAVI ou Movistar KOI ?",
           },
         ],
       },
@@ -117,7 +117,7 @@ const articles = [
         type: 'p',
         children: [
           {
-            text: 'G2\'s dominance over the EMEA qualifier was comprehensive. After sweeping Natus Vincere 2-0 in the upper bracket semifinals, they replicated that efficiency against Karmine Corp with a clean 3-0 sweep in the BO5 final. The G2 roster displayed impressive tactical maturity and consistency at every stage of the bracket, leaving opponents no room to respond.',
+            text: "G2's dominance over the EMEA qualifier was comprehensive. After sweeping Natus Vincere 2-0 in the upper bracket semifinals, they replicated that efficiency against Karmine Corp with a clean 3-0 sweep in the BO5 final. The G2 roster displayed impressive tactical maturity and consistency at every stage of the bracket, leaving opponents no room to respond.",
           },
         ],
       },

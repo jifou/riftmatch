@@ -34,11 +34,11 @@ const articles = [
       },
       {
         type: 'p',
-        children: [{ text: 'Avec l\'avantage du premier seed, Team Vitality avait la main pour désigner son adversaire parmi les équipes de l\'Upper Bracket. Le choix s\'est porté sur Movistar KOI (4ème seed), laissant ainsi Karmine Corp (2ème) face à G2 Esports (3ème) dans un choc qui promet d\'être électrique.' }],
+        children: [{ text: "Avec l'avantage du premier seed, Team Vitality avait la main pour désigner son adversaire parmi les équipes de l'Upper Bracket. Le choix s'est porté sur Movistar KOI (4ème seed), laissant ainsi Karmine Corp (2ème) face à G2 Esports (3ème) dans un choc qui promet d'être électrique." }],
       },
       {
         type: 'p',
-        children: [{ text: 'Ce n\'est pas anodin : G2 avait battu Karmine Corp 3-2 en grande finale du LEC Versus 2026, le tournoi qui a remplacé le Winter Split cette année. La rivalité entre les deux organisations européennes est donc plus vive que jamais à l\'approche de ces playoffs.' }],
+        children: [{ text: "Ce n'est pas anodin : G2 avait battu Karmine Corp 3-2 en grande finale du LEC Versus 2026, le tournoi qui a remplacé le Winter Split cette année. La rivalité entre les deux organisations européennes est donc plus vive que jamais à l'approche de ces playoffs." }],
       },
       {
         type: 'h2',
@@ -88,7 +88,7 @@ const articles = [
       },
       {
         type: 'p',
-        children: [{ text: 'Les six équipes s\'affrontent dans un format double-élimination. Toutes les rencontres de playoffs sont disputées en BO5 (best-of-five), ce qui signifie qu\'une équipe doit accumuler trois victoires pour avancer. Une défaite en Upper Bracket offre une seconde chance via le Lower Bracket.' }],
+        children: [{ text: "Les six équipes s'affrontent dans un format double-élimination. Toutes les rencontres de playoffs sont disputées en BO5 (best-of-five), ce qui signifie qu'une équipe doit accumuler trois victoires pour avancer. Une défaite en Upper Bracket offre une seconde chance via le Lower Bracket." }],
       },
       {
         type: 'h2',
@@ -96,7 +96,7 @@ const articles = [
       },
       {
         type: 'p',
-        children: [{ text: 'Quatre équipes manquent les playoffs : Fnatic, SK Gaming, Shifters et Team Heretics. L\'élimination de Fnatic est sans doute la plus marquante après leur parcours en dents de scie tout au long du split. Ces équipes ne retrouveront les Rift qu\'en Summer Split.' }],
+        children: [{ text: "Quatre équipes manquent les playoffs : Fnatic, SK Gaming, Shifters et Team Heretics. L'élimination de Fnatic est sans doute la plus marquante après leur parcours en dents de scie tout au long du split. Ces équipes ne retrouveront les Rift qu'en Summer Split." }],
       },
       {
         type: 'blockquote',
@@ -129,7 +129,7 @@ const articles = [
       },
       {
         type: 'h2',
-        children: [{ text: 'Vitality\'s pick: MKOI over G2' }],
+        children: [{ text: "Vitality's pick: MKOI over G2" }],
       },
       {
         type: 'p',
@@ -195,7 +195,7 @@ const articles = [
       },
       {
         type: 'p',
-        children: [{ text: 'Four teams failed to make the cut: Fnatic, SK Gaming, Shifters and Team Heretics. Fnatic\'s absence is the most notable given their history, following an inconsistent split that left them outside the top six. They will return in the Summer Split.' }],
+        children: [{ text: "Four teams failed to make the cut: Fnatic, SK Gaming, Shifters and Team Heretics. Fnatic's absence is the most notable given their history, following an inconsistent split that left them outside the top six. They will return in the Summer Split." }],
       },
       {
         type: 'blockquote',

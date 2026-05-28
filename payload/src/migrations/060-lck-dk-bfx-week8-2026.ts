@@ -25,7 +25,7 @@ const articles = [
     content: [
       {
         type: 'p',
-        children: [{ text: 'Ce samedi 23 mai 2026, Dplus KIA a dominé BNK FEARX sur un score parfait de 2-0 lors de la huitième semaine des LCK 2026 Rounds 1-2. Une victoire qui porte à quatre la série de succès consécutifs de l\'organisation, consolidant leur place dans la course au top 6 synonyme de qualification pour le Road to MSI.' }],
+        children: [{ text: "Ce samedi 23 mai 2026, Dplus KIA a dominé BNK FEARX sur un score parfait de 2-0 lors de la huitième semaine des LCK 2026 Rounds 1-2. Une victoire qui porte à quatre la série de succès consécutifs de l'organisation, consolidant leur place dans la course au top 6 synonyme de qualification pour le Road to MSI." }],
       },
       {
         type: 'h2',
@@ -37,7 +37,7 @@ const articles = [
       },
       {
         type: 'p',
-        children: [{ text: 'En game 1, c\'est le jungler Choi "Lucid" Yong-hyeok qui a porté l\'estocade sur Lee Sin. En partant d\'un gank éclair à mi-partie, il a enchaîné les picks et utilisé son ultime avec une précision chirurgicale pour éjecter les carries adverses hors des combats, privant BNK FEARX de tout espace de respiration.' }],
+        children: [{ text: "En game 1, c'est le jungler Choi \"Lucid\" Yong-hyeok qui a porté l'estocade sur Lee Sin. En partant d'un gank éclair à mi-partie, il a enchaîné les picks et utilisé son ultime avec une précision chirurgicale pour éjecter les carries adverses hors des combats, privant BNK FEARX de tout espace de respiration." }],
       },
       {
         type: 'h2',
@@ -45,7 +45,7 @@ const articles = [
       },
       {
         type: 'p',
-        children: [{ text: 'Du côté de BNK FEARX, le retour du mid-laner Kim "VicLa" Gu-hyeon dans la composition de départ n\'a pas suffi à renverser la tendance. Pointant à 5 victoires pour 10 défaites avant cette rencontre, l\'équipe continue de manquer de régularité et peine à concrétiser ses avantages en phase de mid-game.' }],
+        children: [{ text: "Du côté de BNK FEARX, le retour du mid-laner Kim \"VicLa\" Gu-hyeon dans la composition de départ n'a pas suffi à renverser la tendance. Pointant à 5 victoires pour 10 défaites avant cette rencontre, l'équipe continue de manquer de régularité et peine à concrétiser ses avantages en phase de mid-game." }],
       },
       {
         type: 'h2',
@@ -53,11 +53,11 @@ const articles = [
       },
       {
         type: 'p',
-        children: [{ text: 'Avec ce quatrième succès consécutif, Dplus KIA confirme leur montée en puissance et renforce leur candidature pour intégrer le top 6 final. La saison régulière des Rounds 1-2 approche de son terme et la lutte pour les places qualificatives s\'annonce serrée jusqu\'au dernier match. HLE et KT ont déjà validé leur statut de Legend Group ; DK, de leur côté, veulent s\'assurer une position confortable avant les phases finales.' }],
+        children: [{ text: "Avec ce quatrième succès consécutif, Dplus KIA confirme leur montée en puissance et renforce leur candidature pour intégrer le top 6 final. La saison régulière des Rounds 1-2 approche de son terme et la lutte pour les places qualificatives s'annonce serrée jusqu'au dernier match. HLE et KT ont déjà validé leur statut de Legend Group ; DK, de leur côté, veulent s'assurer une position confortable avant les phases finales." }],
       },
       {
         type: 'blockquote',
-        children: [{ text: 'DK enchaîne une quatrième victoire d\'affilée : ShowMaker démontre une nouvelle fois pourquoi il reste l\'un des meilleurs mid-laners de la LCK, et Lucid confirme son statut de jungler de premier plan.' }],
+        children: [{ text: "DK enchaîne une quatrième victoire d'affilée : ShowMaker démontre une nouvelle fois pourquoi il reste l'un des meilleurs mid-laners de la LCK, et Lucid confirme son statut de jungler de premier plan." }],
       },
     ],
   },
@@ -78,7 +78,7 @@ const articles = [
     content: [
       {
         type: 'p',
-        children: [{ text: 'On Saturday, May 23, 2026, Dplus KIA secured a commanding 2-0 sweep over BNK FEARX in Week 8 of the LCK 2026 Rounds 1-2. The result extended DK\'s winning streak to four consecutive matches, strengthening their position in the race for a top-6 finish and a Road to MSI qualification spot.' }],
+        children: [{ text: "On Saturday, May 23, 2026, Dplus KIA secured a commanding 2-0 sweep over BNK FEARX in Week 8 of the LCK 2026 Rounds 1-2. The result extended DK's winning streak to four consecutive matches, strengthening their position in the race for a top-6 finish and a Road to MSI qualification spot." }],
       },
       {
         type: 'h2',
@@ -86,19 +86,19 @@ const articles = [
       },
       {
         type: 'p',
-        children: [{ text: 'Mid-laner Heo "ShowMaker" Su put on a clinic on Ahri during Game 2, roaming to the bot lane early for a kill that immediately opened up the map for DK. His assassin mechanics and superior vision control left BNK FEARX\'s composition with no viable answer throughout the mid-game, and the game was effectively over before the first major objective spawned.' }],
+        children: [{ text: "Mid-laner Heo \"ShowMaker\" Su put on a clinic on Ahri during Game 2, roaming to the bot lane early for a kill that immediately opened up the map for DK. His assassin mechanics and superior vision control left BNK FEARX's composition with no viable answer throughout the mid-game, and the game was effectively over before the first major objective spawned." }],
       },
       {
         type: 'p',
-        children: [{ text: 'In Game 1, jungler Choi "Lucid" Yong-hyeok on Lee Sin was the standout performer. A well-timed mid-game gank ignited DK\'s snowball, and Lucid kept piling on with precise Dragon Kick ultimates that displaced FEARX\'s carries in every team fight, denying them any opportunity to stage a comeback.' }],
+        children: [{ text: "In Game 1, jungler Choi \"Lucid\" Yong-hyeok on Lee Sin was the standout performer. A well-timed mid-game gank ignited DK's snowball, and Lucid kept piling on with precise Dragon Kick ultimates that displaced FEARX's carries in every team fight, denying them any opportunity to stage a comeback." }],
       },
       {
         type: 'h2',
-        children: [{ text: 'BNK FEARX Struggles Despite VicLa\'s Return' }],
+        children: [{ text: "BNK FEARX Struggles Despite VicLa's Return" }],
       },
       {
         type: 'p',
-        children: [{ text: 'BNK FEARX entered the match with mid-laner Kim "VicLa" Gu-hyeon back in the starting lineup, but the change failed to spark the team\'s performance. Sitting at 5 wins and 10 losses heading into Saturday, FEARX continue to struggle with consistency and converting early leads into match victories against higher-caliber opponents.' }],
+        children: [{ text: "BNK FEARX entered the match with mid-laner Kim \"VicLa\" Gu-hyeon back in the starting lineup, but the change failed to spark the team's performance. Sitting at 5 wins and 10 losses heading into Saturday, FEARX continue to struggle with consistency and converting early leads into match victories against higher-caliber opponents." }],
       },
       {
         type: 'h2',
@@ -106,11 +106,11 @@ const articles = [
       },
       {
         type: 'p',
-        children: [{ text: 'Dplus KIA\'s recent form represents their best run of the split, and this fourth straight win places them firmly in contention for a top-6 finish as the regular season nears its conclusion. With HLE and KT already locked into Legend Group status, the competition for the remaining spots is fierce. DK\'s momentum arriving at the final stretch could prove decisive.' }],
+        children: [{ text: "Dplus KIA's recent form represents their best run of the split, and this fourth straight win places them firmly in contention for a top-6 finish as the regular season nears its conclusion. With HLE and KT already locked into Legend Group status, the competition for the remaining spots is fierce. DK's momentum arriving at the final stretch could prove decisive." }],
       },
       {
         type: 'blockquote',
-        children: [{ text: 'DK\'s four-match winning streak is a testament to ShowMaker\'s consistency and Lucid\'s explosive playmaking — the duo is making a strong case for DK\'s place in the Road to MSI.' }],
+        children: [{ text: "DK's four-match winning streak is a testament to ShowMaker's consistency and Lucid's explosive playmaking — the duo is making a strong case for DK's place in the Road to MSI." }],
       },
     ],
   },

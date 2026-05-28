@@ -25,7 +25,7 @@ const articles = [
     content: [
       {
         type: 'p',
-        children: [{ text: 'La saison régulière de la LCS 2026 Spring s\'est refermée le 17 mai avec un grand vainqueur incontesté : Cloud9. L\'organisation californienne est la seule équipe à avoir traversé les sept semaines de compétition sans la moindre défaite, signant un bilan parfait de 7-0. Une performance qui propulse C9 en tête des têtes de série pour les playoffs, avec un statut de grand favori pour décrocher la couronne du printemps et une place au Mid-Season Invitational en Corée du Sud.' }],
+        children: [{ text: "La saison régulière de la LCS 2026 Spring s'est refermée le 17 mai avec un grand vainqueur incontesté : Cloud9. L'organisation californienne est la seule équipe à avoir traversé les sept semaines de compétition sans la moindre défaite, signant un bilan parfait de 7-0. Une performance qui propulse C9 en tête des têtes de série pour les playoffs, avec un statut de grand favori pour décrocher la couronne du printemps et une place au Mid-Season Invitational en Corée du Sud." }],
       },
       {
         type: 'h2',
@@ -33,7 +33,7 @@ const articles = [
       },
       {
         type: 'p',
-        children: [{ text: 'Pendant les cinq premières semaines, Cloud9 et Team Liquid marchaient de concert au sommet du classement avec des bilans identiques de 5-0. Mais les deux dernières semaines ont tout changé : TL a cédé deux séries consécutives, terminant à la 3e place avec 5 victoires et 2 défaites. LYON, finaliste du Lock-In, a tenu le cap avec 5-1 pour s\'installer en 2e position malgré une défaite sur le fil contre FlyQuest lors du dernier jour (2-1 en faveur de FLY). Cloud9, de son côté, n\'a jamais vacillé.' }],
+        children: [{ text: "Pendant les cinq premières semaines, Cloud9 et Team Liquid marchaient de concert au sommet du classement avec des bilans identiques de 5-0. Mais les deux dernières semaines ont tout changé : TL a cédé deux séries consécutives, terminant à la 3e place avec 5 victoires et 2 défaites. LYON, finaliste du Lock-In, a tenu le cap avec 5-1 pour s'installer en 2e position malgré une défaite sur le fil contre FlyQuest lors du dernier jour (2-1 en faveur de FLY). Cloud9, de son côté, n'a jamais vacillé." }],
       },
       {
         type: 'h2',
@@ -49,11 +49,11 @@ const articles = [
       },
       {
         type: 'p',
-        children: [{ text: 'À partir du 23 mai, les six qualifiées s\'affronteront dans un bracket en double élimination, entièrement joué en Best-of-5 avec la règle Fearless Draft (chaque champion ne peut être sélectionné qu\'une seule fois par série). Les 1er, 2e, 3e et 4e seeds débutent en upper bracket ; les 5e et 6e seeds entrent directement en lower bracket. Les deux finalistes décrocheront leur billet pour le Mid-Season Invitational 2026 en Corée du Sud. La grande finale est prévue les 13 et 14 juin à la Mullett Arena de l\'Arizona State University.' }],
+        children: [{ text: "À partir du 23 mai, les six qualifiées s'affronteront dans un bracket en double élimination, entièrement joué en Best-of-5 avec la règle Fearless Draft (chaque champion ne peut être sélectionné qu'une seule fois par série). Les 1er, 2e, 3e et 4e seeds débutent en upper bracket ; les 5e et 6e seeds entrent directement en lower bracket. Les deux finalistes décrocheront leur billet pour le Mid-Season Invitational 2026 en Corée du Sud. La grande finale est prévue les 13 et 14 juin à la Mullett Arena de l'Arizona State University." }],
       },
       {
         type: 'blockquote',
-        children: [{ text: 'Cloud9 entre en playoffs sur une série de 7-0 — les trois premières têtes de série se retrouveront en upper bracket dès le 23 mai pour l\'un des playoffs LCS les plus relevés depuis plusieurs saisons.' }],
+        children: [{ text: "Cloud9 entre en playoffs sur une série de 7-0 — les trois premières têtes de série se retrouveront en upper bracket dès le 23 mai pour l'un des playoffs LCS les plus relevés depuis plusieurs saisons." }],
       },
     ],
   },

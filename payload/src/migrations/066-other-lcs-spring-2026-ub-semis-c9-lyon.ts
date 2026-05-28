@@ -25,7 +25,7 @@ const articles = [
     content: [
       {
         type: 'p',
-        children: [{ text: 'Les demi-finales de l\'Upper Bracket des playoffs LCS Spring 2026 ont livré deux séries mémorables ce week-end à Los Angeles. Cloud9 et LYON se sont qualifiés pour la finale Upper Bracket, prévue le 6 juin, avec des parcours très différents : une survie épique côté Cloud9, une démonstration de force côté LYON.' }],
+        children: [{ text: "Les demi-finales de l'Upper Bracket des playoffs LCS Spring 2026 ont livré deux séries mémorables ce week-end à Los Angeles. Cloud9 et LYON se sont qualifiés pour la finale Upper Bracket, prévue le 6 juin, avec des parcours très différents : une survie épique côté Cloud9, une démonstration de force côté LYON." }],
       },
       {
         type: 'h2',
@@ -33,7 +33,7 @@ const articles = [
       },
       {
         type: 'p',
-        children: [{ text: 'Samedi 23 mai, Cloud9, tête de série numéro un après une saison régulière parfaite (7-0), a failli tout perdre face à une FlyQuest ambitieuse. Après avoir mené 2-0, les Bleus ont vu FlyQuest égaliser à 2-2 grâce à deux parties de haute intensité. C\'est dans un match 5 décisif que Cloud9 a su hausser son niveau, porté par un Robert « Blaber » Huang exceptionnel, nommé MVP de la série avec un KDA combiné de 10-15-35. FlyQuest bascule dans le Lower Bracket où une longue route les attend.' }],
+        children: [{ text: "Samedi 23 mai, Cloud9, tête de série numéro un après une saison régulière parfaite (7-0), a failli tout perdre face à une FlyQuest ambitieuse. Après avoir mené 2-0, les Bleus ont vu FlyQuest égaliser à 2-2 grâce à deux parties de haute intensité. C'est dans un match 5 décisif que Cloud9 a su hausser son niveau, porté par un Robert « Blaber » Huang exceptionnel, nommé MVP de la série avec un KDA combiné de 10-15-35. FlyQuest bascule dans le Lower Bracket où une longue route les attend." }],
       },
       {
         type: 'h2',
@@ -41,7 +41,7 @@ const articles = [
       },
       {
         type: 'p',
-        children: [{ text: 'Le lendemain, dimanche 24 mai, LYON a répondu avec autorité. Face à Team Liquid Alienware (5e de la saison régulière et surprenant qualifié), l\'organisation texane a dominé la série 3-1, ne concédant qu\'un seul match sur les quatre disputés. LYON confirme ainsi sa place parmi les grands favoris du titre printanier, une constance notable depuis leur victoire au Lock-In en janvier.' }],
+        children: [{ text: "Le lendemain, dimanche 24 mai, LYON a répondu avec autorité. Face à Team Liquid Alienware (5e de la saison régulière et surprenant qualifié), l'organisation texane a dominé la série 3-1, ne concédant qu'un seul match sur les quatre disputés. LYON confirme ainsi sa place parmi les grands favoris du titre printanier, une constance notable depuis leur victoire au Lock-In en janvier." }],
       },
       {
         type: 'h2',
@@ -53,7 +53,7 @@ const articles = [
       },
       {
         type: 'blockquote',
-        children: [{ text: 'Rendez-vous le 6 juin pour une finale Upper Bracket qui s\'annonce explosive entre Cloud9 et LYON. Le trône de la LCS Spring 2026 se jouera là.' }],
+        children: [{ text: "Rendez-vous le 6 juin pour une finale Upper Bracket qui s'annonce explosive entre Cloud9 et LYON. Le trône de la LCS Spring 2026 se jouera là." }],
       },
     ],
   },
@@ -102,7 +102,7 @@ const articles = [
       },
       {
         type: 'blockquote',
-        children: [{ text: 'Cloud9 vs LYON on June 6: two of NA\'s best square off for a direct seat in the LCS Spring 2026 Grand Final.' }],
+        children: [{ text: "Cloud9 vs LYON on June 6: two of NA's best square off for a direct seat in the LCS Spring 2026 Grand Final." }],
       },
     ],
   },

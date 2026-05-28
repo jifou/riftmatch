@@ -25,19 +25,19 @@ const articles = [
     content: [
       {
         type: 'p',
-        children: [{ text: 'Le 12 mai 2026, les demi-finales du bracket supérieur de l\'EWC 2026 Korea Qualifier ont livré deux résultats marquants. Dplus KIA a renversé Hanwha Life Esports en trois manches (2-1), et T1 a balayé BNK FEARX sans trembler (2-0). Les deux équipes qualifiées rejoignent la finale du bracket supérieur prévue le 25 mai, tandis que HLE et BFX descendent dans le bracket inférieur.' }],
+        children: [{ text: "Le 12 mai 2026, les demi-finales du bracket supérieur de l'EWC 2026 Korea Qualifier ont livré deux résultats marquants. Dplus KIA a renversé Hanwha Life Esports en trois manches (2-1), et T1 a balayé BNK FEARX sans trembler (2-0). Les deux équipes qualifiées rejoignent la finale du bracket supérieur prévue le 25 mai, tandis que HLE et BFX descendent dans le bracket inférieur." }],
       },
       {
         type: 'h2',
-        children: [{ text: 'DK renverse HLE : l\'upset de la semaine' }],
+        children: [{ text: "DK renverse HLE : l'upset de la semaine" }],
       },
       {
         type: 'p',
-        children: [{ text: 'Hanwha Life Esports, première tête de série du tournoi grâce à ses résultats de la phase régulière LCK, partait favori face à Dplus KIA. Mais DK a livré une performance collective impressionnante. Le top laner Siwoo, au duel direct avec Zeus d\'HLE, a été décisif et a décroché le titre de MVP du match. Avec des pick créatifs en draft fearless, DK a su contraindre HLE sur deux des trois parties pour s\'imposer 2-1 et valider sa place en finale du bracket supérieur.' }],
+        children: [{ text: "Hanwha Life Esports, première tête de série du tournoi grâce à ses résultats de la phase régulière LCK, partait favori face à Dplus KIA. Mais DK a livré une performance collective impressionnante. Le top laner Siwoo, au duel direct avec Zeus d'HLE, a été décisif et a décroché le titre de MVP du match. Avec des pick créatifs en draft fearless, DK a su contraindre HLE sur deux des trois parties pour s'imposer 2-1 et valider sa place en finale du bracket supérieur." }],
       },
       {
         type: 'p',
-        children: [{ text: 'Cette victoire confirme la progression de DK depuis le début du split. ShowMaker, Lucid et Smash ont chacun apporté leur contribution dans les games clés, illustrant la montée en puissance d\'un effectif parmi les plus jeunes de la LCK cette saison.' }],
+        children: [{ text: "Cette victoire confirme la progression de DK depuis le début du split. ShowMaker, Lucid et Smash ont chacun apporté leur contribution dans les games clés, illustrant la montée en puissance d'un effectif parmi les plus jeunes de la LCK cette saison." }],
       },
       {
         type: 'h2',
@@ -45,15 +45,15 @@ const articles = [
       },
       {
         type: 'p',
-        children: [{ text: 'Dans le deuxième match de la soirée, T1 n\'a laissé aucune chance à BNK FEARX. La machine T1 a fonctionné à plein régime : contrôle de la vision, priorité mid-jungle, et macro exemplaire. BFX n\'a pas trouvé de failles exploitables et tombe dans le bracket inférieur où il devra enchaîner les victoires pour espérer encore se qualifier.' }],
+        children: [{ text: "Dans le deuxième match de la soirée, T1 n'a laissé aucune chance à BNK FEARX. La machine T1 a fonctionné à plein régime : contrôle de la vision, priorité mid-jungle, et macro exemplaire. BFX n'a pas trouvé de failles exploitables et tombe dans le bracket inférieur où il devra enchaîner les victoires pour espérer encore se qualifier." }],
       },
       {
         type: 'h2',
-        children: [{ text: 'La route vers l\'EWC : ce qui reste à jouer' }],
+        children: [{ text: "La route vers l'EWC : ce qui reste à jouer" }],
       },
       {
         type: 'p',
-        children: [{ text: 'Le format du Korea Qualifier est en double élimination. Deux spots sont en jeu pour le Main Event de l\'Esports World Cup à Riyad (Arabie Saoudite). Gen.G, champion en titre de l\'EWC, est déjà qualifié directement. Les deux places restantes seront attribuées : une au vainqueur de la finale du bracket supérieur (T1 vs DK, le 25 mai), l\'autre au vainqueur de la finale du bracket inférieur (le 26 mai). HLE et BFX ont donc encore leur chance, mais devront gagner chaque match sans droit à l\'erreur.' }],
+        children: [{ text: "Le format du Korea Qualifier est en double élimination. Deux spots sont en jeu pour le Main Event de l'Esports World Cup à Riyad (Arabie Saoudite). Gen.G, champion en titre de l'EWC, est déjà qualifié directement. Les deux places restantes seront attribuées : une au vainqueur de la finale du bracket supérieur (T1 vs DK, le 25 mai), l'autre au vainqueur de la finale du bracket inférieur (le 26 mai). HLE et BFX ont donc encore leur chance, mais devront gagner chaque match sans droit à l'erreur." }],
       },
       {
         type: 'blockquote',
@@ -82,15 +82,15 @@ const articles = [
       },
       {
         type: 'h2',
-        children: [{ text: 'DK\'s upset win: Siwoo steals the show' }],
+        children: [{ text: "DK's upset win: Siwoo steals the show" }],
       },
       {
         type: 'p',
-        children: [{ text: 'Hanwha Life Esports entered as the number one seed thanks to their dominant LCK regular season performance, and were considered heavy favorites heading into the match. DK, however, had a different plan. Top laner Siwoo outperformed HLE\'s Zeus in the critical individual matchup, earning MVP honors for his performance across the series. DK\'s fearless draft strategy proved creative and unpredictable, ultimately securing the 2-1 victory.' }],
+        children: [{ text: "Hanwha Life Esports entered as the number one seed thanks to their dominant LCK regular season performance, and were considered heavy favorites heading into the match. DK, however, had a different plan. Top laner Siwoo outperformed HLE's Zeus in the critical individual matchup, earning MVP honors for his performance across the series. DK's fearless draft strategy proved creative and unpredictable, ultimately securing the 2-1 victory." }],
       },
       {
         type: 'p',
-        children: [{ text: 'The win underscores DK\'s collective growth throughout the split. ShowMaker, Lucid, and Smash all contributed in key games, showcasing one of the LCK\'s youngest rosters firing on all cylinders at the right moment.' }],
+        children: [{ text: "The win underscores DK's collective growth throughout the split. ShowMaker, Lucid, and Smash all contributed in key games, showcasing one of the LCK's youngest rosters firing on all cylinders at the right moment." }],
       },
       {
         type: 'h2',
@@ -98,11 +98,11 @@ const articles = [
       },
       {
         type: 'p',
-        children: [{ text: 'T1\'s match against BNK FEARX was a showcase of disciplined, macro-focused League of Legends. T1 controlled vision, dominated the mid-jungle corridor, and never allowed BFX a path back into either game. The 2-0 sweep was clinical, and BFX now faces a challenging run through the Lower Bracket if they want to reach the EWC Main Event.' }],
+        children: [{ text: "T1's match against BNK FEARX was a showcase of disciplined, macro-focused League of Legends. T1 controlled vision, dominated the mid-jungle corridor, and never allowed BFX a path back into either game. The 2-0 sweep was clinical, and BFX now faces a challenging run through the Lower Bracket if they want to reach the EWC Main Event." }],
       },
       {
         type: 'h2',
-        children: [{ text: 'What\'s next: road to EWC Riyadh' }],
+        children: [{ text: "What's next: road to EWC Riyadh" }],
       },
       {
         type: 'p',
@@ -110,7 +110,7 @@ const articles = [
       },
       {
         type: 'blockquote',
-        children: [{ text: 'DK and T1 are in the driver\'s seat, but HLE and BFX are still alive in the Lower Bracket. All eyes turn to the finals on May 25–26.' }],
+        children: [{ text: "DK and T1 are in the driver's seat, but HLE and BFX are still alive in the Lower Bracket. All eyes turn to the finals on May 25–26." }],
       },
     ],
   },

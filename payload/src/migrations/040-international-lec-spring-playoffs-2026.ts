@@ -119,7 +119,7 @@ const articles = [
       },
       {
         type: 'h2',
-        children: [{ text: 'G2 vs KC: Europe\'s Defining Rivalry' }],
+        children: [{ text: "G2 vs KC: Europe's Defining Rivalry" }],
       },
       {
         type: 'p',
@@ -131,7 +131,7 @@ const articles = [
       },
       {
         type: 'h2',
-        children: [{ text: 'Vitality\'s Pick and the Full Bracket' }],
+        children: [{ text: "Vitality's Pick and the Full Bracket" }],
       },
       {
         type: 'p',
@@ -143,7 +143,7 @@ const articles = [
       },
       {
         type: 'h2',
-        children: [{ text: 'MSI 2026: Daejeon Awaits Europe\'s Best' }],
+        children: [{ text: "MSI 2026: Daejeon Awaits Europe's Best" }],
       },
       {
         type: 'p',

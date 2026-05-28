@@ -51,12 +51,12 @@ const articles = [
       {
         type: 'ul',
         children: [
-          { type: 'li', children: [{ text: 'Coup d\'envoi : 29-31 mai 2026' }] },
-          { type: 'li', children: [{ text: '5 étapes mensuelles ouvertes (jusqu\'à 32 équipes par étape)' }] },
-          { type: 'li', children: [{ text: 'Top 6 du classement général qualifié pour les playoffs d\'octobre' }] },
+          { type: 'li', children: [{ text: "Coup d'envoi : 29-31 mai 2026" }] },
+          { type: 'li', children: [{ text: "5 étapes mensuelles ouvertes (jusqu'à 32 équipes par étape)" }] },
+          { type: 'li', children: [{ text: "Top 6 du classement général qualifié pour les playoffs d'octobre" }] },
           {
             type: 'li',
-            children: [{ text: '2 places supplémentaires via l\'Equal Esports Cup (Allemagne) et la Nova Series (France)' }],
+            children: [{ text: "2 places supplémentaires via l'Equal Esports Cup (Allemagne) et la Nova Series (France)" }],
           },
         ],
       },
@@ -74,7 +74,7 @@ const articles = [
       },
       {
         type: 'h2',
-        children: [{ text: 'Continuité confirmée jusqu\'en 2027' }],
+        children: [{ text: "Continuité confirmée jusqu'en 2027" }],
       },
       {
         type: 'p',
@@ -145,7 +145,7 @@ const articles = [
           { type: 'li', children: [{ text: 'Top 6 in overall standings qualify for October Playoffs' }] },
           {
             type: 'li',
-            children: [{ text: '2 additional playoff spots via Germany\'s Equal Esports Cup and France\'s Nova Series' }],
+            children: [{ text: "2 additional playoff spots via Germany's Equal Esports Cup and France's Nova Series" }],
           },
         ],
       },

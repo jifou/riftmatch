@@ -25,7 +25,7 @@ const articles = [
     content: [
       {
         type: 'p',
-        children: [{ text: 'La semaine 7 du LEC Spring Split 2026 s\'est déroulée en direct au Madrid Arena du 8 au 10 mai, réunissant des milliers de fans ibériques pour le dernier Roadshow de la phase régulière. Résultats, classements, qualifiés et éliminés : voici le bilan complet.' }],
+        children: [{ text: "La semaine 7 du LEC Spring Split 2026 s'est déroulée en direct au Madrid Arena du 8 au 10 mai, réunissant des milliers de fans ibériques pour le dernier Roadshow de la phase régulière. Résultats, classements, qualifiés et éliminés : voici le bilan complet." }],
       },
       {
         type: 'h2',
@@ -33,11 +33,11 @@ const articles = [
       },
       {
         type: 'p',
-        children: [{ text: 'Team Vitality confirme sa domination en terminant première du classement après avoir battu Fnatic lors de cette semaine décisive. L\'équipe franco-européenne s\'impose comme la grande favorite de ces playoffs et entrera dans le bracket de l\'Upper Bracket avec l\'avantage du premier seed.' }],
+        children: [{ text: "Team Vitality confirme sa domination en terminant première du classement après avoir battu Fnatic lors de cette semaine décisive. L'équipe franco-européenne s'impose comme la grande favorite de ces playoffs et entrera dans le bracket de l'Upper Bracket avec l'avantage du premier seed." }],
       },
       {
         type: 'p',
-        children: [{ text: 'Karmine Corp prend la deuxième place et valide sa qualification au MSI 2026, une première depuis plusieurs splits. Le public madrilène a particulièrement applaudi les performances de l\'organisation française, fidèle à son identité aggressive.' }],
+        children: [{ text: "Karmine Corp prend la deuxième place et valide sa qualification au MSI 2026, une première depuis plusieurs splits. Le public madrilène a particulièrement applaudi les performances de l'organisation française, fidèle à son identité aggressive." }],
       },
       {
         type: 'h2',
@@ -60,11 +60,11 @@ const articles = [
       },
       {
         type: 'h2',
-        children: [{ text: 'Fnatic et Team Heretics : la saison s\'arrête ici' }],
+        children: [{ text: "Fnatic et Team Heretics : la saison s'arrête ici" }],
       },
       {
         type: 'p',
-        children: [{ text: 'La grande désillusion de ce split reste l\'élimination de Fnatic. Malgré quelques sursauts en milieu de saison, la team britannique ne parvient pas à enchaîner les victoires face aux meilleures équipes. Team Heretics connaît le même sort, avec une saison décevante qui ne leur offre pas d\'accès aux playoffs.' }],
+        children: [{ text: "La grande désillusion de ce split reste l'élimination de Fnatic. Malgré quelques sursauts en milieu de saison, la team britannique ne parvient pas à enchaîner les victoires face aux meilleures équipes. Team Heretics connaît le même sort, avec une saison décevante qui ne leur offre pas d'accès aux playoffs." }],
       },
       {
         type: 'p',
@@ -76,7 +76,7 @@ const articles = [
       },
       {
         type: 'p',
-        children: [{ text: 'Le bracket playoff se dessine avec des affiches prometteuses. Team Vitality et Karmine Corp partent favoris, mais G2 Esports — jamais à court de ressources — pourrait créer la surprise. Movistar KOI, sur ses terres espagnoles, bénéficie d\'un soutien indéfectible du public local.' }],
+        children: [{ text: "Le bracket playoff se dessine avec des affiches prometteuses. Team Vitality et Karmine Corp partent favoris, mais G2 Esports — jamais à court de ressources — pourrait créer la surprise. Movistar KOI, sur ses terres espagnoles, bénéficie d'un soutien indéfectible du public local." }],
       },
       {
         type: 'blockquote',
@@ -104,7 +104,7 @@ const articles = [
     content: [
       {
         type: 'p',
-        children: [{ text: 'Week 7 of the LEC Spring Split 2026 took place live at the Madrid Arena from May 8 to 10, bringing thousands of Iberian fans together for the final Roadshow of the regular season. Results, standings, qualifiers and eliminations — here\'s the full recap.' }],
+        children: [{ text: "Week 7 of the LEC Spring Split 2026 took place live at the Madrid Arena from May 8 to 10, bringing thousands of Iberian fans together for the final Roadshow of the regular season. Results, standings, qualifiers and eliminations — here's the full recap." }],
       },
       {
         type: 'h2',
@@ -139,7 +139,7 @@ const articles = [
       },
       {
         type: 'p',
-        children: [{ text: 'The biggest disappointment of the split is Fnatic\'s elimination. Despite showing flashes of their former self mid-season, they couldn\'t string together enough wins against top-tier competition. Team Heretics suffer the same fate, wrapping up a forgettable split outside the top 6.' }],
+        children: [{ text: "The biggest disappointment of the split is Fnatic's elimination. Despite showing flashes of their former self mid-season, they couldn't string together enough wins against top-tier competition. Team Heretics suffer the same fate, wrapping up a forgettable split outside the top 6." }],
       },
       {
         type: 'h2',

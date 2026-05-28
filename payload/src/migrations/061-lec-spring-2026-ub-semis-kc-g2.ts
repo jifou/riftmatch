@@ -28,7 +28,7 @@ const articles = [
         type: 'p',
         children: [
           {
-            text: 'Les LEC Spring 2026 Playoffs débutent ce samedi 23 mai et l\'affiche de lancement est immédiatement spectaculaire : Karmine Corp affronte G2 Esports en demi-finale du bracket supérieur, à 17h CEST. Un choc Best-of-5 qui lance la phase décisive de la saison régulière européenne.',
+            text: "Les LEC Spring 2026 Playoffs débutent ce samedi 23 mai et l'affiche de lancement est immédiatement spectaculaire : Karmine Corp affronte G2 Esports en demi-finale du bracket supérieur, à 17h CEST. Un choc Best-of-5 qui lance la phase décisive de la saison régulière européenne.",
           },
         ],
       },
@@ -60,7 +60,7 @@ const articles = [
         type: 'p',
         children: [
           {
-            text: 'Le format est un double-élimination avec six équipes. Le vainqueur d\'aujourd\'hui se qualifie directement pour la finale du bracket supérieur prévue le 25 mai — à une seule victoire de la grande finale du Spring. L\'équipe battue tombe dans le bracket inférieur et devra prendre un chemin beaucoup plus long pour rêver du titre.',
+            text: "Le format est un double-élimination avec six équipes. Le vainqueur d'aujourd'hui se qualifie directement pour la finale du bracket supérieur prévue le 25 mai — à une seule victoire de la grande finale du Spring. L'équipe battue tombe dans le bracket inférieur et devra prendre un chemin beaucoup plus long pour rêver du titre.",
           },
         ],
       },
@@ -68,7 +68,7 @@ const articles = [
         type: 'p',
         children: [
           {
-            text: 'Ces deux formations se connaissent bien : lors du LEC Versus en février 2026, G2 avait dominé KC 2-0 en demi-finale du bracket supérieur de ce même tournoi. Karmine Corp aura à cœur de renverser cette tendance sur le format BO5, plus favorable aux équipes capables d\'adapter leur stratégie.',
+            text: "Ces deux formations se connaissent bien : lors du LEC Versus en février 2026, G2 avait dominé KC 2-0 en demi-finale du bracket supérieur de ce même tournoi. Karmine Corp aura à cœur de renverser cette tendance sur le format BO5, plus favorable aux équipes capables d'adapter leur stratégie.",
           },
         ],
       },
@@ -80,7 +80,7 @@ const articles = [
         type: 'p',
         children: [
           {
-            text: 'La rencontre est diffusée en direct à 17h CEST sur la chaîne officielle LoL Esports. Les playoffs LEC se déroulent dans le cadre d\'un double-élimination et se poursuivent jusqu\'à la grande finale prévue le 7 juin 2026.',
+            text: "La rencontre est diffusée en direct à 17h CEST sur la chaîne officielle LoL Esports. Les playoffs LEC se déroulent dans le cadre d'un double-élimination et se poursuivent jusqu'à la grande finale prévue le 7 juin 2026.",
           },
         ],
       },
@@ -88,7 +88,7 @@ const articles = [
         type: 'blockquote',
         children: [
           {
-            text: 'KC vs G2 est l\'affrontement le plus attendu de ces playoffs. Deux philosophies de jeu, deux approches tactiques — mais un seul ticket pour la finale du bracket supérieur.',
+            text: "KC vs G2 est l'affrontement le plus attendu de ces playoffs. Deux philosophies de jeu, deux approches tactiques — mais un seul ticket pour la finale du bracket supérieur.",
           },
         ],
       },
@@ -114,7 +114,7 @@ const articles = [
         type: 'p',
         children: [
           {
-            text: 'The LEC Spring 2026 Playoffs kick off this Saturday, May 23, and the opening matchup couldn\'t be more exciting: Karmine Corp versus G2 Esports in the Upper Bracket Semifinals at 17:00 CEST. A Best-of-5 series that immediately raises the stakes for European League of Legends.',
+            text: "The LEC Spring 2026 Playoffs kick off this Saturday, May 23, and the opening matchup couldn't be more exciting: Karmine Corp versus G2 Esports in the Upper Bracket Semifinals at 17:00 CEST. A Best-of-5 series that immediately raises the stakes for European League of Legends.",
           },
         ],
       },
@@ -140,13 +140,13 @@ const articles = [
       },
       {
         type: 'h2',
-        children: [{ text: 'What\'s at Stake' }],
+        children: [{ text: "What's at Stake" }],
       },
       {
         type: 'p',
         children: [
           {
-            text: 'The Spring Playoffs use a double-elimination format with six teams. The winner of today\'s series advances directly to the Upper Bracket Final on May 25 — just one series away from the grand final. The losing side falls into the lower bracket, where the road to the title becomes significantly longer.',
+            text: "The Spring Playoffs use a double-elimination format with six teams. The winner of today's series advances directly to the Upper Bracket Final on May 25 — just one series away from the grand final. The losing side falls into the lower bracket, where the road to the title becomes significantly longer.",
           },
         ],
       },

@@ -51,7 +51,7 @@ export const up: MigrationModule['up'] = async (payload) => {
         },
         {
           type: 'p',
-          children: [{ text: 'Le 26 avril 2026, lors du fan meeting LCK Home Ground organisé à l\'Inspire Arena de Yeongjongdo, Incheon, T1 a offert à ses fans un cadeau surprise : Ryu "Keria" Min-seok a paraphé en direct sur scène son extension de contrat avec l\'organisation. Le support coréen est désormais lié à T1 jusqu\'à la fin de la saison 2029, soit un engagement de trois ans supplémentaires.' }],
+          children: [{ text: "Le 26 avril 2026, lors du fan meeting LCK Home Ground organisé à l'Inspire Arena de Yeongjongdo, Incheon, T1 a offert à ses fans un cadeau surprise : Ryu \"Keria\" Min-seok a paraphé en direct sur scène son extension de contrat avec l'organisation. Le support coréen est désormais lié à T1 jusqu'à la fin de la saison 2029, soit un engagement de trois ans supplémentaires." }],
         },
         {
           type: 'h2',
@@ -59,7 +59,7 @@ export const up: MigrationModule['up'] = async (payload) => {
         },
         {
           type: 'p',
-          children: [{ text: 'Cette saison, T1 a subi un changement notable en botlane. Après plus de cinq ans au sein de l\'organisation et trois titres mondiaux, Lee "Gumayusi" Min-hyung a quitté l\'équipe pour rejoindre Hanwha Life Esports. Il a été remplacé par Kim "Peyz" Su-hwan, ancien ADC de JD Gaming en LPL. Le reste du roster reste inchangé.' }],
+          children: [{ text: "Cette saison, T1 a subi un changement notable en botlane. Après plus de cinq ans au sein de l'organisation et trois titres mondiaux, Lee \"Gumayusi\" Min-hyung a quitté l'équipe pour rejoindre Hanwha Life Esports. Il a été remplacé par Kim \"Peyz\" Su-hwan, ancien ADC de JD Gaming en LPL. Le reste du roster reste inchangé." }],
         },
         {
           type: 'ul',
@@ -68,20 +68,20 @@ export const up: MigrationModule['up'] = async (payload) => {
             { type: 'li', children: [{ text: 'Jungle : Mun "Oner" Hyeon-jun' }] },
             { type: 'li', children: [{ text: 'Mid : Lee "Faker" Sang-hyeok' }] },
             { type: 'li', children: [{ text: 'ADC : Kim "Peyz" Su-hwan (nouveau)' }] },
-            { type: 'li', children: [{ text: 'Support : Ryu "Keria" Min-seok (prolongé jusqu\'en 2029)' }] },
+            { type: 'li', children: [{ text: "Support : Ryu \"Keria\" Min-seok (prolongé jusqu'en 2029)" }] },
           ],
         },
         {
           type: 'h2',
-          children: [{ text: 'Faker et Keria ensemble jusqu\'en 2029' }],
+          children: [{ text: "Faker et Keria ensemble jusqu'en 2029" }],
         },
         {
           type: 'p',
-          children: [{ text: 'Faker est lui aussi sous contrat jusqu\'en 2029. Oner et Peyz sont liés à T1 jusqu\'en 2028. La direction a clairement choisi la stabilité plutôt que les reconstructions, après avoir résisté aux offres massives de franchises LPL pour Keria en début d\'année.' }],
+          children: [{ text: "Faker est lui aussi sous contrat jusqu'en 2029. Oner et Peyz sont liés à T1 jusqu'en 2028. La direction a clairement choisi la stabilité plutôt que les reconstructions, après avoir résisté aux offres massives de franchises LPL pour Keria en début d'année." }],
         },
         {
           type: 'blockquote',
-          children: [{ text: '"Je voulais continuer avec cette équipe. T1, c\'est ma maison depuis 2021 — je n\'imagine pas porter un autre maillot." — Keria, lors de la cérémonie Home Ground' }],
+          children: [{ text: "\"Je voulais continuer avec cette équipe. T1, c'est ma maison depuis 2021 — je n'imagine pas porter un autre maillot.\" — Keria, lors de la cérémonie Home Ground" }],
         },
         {
           type: 'h2',
@@ -89,7 +89,7 @@ export const up: MigrationModule['up'] = async (payload) => {
         },
         {
           type: 'p',
-          children: [{ text: 'T1 aborde la suite du split LCK avec un effectif pleinement stabilisé. Leur prochain grand objectif est le MSI 2026, prévu en juin, où ils espèrent représenter la LCK face aux représentants LPL qui dominent la scène internationale depuis le début de l\'année.' }],
+          children: [{ text: "T1 aborde la suite du split LCK avec un effectif pleinement stabilisé. Leur prochain grand objectif est le MSI 2026, prévu en juin, où ils espèrent représenter la LCK face aux représentants LPL qui dominent la scène internationale depuis le début de l'année." }],
         },
       ],
     },
@@ -127,16 +127,16 @@ export const up: MigrationModule['up'] = async (payload) => {
         },
         {
           type: 'p',
-          children: [{ text: 'Le patch 26.9 marque le début de la Saison 2 ranked, avec un reset de LP pour les joueurs Apex (Master, Grandmaster, Challenger) sur les serveurs NA, EUW, EUN, LAN, BR et TR. La principale nouveauté système est l\'activation de WASD dans les files Solo/Duo et Flex.' }],
+          children: [{ text: "Le patch 26.9 marque le début de la Saison 2 ranked, avec un reset de LP pour les joueurs Apex (Master, Grandmaster, Challenger) sur les serveurs NA, EUW, EUN, LAN, BR et TR. La principale nouveauté système est l'activation de WASD dans les files Solo/Duo et Flex." }],
         },
         {
           type: 'ul',
           children: [
             { type: 'li', children: [{ text: 'WASD activé en ranked Solo/Duo et Flex' }] },
             { type: 'li', children: [{ text: 'Keybinds personnalisés par champion disponibles' }] },
-            { type: 'li', children: [{ text: 'Retour de Deathfire Touch et Stormraider\'s Surge' }] },
+            { type: 'li', children: [{ text: "Retour de Deathfire Touch et Stormraider's Surge" }] },
             { type: 'li', children: [{ text: 'Nouveaux items de départ et builds alternatifs' }] },
-            { type: 'li', children: [{ text: 'Mode Arena : nouvelle map, nouveaux Augments, nouveau système d\'événements' }] },
+            { type: 'li', children: [{ text: "Mode Arena : nouvelle map, nouveaux Augments, nouveau système d'événements" }] },
           ],
         },
         {
@@ -218,7 +218,7 @@ export const up: MigrationModule['up'] = async (payload) => {
         },
         {
           type: 'p',
-          children: [{ text: 'L\'ajout d\'un cast time plus long sur son ultime crée une fenêtre de contre-jeu réelle, notamment avec les CC rapides.' }],
+          children: [{ text: "L'ajout d'un cast time plus long sur son ultime crée une fenêtre de contre-jeu réelle, notamment avec les CC rapides." }],
         },
         {
           type: 'h4',
@@ -232,7 +232,7 @@ export const up: MigrationModule['up'] = async (payload) => {
         },
         {
           type: 'h4',
-          children: [{ text: 'Zoe — L\'Aspect de la Crépuscule' }],
+          children: [{ text: "Zoe — L'Aspect de la Crépuscule" }],
         },
         {
           type: 'ul',
@@ -248,12 +248,12 @@ export const up: MigrationModule['up'] = async (payload) => {
         },
         {
           type: 'h4',
-          children: [{ text: 'Zeri — L\'Étincelle de Zaun' }],
+          children: [{ text: "Zeri — L'Étincelle de Zaun" }],
         },
         {
           type: 'ul',
           children: [
-            { type: 'li', children: [{ text: 'P — Portée d\'attaque de base : 500 → 550' }] },
+            { type: 'li', children: [{ text: "P — Portée d'attaque de base : 500 → 550" }] },
             { type: 'li', children: [{ text: 'Q — Dégâts de base early augmentés, scaling AD late réduit' }] },
             { type: 'li', children: [{ text: 'Q — Conversion AS excédentaire : 70% → 50%' }] },
             { type: 'li', children: [{ text: 'W — Wall Crit multiplicateur : 175% → 150% / Ratio AP : 25% → 50%' }] },
@@ -276,7 +276,7 @@ export const up: MigrationModule['up'] = async (payload) => {
         },
         {
           type: 'p',
-          children: [{ text: 'L\'objectif est de créer deux chemins distincts viables : AD/Crit pour les duels et AP/Tank pour les fights prolongés en dragon.' }],
+          children: [{ text: "L'objectif est de créer deux chemins distincts viables : AD/Crit pour les duels et AP/Tank pour les fights prolongés en dragon." }],
         },
         {
           type: 'h4',
@@ -285,7 +285,7 @@ export const up: MigrationModule['up'] = async (payload) => {
         {
           type: 'ul',
           children: [
-            { type: 'li', children: [{ text: 'W Passif : S\'applique désormais sur toute l\'attaque en on-hit ; peut critter pour 140% (+40% bonus crit)' }] },
+            { type: 'li', children: [{ text: "W Passif : S'applique désormais sur toute l'attaque en on-hit ; peut critter pour 140% (+40% bonus crit)" }] },
             { type: 'li', children: [{ text: 'E : Les critical strikes prolongent le buff AS de 1s (max 4s)' }] },
           ],
         },

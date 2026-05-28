@@ -28,7 +28,7 @@ const articles = [
         type: 'p',
         children: [
           {
-            text: 'Riot Games a confirmé par la voix d\'Andrei "Meddler" van Roon, directeur du studio League of Legends, qu\'un seul nouveau champion sera publié en 2026 : Locke. Sa sortie est prévue pour la Saison 2, Acte 2 — baptisé "Pandemonium" — aux alentours du Patch 26.15, soit vers le 29 juillet 2026.',
+            text: "Riot Games a confirmé par la voix d'Andrei \"Meddler\" van Roon, directeur du studio League of Legends, qu'un seul nouveau champion sera publié en 2026 : Locke. Sa sortie est prévue pour la Saison 2, Acte 2 — baptisé \"Pandemonium\" — aux alentours du Patch 26.15, soit vers le 29 juillet 2026.",
           },
         ],
       },
@@ -40,7 +40,7 @@ const articles = [
         type: 'p',
         children: [
           {
-            text: 'Locke est un assassin AP destiné au milieu de carte, avec une viabilité potentielle dans la jungle. Son style visuel rappelle immédiatement Nanami Kento de l\'animé Jujutsu Kaisen : silhouette encapuchonnée, lunettes rondes à verres rouges et carquois dans le dos. Ses capacités semblent tout aussi référencées : son sort Q, intitulé "Soul Nail", projette un gigantesque clou fantomatique en ligne droite, une mécanique proche des techniques de Nobara Kugisaki dans le même manga.',
+            text: "Locke est un assassin AP destiné au milieu de carte, avec une viabilité potentielle dans la jungle. Son style visuel rappelle immédiatement Nanami Kento de l'animé Jujutsu Kaisen : silhouette encapuchonnée, lunettes rondes à verres rouges et carquois dans le dos. Ses capacités semblent tout aussi référencées : son sort Q, intitulé \"Soul Nail\", projette un gigantesque clou fantomatique en ligne droite, une mécanique proche des techniques de Nobara Kugisaki dans le même manga.",
           },
         ],
       },
@@ -52,7 +52,7 @@ const articles = [
         type: 'p',
         children: [
           {
-            text: 'Les premières images du gameplay font apparaître une seconde forme encore plus éthérée pour Locke, infligeant des dégâts en zone autour de lui. Le champion peut également ramasser des "artefacts scellés" dont le rôle précis dans son kit reste à préciser. Sa trame narrative prend racine à Demacia : une scène d\'introduction le montre s\'adressant à un barman qui l\'avertit que "personne ne revient de ces forêts inchangé".',
+            text: "Les premières images du gameplay font apparaître une seconde forme encore plus éthérée pour Locke, infligeant des dégâts en zone autour de lui. Le champion peut également ramasser des \"artefacts scellés\" dont le rôle précis dans son kit reste à préciser. Sa trame narrative prend racine à Demacia : une scène d'introduction le montre s'adressant à un barman qui l'avertit que \"personne ne revient de ces forêts inchangé\".",
           },
         ],
       },
@@ -64,7 +64,7 @@ const articles = [
         type: 'p',
         children: [
           {
-            text: 'La décision de limiter les sorties à un seul champion cette année s\'inscrit dans la stratégie "League Next", refonte majeure du jeu sur laquelle Riot concentre ses ressources. C\'est aussi la raison pour laquelle Locke cristallise l\'attention de la communauté : il n\'aura pas de concurrent interne en 2026. Les deux reworks confirmés — dont celui de Shyvana sorti en mars — complètent le programme.',
+            text: "La décision de limiter les sorties à un seul champion cette année s'inscrit dans la stratégie \"League Next\", refonte majeure du jeu sur laquelle Riot concentre ses ressources. C'est aussi la raison pour laquelle Locke cristallise l'attention de la communauté : il n'aura pas de concurrent interne en 2026. Les deux reworks confirmés — dont celui de Shyvana sorti en mars — complètent le programme.",
           },
         ],
       },
@@ -72,7 +72,7 @@ const articles = [
         type: 'blockquote',
         children: [
           {
-            text: 'Avec un seul nouveau champion prévu pour toute l\'année, Locke s\'annonce comme l\'un des sorties les plus attendues de l\'histoire récente de League of Legends. Rendez-vous à l\'été 2026.',
+            text: "Avec un seul nouveau champion prévu pour toute l'année, Locke s'annonce comme l'un des sorties les plus attendues de l'histoire récente de League of Legends. Rendez-vous à l'été 2026.",
           },
         ],
       },
@@ -110,7 +110,7 @@ const articles = [
         type: 'p',
         children: [
           {
-            text: 'Locke is designed as an AP assassin for the mid lane, with potential jungle viability. His visual design immediately evokes Jujutsu Kaisen\'s Nanami Kento: hooded figure, round red-tinted glasses, and a quiver on his back. His gameplay follows suit — his Q ability, called "Soul Nail," fires a giant ghostly nail in a straight line, a mechanic reminiscent of Nobara Kugisaki\'s cursed nail techniques from the same anime.',
+            text: "Locke is designed as an AP assassin for the mid lane, with potential jungle viability. His visual design immediately evokes Jujutsu Kaisen's Nanami Kento: hooded figure, round red-tinted glasses, and a quiver on his back. His gameplay follows suit — his Q ability, called \"Soul Nail,\" fires a giant ghostly nail in a straight line, a mechanic reminiscent of Nobara Kugisaki's cursed nail techniques from the same anime.",
           },
         ],
       },
@@ -134,7 +134,7 @@ const articles = [
         type: 'p',
         children: [
           {
-            text: 'The decision to release only one champion this year is directly tied to "League Next," Riot\'s large-scale rework of the game\'s core systems, which is absorbing a significant portion of the development team\'s bandwidth. Two reworks are also on the calendar — Shyvana launched in March 2026, while a second remains unconfirmed. With no other new champion competing for the spotlight, Locke carries enormous community expectations heading into the summer.',
+            text: "The decision to release only one champion this year is directly tied to \"League Next,\" Riot's large-scale rework of the game's core systems, which is absorbing a significant portion of the development team's bandwidth. Two reworks are also on the calendar — Shyvana launched in March 2026, while a second remains unconfirmed. With no other new champion competing for the spotlight, Locke carries enormous community expectations heading into the summer.",
           },
         ],
       },

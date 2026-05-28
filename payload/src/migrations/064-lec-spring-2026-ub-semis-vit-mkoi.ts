@@ -28,7 +28,7 @@ const articles = [
         type: 'p',
         children: [
           {
-            text: 'Movistar KOI a réalisé l\'une des performances les plus impressionnantes de ces LEC Spring 2026 Playoffs en s\'imposant face à Team Vitality lors des demi-finales du bracket supérieur, ce dimanche 24 mai à 17h CEST. La tête de série numéro un, qui avait terminé première de la saison régulière, tombe de haut et doit désormais prendre la voie du bracket inférieur.',
+            text: "Movistar KOI a réalisé l'une des performances les plus impressionnantes de ces LEC Spring 2026 Playoffs en s'imposant face à Team Vitality lors des demi-finales du bracket supérieur, ce dimanche 24 mai à 17h CEST. La tête de série numéro un, qui avait terminé première de la saison régulière, tombe de haut et doit désormais prendre la voie du bracket inférieur.",
           },
         ],
       },
@@ -40,7 +40,7 @@ const articles = [
         type: 'p',
         children: [
           {
-            text: 'Emmenés par un Elyoya étincelant à la jungle, les joueurs de Movistar KOI ont su imposer leur style de jeu à chaque moment décisif de la série. L\'équipe espagnole, quatrième de la saison régulière, avait pourtant été choisie comme adversaire par Vitality — une décision que la tête de série numéro un paie cash ce soir. MKOI a prouvé que son bilan en phase régulière sous-estimait largement leur potentiel en Best-of-5.',
+            text: "Emmenés par un Elyoya étincelant à la jungle, les joueurs de Movistar KOI ont su imposer leur style de jeu à chaque moment décisif de la série. L'équipe espagnole, quatrième de la saison régulière, avait pourtant été choisie comme adversaire par Vitality — une décision que la tête de série numéro un paie cash ce soir. MKOI a prouvé que son bilan en phase régulière sous-estimait largement leur potentiel en Best-of-5.",
           },
         ],
       },
@@ -118,7 +118,7 @@ const articles = [
         type: 'p',
         children: [
           {
-            text: 'Jungler Elyoya was a standout performer throughout the series, exemplifying the controlled and proactive style that has defined Movistar KOI this split. The Spanish organization, which entered the playoffs as the fourth seed, was actually hand-picked as Vitality\'s opponent — a choice that backfired spectacularly. MKOI demonstrated that their regular season record did not reflect their true ceiling in extended Best-of-5 play.',
+            text: "Jungler Elyoya was a standout performer throughout the series, exemplifying the controlled and proactive style that has defined Movistar KOI this split. The Spanish organization, which entered the playoffs as the fourth seed, was actually hand-picked as Vitality's opponent — a choice that backfired spectacularly. MKOI demonstrated that their regular season record did not reflect their true ceiling in extended Best-of-5 play.",
           },
         ],
       },
@@ -138,13 +138,13 @@ const articles = [
         type: 'p',
         children: [
           {
-            text: 'This matchup had been anticipated all split. Earlier in the LEC Versus (February 2026), MKOI had already gotten the better of Vitality. Tonight\'s result confirms that Movistar KOI are no longer just a regular season contender — they are a legitimate finals threat.',
+            text: "This matchup had been anticipated all split. Earlier in the LEC Versus (February 2026), MKOI had already gotten the better of Vitality. Tonight's result confirms that Movistar KOI are no longer just a regular season contender — they are a legitimate finals threat.",
           },
         ],
       },
       {
         type: 'h2',
-        children: [{ text: 'What\'s Next' }],
+        children: [{ text: "What's Next" }],
       },
       {
         type: 'p',

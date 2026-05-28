@@ -47,7 +47,7 @@ const articles = [
         type: 'p',
         children: [
           {
-            text: 'Eternal Aspect Leona habille la Radieuse d\'une armure baignée d\'un éclat doré, prolongeant l\'iconographie de l\'Aspect du Soleil avec de nouvelles animations de sorts, des effets de particules solaires et des lignes de dialogue inédites qui approfondissent son lien avec Diana. De l\'autre côté, Eternal Aspect Diana enveloppe la Lune dans un argent lunaire vif, avec des effets de lumière froide sur chaque compétence et des animations rappelant les phases de la lune.',
+            text: "Eternal Aspect Leona habille la Radieuse d'une armure baignée d'un éclat doré, prolongeant l'iconographie de l'Aspect du Soleil avec de nouvelles animations de sorts, des effets de particules solaires et des lignes de dialogue inédites qui approfondissent son lien avec Diana. De l'autre côté, Eternal Aspect Diana enveloppe la Lune dans un argent lunaire vif, avec des effets de lumière froide sur chaque compétence et des animations rappelant les phases de la lune.",
           },
         ],
       },
@@ -59,7 +59,7 @@ const articles = [
         type: 'p',
         children: [
           {
-            text: 'En complément, Riot propose l\'Édition Mythique Eclipse Diana le même jour. Contrairement au skin Légendaire aux teintes bleues, cette variante Mythique adopte un coloris rose-rouge intense, évoquant une éclipse totale de lune. Ce type d\'édition est réservé aux joueurs souhaitant une identité visuelle encore plus distinctive pour leur championne favorite.',
+            text: "En complément, Riot propose l'Édition Mythique Eclipse Diana le même jour. Contrairement au skin Légendaire aux teintes bleues, cette variante Mythique adopte un coloris rose-rouge intense, évoquant une éclipse totale de lune. Ce type d'édition est réservé aux joueurs souhaitant une identité visuelle encore plus distinctive pour leur championne favorite.",
           },
         ],
       },
@@ -71,7 +71,7 @@ const articles = [
         type: 'p',
         children: [
           {
-            text: 'Ces designs ne sont pas entièrement nouveaux : ils avaient été introduits dans Teamfight Tactics lors de l\'Ensemble 17, et leur popularité a convaincu Riot de les intégrer dans le client principal de League of Legends. C\'est la deuxième fois cette saison qu\'un skin né dans TFT fait le chemin inverse vers la Faille de l\'Invocateur.',
+            text: "Ces designs ne sont pas entièrement nouveaux : ils avaient été introduits dans Teamfight Tactics lors de l'Ensemble 17, et leur popularité a convaincu Riot de les intégrer dans le client principal de League of Legends. C'est la deuxième fois cette saison qu'un skin né dans TFT fait le chemin inverse vers la Faille de l'Invocateur.",
           },
         ],
       },
@@ -79,7 +79,7 @@ const articles = [
         type: 'p',
         children: [
           {
-            text: 'Les deux skins Eternal Aspects rappellent également le canon romantique établi par Riot entre Leona et Diana : sous l\'éternelle opposition des Solari et des Lunari se cache un amour que les deux guerrières n\'ont jamais pu pleinement s\'avouer. La ligne Eternal Aspects cristallise visuellement cette tension et cette harmonie simultanées.',
+            text: "Les deux skins Eternal Aspects rappellent également le canon romantique établi par Riot entre Leona et Diana : sous l'éternelle opposition des Solari et des Lunari se cache un amour que les deux guerrières n'ont jamais pu pleinement s'avouer. La ligne Eternal Aspects cristallise visuellement cette tension et cette harmonie simultanées.",
           },
         ],
       },
@@ -87,7 +87,7 @@ const articles = [
         type: 'blockquote',
         children: [
           {
-            text: 'Eternal Aspects Leona et Diana seront disponibles le 27 mai 2026 à 1 820 RP chacun. L\'édition Mythique Eclipse Diana sort le même jour. À suivre dans le Patch 26.11.',
+            text: "Eternal Aspects Leona et Diana seront disponibles le 27 mai 2026 à 1 820 RP chacun. L'édition Mythique Eclipse Diana sort le même jour. À suivre dans le Patch 26.11.",
           },
         ],
       },
@@ -144,7 +144,7 @@ const articles = [
         type: 'p',
         children: [
           {
-            text: 'Alongside the two Legendary skins, Riot is releasing the Mythic Eclipse Diana Edition on the same day. Unlike the Legendary skin\'s blue lunar tones, the Mythic variant features a vivid pinkish-red color scheme, conjuring the imagery of a total lunar eclipse. This Mythic edition is designed for players who want the most distinctive visual identity for their favourite champion.',
+            text: "Alongside the two Legendary skins, Riot is releasing the Mythic Eclipse Diana Edition on the same day. Unlike the Legendary skin's blue lunar tones, the Mythic variant features a vivid pinkish-red color scheme, conjuring the imagery of a total lunar eclipse. This Mythic edition is designed for players who want the most distinctive visual identity for their favourite champion.",
           },
         ],
       },
@@ -156,7 +156,7 @@ const articles = [
         type: 'p',
         children: [
           {
-            text: 'These designs are not entirely brand new: they originated in Teamfight Tactics during Set 17, where their popularity prompted Riot to bring them into the main League of Legends client. It marks the second time this season that a TFT-born skin has made the reverse journey to the Summoner\'s Rift.',
+            text: "These designs are not entirely brand new: they originated in Teamfight Tactics during Set 17, where their popularity prompted Riot to bring them into the main League of Legends client. It marks the second time this season that a TFT-born skin has made the reverse journey to the Summoner's Rift.",
           },
         ],
       },

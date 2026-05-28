@@ -43,13 +43,13 @@ export const up: MigrationModule['up'] = async (payload) => {
         {
           type: 'ul',
           children: [
-            { type: 'li', children: [{ text: 'R — Grandmaster\'s Might : Dégâts magiques par stack : 80/110/140 → 90/125/160' }] },
-            { type: 'li', children: [{ text: 'E — Counter Strike : Durée d\'étourdissement augmentée de 0,25s' }] },
+            { type: 'li', children: [{ text: "R — Grandmaster's Might : Dégâts magiques par stack : 80/110/140 → 90/125/160" }] },
+            { type: 'li', children: [{ text: "E — Counter Strike : Durée d'étourdissement augmentée de 0,25s" }] },
           ],
         },
         {
           type: 'p',
-          children: [{ text: 'Jax souffrait d\'un manque de puissance en fin de partie suite aux changements d\'items. Ces buffs lui redonnent une présence dans les duels prolongés.' }],
+          children: [{ text: "Jax souffrait d'un manque de puissance en fin de partie suite aux changements d'items. Ces buffs lui redonnent une présence dans les duels prolongés." }],
         },
         {
           type: 'h4',
@@ -78,7 +78,7 @@ export const up: MigrationModule['up'] = async (payload) => {
         },
         {
           type: 'p',
-          children: [{ text: 'Caitlyn a longtemps été l\'ADC à la portée la plus haute, mais les changements de la saison ont réduit son avantage. On lui redonne cet atout distinctif.' }],
+          children: [{ text: "Caitlyn a longtemps été l'ADC à la portée la plus haute, mais les changements de la saison ont réduit son avantage. On lui redonne cet atout distinctif." }],
         },
         {
           type: 'h4',
@@ -97,7 +97,7 @@ export const up: MigrationModule['up'] = async (payload) => {
         },
         {
           type: 'h4',
-          children: [{ text: 'Soraka — L\'Étoile Filante' }],
+          children: [{ text: "Soraka — L'Étoile Filante" }],
         },
         {
           type: 'ul',
@@ -137,7 +137,7 @@ export const up: MigrationModule['up'] = async (payload) => {
         },
         {
           type: 'p',
-          children: [{ text: 'Cet ajustement récompense les joueurs qui maximisent le retour de l\'Orbe en le passant à travers les ennemis, sans modifier le burst total.' }],
+          children: [{ text: "Cet ajustement récompense les joueurs qui maximisent le retour de l'Orbe en le passant à travers les ennemis, sans modifier le burst total." }],
         },
         {
           type: 'h2',
@@ -184,7 +184,7 @@ export const up: MigrationModule['up'] = async (payload) => {
         },
         {
           type: 'p',
-          children: [{ text: 'Conquerant reste la rune dominante sur trop de champions. Cette réduction d\'omnivamp limite son efficacité sur les champions de sustain comme Aatrox et Olaf.' }],
+          children: [{ text: "Conquerant reste la rune dominante sur trop de champions. Cette réduction d'omnivamp limite son efficacité sur les champions de sustain comme Aatrox et Olaf." }],
         },
         {
           type: 'h2',
@@ -211,7 +211,7 @@ export const up: MigrationModule['up'] = async (payload) => {
       excerpt:
         'Le PBE 14.10 introduit des changements sur les junglers et prépare l\'arrivée de la saison MSI avec des buffs globaux sur les ADC.',
       highlights: [
-        { text: '🔺 Kha\'Zix — Isolation mechanic buffée' },
+        { text: "🔺 Kha'Zix — Isolation mechanic buffée" },
         { text: '🔺 Vi — Dégâts Q augmentés' },
         { text: '🔻 Zeri — Vitesse attaque réduite' },
         { text: '⚖️ Baron Nashor — Respawn timer ajusté pour MSI' },
@@ -227,7 +227,7 @@ export const up: MigrationModule['up'] = async (payload) => {
         },
         {
           type: 'h4',
-          children: [{ text: 'Kha\'Zix' }],
+          children: [{ text: "Kha'Zix" }],
         },
         {
           type: 'ul',
@@ -241,7 +241,7 @@ export const up: MigrationModule['up'] = async (payload) => {
         },
         {
           type: 'p',
-          children: [{ text: 'Des ajustements des timers d\'objectifs sont testés pour favoriser les comebacks lors des compétitions MSI.' }],
+          children: [{ text: "Des ajustements des timers d'objectifs sont testés pour favoriser les comebacks lors des compétitions MSI." }],
         },
       ],
     },
@@ -272,7 +272,7 @@ export const up: MigrationModule['up'] = async (payload) => {
         },
         {
           type: 'p',
-          children: [{ text: 'Depuis plusieurs patches, les ADC souffraient d\'un manque de domination en phase de laning. La présence accrue des supports actifs combinée à des items de sustain très efficaces avait relégué les carries à un rôle secondaire.' }],
+          children: [{ text: "Depuis plusieurs patches, les ADC souffraient d'un manque de domination en phase de laning. La présence accrue des supports actifs combinée à des items de sustain très efficaces avait relégué les carries à un rôle secondaire." }],
         },
         {
           type: 'h2',
@@ -291,7 +291,7 @@ export const up: MigrationModule['up'] = async (payload) => {
           children: [
             { type: 'li', children: [{ text: 'Caitlyn : pick prioritaire avec la portée buffée + composition avec Lux/Morgana' }] },
             { type: 'li', children: [{ text: 'Jinx : excellent contre les compositions sans engage, elle scale mieux maintenant' }] },
-            { type: 'li', children: [{ text: 'Jhin : profite de l\'environnement moins sustain pour punir les erreurs' }] },
+            { type: 'li', children: [{ text: "Jhin : profite de l'environnement moins sustain pour punir les erreurs" }] },
           ],
         },
       ],
@@ -323,7 +323,7 @@ export const up: MigrationModule['up'] = async (payload) => {
         },
         {
           type: 'p',
-          children: [{ text: 'Le MSI 2024 réunit 13 équipes issues des différentes régions mondiales. La phase de groupes est suivie d\'un bracket principal en double élimination.' }],
+          children: [{ text: "Le MSI 2024 réunit 13 équipes issues des différentes régions mondiales. La phase de groupes est suivie d'un bracket principal en double élimination." }],
         },
         {
           type: 'h2',

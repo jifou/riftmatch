@@ -28,19 +28,19 @@ const articles = [
         type: 'p',
         children: [
           {
-            text: 'Les quatre matchs des Play-In Knights Rivals du LPL Split 2 2026 sont désormais joués. Le bilan est sans appel : quatre séries disputées, dont trois décidées au cinquième game, et un upset majeur qui va redistribuer les cartes dans les playoffs. LGD Gaming, donnés perdants par la majorité des observateurs, a éliminé Weibo Gaming dans un game 5 épique, provoquant l\'une des surprises les plus retentissantes de la saison en LPL.',
+            text: "Les quatre matchs des Play-In Knights Rivals du LPL Split 2 2026 sont désormais joués. Le bilan est sans appel : quatre séries disputées, dont trois décidées au cinquième game, et un upset majeur qui va redistribuer les cartes dans les playoffs. LGD Gaming, donnés perdants par la majorité des observateurs, a éliminé Weibo Gaming dans un game 5 épique, provoquant l'une des surprises les plus retentissantes de la saison en LPL.",
           },
         ],
       },
       {
         type: 'h2',
-        children: [{ text: 'LGD renverse Weibo Gaming : l\'upset de la saison' }],
+        children: [{ text: "LGD renverse Weibo Gaming : l'upset de la saison" }],
       },
       {
         type: 'p',
         children: [
           {
-            text: 'C\'est le résultat qui a fait trembler toute la scène LPL. Weibo Gaming, armés de Zhao "Elk" Jia-Hao à l\'ADC et du jungler Zhao "jiejie" Li-Jie, entraient dans la série avec le statut de favoris absolus. LGD, bien plus discrets en saison régulière, ont refusé de plier. La série s\'est étirée jusqu\'au game 5, où LGD a réussi à tenir le choc pour arracher la qualification. Weibo Gaming, l\'une des équipes les plus chères construites cet hiver, s\'en va dès le play-in.',
+            text: "C'est le résultat qui a fait trembler toute la scène LPL. Weibo Gaming, armés de Zhao \"Elk\" Jia-Hao à l'ADC et du jungler Zhao \"jiejie\" Li-Jie, entraient dans la série avec le statut de favoris absolus. LGD, bien plus discrets en saison régulière, ont refusé de plier. La série s'est étirée jusqu'au game 5, où LGD a réussi à tenir le choc pour arracher la qualification. Weibo Gaming, l'une des équipes les plus chères construites cet hiver, s'en va dès le play-in.",
           },
         ],
       },
@@ -52,7 +52,7 @@ const articles = [
         type: 'p',
         children: [
           {
-            text: 'EDward Gaming, leaders du Groupe Nirvana, ont failli être victimes d\'un autre upset. Les Ninjas in Pyjamas ont poussé EDG jusqu\'à la limite dans un BO5 âprement disputé. EDG a finalement su renverser la situation au game 5, confirmant leur qualification pour les playoffs. Cette série aura montré que NiP n\'est pas l\'équipe que leur bilan de saison régulière laissait penser — mais EDG reste bien présent dans la course.',
+            text: "EDward Gaming, leaders du Groupe Nirvana, ont failli être victimes d'un autre upset. Les Ninjas in Pyjamas ont poussé EDG jusqu'à la limite dans un BO5 âprement disputé. EDG a finalement su renverser la situation au game 5, confirmant leur qualification pour les playoffs. Cette série aura montré que NiP n'est pas l'équipe que leur bilan de saison régulière laissait penser — mais EDG reste bien présent dans la course.",
           },
         ],
       },
@@ -64,7 +64,7 @@ const articles = [
         type: 'p',
         children: [
           {
-            text: 'ThunderTalk Gaming a réalisé le meilleur résultat du play-in en dominant Invictus Gaming 3-0 sans trembler. TT a affiché un niveau collectif impressionnant, laissant iG sans réponse dans chacune des trois manches. De l\'autre côté, Team WE a dû aller chercher sa qualification en cinq games contre LNG Esports dans une série tout aussi serrée. WE s\'en sort grâce à une constance défensive et une gestion des ressources irréprochable dans le game décisif.',
+            text: "ThunderTalk Gaming a réalisé le meilleur résultat du play-in en dominant Invictus Gaming 3-0 sans trembler. TT a affiché un niveau collectif impressionnant, laissant iG sans réponse dans chacune des trois manches. De l'autre côté, Team WE a dû aller chercher sa qualification en cinq games contre LNG Esports dans une série tout aussi serrée. WE s'en sort grâce à une constance défensive et une gestion des ressources irréprochable dans le game décisif.",
           },
         ],
       },
@@ -76,7 +76,7 @@ const articles = [
         type: 'p',
         children: [
           {
-            text: 'Les matchs des quarts de finale débuteront le 29 mai au Shenzhen LongGang BuJi Cultural & Sports Center. Le bracket est le suivant : JD Gaming affronte ThunderTalk Gaming, Top Esports challenge LGD Gaming (le favori TES face au géant tué), Anyone\'s Legend retrouve EDward Gaming, et BiliBili Gaming ouvre contre Team WE. Tous les matchs sont en best-of-five avec le format Hard Fearless Draft.',
+            text: "Les matchs des quarts de finale débuteront le 29 mai au Shenzhen LongGang BuJi Cultural & Sports Center. Le bracket est le suivant : JD Gaming affronte ThunderTalk Gaming, Top Esports challenge LGD Gaming (le favori TES face au géant tué), Anyone's Legend retrouve EDward Gaming, et BiliBili Gaming ouvre contre Team WE. Tous les matchs sont en best-of-five avec le format Hard Fearless Draft.",
           },
         ],
       },
@@ -84,7 +84,7 @@ const articles = [
         type: 'blockquote',
         children: [
           {
-            text: 'Le LPL Split 2 2026 va désormais s\'emballer : LGD, outsider parfait après son upset de Weibo, peut-il continuer sur sa lancée face à TES ? Les réponses dès le 29 mai.',
+            text: "Le LPL Split 2 2026 va désormais s'emballer : LGD, outsider parfait après son upset de Weibo, peut-il continuer sur sa lancée face à TES ? Les réponses dès le 29 mai.",
           },
         ],
       },
@@ -134,7 +134,7 @@ const articles = [
         type: 'p',
         children: [
           {
-            text: 'EDward Gaming, who topped Group Nirvana in the regular season, came dangerously close to being upset themselves. Ninjas in Pyjamas showed impressive early-game coordination across all five games and pushed EDG to the absolute limit. In the end, EDG\'s macro game and teamfighting depth proved decisive in Game 5, allowing them to close out the series 3-2 and earn their playoff spot.',
+            text: "EDward Gaming, who topped Group Nirvana in the regular season, came dangerously close to being upset themselves. Ninjas in Pyjamas showed impressive early-game coordination across all five games and pushed EDG to the absolute limit. In the end, EDG's macro game and teamfighting depth proved decisive in Game 5, allowing them to close out the series 3-2 and earn their playoff spot.",
           },
         ],
       },
@@ -146,7 +146,7 @@ const articles = [
         type: 'p',
         children: [
           {
-            text: 'ThunderTalk Gaming had the cleanest run of the play-in, dispatching Invictus Gaming 3-0 in a dominant performance that left iG without answers in all three games. Team WE, meanwhile, had to dig deep to overcome LNG Esports in another five-game series. WE\'s disciplined defensive play and superior late-game decision-making in the final game secured their passage to the main bracket.',
+            text: "ThunderTalk Gaming had the cleanest run of the play-in, dispatching Invictus Gaming 3-0 in a dominant performance that left iG without answers in all three games. Team WE, meanwhile, had to dig deep to overcome LNG Esports in another five-game series. WE's disciplined defensive play and superior late-game decision-making in the final game secured their passage to the main bracket.",
           },
         ],
       },
@@ -158,7 +158,7 @@ const articles = [
         type: 'p',
         children: [
           {
-            text: 'The quarterfinals begin May 29 at the Shenzhen LongGang BuJi Cultural & Sports Center. Matchups: JD Gaming vs ThunderTalk Gaming, Top Esports vs LGD Gaming (an intriguing test for the giant killer), Anyone\'s Legend vs EDward Gaming, and BiliBili Gaming vs Team WE. All matches are best-of-five under Hard Fearless Draft rules.',
+            text: "The quarterfinals begin May 29 at the Shenzhen LongGang BuJi Cultural & Sports Center. Matchups: JD Gaming vs ThunderTalk Gaming, Top Esports vs LGD Gaming (an intriguing test for the giant killer), Anyone's Legend vs EDward Gaming, and BiliBili Gaming vs Team WE. All matches are best-of-five under Hard Fearless Draft rules.",
           },
         ],
       },
@@ -240,7 +240,7 @@ const articles = [
         type: 'p',
         children: [
           {
-            text: 'Los cuartos de final arrancan el 29 de mayo en el Shenzhen LongGang BuJi Cultural & Sports Center. Los cruces son los siguientes: JD Gaming vs ThunderTalk Gaming, Top Esports vs LGD Gaming (el favorito ante el equipo revelación), Anyone\'s Legend vs EDward Gaming, y BiliBili Gaming vs Team WE. Todos los partidos son al mejor de cinco bajo el formato Hard Fearless Draft.',
+            text: "Los cuartos de final arrancan el 29 de mayo en el Shenzhen LongGang BuJi Cultural & Sports Center. Los cruces son los siguientes: JD Gaming vs ThunderTalk Gaming, Top Esports vs LGD Gaming (el favorito ante el equipo revelación), Anyone's Legend vs EDward Gaming, y BiliBili Gaming vs Team WE. Todos los partidos son al mejor de cinco bajo el formato Hard Fearless Draft.",
           },
         ],
       },

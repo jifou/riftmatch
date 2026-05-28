@@ -28,7 +28,7 @@ const articles = [
         type: 'p',
         children: [
           {
-            text: 'La saison régulière du LEC Spring 2026 a pris fin lors du Roadtrip de Madrid (semaine 7), et les six équipes qualifiées pour les playoffs sont désormais connues. Team Vitality s\'est imposée en tête du classement avec un bilan record de 8 victoires pour une seule défaite, s\'assurant ainsi la première tête de série et le privilège de choisir son adversaire en bracket supérieur.',
+            text: "La saison régulière du LEC Spring 2026 a pris fin lors du Roadtrip de Madrid (semaine 7), et les six équipes qualifiées pour les playoffs sont désormais connues. Team Vitality s'est imposée en tête du classement avec un bilan record de 8 victoires pour une seule défaite, s'assurant ainsi la première tête de série et le privilège de choisir son adversaire en bracket supérieur.",
           },
         ],
       },
@@ -40,7 +40,7 @@ const articles = [
         type: 'p',
         children: [
           {
-            text: 'Le top 4 du classement — Vitality (1re), Karmine Corp (2e), G2 Esports (3e) et Movistar KOI (4e) — rejoint directement le bracket supérieur. Natus Vincere (5e) et GIANTX (6e) démarrent quant à eux en bracket inférieur, où ils attendront les perdants du premier tour de l\'upper bracket.',
+            text: "Le top 4 du classement — Vitality (1re), Karmine Corp (2e), G2 Esports (3e) et Movistar KOI (4e) — rejoint directement le bracket supérieur. Natus Vincere (5e) et GIANTX (6e) démarrent quant à eux en bracket inférieur, où ils attendront les perdants du premier tour de l'upper bracket.",
           },
         ],
       },
@@ -48,19 +48,19 @@ const articles = [
         type: 'p',
         children: [
           {
-            text: 'Quatre équipes ne verront pas les playoffs : Fnatic, SK Gaming, Shifters et Team Heretics terminent respectivement aux places 7 à 10 et voient leur saison s\'arrêter. Pour Fnatic, pourtant finaliste du LEC Versus en 2025, c\'est une désillusion après un Sprint 2026 décevant.',
+            text: "Quatre équipes ne verront pas les playoffs : Fnatic, SK Gaming, Shifters et Team Heretics terminent respectivement aux places 7 à 10 et voient leur saison s'arrêter. Pour Fnatic, pourtant finaliste du LEC Versus en 2025, c'est une désillusion après un Sprint 2026 décevant.",
           },
         ],
       },
       {
         type: 'h2',
-        children: [{ text: 'Le bracket : KC vs G2, le choc de l\'upper bracket' }],
+        children: [{ text: "Le bracket : KC vs G2, le choc de l'upper bracket" }],
       },
       {
         type: 'p',
         children: [
           {
-            text: 'Forte de sa première place, Team Vitality a exercé son droit de choisir son adversaire et a désigné Movistar KOI. Le match ouvre les playoffs le vendredi 23 mai à 17h CET. Karmine Corp et G2 Esports s\'affrontent dès le samedi 24 mai dans ce qui promet d\'être le duel de la semaine : deux équipes au style offensif marqué, des supporters enflammés des deux côtés.',
+            text: "Forte de sa première place, Team Vitality a exercé son droit de choisir son adversaire et a désigné Movistar KOI. Le match ouvre les playoffs le vendredi 23 mai à 17h CET. Karmine Corp et G2 Esports s'affrontent dès le samedi 24 mai dans ce qui promet d'être le duel de la semaine : deux équipes au style offensif marqué, des supporters enflammés des deux côtés.",
           },
         ],
       },
@@ -68,7 +68,7 @@ const articles = [
         type: 'p',
         children: [
           {
-            text: 'Les perdants de ces deux demies plongeront en bracket inférieur (lower bracket), où ils retrouveront NAVI et GIANTX les 30 et 31 mai. L\'ensemble des matchs se joue en format best-of-5.',
+            text: "Les perdants de ces deux demies plongeront en bracket inférieur (lower bracket), où ils retrouveront NAVI et GIANTX les 30 et 31 mai. L'ensemble des matchs se joue en format best-of-5.",
           },
         ],
       },
@@ -80,7 +80,7 @@ const articles = [
         type: 'p',
         children: [
           {
-            text: 'Les deux finalistes du LEC Spring 2026 décrocheront leur billet pour le Mid-Season Invitational (MSI) 2026 ainsi que pour l\'Esports World Cup 2026. Le Grand Final est prévu pour le 7 juin, avec un format double élimination qui garantit plusieurs duels palpitants avant la grande finale.',
+            text: "Les deux finalistes du LEC Spring 2026 décrocheront leur billet pour le Mid-Season Invitational (MSI) 2026 ainsi que pour l'Esports World Cup 2026. Le Grand Final est prévu pour le 7 juin, avec un format double élimination qui garantit plusieurs duels palpitants avant la grande finale.",
           },
         ],
       },
@@ -88,7 +88,7 @@ const articles = [
         type: 'blockquote',
         children: [
           {
-            text: 'Le LEC Spring 2026 est à son niveau le plus compétitif depuis des années. Vitality semble inarrêtable, mais KC et G2 ont montré tout l\'été qu\'ils pouvaient renverser n\'importe quelle équipe. Cette postseason s\'annonce mémorable.',
+            text: "Le LEC Spring 2026 est à son niveau le plus compétitif depuis des années. Vitality semble inarrêtable, mais KC et G2 ont montré tout l'été qu'ils pouvaient renverser n'importe quelle équipe. Cette postseason s'annonce mémorable.",
           },
         ],
       },
@@ -114,7 +114,7 @@ const articles = [
         type: 'p',
         children: [
           {
-            text: 'The LEC Spring 2026 regular season came to an end during Week 7\'s Madrid Roadtrip, and all six playoff teams are now set. Team Vitality dominated the season with an impressive 8-1 record, claiming the first seed and the right to choose their upper bracket opponent heading into the postseason.',
+            text: "The LEC Spring 2026 regular season came to an end during Week 7's Madrid Roadtrip, and all six playoff teams are now set. Team Vitality dominated the season with an impressive 8-1 record, claiming the first seed and the right to choose their upper bracket opponent heading into the postseason.",
           },
         ],
       },
@@ -126,7 +126,7 @@ const articles = [
         type: 'p',
         children: [
           {
-            text: 'The top four teams in the standings — Vitality (1st), Karmine Corp (2nd), G2 Esports (3rd), and Movistar KOI (4th) — enter directly into the upper bracket. Natus Vincere (5th) and GIANTX (6th) start in the lower bracket, waiting for the upper bracket\'s first-round losers.',
+            text: "The top four teams in the standings — Vitality (1st), Karmine Corp (2nd), G2 Esports (3rd), and Movistar KOI (4th) — enter directly into the upper bracket. Natus Vincere (5th) and GIANTX (6th) start in the lower bracket, waiting for the upper bracket's first-round losers.",
           },
         ],
       },
@@ -134,7 +134,7 @@ const articles = [
         type: 'p',
         children: [
           {
-            text: 'Fnatic, SK Gaming, Shifters, and Team Heretics failed to qualify for the playoffs, ending their Spring 2026 campaign. Fnatic\'s absence is particularly notable, given the organization\'s historic playoff presence in the LEC.',
+            text: "Fnatic, SK Gaming, Shifters, and Team Heretics failed to qualify for the playoffs, ending their Spring 2026 campaign. Fnatic's absence is particularly notable, given the organization's historic playoff presence in the LEC.",
           },
         ],
       },
@@ -160,7 +160,7 @@ const articles = [
       },
       {
         type: 'h2',
-        children: [{ text: 'What\'s at Stake: MSI and Esports World Cup Spots' }],
+        children: [{ text: "What's at Stake: MSI and Esports World Cup Spots" }],
       },
       {
         type: 'p',

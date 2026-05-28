@@ -26,7 +26,7 @@ const articles = [
     content: [
       {
         type: 'p',
-        children: [{ text: 'La semaine 7 de la LCK 2026 Rounds 1-2 a offert l\'un des matchs les plus attendus du split ce samedi 16 mai au LoL Park de Jongno, à Séoul : BNK FearX (BFX) a écrasé Nongshim RedForce 2-0 dans ce que la communauté coréenne avait surnommé le "derby des échangés". Au cœur du spectacle : Kim \'Taeyoon\' Tae-yoon, transféré de Nongshim à BFX fin avril dans le cadre du surprenant échange impliquant Diable, et qui affrontait pour la première fois ses anciens coéquipiers.' }],
+        children: [{ text: "La semaine 7 de la LCK 2026 Rounds 1-2 a offert l'un des matchs les plus attendus du split ce samedi 16 mai au LoL Park de Jongno, à Séoul : BNK FearX (BFX) a écrasé Nongshim RedForce 2-0 dans ce que la communauté coréenne avait surnommé le \"derby des échangés\". Au cœur du spectacle : Kim 'Taeyoon' Tae-yoon, transféré de Nongshim à BFX fin avril dans le cadre du surprenant échange impliquant Diable, et qui affrontait pour la première fois ses anciens coéquipiers." }],
       },
       {
         type: 'h2',
@@ -34,7 +34,7 @@ const articles = [
       },
       {
         type: 'p',
-        children: [{ text: 'Fin avril, la LCK avait été secouée par un trade inattendu : Diable, l\'ADC de BFX mis à l\'écart après un incident disciplinaire, était envoyé chez Nongshim RedForce en échange du top laner Taeyoon. Une transaction vécue difficilement par le principal concerné. "C\'était un trade que je ne voulais pas, mais je l\'ai accepté. Je me suis présenté avec la mentalité de montrer à Nongshim ce qu\'ils ont laissé partir", avait déclaré Taeyoon avant le match.' }],
+        children: [{ text: "Fin avril, la LCK avait été secouée par un trade inattendu : Diable, l'ADC de BFX mis à l'écart après un incident disciplinaire, était envoyé chez Nongshim RedForce en échange du top laner Taeyoon. Une transaction vécue difficilement par le principal concerné. \"C'était un trade que je ne voulais pas, mais je l'ai accepté. Je me suis présenté avec la mentalité de montrer à Nongshim ce qu'ils ont laissé partir\", avait déclaré Taeyoon avant le match." }],
       },
       {
         type: 'h2',
@@ -42,15 +42,15 @@ const articles = [
       },
       {
         type: 'p',
-        children: [{ text: 'Sur le Rift, BFX n\'a laissé aucune chance à NS dans les deux manches. Taeyoon a livré une performance dominante en top lane, contrôlant son couloir avec une précision chirurgicale et pesant lourd sur chaque teamfight décisif. BFX a pris le contrôle des objectifs dès la phase de mid-game dans les deux parties, enchaînant Baron et Elder Dragon pour fermer les rencontres sans trembler.' }],
+        children: [{ text: "Sur le Rift, BFX n'a laissé aucune chance à NS dans les deux manches. Taeyoon a livré une performance dominante en top lane, contrôlant son couloir avec une précision chirurgicale et pesant lourd sur chaque teamfight décisif. BFX a pris le contrôle des objectifs dès la phase de mid-game dans les deux parties, enchaînant Baron et Elder Dragon pour fermer les rencontres sans trembler." }],
       },
       {
         type: 'p',
-        children: [{ text: 'À l\'issue de la victoire, Taeyoon n\'a pas caché ses émotions dans l\'interview d\'après-match. "Bien sûr, j\'étais content de gagner. Mais voir mes anciens coéquipiers avec qui j\'ai partagé tant de moments, c\'était difficile de contrôler mes émotions. Malgré tout, je suis heureux que nous ayons remporté ce match." Une réaction humaine et touchante, après une célébration devenue virale : Taeyoon avait jeté son ancien maillot de Nongshim sur le sol à la fin du match.' }],
+        children: [{ text: "À l'issue de la victoire, Taeyoon n'a pas caché ses émotions dans l'interview d'après-match. \"Bien sûr, j'étais content de gagner. Mais voir mes anciens coéquipiers avec qui j'ai partagé tant de moments, c'était difficile de contrôler mes émotions. Malgré tout, je suis heureux que nous ayons remporté ce match.\" Une réaction humaine et touchante, après une célébration devenue virale : Taeyoon avait jeté son ancien maillot de Nongshim sur le sol à la fin du match." }],
       },
       {
         type: 'blockquote',
-        children: [{ text: 'Je voulais leur montrer ce qu\'ils ont laissé partir. Mission accomplie — BFX 2-0 NS, et Taeyoon prouve qu\'il avait tout à donner.' }],
+        children: [{ text: "Je voulais leur montrer ce qu'ils ont laissé partir. Mission accomplie — BFX 2-0 NS, et Taeyoon prouve qu'il avait tout à donner." }],
       },
     ],
   },
@@ -71,7 +71,7 @@ const articles = [
     content: [
       {
         type: 'p',
-        children: [{ text: 'Week 7 of LCK 2026 Rounds 1-2 delivered its most emotionally charged match on Saturday, May 16, at LoL Park in Jongno, Seoul: BNK FearX (BFX) swept Nongshim RedForce 2-0 in what the Korean community had dubbed the "swapped teams derby." At the center of it all was Kim \'Taeyoon\' Tae-yoon, traded from Nongshim to BFX at the end of April in the surprise deal involving ADC Diable — and facing his former teammates for the very first time.' }],
+        children: [{ text: "Week 7 of LCK 2026 Rounds 1-2 delivered its most emotionally charged match on Saturday, May 16, at LoL Park in Jongno, Seoul: BNK FearX (BFX) swept Nongshim RedForce 2-0 in what the Korean community had dubbed the \"swapped teams derby.\" At the center of it all was Kim 'Taeyoon' Tae-yoon, traded from Nongshim to BFX at the end of April in the surprise deal involving ADC Diable — and facing his former teammates for the very first time." }],
       },
       {
         type: 'h2',
@@ -79,7 +79,7 @@ const articles = [
       },
       {
         type: 'p',
-        children: [{ text: 'The late-April trade shook the LCK: Diable, BFX\'s ADC who had been benched following a disciplinary incident, was sent to Nongshim in exchange for top laner Taeyoon. For Taeyoon, the move was painful. "It was a trade I didn\'t want. But I approached this match with the mindset of showing Nongshim exactly who they let go," he said ahead of the game.' }],
+        children: [{ text: "The late-April trade shook the LCK: Diable, BFX's ADC who had been benched following a disciplinary incident, was sent to Nongshim in exchange for top laner Taeyoon. For Taeyoon, the move was painful. \"It was a trade I didn't want. But I approached this match with the mindset of showing Nongshim exactly who they let go,\" he said ahead of the game." }],
       },
       {
         type: 'h2',
@@ -91,11 +91,11 @@ const articles = [
       },
       {
         type: 'p',
-        children: [{ text: 'In his post-game interview, Taeyoon didn\'t hold back his emotions. "Of course, I felt good when we won. But seeing my former teammates, whom I lived with, made it difficult to control my emotions for a moment. Still, I am happy that we won the match." His celebration — throwing his old Nongshim jersey to the floor at the end of the series — had already gone viral across Korean esports social media before the interview even aired.' }],
+        children: [{ text: "In his post-game interview, Taeyoon didn't hold back his emotions. \"Of course, I felt good when we won. But seeing my former teammates, whom I lived with, made it difficult to control my emotions for a moment. Still, I am happy that we won the match.\" His celebration — throwing his old Nongshim jersey to the floor at the end of the series — had already gone viral across Korean esports social media before the interview even aired." }],
       },
       {
         type: 'blockquote',
-        children: [{ text: '"I\'ll show you who you let go." Taeyoon delivered — BFX 2-0 NS, and one of the split\'s most compelling storylines has its chapter one ending.' }],
+        children: [{ text: "\"I'll show you who you let go.\" Taeyoon delivered — BFX 2-0 NS, and one of the split's most compelling storylines has its chapter one ending." }],
       },
     ],
   },
@@ -116,7 +116,7 @@ const articles = [
     content: [
       {
         type: 'p',
-        children: [{ text: 'La semana 7 de LCK 2026 Rounds 1-2 reservó su partido más esperado para el sábado 16 de mayo en el LoL Park de Jongno, Seúl: BNK FearX (BFX) aplastó a Nongshim RedForce 2-0 en el llamado "derby de los intercambiados". El gran protagonista fue Kim \'Taeyoon\' Tae-yoon, traspasado de Nongshim a BFX a finales de abril en el sorprendente intercambio con Diable, quien se enfrentaba por primera vez a sus ex compañeros.' }],
+        children: [{ text: "La semana 7 de LCK 2026 Rounds 1-2 reservó su partido más esperado para el sábado 16 de mayo en el LoL Park de Jongno, Seúl: BNK FearX (BFX) aplastó a Nongshim RedForce 2-0 en el llamado \"derby de los intercambiados\". El gran protagonista fue Kim 'Taeyoon' Tae-yoon, traspasado de Nongshim a BFX a finales de abril en el sorprendente intercambio con Diable, quien se enfrentaba por primera vez a sus ex compañeros." }],
       },
       {
         type: 'h2',

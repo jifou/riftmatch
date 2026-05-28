@@ -231,7 +231,7 @@ const articles = [
           },
           {
             type: 'li',
-            children: [{ text: 'May 8 — T1 def. SOOPers 2-0: the first of T1\'s two wins this week, setting up their DK revenge match.' }],
+            children: [{ text: "May 8 — T1 def. SOOPers 2-0: the first of T1's two wins this week, setting up their DK revenge match." }],
           },
           {
             type: 'li',
@@ -263,7 +263,7 @@ const articles = [
         type: 'p',
         children: [
           {
-            text: 'Week 7 kicks off on May 13 with T1 vs Nongshim RedForce and DNS vs Dplus KIA. On May 14, BRION take on Gen.G while FearX look to upset KT Rolster again. Friday May 15 delivers the week\'s marquee match: HLE vs Dplus KIA — a high-stakes clash between the league leader and a team desperate for redemption.',
+            text: "Week 7 kicks off on May 13 with T1 vs Nongshim RedForce and DNS vs Dplus KIA. On May 14, BRION take on Gen.G while FearX look to upset KT Rolster again. Friday May 15 delivers the week's marquee match: HLE vs Dplus KIA — a high-stakes clash between the league leader and a team desperate for redemption.",
           },
         ],
       },
@@ -271,7 +271,7 @@ const articles = [
         type: 'blockquote',
         children: [
           {
-            text: 'The Road to MSI race enters its decisive phase. With HLE all but guaranteed the first seed, the real battles are for places 2 through 6. FearX and BRION — Week 6\'s surprise packages — could yet shake up the final standings.',
+            text: "The Road to MSI race enters its decisive phase. With HLE all but guaranteed the first seed, the real battles are for places 2 through 6. FearX and BRION — Week 6's surprise packages — could yet shake up the final standings.",
           },
         ],
       },

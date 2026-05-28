@@ -28,7 +28,7 @@ const articles = [
         type: 'p',
         children: [
           {
-            text: 'C\'est le jour J pour les fans coréens de League of Legends. Ce 21 mai 2026, Riot Games ouvre la vente de billets pour le Mid-Season Invitational 2026 à destination des résidents sud-coréens. Les tickets sont disponibles via la plateforme Interpark, accessible uniquement avec une carte d\'identité coréenne.',
+            text: "C'est le jour J pour les fans coréens de League of Legends. Ce 21 mai 2026, Riot Games ouvre la vente de billets pour le Mid-Season Invitational 2026 à destination des résidents sud-coréens. Les tickets sont disponibles via la plateforme Interpark, accessible uniquement avec une carte d'identité coréenne.",
           },
         ],
       },
@@ -40,7 +40,7 @@ const articles = [
         type: 'p',
         children: [
           {
-            text: 'Le MSI 2026 se tiendra du 28 juin au 12 juillet au Daejeon Convention Center II, en Corée du Sud. C\'est la première fois qu\'une ville autre que Séoul accueille un événement majeur de LoL Esports en Corée. Riot Games estime que quelque 80 000 fans — locaux et internationaux — feront le déplacement, générant un impact économique estimé à plus de 100 milliards de wons (~73 millions d\'euros) pour la région.',
+            text: "Le MSI 2026 se tiendra du 28 juin au 12 juillet au Daejeon Convention Center II, en Corée du Sud. C'est la première fois qu'une ville autre que Séoul accueille un événement majeur de LoL Esports en Corée. Riot Games estime que quelque 80 000 fans — locaux et internationaux — feront le déplacement, générant un impact économique estimé à plus de 100 milliards de wons (~73 millions d'euros) pour la région.",
           },
         ],
       },
@@ -52,7 +52,7 @@ const articles = [
         type: 'p',
         children: [
           {
-            text: 'Les billets sont 100 % mobiles et liés au compte Interpark vérifié de l\'acheteur. Les journées de Play-In sont proposées à 50 000 KRW (~36 €), les phases de bracket montant progressivement jusqu\'à 80 000 KRW (~58 €), et les places pour les demi-finales et la finale atteignent entre 80 000 et 150 000 KRW (~58–109 €) selon le placement dans l\'enceinte. Des frais de service de 4 000 KRW s\'ajoutent à chaque achat. Les billets internationaux (avec passeport) avaient été mis en vente les 21 et 23 avril.',
+            text: "Les billets sont 100 % mobiles et liés au compte Interpark vérifié de l'acheteur. Les journées de Play-In sont proposées à 50 000 KRW (~36 €), les phases de bracket montant progressivement jusqu'à 80 000 KRW (~58 €), et les places pour les demi-finales et la finale atteignent entre 80 000 et 150 000 KRW (~58–109 €) selon le placement dans l'enceinte. Des frais de service de 4 000 KRW s'ajoutent à chaque achat. Les billets internationaux (avec passeport) avaient été mis en vente les 21 et 23 avril.",
           },
         ],
       },
@@ -72,7 +72,7 @@ const articles = [
         type: 'blockquote',
         children: [
           {
-            text: 'Le MSI 2026 à Daejeon s\'annonce comme l\'un des événements LoL les plus attendus de l\'année — le centre de la Corée du Sud prêt à vibrer au rythme du jeu mondial.',
+            text: "Le MSI 2026 à Daejeon s'annonce comme l'un des événements LoL les plus attendus de l'année — le centre de la Corée du Sud prêt à vibrer au rythme du jeu mondial.",
           },
         ],
       },
@@ -142,7 +142,7 @@ const articles = [
         type: 'blockquote',
         children: [
           {
-            text: 'MSI 2026 in Daejeon is shaping up to be one of the biggest LoL events of the year — a new city ready to welcome the world\'s best teams.',
+            text: "MSI 2026 in Daejeon is shaping up to be one of the biggest LoL events of the year — a new city ready to welcome the world's best teams.",
           },
         ],
       },

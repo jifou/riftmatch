@@ -113,7 +113,7 @@ const articles = [
         type: 'p',
         children: [
           {
-            text: 'On March 22, 2026, Bilibili Gaming (BLG) defeated G2 Esports 3-1 in the First Stand 2026 Grand Final at the Ginásio do Ibirapuera in São Paulo, Brazil. The victory marks the first international title in BLG\'s history.',
+            text: "On March 22, 2026, Bilibili Gaming (BLG) defeated G2 Esports 3-1 in the First Stand 2026 Grand Final at the Ginásio do Ibirapuera in São Paulo, Brazil. The victory marks the first international title in BLG's history.",
           },
         ],
       },

@@ -29,7 +29,7 @@ const articles = [
         type: 'p',
         children: [
           {
-            text: 'Le qualificatif EMEA pour l\'Esports World Cup 2026 est entré dans sa phase décisive. Après une journée du 15 mai riche en rebondissements dans le bracket perdant, le samedi 16 mai s\'annonce historique pour l\'esport européen avec deux rencontres à fort enjeu.',
+            text: "Le qualificatif EMEA pour l'Esports World Cup 2026 est entré dans sa phase décisive. Après une journée du 15 mai riche en rebondissements dans le bracket perdant, le samedi 16 mai s'annonce historique pour l'esport européen avec deux rencontres à fort enjeu.",
           },
         ],
       },
@@ -41,7 +41,7 @@ const articles = [
         type: 'p',
         children: [
           {
-            text: 'La veille, Natus Vincere a éliminé les Galions pour maintenir leurs espoirs de qualification. NAVI, qui avait chuté 0-2 face à G2 Esports en demi-finale de l\'upper bracket, a su rebondir avec autorité dans le bracket perdant. Dans le même temps, Movistar KOI a livré une prestation dominante face à GiantX, s\'imposant 2-0 sans trembler.',
+            text: "La veille, Natus Vincere a éliminé les Galions pour maintenir leurs espoirs de qualification. NAVI, qui avait chuté 0-2 face à G2 Esports en demi-finale de l'upper bracket, a su rebondir avec autorité dans le bracket perdant. Dans le même temps, Movistar KOI a livré une prestation dominante face à GiantX, s'imposant 2-0 sans trembler.",
           },
         ],
       },
@@ -49,7 +49,7 @@ const articles = [
         type: 'p',
         children: [
           {
-            text: 'Le jungler Elyoya a été omniprésent tout au long de la série contre GiantX, accumulant plus de 3 000 or d\'avance sur son adversaire dès la 20e minute. Le midlaner Jojopyun a lancé la machine espagnole avec un solokill précoce, tandis que l\'ADC Supa a conclu le deuxième mapa avec près de 12 000 or d\'avance sur son opposant.',
+            text: "Le jungler Elyoya a été omniprésent tout au long de la série contre GiantX, accumulant plus de 3 000 or d'avance sur son adversaire dès la 20e minute. Le midlaner Jojopyun a lancé la machine espagnole avec un solokill précoce, tandis que l'ADC Supa a conclu le deuxième mapa avec près de 12 000 or d'avance sur son opposant.",
           },
         ],
       },
@@ -61,7 +61,7 @@ const articles = [
         type: 'p',
         children: [
           {
-            text: 'Ce samedi, tous les regards sont tournés vers la finale upper bracket entre G2 Esports et Karmine Corp. Les deux équipes ont affiché un parcours sans faute dans ce qualificatif, balayant respectivement NAVI (2-0) et MKOI (2-0) lors de leurs demi-finales. Ce Best-of-5 désignera le premier représentant EMEA à l\'Esports World Cup 2026.',
+            text: "Ce samedi, tous les regards sont tournés vers la finale upper bracket entre G2 Esports et Karmine Corp. Les deux équipes ont affiché un parcours sans faute dans ce qualificatif, balayant respectivement NAVI (2-0) et MKOI (2-0) lors de leurs demi-finales. Ce Best-of-5 désignera le premier représentant EMEA à l'Esports World Cup 2026.",
           },
         ],
       },
@@ -69,7 +69,7 @@ const articles = [
         type: 'p',
         children: [
           {
-            text: 'L\'EWC 2026 se tiendra à Riyad du 15 au 19 juillet avec une prize pool de 2 millions de dollars et 16 équipes issues des meilleures régions mondiales. Deux places qualificatives sont disponibles pour l\'EMEA. Le vainqueur d\'aujourd\'hui s\'assure un ticket direct ; le perdant devra continuer sa route via le bracket inférieur pour décrocher la deuxième place lors de la finale du 17 mai.',
+            text: "L'EWC 2026 se tiendra à Riyad du 15 au 19 juillet avec une prize pool de 2 millions de dollars et 16 équipes issues des meilleures régions mondiales. Deux places qualificatives sont disponibles pour l'EMEA. Le vainqueur d'aujourd'hui s'assure un ticket direct ; le perdant devra continuer sa route via le bracket inférieur pour décrocher la deuxième place lors de la finale du 17 mai.",
           },
         ],
       },
@@ -77,7 +77,7 @@ const articles = [
         type: 'blockquote',
         children: [
           {
-            text: 'G2 contre Karmine Corp, c\'est le choc que l\'Europe attendait : la rivalité franco-internationale au sommet de l\'esport continental, pour un billet vers Riyad.',
+            text: "G2 contre Karmine Corp, c'est le choc que l'Europe attendait : la rivalité franco-internationale au sommet de l'esport continental, pour un billet vers Riyad.",
           },
         ],
       },
@@ -145,7 +145,7 @@ const articles = [
         type: 'p',
         children: [
           {
-            text: 'EWC 2026 is scheduled in Riyadh from July 15-19 with a $2 million prize pool and 16 teams from the world\'s top regions. The winner of today\'s G2 vs KC match earns a guaranteed EWC slot, while the loser must fight through the lower bracket for the second and final EMEA qualification spot — decided in the grand final on May 17.',
+            text: "EWC 2026 is scheduled in Riyadh from July 15-19 with a $2 million prize pool and 16 teams from the world's top regions. The winner of today's G2 vs KC match earns a guaranteed EWC slot, while the loser must fight through the lower bracket for the second and final EMEA qualification spot — decided in the grand final on May 17.",
           },
         ],
       },
@@ -153,7 +153,7 @@ const articles = [
         type: 'blockquote',
         children: [
           {
-            text: 'G2 vs Karmine Corp is the matchup Europe has been waiting for — two giants of the LEC competing for the right to represent EMEA on the world\'s biggest esports stage.',
+            text: "G2 vs Karmine Corp is the matchup Europe has been waiting for — two giants of the LEC competing for the right to represent EMEA on the world's biggest esports stage.",
           },
         ],
       },

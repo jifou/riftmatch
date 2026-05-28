@@ -35,11 +35,11 @@ const articles = [
       },
       {
         type: 'p',
-        children: [{ text: 'Portée par l\'ADC coréen Viper et le jungler Xun, l\'équipe de Bilibili Gaming enchaîne les victoires depuis le début du split. Avec 11 victoires en 13 matchs, BLG s\'est déjà assuré une place en playoffs en tant que tête de série. JD Gaming (8-5) et Anyone\'s Legend (8-5) partagent la deuxième place, talonné par Top Esports (8-6) qui lutte pour rester dans le top 4 et éviter les play-ins.' }],
+        children: [{ text: "Portée par l'ADC coréen Viper et le jungler Xun, l'équipe de Bilibili Gaming enchaîne les victoires depuis le début du split. Avec 11 victoires en 13 matchs, BLG s'est déjà assuré une place en playoffs en tant que tête de série. JD Gaming (8-5) et Anyone's Legend (8-5) partagent la deuxième place, talonné par Top Esports (8-6) qui lutte pour rester dans le top 4 et éviter les play-ins." }],
       },
       {
         type: 'p',
-        children: [{ text: 'Plus bas dans le classement, la situation est contrastée. Ninjas in Pyjamas (6-7) et Weibo Gaming (6-8) se battent pour le top 6, tandis qu\'Invictus Gaming (5-8) est sous pression. Au fond du classement, Team WE affiche un bilan catastrophique de 1-12 et n\'a plus aucune chance de qualification.' }],
+        children: [{ text: "Plus bas dans le classement, la situation est contrastée. Ninjas in Pyjamas (6-7) et Weibo Gaming (6-8) se battent pour le top 6, tandis qu'Invictus Gaming (5-8) est sous pression. Au fond du classement, Team WE affiche un bilan catastrophique de 1-12 et n'a plus aucune chance de qualification." }],
       },
       {
         type: 'h2',
@@ -59,7 +59,7 @@ const articles = [
       },
       {
         type: 'blockquote',
-        children: [{ text: 'BLG est en route vers un second titre de champion LPL consécutif. Mais JDG, TES et AL n\'ont pas dit leur dernier mot en playoffs.' }],
+        children: [{ text: "BLG est en route vers un second titre de champion LPL consécutif. Mais JDG, TES et AL n'ont pas dit leur dernier mot en playoffs." }],
       },
     ],
   },
@@ -88,7 +88,7 @@ const articles = [
       },
       {
         type: 'p',
-        children: [{ text: 'Powered by Korean ADC Viper and jungler Xun, Bilibili Gaming has been a cut above the rest this split. With 11 wins in 13 matches, BLG has already secured a playoff spot as the top seed. JD Gaming (8-5) and Anyone\'s Legend (8-5) are tied for second place, with Top Esports (8-6) fighting to stay in the top four and avoid the play-ins. The race for those four direct playoff spots is tight at the top.' }],
+        children: [{ text: "Powered by Korean ADC Viper and jungler Xun, Bilibili Gaming has been a cut above the rest this split. With 11 wins in 13 matches, BLG has already secured a playoff spot as the top seed. JD Gaming (8-5) and Anyone's Legend (8-5) are tied for second place, with Top Esports (8-6) fighting to stay in the top four and avoid the play-ins. The race for those four direct playoff spots is tight at the top." }],
       },
       {
         type: 'p',
@@ -104,7 +104,7 @@ const articles = [
       },
       {
         type: 'h2',
-        children: [{ text: 'What\'s at Stake: MSI 2026 Qualification' }],
+        children: [{ text: "What's at Stake: MSI 2026 Qualification" }],
       },
       {
         type: 'p',
@@ -141,7 +141,7 @@ const articles = [
       },
       {
         type: 'p',
-        children: [{ text: 'Liderado por el ADC coreano Viper y el jungler Xun, Bilibili Gaming ha sido un escalón por encima del resto durante todo el split. Con 11 victorias en 13 partidos, BLG ya ha asegurado su plaza en playoffs como cabeza de serie número uno. JD Gaming (8-5) y Anyone\'s Legend (8-5) comparten el segundo lugar, con Top Esports (8-6) luchando por mantenerse en el top 4 y evitar los play-ins.' }],
+        children: [{ text: "Liderado por el ADC coreano Viper y el jungler Xun, Bilibili Gaming ha sido un escalón por encima del resto durante todo el split. Con 11 victorias en 13 partidos, BLG ya ha asegurado su plaza en playoffs como cabeza de serie número uno. JD Gaming (8-5) y Anyone's Legend (8-5) comparten el segundo lugar, con Top Esports (8-6) luchando por mantenerse en el top 4 y evitar los play-ins." }],
       },
       {
         type: 'p',
