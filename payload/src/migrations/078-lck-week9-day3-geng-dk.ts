@@ -1,6 +1,6 @@
 import type { MigrationModule } from './runner'
 
-export const id = '077-lck-week9-day3-geng-dk'
+export const id = '078-lck-week9-day3-geng-dk'
 export const description = 'LCK Semaine 9 Jour 3 — Gen.G 2-0 BRION, Dplus KIA 2-1 KRX (débuts de Chabel)'
 
 const AUTHORS = ['RiftMatch', 'Jifou', 'Echo']
