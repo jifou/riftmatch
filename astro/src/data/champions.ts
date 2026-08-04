@@ -180,11 +180,12 @@ const raw: [string, string, string[], string[], string[], string, number, string
   ["Zoe","Zoe",["mid"],["mage"],["aggressive","carry"],"targon",4,["cosmic","fantasy"],["human","god"]],
   ["Zyra","Zyra",["mid","support"],["mage","support"],["aggressive","utility"],"ixtal",3,["ancient","nature"],["plant","spirit"]],
   ["Ambessa","Ambessa",["top"],["fighter"],["aggressive","carry"],"noxus",3,["medieval","fantasy"],["human"]],
+  ["Locke","Locke",["mid","jungle"],["assassin","mage"],["aggressive","carry"],"demacia",4,["medieval","dark","fantasy"],["human"]],
 ]
 
 export const CHAMPIONS: Champion[] = raw.map(([name, apiId, lanes, archetypes, styles, faction, difficulty, universes, types]) => ({
   name, apiId, lanes, archetypes, styles, faction, difficulty, universes, types
 }))
 
-export const DDR_VERSION = '14.9.1'
+export const DDR_VERSION = '16.15.1'
 export const DDR_BASE = `https://ddragon.leagueoflegends.com/cdn/${DDR_VERSION}/img/champion`
