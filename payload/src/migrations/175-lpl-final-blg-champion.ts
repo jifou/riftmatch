@@ -27,7 +27,7 @@ const articles = [
     tags: [{ tag: 'LPL' }, { tag: 'BiliBili Gaming' }, { tag: 'JDG' }, { tag: 'Elk' }, { tag: 'Finale' }],
     content: [
       { type: 'p', children: [{ text: "BiliBili Gaming est le champion de la LPL Summer 2026. La formation a conclu sa saison parfaite en disposant de JDG Gaming 3-1 en grande finale et s'affirme comme le grand favori des Worlds 2026 du côté chinois." }] },
-      { type: 'h2', children: [{ text: 'Elk, une performance pour les livres d\'histoire' }] },
+      { type: 'h2', children: [{ text: "Elk, une performance pour les livres d\'histoire" }] },
       { type: 'p', children: [{ text: "L'ADC de BLG a signé l'une des meilleures performances de l'année en LPL lors du game 4. Sur Kai'Sa, Elk a terminé avec un score de 12/0/8 et 28 kills en seulement 30 minutes. Sa capacité à trouver des positionnements parfaits dans des teamfights ultra-serrés l'a placé dans une autre dimension que son adversaire ce soir-là." }] },
       { type: 'h2', children: [{ text: 'BLG, armée pour les Worlds' }] },
       { type: 'p', children: [{ text: "Avec 14 victoires en saison régulière, un run de playoffs sans défaite, et une cohésion collective rarement vue en Chine depuis les grandes années de RNG, BiliBili Gaming arrive aux Worlds 2026 comme le concurrent numéro 1 de T1 pour le titre mondial." }] },

@@ -27,7 +27,7 @@ const articles = [
     tags: [{ tag: 'LEC' }, { tag: 'G2 Esports' }, { tag: 'Team Vitality' }, { tag: 'Worlds 2026' }],
     content: [
       { type: 'p', children: [{ text: "La qualification directe pour les Worlds 2026 est désormais actée pour deux équipes européennes. G2 Esports et Team Vitality ont respectivement terminé 1er et 2e de la saison régulière LEC Summer, leur assurant une place en phases de groupes du Championnat du Monde." }] },
-      { type: 'h2', children: [{ text: 'Une course haletante jusqu\'au bout' }] },
+      { type: 'h2', children: [{ text: "Une course haletante jusqu\'au bout" }] },
       { type: 'p', children: [{ text: "Pendant plusieurs semaines, trois équipes se sont battues pour deux places. Fnatic, longtemps en position de force, a craqué lors des deux dernières journées en perdant face à MAD Lions et BDS, laissant Vitality s'imposer à la deuxième place. Une déception pour l'équipe au Phoenix, qui devra passer par le LEC Play-In." }] },
       { type: 'h2', children: [{ text: 'Le LEC Play-In ce week-end' }] },
       { type: 'p', children: [{ text: "Fnatic, MAD Lions, Team BDS et SK Gaming se disputeront la troisième place européenne lors du LEC Play-In ce week-end. Les deux premières équipes rejoindront G2 et Vitality en Play-In Worlds." }] },

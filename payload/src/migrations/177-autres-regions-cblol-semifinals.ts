@@ -29,7 +29,7 @@ const articles = [
       { type: 'p', children: [{ text: "La grande finale du CBLOL Split 2 2026 est connue : LOUD et FURIA se retrouveront la semaine prochaine pour le titre brésilien, et avec lui la qualification pour les Worlds 2026 en tant que représentant du CBLOL." }] },
       { type: 'h2', children: [{ text: 'LOUD domine paiN Gaming 3-0' }] },
       { type: 'p', children: [{ text: "LOUD n'a laissé aucune chance à paiN Gaming en demi-finale, dominant les trois games avec une composition d'engage-disengage parfaitement exécutée. Le mid de LOUD a été au-dessus tout au long de la série, ne laissant aucune liberté à son vis-à-vis. Le 3-0 est sans appel et envoie LOUD en finale avec confiance." }] },
-      { type: 'h2', children: [{ text: 'FURIA passe l\'épreuve R7 2-1' }] },
+      { type: 'h2', children: [{ text: "FURIA passe l\'épreuve R7 2-1" }] },
       { type: 'p', children: [{ text: "La demi-finale entre FURIA et R7 a été plus disputée. R7 a remporté le game 1 en exploitant des erreurs de split-push de FURIA, mais la formation a rectifié le tir en games 2 et 3, s'appuyant sur son jungler Tatu (revenu de suspension) qui a montré un niveau impressionnant. FURIA file en finale avec la dynamique d'une équipe qui monte en puissance." }] },
       { type: 'h2', children: [{ text: 'Une finale très attendue' }] },
       { type: 'p', children: [{ text: "LOUD vs FURIA est le Classique brésilien par excellence. Ces deux équipes ont une rivalité de longue date, et leur affrontement en finale pour une place aux Worlds 2026 promet d'être l'un des événements esportifs les plus suivis au Brésil de l'année." }] },
