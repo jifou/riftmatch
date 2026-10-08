@@ -90,6 +90,8 @@ const quizHref = '/quiz'  // pas de variante URL par locale
 
     <!-- Theme color (barre adresse mobile) -->
     <meta name="theme-color" content="#090b10" />
+    <link rel="manifest" href="/manifest.json" />
+    <link rel="apple-touch-icon" href="/icons/icon-192.png" />
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -838,5 +840,10 @@ const quizHref = '/quiz'  // pas de variante URL par locale
         .logo-text { font-size: 0.8rem; }
       }
     </style>
+    <script is:inline>
+      if ('serviceWorker' in navigator) {
+        window.addEventListener('load', () => navigator.serviceWorker.register('/sw.js').catch(() => {}))
+      }
+    </script>
   </body>
 </html>

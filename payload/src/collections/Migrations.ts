@@ -11,8 +11,13 @@ const Migrations: CollectionConfig = {
     defaultColumns: ['migrationId', 'ranAt'],
     description: 'Migrations de contenu exécutées automatiquement. Ne pas modifier manuellement.',
   },
+  // Interne : ni lecture ni écriture publiques. L'API locale des migrations
+  // (runner.ts) contourne ces règles, donc rien ne change côté déploiement.
   access: {
-    read: () => true,
+    read: ({ req }) => Boolean(req.user),
+    create: ({ req }) => Boolean(req.user),
+    update: ({ req }) => Boolean(req.user),
+    delete: ({ req }) => Boolean(req.user),
   },
   fields: [
     {
