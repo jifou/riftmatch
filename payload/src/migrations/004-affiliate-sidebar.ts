@@ -1,9 +1,11 @@
 import type { MigrationModule } from './runner'
+import { withLegacyAffiliate } from './runner-affiliate-compat'
 
 export const id = '004-affiliate-sidebar'
 export const description = 'Crée un bloc affiliate pour la sidebar des pages guide'
 
-export const up: MigrationModule['up'] = async (payload) => {
+export const up: MigrationModule['up'] = async (rawPayload) => {
+  const payload = withLegacyAffiliate(rawPayload)
   const existing = await payload.find({
     collection: 'affiliate-blocks',
     where: { title: { equals: 'SteelSeries Arctis Nova 3 — Sidebar' } },

@@ -1,9 +1,11 @@
 import type { MigrationModule } from './runner'
+import { withLegacyAffiliate } from './runner-affiliate-compat'
 
 export const id = '006-affiliate-locale-update'
 export const description = 'Tag existing FR blocks with locale:fr and add EN+ES blocks'
 
-export const up: MigrationModule['up'] = async (payload) => {
+export const up: MigrationModule['up'] = async (rawPayload) => {
+  const payload = withLegacyAffiliate(rawPayload)
   // Note: existing blocks (001-005) have no locale → they act as 'all' fallback.
   // This migration only adds locale-specific FR/EN/ES blocks.
 

@@ -1,4 +1,5 @@
 import type { MigrationModule } from './runner'
+import { withLegacyAffiliate } from './runner-affiliate-compat'
 
 export const id = '005-affiliate-rotation-demo'
 export const description = 'Ajoute plusieurs blocs affiliate pour tester la rotation'
@@ -84,7 +85,8 @@ const blocks = [
   },
 ]
 
-export const up: MigrationModule['up'] = async (payload) => {
+export const up: MigrationModule['up'] = async (rawPayload) => {
+  const payload = withLegacyAffiliate(rawPayload)
   for (const block of blocks) {
     const existing = await payload.find({
       collection: 'affiliate-blocks',

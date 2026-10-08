@@ -86,7 +86,7 @@ services:
       - "traefik.http.routers.riftmatch.entrypoints=websecure"
       - "traefik.http.routers.riftmatch.tls.certresolver=myresolver"
       - "traefik.http.services.riftmatch.loadbalancer.server.port=80"
-      - "traefik.docker.network=web-proxy"
+      - "traefik.docker.network=root_web-proxy"
       # Middleware : redirect www → non-www
       - "traefik.http.middlewares.riftmatch-nowww.redirectregex.regex=^https://www\\.riftmatch\\.io/(.*)"
       - "traefik.http.middlewares.riftmatch-nowww.redirectregex.replacement=https://riftmatch.io/$${1}"
@@ -98,6 +98,7 @@ networks:
     driver: bridge
   web-proxy:
     external: true   # réseau Traefik existant
+    name: root_web-proxy
 
 volumes:
   mongo_data:

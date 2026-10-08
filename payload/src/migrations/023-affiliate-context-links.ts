@@ -42,9 +42,10 @@ export const up: MigrationModule['up'] = async (payload) => {
 
     // Construire links[] depuis affiliateUrl existant
     const existingUrl = (doc as any).product?.affiliateUrl ?? ''
+    const currentLinks = Array.isArray(doc.links) ? doc.links : []
     const links = existingUrl
       ? [{ locale: 'fr', url: existingUrl }]
-      : []
+      : currentLinks.map((l: any) => ({ locale: l.locale, url: l.url }))
 
     if (!newContext) {
       console.warn(`  ⚠️  Placement inconnu "${legacyPlacement}" pour "${doc.title}" — context non défini`)

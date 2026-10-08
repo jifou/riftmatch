@@ -1,4 +1,5 @@
 import type { MigrationModule } from './runner'
+import { withLegacyAffiliate } from './runner-affiliate-compat'
 
 export const id = '014-affiliate-all-placements'
 export const description = 'Ajoute des blocs affiliate sur tous les placements manquants (homepage-hero, quiz-results, quiz-results-bottom, champion-sidebar) avec rotation 3 produits'
@@ -150,7 +151,8 @@ const blocks = [
   },
 ]
 
-export const up: MigrationModule['up'] = async (payload) => {
+export const up: MigrationModule['up'] = async (rawPayload) => {
+  const payload = withLegacyAffiliate(rawPayload)
   for (const block of blocks) {
     const existing = await payload.find({
       collection: 'affiliate-blocks',
