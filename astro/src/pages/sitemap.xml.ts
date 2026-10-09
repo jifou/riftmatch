@@ -16,7 +16,7 @@ function localeUrl(path: string, locale: 'fr' | 'en' | 'es'): string {
 export const GET: APIRoute = async () => {
   // ── Fetch des guides depuis Payload ─────────────────────────────
   const PAYLOAD_URL = import.meta.env.PAYLOAD_API_URL || 'http://payload:3000'
-  let contentPages: { slug: string; locale: string; updatedAt?: string }[] = []
+  let contentPages: { slug: string; locale: string; updatedAt?: string; translationKey?: string }[] = []
   let newsArticles: { slug: string; updatedAt?: string; publishedAt?: string }[] = []
   try {
     const [pagesRes, newsRes] = await Promise.all([
@@ -28,6 +28,7 @@ export const GET: APIRoute = async () => {
       slug:      p.slug,
       locale:    p.locale || 'fr',
       updatedAt: p.updatedAt?.split('T')[0] ?? TODAY,
+      translationKey: p.translationKey || undefined,
     }))
     const newsData = await newsRes.json()
     newsArticles = (newsData.docs ?? []).map((n: any) => ({
@@ -38,7 +39,7 @@ export const GET: APIRoute = async () => {
   } catch { /* Payload KO — sitemap sans guides/news */ }
 
   // ── Toutes les URLs ──────────────────────────────────────────────
-  type Entry = { url: string; priority: string; changefreq: string; lastmod: string }
+  type Entry = { url: string; priority: string; changefreq: string; lastmod: string; alternates?: { lang: string; url: string }[] }
   const entries: Entry[] = []
 
   // Homepage (FR seulement — pas de /en/ ni /es/ homepage)
@@ -48,23 +49,39 @@ export const GET: APIRoute = async () => {
   entries.push({ url: '/quiz', priority: '0.9', changefreq: 'monthly', lastmod: TODAY })
 
   // Guides listing (×3 locales)
+  const withAlt = (path: string) => [
+    ...LOCALES.map(l => ({ lang: l, url: `${BASE_URL}${localeUrl(path, l)}` })),
+    { lang: 'x-default', url: `${BASE_URL}${path}` },
+  ]
   for (const locale of LOCALES) {
     entries.push({
       url:        localeUrl('/guides', locale),
       priority:   '0.8',
       changefreq: 'weekly',
       lastmod:    TODAY,
+      alternates: withAlt('/guides'),
     })
   }
 
   // Articles / guides (chaque page existe dans sa locale)
   for (const page of contentPages) {
     const locale = LOCALES.includes(page.locale as any) ? (page.locale as typeof LOCALES[number]) : 'fr'
+    const siblings = page.translationKey
+      ? contentPages.filter(p => p.translationKey === page.translationKey)
+      : []
+    const fr = siblings.find(p => p.locale === 'fr')
+    const alternates = siblings.length > 1
+      ? [
+          ...siblings.map(p => ({ lang: p.locale, url: `${BASE_URL}${localeUrl(`/info/${p.slug}`, p.locale as any)}` })),
+          { lang: 'x-default', url: `${BASE_URL}${fr ? `/info/${fr.slug}` : localeUrl(`/info/${page.slug}`, locale)}` },
+        ]
+      : undefined
     entries.push({
       url:        localeUrl(`/info/${page.slug}`, locale),
       priority:   '0.7',
       changefreq: 'monthly',
       lastmod:    page.updatedAt ?? TODAY,
+      alternates,
     })
   }
 
@@ -89,17 +106,19 @@ export const GET: APIRoute = async () => {
         priority:   '0.6',
         changefreq: 'monthly',
         lastmod:    TODAY,
+        alternates: withAlt(`/champion/${c.apiId}`),
       })
     }
   }
 
   const xml = `<?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
 ${entries.map(p => `  <url>
     <loc>${BASE_URL}${p.url}</loc>
     <lastmod>${p.lastmod}</lastmod>
     <changefreq>${p.changefreq}</changefreq>
-    <priority>${p.priority}</priority>
+    <priority>${p.priority}</priority>${(p.alternates ?? []).map(a => `
+    <xhtml:link rel="alternate" hreflang="${a.lang}" href="${a.url}"/>`).join('')}
   </url>`).join('\n')}
 </urlset>`
 

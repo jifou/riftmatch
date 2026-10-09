@@ -40,6 +40,16 @@ const Pages: CollectionConfig = {
       },
     },
     {
+      name: 'translationKey',
+      label: 'Clé de traduction',
+      type: 'text',
+      index: true,
+      admin: {
+        description:
+          "Identifiant commun aux traductions d'un même article (ex: guide-jungle). Les pages FR, EN et ES qui partagent la même clé sont annoncées comme équivalentes aux moteurs de recherche (hreflang). Laisser vide s'il n'existe pas de traduction.",
+      },
+    },
+    {
       name: 'template',
       type: 'select',
       defaultValue: 'article',

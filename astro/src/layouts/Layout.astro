@@ -7,6 +7,7 @@ export interface Props {
   description?: string
   lang?: string
   image?: string
+  canonical?: string
 }
 
 const {
@@ -14,6 +15,7 @@ const {
   description = 'Découvrez quel champion League of Legends vous correspond en 7 questions.',
   lang = 'fr',
   image = '/og-image.jpg',
+  canonical,
 } = Astro.props
 
 // Sur les pages avec préfixe URL (/en/..., /es/...) → locale depuis l'URL
@@ -27,7 +29,7 @@ const tl = UI[currentLocale] || UI.fr
 const gaId = import.meta.env.PUBLIC_GA_ID || process.env.PUBLIC_GA_ID || ''
 
 const BASE_URL = 'https://riftmatch.io'
-const canonicalURL = new URL(Astro.url.pathname, BASE_URL).toString()
+const canonicalURL = canonical ?? new URL(Astro.url.pathname, BASE_URL).toString()
 const ogImage = image.startsWith('http') ? image : `${BASE_URL}${image}`
 
 const OG_LOCALE: Record<string, string> = { fr: 'fr_FR', en: 'en_GB', es: 'es_ES' }

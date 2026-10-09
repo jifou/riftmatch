@@ -43,6 +43,21 @@ try {
   console.error('Could not fetch page:', e)
 }
 
+// Traductions de cet article (même translationKey) : sert aux hreflang.
+// Sans clé, aucune alternative n'est annoncée plutôt que des URLs qui n'existent pas.
+const translations: Record<string, string> = {}
+if (page?.translationKey) {
+  try {
+    const tr = await fetch(
+      `${PAYLOAD_URL}/api/pages?where[translationKey][equals]=${encodeURIComponent(page.translationKey)}&limit=10&depth=0`
+    )
+    const trData = await tr.json()
+    for (const d of trData.docs ?? []) {
+      if (d.locale && d.slug) translations[d.locale] = d.slug
+    }
+  } catch { /* hreflang omis si Payload ne répond pas */ }
+}
+
 if (!page) return Astro.redirect('/404')
 
 const template: 'article' | 'guide' | 'listicle' = page.template || 'article'
@@ -131,6 +146,17 @@ const guidesPath = locale === 'fr' ? '/guides' : `/${locale}/guides`
 const quizPath = '/quiz'  // pas de variante URL par locale
 const canonicalUrl = locale === 'fr' ? `${BASE}/info/${page.slug}` : `${BASE}/${locale}/info/${page.slug}`
 const inLanguage = locale === 'en' ? 'en' : locale === 'es' ? 'es' : 'fr'
+const infoUrl = (l: string, slug: string) => (l === 'fr' ? `${BASE}/info/${slug}` : `${BASE}/${l}/info/${slug}`)
+const hreflangLinks: Record<string, string> = {}
+for (const l of ['fr', 'en', 'es']) {
+  if (translations[l]) hreflangLinks[l] = infoUrl(l, translations[l])
+}
+// Une page qui a des traductions s'annonce elle-même ; x-default pointe vers le français si dispo.
+if (Object.keys(hreflangLinks).length > 1) {
+  hreflangLinks['x-default'] = hreflangLinks.fr ?? canonicalUrl
+} else {
+  for (const k of Object.keys(hreflangLinks)) delete hreflangLinks[k]
+}
 
 // JSON-LD
 const articleSchema = {
@@ -142,13 +168,11 @@ const articleSchema = {
 }
 ---
 
-<Layout title={`${page.title} | RiftMatch`} description={page.seo?.description} lang={locale}>
+<Layout title={`${page.title} | RiftMatch`} description={page.seo?.description} lang={locale} canonical={canonicalUrl}>
   <Fragment slot="head">
-    <link rel="canonical" href={canonicalUrl} />
-    <link rel="alternate" hreflang="fr" href={`${BASE}/info/${page.slug}`} />
-    <link rel="alternate" hreflang="en" href={`${BASE}/en/info/${page.slug}`} />
-    <link rel="alternate" hreflang="es" href={`${BASE}/es/info/${page.slug}`} />
-    <link rel="alternate" hreflang="x-default" href={`${BASE}/info/${page.slug}`} />
+    {Object.entries(hreflangLinks).map(([lang, href]) => (
+      <link rel="alternate" hreflang={lang} href={href} />
+    ))}
     <script type="application/ld+json" set:html={JSON.stringify(articleSchema)} />
   </Fragment>
 
