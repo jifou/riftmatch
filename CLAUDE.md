@@ -116,3 +116,16 @@ L'admin Payload est accessible sur `http://localhost:3010/admin`.
 | `affiliate-blocks` | Blocs pub contextuels par placement      |
 | `migrations`     | Tracker interne des migrations (ne pas modifier) |
 | `users`          | Admins CMS                                 |
+
+---
+
+## Production (VPS Hostinger)
+
+- Le site tourne en Docker derrière Traefik (HTTPS Let's Encrypt), sur `riftmatch.io`.
+- Le déploiement quotidien est lancé par cron à 7h : `git pull`, build, migrations.
+- Les alternatives de langue (hreflang) des articles viennent du champ `translationKey` de la
+  collection `pages` : les traductions d'un même article partagent la même clé. Un nouvel
+  article traduit doit recevoir la même clé dans ses 3 langues, sinon aucun hreflang n'est émis.
+- `payload/src/migrations/runner-affiliate-compat.ts` convertit les anciens blocs affiliés
+  (`affiliateUrl`) vers le champ `links` attendu aujourd'hui.
+- `astro/public/` contient `sw.js`, `manifest.json` et les icônes de la PWA.
