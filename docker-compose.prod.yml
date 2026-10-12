@@ -58,6 +58,11 @@ services:
     environment:
       PAYLOAD_API_URL: http://payload:3000
       AMAZON_AFFILIATE_TAG: ${AMAZON_AFFILIATE_TAG:-}
+      AMAZON_TAG_FR: ${AMAZON_TAG_FR:-}
+      AMAZON_TAG_UK: ${AMAZON_TAG_UK:-}
+      AMAZON_TAG_ES: ${AMAZON_TAG_ES:-}
+      AMAZON_TAG_DE: ${AMAZON_TAG_DE:-}
+      AMAZON_TAG_IT: ${AMAZON_TAG_IT:-}
       PUBLIC_GA_ID: ${PUBLIC_GA_ID:-}
       PORT: 4321
       NODE_ENV: production

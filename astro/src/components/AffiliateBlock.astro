@@ -15,13 +15,25 @@ export interface Props {
 const { variant = 'card', roles = [], locale = 'fr' } = Astro.props
 
 const PAYLOAD_URL = import.meta.env.PAYLOAD_API_URL || 'http://payload:3000'
-const AFFILIATE_TAG = import.meta.env.AMAZON_AFFILIATE_TAG || process.env.AMAZON_AFFILIATE_TAG || ''
+const env = (k: string): string => import.meta.env[k] || process.env[k] || ''
+
+// Un tag Associates par boutique Amazon, choisi selon le domaine du lien.
+// AMAZON_AFFILIATE_TAG reste le tag historique (amazon.fr).
+const TAGS_BY_DOMAIN: Record<string, string> = {
+  'amazon.fr': env('AMAZON_TAG_FR') || env('AMAZON_AFFILIATE_TAG'),
+  'amazon.co.uk': env('AMAZON_TAG_UK'),
+  'amazon.es': env('AMAZON_TAG_ES'),
+  'amazon.de': env('AMAZON_TAG_DE'),
+  'amazon.it': env('AMAZON_TAG_IT'),
+}
 
 function injectTag(url: string): string {
-  if (!AFFILIATE_TAG || !url) return url
+  if (!url) return url
   try {
     const u = new URL(url)
-    if (!u.searchParams.has('tag')) u.searchParams.set('tag', AFFILIATE_TAG)
+    const domain = u.hostname.replace(/^www\./, '')
+    const tag = TAGS_BY_DOMAIN[domain]
+    if (tag && !u.searchParams.has('tag')) u.searchParams.set('tag', tag)
     return u.toString()
   } catch { return url }
 }
