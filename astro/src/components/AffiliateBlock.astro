@@ -39,21 +39,35 @@ function injectTag(url: string): string {
 }
 
 /**
- * Résout l'URL affiliée depuis links[].
- * Priorité : locale exacte → fr (fallback) → premier lien disponible.
+ * Résout l'URL affiliée depuis links[]: locale exacte uniquement.
+ * Pas de repli sur une autre boutique: un visiteur allemand ne doit pas
+ * atterrir sur amazon.fr. Un bloc sans lien pour la langue est écarté.
  */
 function resolveUrl(doc: any, targetLocale: string): string {
   const links: { locale: string; url: string }[] = doc.links ?? []
-  if (links.length > 0) {
-    const exact = links.find(l => l.locale === targetLocale)
-    if (exact?.url) return injectTag(exact.url)
-    const frFallback = links.find(l => l.locale === 'fr')
-    if (frFallback?.url) return injectTag(frFallback.url)
-    const first = links.find(l => l.url)
-    if (first?.url) return injectTag(first.url)
-  }
-  return ''
+  const exact = links.find(l => l.locale === targetLocale)
+  return exact?.url ? injectTag(exact.url) : ''
 }
+
+/** Textes de la langue du visiteur, repli sur le groupe `product` (français). */
+function resolveTexts(doc: any, targetLocale: string) {
+  const t = (doc.texts ?? []).find((x: any) => x.locale === targetLocale) ?? {}
+  return {
+    tagline:    t.tagline    || doc.product?.tagline || '',
+    ctaText:    t.ctaText    || doc.product?.ctaText || '',
+    badge:      t.badge      ?? doc.product?.badge   ?? '',
+    disclosure: t.disclosure || doc.disclosure       || '',
+  }
+}
+
+const LABELS: Record<string, { card: string; banner: string; cta: string }> = {
+  fr: { card: 'Offre recommandée', banner: 'Offre partenaire', cta: 'Voir sur Amazon →' },
+  en: { card: 'Recommended offer', banner: 'Partner offer',    cta: 'View on Amazon →' },
+  es: { card: 'Oferta recomendada', banner: 'Oferta de socio', cta: 'Ver en Amazon →' },
+  de: { card: 'Empfohlenes Angebot', banner: 'Partnerangebot', cta: 'Bei Amazon ansehen →' },
+  it: { card: 'Offerta consigliata', banner: 'Offerta partner', cta: 'Vedi su Amazon →' },
+}
+const L = LABELS[locale] ?? LABELS.fr
 
 const LANE_TO_ROLE: Record<string, string> = {
   bot: 'adc', adc: 'adc', mid: 'mage', support: 'support', jungle: 'jungle', top: 'tank',
@@ -94,15 +108,22 @@ try {
 if (candidates.length === 0) return
 
 // Sérialiser pour le client (URL résolue ici côté serveur selon la locale)
-const blocksData = candidates.map((b: any) => ({
-  name:         b.product?.name    ?? '',
-  tagline:      b.product?.tagline ?? '',
-  imageUrl:     b.product?.imageUrl ?? '',
-  affiliateUrl: resolveUrl(b, locale),
-  ctaText:      b.product?.ctaText ?? "Voir sur Amazon →",
-  badge:        b.product?.badge   ?? '',
-  disclosure:   b.disclosure       ?? '',
-})).filter(b => b.affiliateUrl) // Exclure les blocs sans URL pour cette locale
+const blocksData = candidates.map((b: any) => {
+  const tx = resolveTexts(b, locale)
+  return {
+    name:         b.product?.name ?? '',
+    tagline:      tx.tagline,
+    imageUrl:     b.product?.imageUrl ?? '',
+    affiliateUrl: resolveUrl(b, locale),
+    ctaText:      tx.ctaText || L.cta,
+    badge:        tx.badge,
+    disclosure:   tx.disclosure,
+    labelCard:    L.card,
+    labelBanner:  L.banner,
+  }
+}).filter(b => b.affiliateUrl) // Exclure les blocs sans lien pour cette langue
+
+if (blocksData.length === 0) return
 ---
 
 <div
@@ -117,11 +138,12 @@ const blocksData = candidates.map((b: any) => ({
   type AffBlock = {
     name: string; tagline: string; imageUrl: string
     affiliateUrl: string; ctaText: string; badge: string; disclosure: string
+    labelCard: string; labelBanner: string
   }
 
   function renderCard(b: AffBlock): string {
     return `
-      <aside class="aff-card gradient-border" data-aff-block data-variant="card" aria-label="Offre partenaire : ${b.name}">
+      <aside class="aff-card gradient-border" data-aff-block data-variant="card" aria-label="${b.labelBanner} : ${b.name}">
         <div class="aff-card-glow" aria-hidden="true"></div>
         ${b.badge ? `<span class="aff-badge">${b.badge}</span>` : ''}
         <div class="aff-card-inner">
@@ -130,7 +152,7 @@ const blocksData = candidates.map((b: any) => ({
               <img class="aff-img" src="${b.imageUrl}" alt="${b.name}" loading="lazy" width="80" height="80" />
             </div>` : ''}
           <div class="aff-body">
-            <p class="aff-label">Offre Recommandée</p>
+            <p class="aff-label">${b.labelCard}</p>
             <p class="aff-name">${b.name}</p>
             ${b.tagline ? `<p class="aff-tagline">${b.tagline}</p>` : ''}
             <a class="aff-cta" href="${b.affiliateUrl}" target="_blank" rel="noopener noreferrer sponsored">
@@ -144,7 +166,7 @@ const blocksData = candidates.map((b: any) => ({
 
   function renderBanner(b: AffBlock): string {
     return `
-      <aside class="aff-banner" data-aff-block data-variant="banner" aria-label="Offre partenaire : ${b.name}">
+      <aside class="aff-banner" data-aff-block data-variant="banner" aria-label="${b.labelBanner} : ${b.name}">
         <div class="aff-banner-bg" aria-hidden="true"></div>
         ${b.badge ? `<span class="aff-badge aff-badge--banner">${b.badge}</span>` : ''}
         <div class="aff-banner-inner">
@@ -153,7 +175,7 @@ const blocksData = candidates.map((b: any) => ({
               <img class="aff-img" src="${b.imageUrl}" alt="${b.name}" loading="lazy" width="56" height="56" />
             </div>` : ''}
           <div class="aff-body">
-            <p class="aff-label">Offre Partenaire</p>
+            <p class="aff-label">${b.labelBanner}</p>
             <p class="aff-name">${b.name}</p>
             ${b.tagline ? `<p class="aff-tagline">${b.tagline}</p>` : ''}
           </div>

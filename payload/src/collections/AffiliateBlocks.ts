@@ -124,6 +124,24 @@ const AffiliateBlocks: CollectionConfig = {
       ],
     },
 
+    // ── Textes par langue (accroche, bouton, mention) ───────────
+    {
+      name: 'texts',
+      label: 'Textes par langue',
+      type: 'array',
+      admin: {
+        description:
+          'Un jeu de textes par langue. Le site affiche celui de la langue du visiteur; à défaut, les textes du groupe Produit.',
+      },
+      fields: [
+        { name: 'locale', label: 'Langue', type: 'select', required: true, options: LINK_LOCALES },
+        { name: 'tagline', label: 'Accroche', type: 'text' },
+        { name: 'ctaText', label: 'Texte du bouton', type: 'text' },
+        { name: 'badge', label: 'Badge', type: 'text' },
+        { name: 'disclosure', label: 'Mention légale', type: 'text' },
+      ],
+    },
+
     // ── Ciblage rôles (optionnel, fiches champion) ───────────────
     {
       name: 'roles',
