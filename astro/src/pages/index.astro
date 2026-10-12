@@ -4,10 +4,13 @@ import { CHAMPIONS } from '../data/champions'
 import { getLatestDDRVersion, getDDRBase } from '../lib/ddr-version'
 import AffiliateBlock from '../components/AffiliateBlock.astro'
 import { UI } from '../i18n.js'
+import { TEXT } from '../data/quiz-data.js'
 
 const champions = [...CHAMPIONS].sort((a, b) => a.name.localeCompare(b.name))
 const locale = Astro.cookies.get('locale')?.value || 'fr'
 const t = UI[locale] || UI.fr
+const QT = (TEXT as any)[locale] || (TEXT as any).fr
+const HERO_ART = ['Ahri', 'Yasuo', 'Jinx', 'Lux', 'Zed', 'Sylas']
 const champBase = locale === 'fr' ? '/champion' : `/${locale}/champion`
 
 const ddrVersion = await getLatestDDRVersion()
@@ -44,6 +47,12 @@ const DDR_BASE = getDDRBase(ddrVersion)
         <div class="hero-hex hero-hex--2"></div>
         <div class="hero-orb hero-orb--gold"></div>
         <div class="hero-orb hero-orb--blue"></div>
+        <div class="hero-art">
+          {HERO_ART.map((n, i) => (
+            <div class="hero-art-slide" style={`--i:${i}; background-image:url(https://ddragon.leagueoflegends.com/cdn/img/champion/splash/${n}_0.jpg)`}></div>
+          ))}
+        </div>
+        <div class="hero-art-shade"></div>
       </div>
       <div class="hero-content">
         <p class="hero-eyebrow">
@@ -68,7 +77,7 @@ const DDR_BASE = getDDRBase(ddrVersion)
             <span>{t.home.statChamps}</span>
           </div>
           <div class="stat-pill">
-            <span class="stat-num">5</span>
+            <span class="stat-num">8</span>
             <span>{t.home.statQuestions}</span>
           </div>
         </div>
@@ -99,6 +108,13 @@ const DDR_BASE = getDDRBase(ddrVersion)
           </div>
         </div>
 
+        <div class="role-filters" id="role-filters" role="group">
+          <button type="button" class="role-chip role-chip--on" data-role="all">{QT.ui.all}</button>
+          {['top','jungle','mid','bot','support'].map((r) => (
+            <button type="button" class="role-chip" data-role={r}>{QT.lanes[r]}</button>
+          ))}
+        </div>
+
         <div
           class="champions-grid"
           id="champions-grid"
@@ -113,6 +129,7 @@ const DDR_BASE = getDDRBase(ddrVersion)
               href={`${champBase}/${champion.apiId}`}
               class={`champion-card${i >= 24 ? ' champion-card--hidden' : ''}`}
               data-name={champion.name.toLowerCase()}
+              data-lanes={(champion.lanes || []).join(' ')}
               data-index={i}
             >
               <div class="champion-img-wrap">
@@ -173,42 +190,41 @@ const DDR_BASE = getDDRBase(ddrVersion)
   const total = allCards.length
   let expanded = false
 
-  // ── Show more ──────────────────────────────────────────────
-  showMoreBtn?.addEventListener('click', () => {
-    expanded = true
-    allCards.forEach(card => card.classList.remove('champion-card--hidden'))
-    if (showMoreWrap) showMoreWrap.style.display = 'none'
-    if (countEl) countEl.textContent = `${total} ${_champWord}`
-  })
+  // ── Filtres (recherche + role) ──────────────────────────────
+  let role = 'all'
+  const chips = Array.from(document.querySelectorAll<HTMLElement>('.role-chip'))
 
-  // ── Search ─────────────────────────────────────────────────
-  input?.addEventListener('input', () => {
-    const q = input.value.toLowerCase().trim()
-
-    if (!q) {
-      allCards.forEach((card, i) => {
-        card.style.display = ''
-        if (!expanded && i >= INITIAL_COUNT) card.classList.add('champion-card--hidden')
-        else card.classList.remove('champion-card--hidden')
-      })
-      if (noResults)    noResults.style.display = 'none'
-      if (showMoreWrap) showMoreWrap.style.display = expanded ? 'none' : ''
-      if (countEl)      countEl.textContent = `${total} ${_champWord}`
-      return
-    }
-
-    // While searching: show all matches regardless of expanded state
-    if (showMoreWrap) showMoreWrap.style.display = 'none'
+  function apply() {
+    const q = (input?.value || '').toLowerCase().trim()
+    const filtering = !!q || role !== 'all'
     let visible = 0
-    allCards.forEach(card => {
-      const match = card.dataset.name?.includes(q)
-      card.classList.remove('champion-card--hidden')
+    allCards.forEach((card, i) => {
+      const okName = !q || (card.dataset.name || '').includes(q)
+      const okRole = role === 'all' || (card.dataset.lanes || '').split(' ').includes(role)
+      const match = okName && okRole
       card.style.display = match ? '' : 'none'
-      if (match) visible++
+      if (match) {
+        visible++
+        const hide = !filtering && !expanded && i >= INITIAL_COUNT
+        card.classList.toggle('champion-card--hidden', hide)
+      }
     })
     if (noResults) noResults.style.display = visible === 0 ? 'block' : 'none'
-    if (countEl)   countEl.textContent = `${visible} ${visible !== 1 ? _resultsWord : _resultWord} ${_ofWord} ${total}`
-  })
+    if (showMoreWrap) showMoreWrap.style.display = (filtering || expanded) ? 'none' : ''
+    if (countEl) {
+      countEl.textContent = filtering
+        ? `${visible} ${visible !== 1 ? _resultsWord : _resultWord} ${_ofWord} ${total}`
+        : `${total} ${_champWord}`
+    }
+  }
+
+  showMoreBtn?.addEventListener('click', () => { expanded = true; apply() })
+  input?.addEventListener('input', apply)
+  chips.forEach(ch => ch.addEventListener('click', () => {
+    role = ch.dataset.role || 'all'
+    chips.forEach(c => c.classList.toggle('role-chip--on', c === ch))
+    apply()
+  }))
 </script>
 
 <style>
@@ -676,4 +692,56 @@ const DDR_BASE = getDDRBase(ddrVersion)
     .hero-eyebrow { font-size: 0.7rem; padding: 0.2rem 0.6rem; }
     .stat-num { font-size: 0.9rem; }
   }
+
+  /* ── Hero art (splash arts en fondu) ── */
+  .hero { padding: 6.5rem 1rem 6rem; }
+  .hero-art { position: absolute; inset: 0; }
+  .hero-art-slide {
+    position: absolute; inset: 0; background-size: cover; background-position: center 22%;
+    opacity: 0; animation: heroFade 36s infinite; animation-delay: calc(var(--i) * 6s);
+    transform: scale(1.04);
+  }
+  @keyframes heroFade {
+    0% { opacity: 0; transform: scale(1.08); }
+    4% { opacity: .75; }
+    16% { opacity: .75; }
+    20% { opacity: 0; transform: scale(1); }
+    100% { opacity: 0; }
+  }
+  .hero-art-slide:first-child { animation-name: heroFadeFirst; opacity: .75; }
+  @keyframes heroFadeFirst {
+    0% { opacity: .75; transform: scale(1.04); }
+    16% { opacity: .75; }
+    20% { opacity: 0; transform: scale(1); }
+    96% { opacity: 0; transform: scale(1.08); }
+    100% { opacity: .75; transform: scale(1.04); }
+  }
+  .hero-art-shade {
+    position: absolute; inset: 0;
+    background:
+      radial-gradient(ellipse 55% 60% at 50% 45%, rgba(9,11,16,.78), rgba(9,11,16,.25) 100%),
+      linear-gradient(180deg, rgba(9,11,16,.5) 0%, rgba(9,11,16,.15) 40%, var(--dark) 100%);
+  }
+  .hero-title { text-shadow: 0 4px 30px rgba(0,0,0,.8); text-transform: uppercase; }
+  .hero-sub { color: var(--text-light); text-shadow: 0 2px 14px rgba(0,0,0,.9); max-width: 560px; }
+  .btn-primary {
+    border-radius: 0; padding: 1.05rem 2.8rem; font-size: 1.2rem; letter-spacing: .14em;
+    clip-path: polygon(14px 0, 100% 0, 100% calc(100% - 14px), calc(100% - 14px) 100%, 0 100%, 0 14px);
+  }
+  .btn-ghost { border-radius: 0; background: rgba(9,11,16,.6); }
+
+  /* ── Filtres par role ── */
+  .role-filters { display: flex; flex-wrap: wrap; gap: .5rem; margin: 0 0 1.25rem; }
+  .role-chip {
+    font: 700 .78rem 'Rajdhani', sans-serif; letter-spacing: .14em; text-transform: uppercase; cursor: pointer;
+    padding: .5rem 1.1rem; color: var(--text-muted); background: var(--dark3); border: 1px solid rgba(200,155,60,.18);
+    clip-path: polygon(8px 0, 100% 0, calc(100% - 8px) 100%, 0 100%); transition: color .18s, background .18s, border-color .18s;
+  }
+  .role-chip:hover { color: var(--gold-light); border-color: var(--gold); }
+  .role-chip--on { color: #090b10; background: var(--gold); border-color: var(--gold); }
+
+  /* ── Cartes champion : style gaming ── */
+  .champion-card { clip-path: polygon(10px 0, 100% 0, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0 100%, 0 10px); border-radius: 0; }
+  .champion-card:hover { border-color: var(--gold); box-shadow: var(--glow-gold); transform: translateY(-3px); }
+  @media (prefers-reduced-motion: reduce) { .hero-art-slide { animation: none; } .hero-art-slide:first-child { opacity: .7; } }
 </style>

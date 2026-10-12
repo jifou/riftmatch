@@ -1,119 +1,79 @@
-import { QUIZ } from '../i18n'
+import { QUESTIONS } from '../data/quiz-data.js'
 
-export function getQuestions(lang, path) {
-  return QUIZ[lang]?.[path]?.questions || []
+// Score d'un champion pour un jeu de poids (w) d'une reponse.
+function scoreAnswer(c, w) {
+  let s = 0
+  if (w.lane) {
+    for (const [lane, pts] of Object.entries(w.lane)) {
+      if ((c.lanes || []).includes(lane)) s += pts + (c.lanes[0] === lane ? 1 : 0)
+    }
+  }
+  if (w.arch) {
+    for (const [a, pts] of Object.entries(w.arch)) if ((c.archetypes || []).includes(a)) s += pts
+  }
+  if (w.style) {
+    for (const [a, pts] of Object.entries(w.style)) if ((c.styles || []).includes(a)) s += pts
+  }
+  if (w.diff) {
+    const [lo, hi] = w.diff.r
+    if (c.difficulty >= lo && c.difficulty <= hi) s += w.diff.w
+    else if (c.difficulty === lo - 1 || c.difficulty === hi + 1) s += Math.round(w.diff.w / 2)
+  }
+  if (w.faction && w.faction.f.includes(c.faction)) s += w.faction.w
+  return s
+}
+
+// Hash deterministe (FNV-1a) : sert uniquement a departager des egalites,
+// toujours le meme resultat pour les memes reponses.
+function tieBreak(str) {
+  let h = 2166136261
+  for (let i = 0; i < str.length; i++) {
+    h ^= str.charCodeAt(i)
+    h = Math.imul(h, 16777619)
+  }
+  return ((h >>> 0) % 1000) / 1000
 }
 
 /**
- * answers[0] = difficulty idx  (0=easy, 1=medium, 2=hard, 3=any)
- * answers[1] = role idx        (0=top, 1=jungle, 2=mid, 3=bot, 4=support, 5=any)
- * answers[2] = style idx       (0=magic, 1=physical, 2=tank, 3=any)
- * answers[3] = path Q1 idx
- * answers[4] = path Q2 idx
+ * answers[i] = index de la reponse choisie a la question i (QUESTIONS[i]).
+ * Retourne les 3 meilleurs champions avec matchPct et ce qui correspond.
  */
-export function calculateResults(champions, path, answers) {
-  // ── 1. Hard filters ──────────────────────────────────────────
-  let pool = [...champions]
+export function calculateResults(champions, answers) {
+  const picked = answers.map((idx, i) => (QUESTIONS[i]?.answers[idx]?.w) || {})
+  const key = answers.join('-')
 
-  // Difficulty
-  const diff = answers[0] ?? 3
-  if (diff === 0) pool = pool.filter(c => c.difficulty <= 2)
-  else if (diff === 1) pool = pool.filter(c => c.difficulty === 3)
-  else if (diff === 2) pool = pool.filter(c => c.difficulty >= 4)
-
-  // Role
-  const roleMap = ['top', 'jungle', 'mid', 'bot', 'support']
-  const roleIdx = answers[1] ?? 5
-  if (roleIdx < 5) {
-    const role = roleMap[roleIdx]
-    pool = pool.filter(c => c.lanes && c.lanes.includes(role))
+  let ideal = 0
+  for (const w of picked) {
+    if (!Object.keys(w).length) continue
+    let best = 0
+    for (const c of champions) best = Math.max(best, scoreAnswer(c, w))
+    ideal += best
   }
 
-  // Fallback si pool trop petit
-  if (pool.length < 5) pool = [...champions]
+  const scored = champions.map(c => {
+    let total = 0
+    for (const w of picked) total += scoreAnswer(c, w)
+    return { c, total, tb: tieBreak(key + c.apiId) }
+  })
+  scored.sort((a, b) => (b.total - a.total) || (b.tb - a.tb))
 
-  // ── 2. Scoring ───────────────────────────────────────────────
-  const styleIdx = answers[2] ?? 3
-  const pathAnswers = [answers[3] ?? 0, answers[4] ?? 0]
-
-  const pathScorers = {
-    playstyle: (c, pa) => {
-      let s = 0
-      const styleMap = [['aggressive'], ['poke'], ['carry'], ['scaling']]
-      if ((styleMap[pa[0]] || []).some(st => (c.styles || []).includes(st))) s += 40
-      const priorityMap = [['carry', 'aggressive'], ['carry'], ['utility'], ['utility', 'peel']]
-      if ((priorityMap[pa[1]] || []).some(p => (c.styles || []).includes(p))) s += 40
-      return s
-    },
-    character: (c, pa) => {
-      let s = 0
-      const q3map = [['aggressive', 'carry'], ['utility', 'poke'], ['mage'], ['support']]
-      if ((q3map[pa[0]] || []).some(a => [...(c.styles||[]), ...(c.archetypes||[])].includes(a))) s += 40
-      const q4map = [['mage', 'support'], ['fighter', 'assassin'], ['mage', 'assassin'], ['tank', 'support']]
-      if ((q4map[pa[1]] || []).some(a => (c.archetypes||[]).includes(a))) s += 40
-      return s
-    },
-    mood: (c, pa) => {
-      let s = 0
-      const q3map = [['aggressive', 'carry'], ['utility', 'mage'], ['mobile', 'assassin'], ['support', 'peel']]
-      if ((q3map[pa[0]] || []).some(a => [...(c.styles||[]), ...(c.archetypes||[])].includes(a))) s += 40
-      if (pa[1] === 0 && (c.styles||[]).includes('aggressive')) s += 40
-      else if (pa[1] === 1 && ['tank', 'fighter'].some(a => (c.archetypes||[]).includes(a))) s += 40
-      else s += 15
-      return s
-    },
-    tastes: (c, pa) => {
-      let s = 0
-      const heroMap = [['fighter'], ['mage'], ['assassin'], ['tank', 'support']]
-      if ((heroMap[pa[0]] || []).some(a => (c.archetypes||[]).includes(a))) s += 45
-      const q4map = [['fighter', 'tank'], ['mage'], ['assassin', 'mage'], ['adc', 'assassin']]
-      if ((q4map[pa[1]] || []).some(a => (c.archetypes||[]).includes(a))) s += 35
-      return s
-    },
-    universe: (c, pa) => {
-      let s = 0
-      const regionMap = [['demacia'], ['noxus'], ['ionia'], ['zaun', 'piltover']]
-      if ((regionMap[pa[0]] || []).includes(c.faction)) s += 50
-      const archMap = [['fighter', 'tank'], ['assassin'], ['assassin', 'mage'], ['support', 'tank']]
-      if ((archMap[pa[1]] || []).some(a => (c.archetypes||[]).includes(a))) s += 30
-      return s
-    },
-    difficulty: (c, pa) => {
-      let s = 0
-      const learnMap = [2, 2, 4, 5]
-      const ld = learnMap[pa[0]] || 3
-      s += Math.max(0, 30 - Math.abs(c.difficulty - ld) * 8)
-      if (pa[1] === 0 && c.difficulty <= 2) s += 25
-      else if (pa[1] === 1 && c.difficulty >= 2 && c.difficulty <= 3) s += 25
-      else if (pa[1] === 2) s += 10
-      else if (pa[1] === 3 && c.difficulty >= 4) s += 25
-      return s
-    },
+  // Ce que l'utilisateur a choisi, pour mettre en valeur ce qui correspond
+  const wantLanes = new Set()
+  const wantArch = new Set()
+  const wantFactions = new Set()
+  for (const w of picked) {
+    Object.keys(w.lane || {}).forEach(l => wantLanes.add(l))
+    Object.keys(w.arch || {}).forEach(a => wantArch.add(a))
+    ;(w.faction?.f || []).forEach(f => wantFactions.add(f))
   }
 
-  function getDamageBonus(c, idx) {
-    if (idx === 0) return (c.archetypes||[]).includes('mage') ? 25 : 0
-    if (idx === 1) return ((c.archetypes||[]).includes('adc') || (c.archetypes||[]).includes('fighter') || ((c.archetypes||[]).includes('assassin') && !(c.archetypes||[]).includes('mage'))) ? 25 : 0
-    if (idx === 2) return (c.archetypes||[]).includes('tank') ? 25 : 0
-    return 0
-  }
-
-  const scorer = pathScorers[path] || (() => 0)
-
-  const scored = pool.map(c => ({
+  return scored.slice(0, 3).map(({ c, total }) => ({
     ...c,
-    _raw: scorer(c, pathAnswers) + getDamageBonus(c, styleIdx) + Math.random() * 6,
-  }))
-
-  const top3 = scored.sort((a, b) => b._raw - a._raw).slice(0, 3)
-  const maxRaw = top3[0]._raw
-  const minRaw = top3[2]._raw
-  const range = maxRaw - minRaw
-
-  return top3.map((c, i) => ({
-    ...c,
-    matchPct: range === 0
-      ? [100, 84, 70][i]
-      : Math.round(65 + ((c._raw - minRaw) / range) * 35),
+    matchPct: ideal > 0 ? Math.max(55, Math.min(99, Math.round(Math.sqrt(total / ideal) * 100))) : 80,
+    matched: {
+      lanes: (c.lanes || []).filter(l => wantLanes.has(l)),
+      arch: (c.archetypes || []).filter(a => wantArch.has(a)),
+      faction: wantFactions.has(c.faction),
+    },
   }))
 }
