@@ -7,7 +7,7 @@ const { slug } = Astro.params
 const PAYLOAD_URL = import.meta.env.PAYLOAD_API_URL || 'http://payload:3000'
 
 const locale = Astro.cookies.get('locale')?.value || 'fr'
-const dateLocale = locale === 'en' ? 'en-GB' : locale === 'es' ? 'es-ES' : 'fr-FR'
+const dateLocale = ({ en: 'en-GB', es: 'es-ES', de: 'de-DE', it: 'it-IT' } as Record<string, string>)[locale] ?? 'fr-FR'
 
 let article: any = null
 try {
@@ -28,6 +28,8 @@ const CATEGORY_LABELS: Record<string, Record<string, string>> = {
   fr: { news: 'Actualité', champion: 'Champion', meta: 'Méta', esports: 'Esports', announcement: 'Annonce Riot', update: 'Mise à jour' },
   en: { news: 'News', champion: 'Champion', meta: 'Meta', esports: 'Esports', announcement: 'Riot Announcement', update: 'Update' },
   es: { news: 'Noticia', champion: 'Campeón', meta: 'Meta', esports: 'Esports', announcement: 'Anuncio Riot', update: 'Actualización' },
+  de: { news: 'News', champion: 'Champion', meta: 'Meta', esports: 'Esports', announcement: 'Riot-Ankündigung', update: 'Update' },
+  it: { news: 'Notizie', champion: 'Campione', meta: 'Meta', esports: 'Esports', announcement: 'Annuncio Riot', update: 'Aggiornamento' },
 }
 const catLabels = CATEGORY_LABELS[locale] ?? CATEGORY_LABELS.fr
 
@@ -40,6 +42,8 @@ const UI_LABELS: Record<string, { back: string; backAll: string; quiz: string; b
   fr: { back: '← Toutes les news', backAll: '← Retour aux news', quiz: 'Trouver mon champion →', by: 'Par', tags: 'Tags :' },
   en: { back: '← All news', backAll: '← Back to news', quiz: 'Find my champion →', by: 'By', tags: 'Tags:' },
   es: { back: '← Todas las noticias', backAll: '← Volver a noticias', quiz: 'Encontrar mi campeón →', by: 'Por', tags: 'Etiquetas:' },
+  de: { back: '← Alle News', backAll: '← Zurück zu den News', quiz: 'Meinen Champion finden →', by: 'Von', tags: 'Tags:' },
+  it: { back: '← Tutte le notizie', backAll: '← Torna alle notizie', quiz: 'Trova il mio campione →', by: 'Di', tags: 'Tag:' },
 }
 const ui = UI_LABELS[locale] ?? UI_LABELS.fr
 
@@ -141,7 +145,7 @@ const catLabel = catLabels[article.category] ?? article.category
         "@type": "WebPage",
         "@id": `https://riftmatch.io/news/${slug}`
       },
-      "inLanguage": locale === 'en' ? 'en' : locale === 'es' ? 'es' : 'fr',
+      "inLanguage": ['en', 'es', 'de', 'it'].includes(locale) ? locale : 'fr',
       "keywords": article.tags?.map((t: any) => t.tag).join(', ') || 'League of Legends, esports, LoL'
     })} />
   </Fragment>

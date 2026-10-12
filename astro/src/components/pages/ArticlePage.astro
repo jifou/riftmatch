@@ -14,13 +14,8 @@ const PAYLOAD_URL = import.meta.env.PAYLOAD_API_URL || 'http://payload:3000'
 
 // URL locale : 'fr' (default, sans préfixe) | 'en' | 'es'
 const urlLocale = Astro.currentLocale || 'fr'
-const cookieLocale = Astro.cookies.get('locale')?.value || 'fr'
 
-// Redirect si l'utilisateur préfère une autre langue et est sur l'URL FR par défaut
-if (urlLocale === 'fr' && cookieLocale !== 'fr') {
-  return Astro.redirect(`/${cookieLocale}/info/${slug}`, 302)
-}
-
+// (redirection vers la langue préférée: faite dans la page, pas dans le composant)
 const locale = urlLocale
 const ta = (UI as any)[locale]?.articlePage || (UI as any).fr.articlePage
 
@@ -145,10 +140,10 @@ const BASE = 'https://riftmatch.io'
 const guidesPath = locale === 'fr' ? '/guides' : `/${locale}/guides`
 const quizPath = '/quiz'  // pas de variante URL par locale
 const canonicalUrl = locale === 'fr' ? `${BASE}/info/${page.slug}` : `${BASE}/${locale}/info/${page.slug}`
-const inLanguage = locale === 'en' ? 'en' : locale === 'es' ? 'es' : 'fr'
+const inLanguage = ['en', 'es', 'de', 'it'].includes(locale) ? locale : 'fr'
 const infoUrl = (l: string, slug: string) => (l === 'fr' ? `${BASE}/info/${slug}` : `${BASE}/${l}/info/${slug}`)
 const hreflangLinks: Record<string, string> = {}
-for (const l of ['fr', 'en', 'es']) {
+for (const l of ['fr', 'en', 'es', 'de', 'it']) {
   if (translations[l]) hreflangLinks[l] = infoUrl(l, translations[l])
 }
 // Une page qui a des traductions s'annonce elle-même ; x-default pointe vers le français si dispo.

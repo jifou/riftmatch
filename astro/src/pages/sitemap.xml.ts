@@ -7,9 +7,9 @@ import { CHAMPIONS } from '../data/champions'
 
 const BASE_URL = 'https://riftmatch.io'
 const TODAY    = new Date().toISOString().split('T')[0]
-const LOCALES  = ['fr', 'en', 'es'] as const
+const LOCALES  = ['fr', 'en', 'es', 'de', 'it'] as const
 
-function localeUrl(path: string, locale: 'fr' | 'en' | 'es'): string {
+function localeUrl(path: string, locale: 'fr' | 'en' | 'es' | 'de' | 'it'): string {
   return locale === 'fr' ? path : `/${locale}${path}`
 }
 

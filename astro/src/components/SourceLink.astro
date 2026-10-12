@@ -35,6 +35,16 @@ const LABELS: Record<string, { heading: string; cta: string; disclaimer: string 
     cta: `Leer el artículo original en ${displayDomain} →`,
     disclaimer: 'Este artículo está basado en información publicada por la fuente anterior.',
   },
+  de: {
+    heading: 'Offizielle Quelle',
+    cta: `Originalartikel auf ${displayDomain} lesen →`,
+    disclaimer: 'Dieser Artikel basiert auf Informationen der oben genannten Quelle.',
+  },
+  it: {
+    heading: 'Fonte ufficiale',
+    cta: `Leggi l'articolo originale su ${displayDomain} →`,
+    disclaimer: "Questo articolo si basa su informazioni pubblicate dalla fonte indicata sopra.",
+  },
 }
 
 const l = LABELS[locale] ?? LABELS.fr

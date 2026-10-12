@@ -181,11 +181,14 @@ const raw: [string, string, string[], string[], string[], string, number, string
   ["Zyra","Zyra",["mid","support"],["mage","support"],["aggressive","utility"],"ixtal",3,["ancient","nature"],["plant","spirit"]],
   ["Ambessa","Ambessa",["top"],["fighter"],["aggressive","carry"],"noxus",3,["medieval","fantasy"],["human"]],
   ["Locke","Locke",["mid","jungle"],["assassin","mage"],["aggressive","carry"],"demacia",4,["medieval","dark","fantasy"],["human"]],
+  ["Mel","Mel",["mid","support"],["mage","support"],["aggressive","carry"],"noxus",3,["medieval","fantasy"],["human"]],
+  ["Yunara","Yunara",["bot"],["adc"],["aggressive","carry"],"ionia",2,["medieval","fantasy"],["human"]],
+  ["Zaahen","Zaahen",["top","jungle"],["fighter"],["aggressive","carry"],"shurima",2,["ancient","fantasy"],["god"]],
 ]
 
 export const CHAMPIONS: Champion[] = raw.map(([name, apiId, lanes, archetypes, styles, faction, difficulty, universes, types]) => ({
   name, apiId, lanes, archetypes, styles, faction, difficulty, universes, types
 }))
 
-export const DDR_VERSION = '16.15.1'
+export const DDR_VERSION = '16.20.1'
 export const DDR_BASE = `https://ddragon.leagueoflegends.com/cdn/${DDR_VERSION}/img/champion`

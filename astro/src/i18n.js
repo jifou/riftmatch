@@ -1,11 +1,11 @@
 /* ═══════════════════════════════════════════════════════════════
    RiftMatch — i18n Engine
-   Supported: fr | en | es
+   Supported: fr | en | es | de | it
    Add new language: copy a block, translate, add to LANG_MAP
 ═══════════════════════════════════════════════════════════════ */
 
 /* ── Data Dragon locale per lang ── */
-export const DD_LOCALE = { fr:'fr_FR', en:'en_US', es:'es_ES', ko:'ko_KR', pt:'pt_BR', de:'de_DE' };
+export const DD_LOCALE = { fr:'fr_FR', en:'en_US', es:'es_ES', ko:'ko_KR', pt:'pt_BR', de:'de_DE', it:'it_IT' };
 
 /* ── Browser lang → app lang ── */
 export function detectLang() {
@@ -160,7 +160,101 @@ export const T = {
       difficulty:{ label:'🎯 Dificultad',    desc:'Fácil o reto máximo' }
     },
     legal: 'RiftMatch no está afiliado ni respaldado por Riot Games. League of Legends® es una marca registrada de Riot Games, Inc.'
-  }
+  },
+
+  de: {
+    logoSub:       'Entdecke deinen Champion',
+    adText:        '🖱️ <strong>SteelSeries Arctis Nova Pro</strong>: Das Headset der Champions',
+    adBtn:         'Zum Angebot →',
+    welcomeTitle:  'Wie möchtest du deinen Champion finden?',
+    welcomeSub:    '5 Fragen · Persönliche Ergebnisse · 100% kostenlos',
+    installTitle:  'App installieren',
+    installSub:    'Schneller Zugriff von deinem Startbildschirm',
+    installBtn:    'Installieren',
+    resultsTitle:  'Deine Champions wurden gefunden ✨',
+    resultsSub:    (label, pct) => `Basierend auf ${label} · ${pct}% Übereinstimmung`,
+    shareLabel:    'Teilen:',
+    shareTwitter:  '🐦 Twitter/X',
+    shareNative:   '📤 Teilen',
+    affTitle:      name => `🔗 Spieler von ${name} nutzen auch`,
+    adFooterText:  '⌨️ <strong>Keychron K8 Pro</strong>: Die Lieblingstastatur der LoL-Streamer',
+    restartBtn:    '↩ Anderen Weg ausprobieren',
+    offlineBar:    '📵 Offline-Modus',
+    champCta:      name => `${name} spielen →`,
+    guideCta:      'Guide ansehen →',
+    diffLabel:     'Schwierigkeit',
+    matchLabel:    'Übereinstimmung',
+    initLoading:   'Daten werden geladen',
+    initStep1:     'Lokaler Cache wird geprüft…',
+    initStep2:     'Verbindung zu Riot Data Dragon…',
+    initStep3:     v => `Version ${v} gefunden ✓`,
+    initStep4:     'Champions werden heruntergeladen…',
+    initStep5:     'Daten werden verarbeitet…',
+    initDone:      n => `${n} Champions geladen ✓`,
+    initFallback:  'Offline-Modus: Ersatzdaten',
+    initCache:     'Daten aus dem Cache geladen ✓',
+    champCount:    (n, v) => `Datenbank: ${n} Champions · Version ${v}`,
+    loaderTitle:   'Analyse läuft…',
+    loaderMsgs:    ['Deine Antworten werden analysiert…', n => `${n} Champions werden durchsucht…`, 'Die Archive von Runeterra werden befragt…', 'Dein Schicksal nimmt Gestalt an…'],
+    openChamp:     'Auf LoL ansehen →',
+    topBadge:      'Beste Wahl',
+    paths: {
+      character: { label:'🎭 Persönlichkeit', desc:'Introvertiert, Stratege, impulsiv…' },
+      mood:      { label:'⚡ Stimmung',        desc:'Wie du dich gerade fühlst' },
+      tastes:    { label:'🎮 Geschmack',       desc:'Filme, Universen, Figuren' },
+      playstyle: { label:'🗡️ Spielstil',       desc:'Carry, Tank, Assassine…' },
+      universe:  { label:'🌍 Universum',       desc:'Dämon, Ritter, Magier' },
+      difficulty:{ label:'🎯 Schwierigkeit',   desc:'Einfach oder maximale Herausforderung' }
+    },
+    legal: 'RiftMatch steht in keiner Verbindung zu Riot Games und wird von Riot Games nicht unterstützt. League of Legends® ist eine eingetragene Marke von Riot Games, Inc.'
+  },
+
+  it: {
+    logoSub:       'Scopri il tuo campione',
+    adText:        '🖱️ <strong>SteelSeries Arctis Nova Pro</strong>: Le cuffie dei campioni',
+    adBtn:         "Vedi l'offerta →",
+    welcomeTitle:  'Come vuoi trovare il tuo campione?',
+    welcomeSub:    '5 domande · Risultati personalizzati · 100% gratis',
+    installTitle:  "Installa l'app",
+    installSub:    'Accesso rapido dalla schermata iniziale',
+    installBtn:    'Installa',
+    resultsTitle:  'I tuoi campioni sono stati trovati ✨',
+    resultsSub:    (label, pct) => `In base a ${label} · ${pct}% di compatibilità`,
+    shareLabel:    'Condividi:',
+    shareTwitter:  '🐦 Twitter/X',
+    shareNative:   '📤 Condividi',
+    affTitle:      name => `🔗 I giocatori di ${name} usano anche`,
+    adFooterText:  '⌨️ <strong>Keychron K8 Pro</strong>: La tastiera preferita degli streamer di LoL',
+    restartBtn:    '↩ Prova un altro percorso',
+    offlineBar:    '📵 Modalità offline',
+    champCta:      name => `Gioca ${name} →`,
+    guideCta:      'Vedi la guida →',
+    diffLabel:     'Difficoltà',
+    matchLabel:    'Compatibilità',
+    initLoading:   'Caricamento dei dati',
+    initStep1:     'Verifica della cache locale…',
+    initStep2:     'Connessione a Riot Data Dragon…',
+    initStep3:     v => `Versione ${v} trovata ✓`,
+    initStep4:     'Download dei campioni…',
+    initStep5:     'Elaborazione dei dati…',
+    initDone:      n => `${n} campioni caricati ✓`,
+    initFallback:  'Modalità offline: dati di riserva',
+    initCache:     'Dati caricati dalla cache ✓',
+    champCount:    (n, v) => `Database: ${n} campioni · Versione ${v}`,
+    loaderTitle:   'Analisi in corso…',
+    loaderMsgs:    ['Analisi delle tue risposte…', n => `Esplorazione di ${n} campioni…`, 'Consulto gli archivi di Runeterra…', 'Il tuo destino prende forma…'],
+    openChamp:     'Vedi su LoL →',
+    topBadge:      'Scelta migliore',
+    paths: {
+      character: { label:'🎭 Personalità',   desc:'Introverso, stratega, impulsivo…' },
+      mood:      { label:'⚡ Umore',          desc:'Come ti senti in questo momento' },
+      tastes:    { label:'🎮 Gusti',          desc:'Film, universi, personaggi' },
+      playstyle: { label:'🗡️ Stile di gioco', desc:'Carry, tank, assassino…' },
+      universe:  { label:'🌍 Universo',       desc:'Demone, cavaliere, mago' },
+      difficulty:{ label:'🎯 Difficoltà',     desc:'Facile o sfida massima' }
+    },
+    legal: "RiftMatch non è affiliato né approvato da Riot Games. League of Legends® è un marchio registrato di Riot Games, Inc."
+  },
 };
 
 /* ════════════════════════════════════════════════════════════
@@ -245,6 +339,60 @@ export const QUIZ = {
     difficulty: { questions: [
       { q:'¿Cuánto tardas en aprender un nuevo campeón?', a:[{i:'⚡',t:'Quiero ser eficaz rápidamente'},{i:'📅',t:'Unas horas, me adapto rápido'},{i:'📚',t:'Unas semanas de práctica intensa'},{i:'🔭',t:'Meses — quiero el dominio total'}]},
       { q:'¿Tu objetivo final con este campeón?', a:[{i:'🥇',t:'Divertirme y ganar'},{i:'📊',t:'Subir en ranked eficientemente'},{i:'🎭',t:'Tener un main icónico'},{i:'🌟',t:'Alcanzar el nivel one-trick'}]},
+    ]},
+  },
+
+  de: {
+    character: { questions: [
+      { q:'Bei einem Problem: Handelst du sofort oder denkst du erst nach?', a:[{i:'⚡',t:'Ich preche vor, danach sehen wir weiter'},{i:'🧠',t:'Ich plane erst sorgfältig'},{i:'🎯',t:'Ein bisschen von beidem'},{i:'🤝',t:'Ich frage zuerst andere'}]},
+      { q:'Was beschreibt dich am besten?', a:[{i:'🧊',t:'Ruhig und methodisch'},{i:'🔥',t:'Leidenschaftlich und impulsiv'},{i:'🎪',t:'Kreativ und unberechenbar'},{i:'🛡️',t:'Loyal und beschützend'}]},
+    ]},
+    mood: { questions: [
+      { q:'Worauf hast du heute Abend Lust?', a:[{i:'💥',t:'Alles zerstören und solo carrien'},{i:'🧩',t:'Strategisch spielen und kontrollieren'},{i:'🏃',t:'Überall sein, ständig in Bewegung'},{i:'💚',t:'Mein Team unterstützen'}]},
+      { q:'Schneller Sieg oder epische Partie?', a:[{i:'⚡',t:'Schneller Sieg, früh snowballen'},{i:'🏰',t:'Epische Partie mit finalem Teamfight'},{i:'📈',t:'Egal, Hauptsache ich performe gut'},{i:'🎭',t:'Ich will unvergessliche Momente'}]},
+    ]},
+    tastes: { questions: [
+      { q:'Welcher Heldentyp spricht dich am meisten an?', a:[{i:'⚔️',t:'Der Krieger: rohe Kraft'},{i:'🔮',t:'Der Magier: Macht und Intelligenz'},{i:'🗡️',t:'Der Assassine: Schatten und Präzision'},{i:'🛡️',t:'Der Beschützer: Mut und Loyalität'}]},
+      { q:'Was magst du an einer fiktiven Figur?', a:[{i:'💪',t:'Rohe Stärke'},{i:'🧠',t:'Intelligenz und List'},{i:'🌑',t:'Geheimnis und Zwiespalt'},{i:'⚡',t:'Tempo und Beweglichkeit'}]},
+    ]},
+    playstyle: { questions: [
+      { q:'Wie gewinnst du Kämpfe am liebsten?', a:[{i:'💥',t:'Brutales, direktes All-in'},{i:'🎯',t:'Sicheres Poken aus der Distanz'},{i:'🌪️',t:'Burst und verschwinden'},{i:'⏳',t:'Outscalen und im Lategame dominieren'}]},
+      { q:'Deine Priorität in einer Partie?', a:[{i:'🏆',t:'Carry: maximale Kills und Schaden'},{i:'🗺️',t:'Ziele: Drache, Baron, Türme'},{i:'📡',t:'Vision und Map-Kontrolle'},{i:'🤝',t:'Peel und das Team beschützen'}]},
+    ]},
+    universe: { questions: [
+      { q:'Welche Region von Runeterra passt zu dir?', a:[{i:'⚔️',t:'Demacia: Ehre und Licht'},{i:'🌑',t:'Noxus: Stärke und Herrschaft'},{i:'🔮',t:'Ionia: Gleichgewicht und Spiritualität'},{i:'⚡',t:'Zaun / Piltover: Innovation'}]},
+      { q:'Welcher Erzähl-Archetyp repräsentiert dich?', a:[{i:'👑',t:'Der König: zum Herrschen geboren'},{i:'🗡️',t:'Der Rächer: von seiner Mission verzehrt'},{i:'🎪',t:'Der Trickster: unberechenbar und frei'},{i:'🛡️',t:'Der Wächter: beschützt die anderen'}]},
+    ]},
+    difficulty: { questions: [
+      { q:'Wie lange brauchst du, um einen neuen Champion zu lernen?', a:[{i:'⚡',t:'Ich will schnell effektiv sein'},{i:'📅',t:'Ein paar Stunden, ich passe mich schnell an'},{i:'📚',t:'Ein paar Wochen intensives Training'},{i:'🔭',t:'Monate: ich will totale Meisterschaft'}]},
+      { q:'Dein Endziel mit diesem Champion?', a:[{i:'🥇',t:'Spaß haben und gewinnen'},{i:'📊',t:'Effizient in Ranked aufsteigen'},{i:'🎭',t:'Einen ikonischen Main haben'},{i:'🌟',t:'One-Trick-Niveau erreichen'}]},
+    ]},
+  },
+
+  it: {
+    character: { questions: [
+      { q:'Di fronte a un problema, agisci subito o prima rifletti?', a:[{i:'⚡',t:'Mi butto, poi si vedrà'},{i:'🧠',t:'Pianifico con cura prima'},{i:'🎯',t:'Un po\' di entrambi'},{i:'🤝',t:'Chiedo prima agli altri'}]},
+      { q:'Cosa ti descrive meglio?', a:[{i:'🧊',t:'Calmo e metodico'},{i:'🔥',t:'Appassionato e impulsivo'},{i:'🎪',t:'Creativo e imprevedibile'},{i:'🛡️',t:'Leale e protettivo'}]},
+    ]},
+    mood: { questions: [
+      { q:'Che voglia hai stasera?', a:[{i:'💥',t:'Distruggere tutto e carriare da solo'},{i:'🧩',t:'Giocare in modo strategico e controllare'},{i:'🏃',t:'Muovermi ovunque, essere dappertutto'},{i:'💚',t:'Supportare il mio team'}]},
+      { q:'Vittoria rapida o partita epica?', a:[{i:'⚡',t:'Vittoria rapida, snowball precoce'},{i:'🏰',t:'Partita epica con teamfight finale'},{i:'📈',t:'Non importa, basta che io giochi bene'},{i:'🎭',t:'Voglio momenti memorabili'}]},
+    ]},
+    tastes: { questions: [
+      { q:"Quale tipo di eroe ti parla di più?", a:[{i:'⚔️',t:'Il guerriero: forza bruta'},{i:'🔮',t:'Il mago: potere e intelligenza'},{i:'🗡️',t:"L'assassino: ombra e precisione"},{i:'🛡️',t:'Il protettore: coraggio e lealtà'}]},
+      { q:'Cosa ami in un personaggio di fantasia?', a:[{i:'💪',t:'La potenza bruta'},{i:'🧠',t:"L'intelligenza e l'astuzia"},{i:'🌑',t:"Il mistero e l'ambiguità"},{i:'⚡',t:"La velocità e l'agilità"}]},
+    ]},
+    playstyle: { questions: [
+      { q:'Come preferisci vincere gli scontri?', a:[{i:'💥',t:"All-in brutale e diretto"},{i:'🎯',t:'Poke a distanza e in sicurezza'},{i:'🌪️',t:'Burst e sparire'},{i:'⏳',t:'Scalare meglio e dominare il late game'}]},
+      { q:'La tua priorità in partita?', a:[{i:'🏆',t:'Carry: massimo danno e kill'},{i:'🗺️',t:'Obiettivi: drago, barone, torri'},{i:'📡',t:'Visione e controllo della mappa'},{i:'🤝',t:'Peel e proteggere la squadra'}]},
+    ]},
+    universe: { questions: [
+      { q:'Quale regione di Runeterra fa per te?', a:[{i:'⚔️',t:'Demacia: onore e luce'},{i:'🌑',t:'Noxus: forza e dominio'},{i:'🔮',t:'Ionia: equilibrio e spiritualità'},{i:'⚡',t:'Zaun / Piltover: innovazione'}]},
+      { q:'Quale archetipo narrativo ti rappresenta?', a:[{i:'👑',t:'Il re: nato per regnare'},{i:'🗡️',t:'Il vendicatore: consumato dalla sua missione'},{i:'🎪',t:'Il trickster: imprevedibile e libero'},{i:'🛡️',t:'Il guardiano: protegge gli altri'}]},
+    ]},
+    difficulty: { questions: [
+      { q:'Quanto tempo ti serve per imparare un nuovo campione?', a:[{i:'⚡',t:'Voglio essere efficace subito'},{i:'📅',t:'Poche ore, mi adatto in fretta'},{i:'📚',t:'Qualche settimana di pratica intensa'},{i:'🔭',t:'Mesi: voglio la padronanza totale'}]},
+      { q:'Il tuo obiettivo finale con questo campione?', a:[{i:'🥇',t:'Divertirmi e vincere'},{i:'📊',t:'Salire in ranked in modo efficiente'},{i:'🎭',t:'Avere un main iconico'},{i:'🌟',t:'Raggiungere il livello one-trick'}]},
     ]},
   },
 };
@@ -353,6 +501,74 @@ export const COMMON_QUESTIONS = {
         { i: '⚔️', t: 'Físico — fuerza y AD' },
         { i: '🛡️', t: 'Tanque — resistencia y CC' },
         { i: '🎲', t: 'Me da igual' },
+      ]
+    },
+  ],
+  de: [
+    {
+      badge: '⚙️ Schwierigkeit',
+      q: 'Welchen Schwierigkeitsgrad möchtest du?',
+      a: [
+        { i: '🟢', t: 'Einfach: sofort effektiv' },
+        { i: '🟡', t: 'Mittel: ein paar Mechaniken' },
+        { i: '🔴', t: 'Schwer: hohes Skill-Cap' },
+        { i: '🎲', t: 'Egal: überrasch mich' },
+      ]
+    },
+    {
+      badge: '🗺️ Rolle',
+      q: 'Welche Rolle möchtest du spielen?',
+      a: [
+        { i: '🏔️', t: 'Top' },
+        { i: '🌲', t: 'Dschungel' },
+        { i: '🔮', t: 'Mid' },
+        { i: '🏹', t: 'Bot (ADC)' },
+        { i: '💚', t: 'Support' },
+        { i: '🎲', t: 'Egal' },
+      ]
+    },
+    {
+      badge: '⚔️ Stil',
+      q: 'Welchen Champion-Stil bevorzugst du?',
+      a: [
+        { i: '✨', t: 'Magie: Zauber und AP' },
+        { i: '⚔️', t: 'Physisch: Stärke und AD' },
+        { i: '🛡️', t: 'Tank: Widerstandskraft und CC' },
+        { i: '🎲', t: 'Egal' },
+      ]
+    },
+  ],
+  it: [
+    {
+      badge: '⚙️ Difficoltà',
+      q: 'Che livello di difficoltà cerchi?',
+      a: [
+        { i: '🟢', t: 'Facile: efficace subito' },
+        { i: '🟡', t: 'Medio: qualche meccanica' },
+        { i: '🔴', t: 'Difficile: alto skill cap' },
+        { i: '🎲', t: 'Non importa: sorprendimi' },
+      ]
+    },
+    {
+      badge: '🗺️ Ruolo',
+      q: 'Che ruolo vuoi giocare?',
+      a: [
+        { i: '🏔️', t: 'Top' },
+        { i: '🌲', t: 'Jungle' },
+        { i: '🔮', t: 'Mid' },
+        { i: '🏹', t: 'Bot (ADC)' },
+        { i: '💚', t: 'Support' },
+        { i: '🎲', t: 'Non importa' },
+      ]
+    },
+    {
+      badge: '⚔️ Stile',
+      q: 'Che stile di campione preferisci?',
+      a: [
+        { i: '✨', t: 'Magia: incantesimi e AP' },
+        { i: '⚔️', t: 'Fisico: forza e AD' },
+        { i: '🛡️', t: 'Tank: resistenza e CC' },
+        { i: '🎲', t: 'Non importa' },
       ]
     },
   ],
@@ -481,7 +697,7 @@ export const UI = {
       patchNotes:   'Patch Notes',
       champions:    'Champions',
       quiz:         'Quiz',
-      logoAriaLabel:'RiftMatch – Home',
+      logoAriaLabel:'RiftMatch - Home',
       navAriaLabel: 'Main navigation',
     },
     footer: {
@@ -690,6 +906,226 @@ export const UI = {
       marketing:      'Cookies de marketing',
       marketingDesc:  'Permiten mostrar ofertas de socios relevantes según tu perfil.',
       save:           'Guardar mis preferencias',
+    },
+  },
+
+  /* ── Deutsch ──────────────────────────────────────────── */
+  de: {
+    nav: {
+      guides:       'Guides',
+      news:         'News',
+      patchNotes:   'Patch Notes',
+      champions:    'Champions',
+      quiz:         'Quiz',
+      logoAriaLabel:'RiftMatch - Startseite',
+      navAriaLabel: 'Hauptnavigation',
+    },
+    footer: {
+      tagline:    'Finde deinen idealen Champion mit ein paar Fragen.',
+      quiz:       'Quiz',
+      champions:  'Champions',
+      guidesTitle:'Guides',
+      cookieBtn:  'Cookies verwalten',
+      legal:      'Nicht mit Riot Games verbunden. League of Legends ist eine Marke von Riot Games, Inc.',
+    },
+    home: {
+      title:            'RiftMatch - Welchen League-of-Legends-Champion solltest du spielen?',
+      description:      'Finde in 7 Fragen heraus, welcher LoL-Champion zu dir passt. Persönliches Quiz basierend auf Spielstil, Rang und Lore-Vorlieben.',
+      heroEyebrow:      n => `${n} Champions · Kostenloses Quiz`,
+      heroTitle1:       'Welcher Champion',
+      heroTitle2:       'bist du wirklich?',
+      heroSub:          'Beantworte 7 Fragen und entdecke den Champion, der zu deinem Stil, deiner Persönlichkeit und deinem Skill-Level passt.',
+      heroCta:          'Quiz starten',
+      heroGhostCta:     'Alle Champions ansehen ↓',
+      statChamps:       'Champions',
+      statQuestions:    'Fragen',
+      statPaths:        'Wege',
+      sectionTitle:     'Alle Champions',
+      sectionSub:       'Klicke auf einen Champion, um sein vollständiges Profil zu sehen',
+      searchPlaceholder:'Suchen…',
+      searchAriaLabel:  'Champion suchen',
+      noResults:        'Kein Champion gefunden.',
+      showMore:         n => `${n} weitere Champions anzeigen`,
+      resultsCount:     (v, t) => `${v} Ergebnis${v > 1 ? 'se' : ''} von ${t}`,
+    },
+    quizPage: {
+      title:           'Quiz - Finde deinen LoL-Champion | RiftMatch',
+      description:     'Beantworte 7 Fragen und finde heraus, welcher League-of-Legends-Champion zu deiner Persönlichkeit und deinem Spielstil passt. Kostenlos, ohne Anmeldung.',
+      backAriaLabel:   'Zurück',
+      progressAriaLabel:'Fortschritt',
+      loadingBadge:    'Lädt...',
+      loadingQuestion: 'Fragen werden vorbereitet…',
+      resultsTitle:    'Deine Champions wurden gefunden!',
+      tierS:           'Perfekt',
+      tierA:           'Sehr gut',
+      tierB:           'Gut',
+      tierSDesc:       'Perfekte Übereinstimmung',
+      tierADesc:       'Sehr gute Wahl',
+      tierBDesc:       'Gute Wahl',
+      difficulties:    ['', 'Sehr einfach', 'Einfach', 'Mittel', 'Schwer', 'Sehr schwer'],
+      resultsSub:      'Basierend auf deinen Antworten sind das die Champions, die am besten zu dir passen.',
+      championCta:     'Vollständiges Profil ansehen →',
+      championCtaShort:'Profil ansehen →',
+      restartBtn:      '↩ Anderen Weg ausprobieren',
+    },
+    guidesPage: {
+      title:      'League-of-Legends-Guides | RiftMatch',
+      description:'Guides und Artikel, um League of Legends zu meistern: Champions, Rollen, Mechaniken und Tipps zum Aufsteigen.',
+      eyebrow:    'Ressourcen',
+      heading:    'LoL-Guides',
+      sub:        'Alles, was du über League of Legends wissen musst',
+      empty:      'Noch keine Guides verfügbar.',
+      cardLabel:  'Guide',
+      cardCta:    'Lesen →',
+    },
+    championPage: {
+      backLink:     '← Alle Champions',
+      sectionLabel: 'Überblick',
+      difficulty:   'Schwierigkeit',
+      archetypes:   'Archetypen',
+      playstyle:    'Spielstil',
+      faction:      'Fraktion',
+      opggLink:     name => `${name} auf op.gg ansehen →`,
+      quizCta:      'Meinen\nChampion finden',
+    },
+    articlePage: {
+      home:              'Startseite',
+      guides:            'Guides',
+      readingTime:       n => `${n} Min. Lesezeit`,
+      backLink:          '← Alle Guides',
+      quizCta:           'Meinen Champion finden →',
+      guideBadge:        'Kompletter Guide',
+      guideMeta:         (min, s) => `${min} Min. · ${s} Abschnitte`,
+      tocTitle:          'Inhalt',
+      sidebarQuizLabel:  'Kostenloses Quiz',
+      sidebarQuizTitle:  'Welcher Champion bist du?',
+      sidebarQuizCta:    'Starten →',
+    },
+    cookie: {
+      title:          'Cookies',
+      desc:           'Wir verwenden Cookies, um dein Erlebnis zu verbessern, unseren Traffic zu analysieren und passende Partnerangebote anzuzeigen.',
+      privacyLink:    'Mehr erfahren',
+      customize:      'Anpassen',
+      reject:         'Ablehnen',
+      acceptAll:      'Alle akzeptieren',
+      modalTitle:     'Datenschutzeinstellungen',
+      necessary:      'Notwendige Cookies',
+      necessaryDesc:  'Für das Funktionieren der Seite erforderlich. Immer aktiv.',
+      analytics:      'Analyse-Cookies',
+      analyticsDesc:  'Helfen uns zu verstehen, wie du die Seite nutzt (besuchte Seiten, Dauer…).',
+      marketing:      'Marketing-Cookies',
+      marketingDesc:  'Ermöglichen es uns, passende Partnerangebote auf Basis deines Profils anzuzeigen.',
+      save:           'Meine Auswahl speichern',
+    },
+  },
+
+  /* ── Italiano ─────────────────────────────────────────── */
+  it: {
+    nav: {
+      guides:       'Guide',
+      news:         'Notizie',
+      patchNotes:   'Patch Notes',
+      champions:    'Campioni',
+      quiz:         'Quiz',
+      logoAriaLabel:'RiftMatch – Home',
+      navAriaLabel: 'Navigazione principale',
+    },
+    footer: {
+      tagline:    'Trova il tuo campione ideale con poche domande.',
+      quiz:       'Quiz',
+      champions:  'Campioni',
+      guidesTitle:'Guide',
+      cookieBtn:  'Gestisci i cookie',
+      legal:      'Non affiliato a Riot Games. League of Legends è un marchio di Riot Games, Inc.',
+    },
+    home: {
+      title:            'RiftMatch - Quale campione di League of Legends dovresti giocare?',
+      description:      'Scopri in 7 domande quale campione di LoL fa per te. Quiz personalizzato in base a stile di gioco, rank e preferenze sulla lore.',
+      heroEyebrow:      n => `${n} campioni · Quiz gratuito`,
+      heroTitle1:       'Quale campione',
+      heroTitle2:       'sei davvero?',
+      heroSub:          'Rispondi a 7 domande e scopri il campione che corrisponde al tuo stile, alla tua personalità e al tuo livello.',
+      heroCta:          'Inizia il quiz',
+      heroGhostCta:     'Vedi tutti i campioni ↓',
+      statChamps:       'Campioni',
+      statQuestions:    'Domande',
+      statPaths:        'Percorsi',
+      sectionTitle:     'Tutti i campioni',
+      sectionSub:       'Clicca su un campione per vedere il suo profilo completo',
+      searchPlaceholder:'Cerca…',
+      searchAriaLabel:  'Cerca un campione',
+      noResults:        'Nessun campione trovato.',
+      showMore:         n => `Mostra altri ${n} campioni`,
+      resultsCount:     (v, t) => `${v} risultat${v > 1 ? 'i' : 'o'} su ${t}`,
+    },
+    quizPage: {
+      title:           'Quiz - Trova il tuo campione di LoL | RiftMatch',
+      description:     'Rispondi a 7 domande per scoprire quale campione di League of Legends corrisponde alla tua personalità e al tuo stile di gioco. Gratis, senza registrazione.',
+      backAriaLabel:   'Indietro',
+      progressAriaLabel:'Progresso',
+      loadingBadge:    'Caricamento...',
+      loadingQuestion: 'Preparazione delle domande…',
+      resultsTitle:    'I tuoi campioni sono stati trovati!',
+      tierS:           'Perfetto',
+      tierA:           'Ottimo',
+      tierB:           'Buono',
+      tierSDesc:       'Compatibilità perfetta',
+      tierADesc:       'Ottima scelta',
+      tierBDesc:       'Buona scelta',
+      difficulties:    ['', 'Molto facile', 'Facile', 'Moderato', 'Difficile', 'Molto difficile'],
+      resultsSub:      'In base alle tue risposte, ecco i campioni più adatti a te.',
+      championCta:     'Vedi il profilo completo →',
+      championCtaShort:'Vedi il profilo →',
+      restartBtn:      '↩ Prova un altro percorso',
+    },
+    guidesPage: {
+      title:      'Guide di League of Legends | RiftMatch',
+      description:'Guide e articoli per padroneggiare League of Legends: campioni, ruoli, meccaniche e consigli per salire di rank.',
+      eyebrow:    'Risorse',
+      heading:    'Guide LoL',
+      sub:        'Tutto quello che devi sapere su League of Legends',
+      empty:      'Nessuna guida disponibile al momento.',
+      cardLabel:  'Guida',
+      cardCta:    'Leggi →',
+    },
+    championPage: {
+      backLink:     '← Tutti i campioni',
+      sectionLabel: 'Panoramica',
+      difficulty:   'Difficoltà',
+      archetypes:   'Archetipi',
+      playstyle:    'Stile di gioco',
+      faction:      'Fazione',
+      opggLink:     name => `Vedi ${name} su op.gg →`,
+      quizCta:      'Trova il mio\ncampione',
+    },
+    articlePage: {
+      home:              'Home',
+      guides:            'Guide',
+      readingTime:       n => `${n} min di lettura`,
+      backLink:          '← Tutte le guide',
+      quizCta:           'Trova il mio campione →',
+      guideBadge:        'Guida completa',
+      guideMeta:         (min, s) => `${min} min · ${s} sezioni`,
+      tocTitle:          'Indice',
+      sidebarQuizLabel:  'Quiz gratuito',
+      sidebarQuizTitle:  'Quale campione sei?',
+      sidebarQuizCta:    'Inizia →',
+    },
+    cookie: {
+      title:          'Cookie',
+      desc:           "Usiamo i cookie per migliorare la tua esperienza, analizzare il traffico e mostrarti offerte dei partner pertinenti.",
+      privacyLink:    'Scopri di più',
+      customize:      'Personalizza',
+      reject:         'Rifiuta',
+      acceptAll:      'Accetta tutto',
+      modalTitle:     'Preferenze sulla privacy',
+      necessary:      'Cookie necessari',
+      necessaryDesc:  'Necessari per il funzionamento del sito. Sempre attivi.',
+      analytics:      'Cookie analitici',
+      analyticsDesc:  'Ci aiutano a capire come usi il sito (pagine visitate, durata…).',
+      marketing:      'Cookie di marketing',
+      marketingDesc:  'Ci permettono di mostrarti offerte dei partner pertinenti in base al tuo profilo.',
+      save:           'Salva le mie scelte',
     },
   },
 };

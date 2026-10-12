@@ -1,4 +1,8 @@
 ---
 import GuidesPage from '../components/pages/GuidesPage.astro'
+const pref = Astro.cookies.get('locale')?.value || 'fr'
+if (['en', 'es', 'de', 'it'].includes(pref)) {
+  return Astro.redirect(`/${pref}/guides`, 302)
+}
 ---
 <GuidesPage />

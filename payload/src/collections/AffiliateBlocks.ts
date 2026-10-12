@@ -15,6 +15,8 @@ const LINK_LOCALES = [
   { label: '🇫🇷 Français (amazon.fr)', value: 'fr' },
   { label: '🇬🇧 English (amazon.co.uk / .com)', value: 'en' },
   { label: '🇪🇸 Español (amazon.es)', value: 'es' },
+  { label: '🇩🇪 Deutsch (amazon.de)', value: 'de' },
+  { label: '🇮🇹 Italiano (amazon.it)', value: 'it' },
 ]
 
 const AffiliateBlocks: CollectionConfig = {

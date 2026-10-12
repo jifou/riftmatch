@@ -1,4 +1,9 @@
 ---
 import ArticlePage from '../../components/pages/ArticlePage.astro'
+const { slug } = Astro.params
+const pref = Astro.cookies.get('locale')?.value || 'fr'
+if (['en', 'es', 'de', 'it'].includes(pref)) {
+  return Astro.redirect(`/${pref}/info/${slug}`, 302)
+}
 ---
 <ArticlePage />

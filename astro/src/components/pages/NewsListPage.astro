@@ -5,7 +5,7 @@ const PAYLOAD_URL = import.meta.env.PAYLOAD_API_URL || 'http://payload:3000'
 
 // Locale depuis cookie (même pattern que GuidesPage)
 const locale = Astro.cookies.get('locale')?.value || 'fr'
-const dateLocale = locale === 'en' ? 'en-GB' : locale === 'es' ? 'es-ES' : 'fr-FR'
+const dateLocale = ({ en: 'en-GB', es: 'es-ES', de: 'de-DE', it: 'it-IT' } as Record<string, string>)[locale] ?? 'fr-FR'
 
 let news: any[] = []
 try {
@@ -23,6 +23,8 @@ const CATEGORY_LABELS: Record<string, Record<string, string>> = {
   fr: { news: 'Actualité', champion: 'Champion', meta: 'Méta', esports: 'Esports', announcement: 'Annonce Riot', update: 'Mise à jour' },
   en: { news: 'News', champion: 'Champion', meta: 'Meta', esports: 'Esports', announcement: 'Riot Announcement', update: 'Update' },
   es: { news: 'Noticia', champion: 'Campeón', meta: 'Meta', esports: 'Esports', announcement: 'Anuncio Riot', update: 'Actualización' },
+  de: { news: 'News', champion: 'Champion', meta: 'Meta', esports: 'Esports', announcement: 'Riot-Ankündigung', update: 'Update' },
+  it: { news: 'Notizie', champion: 'Campione', meta: 'Meta', esports: 'Esports', announcement: 'Annuncio Riot', update: 'Aggiornamento' },
 }
 const catLabels = CATEGORY_LABELS[locale] ?? CATEGORY_LABELS.fr
 
@@ -44,6 +46,8 @@ const SUBTYPE_LABELS: Record<string, Record<string, string>> = {
   fr: { resultats: 'Résultats', mercato: 'Mercato', other: 'Autre' },
   en: { resultats: 'Results',   mercato: 'Transfers', other: 'Other' },
   es: { resultats: 'Resultados',mercato: 'Mercado',   other: 'Otro'  },
+  de: { resultats: 'Ergebnisse', mercato: 'Transfers', other: 'Sonstiges' },
+  it: { resultats: 'Risultati',  mercato: 'Mercato',   other: 'Altro' },
 }
 const subLabels = SUBTYPE_LABELS[locale] ?? SUBTYPE_LABELS.fr
 
@@ -59,6 +63,8 @@ const TITLES: Record<string, { title: string; desc: string; eyebrow: string; hea
   fr: { title: 'News League of Legends | RiftMatch', desc: "Toute l'actualité League of Legends : patches, champions, méta, esports et annonces Riot Games.", eyebrow: 'Actualités', heading: 'News LoL', sub: 'Patches, champions, méta, esports — tout ce qui se passe dans le Rift', readMore: "Lire l'article →", all: 'Dernières actualités', empty: 'Aucune actualité disponible.', filterLigue: 'Ligue', filterType: 'Type', filterAll: 'Tous', noResult: 'Aucun article ne correspond à ces filtres.' },
   en: { title: 'League of Legends News | RiftMatch', desc: 'All League of Legends news: patches, champions, meta, esports and Riot announcements.', eyebrow: 'News', heading: 'LoL News', sub: 'Patches, champions, meta, esports — everything happening in the Rift', readMore: 'Read article →', all: 'Latest news', empty: 'No news available yet.', filterLigue: 'League', filterType: 'Type', filterAll: 'All', noResult: 'No articles match these filters.' },
   es: { title: 'Noticias de League of Legends | RiftMatch', desc: 'Toda la actualidad de League of Legends: parches, campeones, meta, esports y anuncios de Riot.', eyebrow: 'Noticias', heading: 'Noticias LoL', sub: 'Parches, campeones, meta, esports — todo lo que pasa en el Rift', readMore: 'Leer artículo →', all: 'Últimas noticias', empty: 'No hay noticias disponibles.', filterLigue: 'Liga', filterType: 'Tipo', filterAll: 'Todos', noResult: 'Ningún artículo coincide con estos filtros.' },
+  de: { title: 'League of Legends News | RiftMatch', desc: 'Alle News zu League of Legends: Patches, Champions, Meta, Esports und Ankündigungen von Riot Games.', eyebrow: 'News', heading: 'LoL News', sub: 'Patches, Champions, Meta, Esports, alles was im Rift passiert', readMore: 'Artikel lesen →', all: 'Neueste News', empty: 'Noch keine News verfügbar.', filterLigue: 'Liga', filterType: 'Typ', filterAll: 'Alle', noResult: 'Keine Artikel für diese Filter gefunden.' },
+  it: { title: 'Notizie su League of Legends | RiftMatch', desc: 'Tutte le novità su League of Legends: patch, campioni, meta, esports e annunci di Riot Games.', eyebrow: 'Notizie', heading: 'Notizie LoL', sub: 'Patch, campioni, meta, esports: tutto quello che succede nel Rift', readMore: "Leggi l'articolo →", all: 'Ultime notizie', empty: 'Nessuna notizia disponibile.', filterLigue: 'Lega', filterType: 'Tipo', filterAll: 'Tutti', noResult: 'Nessun articolo corrisponde a questi filtri.' },
 }
 const t = TITLES[locale] ?? TITLES.fr
 ---

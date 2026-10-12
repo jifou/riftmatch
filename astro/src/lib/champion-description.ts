@@ -1,6 +1,6 @@
 import type { Champion } from '../data/champions'
 
-type Locale = 'fr' | 'en' | 'es'
+type Locale = 'fr' | 'en' | 'es' | 'de' | 'it'
 
 // ── Archetype descriptions ────────────────────────────────────────────────
 
@@ -31,6 +31,24 @@ const ARCHETYPE_DESC: Record<Locale, Record<string, string>> = {
     marksman: 'tirador a distancia que domina el late game con DPS sostenido',
     adc:      'tirador a distancia que domina el late game con DPS sostenido',
     support:  'soporte que protege y refuerza a su equipo durante toda la partida',
+  },
+  de: {
+    fighter:  'vielseitiger Nahkämpfer, der in Duellen glänzt',
+    tank:     'widerstandsfähiger Tank, der Schaden absorbiert und Kämpfe eröffnet',
+    mage:     'Magier, der Gegner aus der Distanz mit mächtigen Zaubern vernichtet',
+    assassin: 'extrem mobiler Assassine, der isolierte Ziele im Handumdrehen ausschaltet',
+    marksman: 'Fernkämpfer, der das Lategame mit konstantem DPS dominiert',
+    adc:      'Fernkämpfer, der das Lategame mit konstantem DPS dominiert',
+    support:  'Support, der sein Team die ganze Partie über schützt und stärkt',
+  },
+  it: {
+    fighter:  'combattente in mischia versatile che eccelle nei duelli',
+    tank:     'tank resistente pensato per assorbire danni e ingaggiare gli scontri',
+    mage:     'mago che distrugge i nemici a distanza con incantesimi potenti',
+    assassin: 'assassino ultra mobile che elimina i bersagli isolati in un istante',
+    marksman: 'tiratore a distanza che domina il late game con un DPS costante',
+    adc:      'tiratore a distanza che domina il late game con un DPS costante',
+    support:  'support che protegge e potenzia la sua squadra per tutta la partita',
   },
 }
 
@@ -67,6 +85,26 @@ const STYLE_TIPS: Record<Locale, Record<string, string>> = {
     scaling:    'Farmea con seguridad y espera el mid/late game para tomar el control.',
     mobile:     'Usa tu movilidad para sorprender al enemigo y esquivar habilidades.',
   },
+  de: {
+    aggressive: 'Spiel von den ersten Level an aggressiv, um deine Lane zu dominieren.',
+    carry:      'Konzentriere dich auf dein Farmen und suche Kills, um die Kontrolle zu übernehmen.',
+    utility:    'Priorisiere die Unterstützung deines Teams und die Kontrolle der Ziele.',
+    peel:       'Bleib nah bei deinen Carries und schütze sie vor gegnerischen Assassinen.',
+    engage:     'Suche Engages auf schlecht positionierte Ziele.',
+    poke:       'Schwäche die Gegner aus der Distanz, bevor die Kämpfe beginnen.',
+    scaling:    'Farme sicher und warte auf das Mid- und Lategame, um die Oberhand zu gewinnen.',
+    mobile:     'Nutze deine Mobilität, um Gegner zu überraschen und Skillshots auszuweichen.',
+  },
+  it: {
+    aggressive: 'Gioca in modo aggressivo fin dai primi livelli per dominare la tua lane.',
+    carry:      'Concentrati sul farm e cerca le kill per prendere il controllo.',
+    utility:    "Dai priorità al supporto della squadra e al controllo degli obiettivi.",
+    peel:       'Resta vicino ai tuoi carry e proteggili dagli assassini avversari.',
+    engage:     'Cerca ingaggi sui bersagli posizionati male.',
+    poke:       'Logora i nemici a distanza prima degli scontri.',
+    scaling:    'Fai farm in sicurezza e aspetta il mid e il late game per prendere il sopravvento.',
+    mobile:     "Usa la tua mobilità per sorprendere il nemico e schivare le skillshot.",
+  },
 }
 
 // ── Lane context ──────────────────────────────────────────────────────────
@@ -96,6 +134,22 @@ const LANE_CONTEXT: Record<Locale, Record<string, string>> = {
     adc:     'en el carril inferior como tirador',
     support: 'en el rol de soporte',
   },
+  de: {
+    top:     'auf der Toplane',
+    jungle:  'im Dschungel',
+    mid:     'auf der Midlane',
+    bot:     'auf der Botlane',
+    adc:     'auf der Botlane als Fernkämpfer',
+    support: 'als Support',
+  },
+  it: {
+    top:     'nella top lane',
+    jungle:  'nella jungle',
+    mid:     'nella mid lane',
+    bot:     'nella bot lane',
+    adc:     'nella bot lane come tiratore',
+    support: 'nel ruolo di support',
+  },
 }
 
 // ── Difficulty descriptions ───────────────────────────────────────────────
@@ -122,6 +176,20 @@ const DIFFICULTY_DESC: Record<Locale, Record<number, string>> = {
     4: 'Campeón exigente que recompensa la inversión de tiempo.',
     5: 'Muy difícil — reservado para jugadores dispuestos a practicar durante horas.',
   },
+  de: {
+    1: 'Sehr zugänglich, ideal für Einsteiger oder wenn du dich auf Makro-Entscheidungen konzentrieren willst.',
+    2: 'Leicht zu erlernen, ein paar Stunden reichen, um effektiv zu sein.',
+    3: 'Mittlerer Schwierigkeitsgrad: beherrsche zuerst die Grundlagen, bevor du optimierst.',
+    4: 'Anspruchsvoller Champion, der investierte Zeit belohnt.',
+    5: 'Sehr schwer: nur für Spieler, die bereit sind, Stunden im Training zu verbringen.',
+  },
+  it: {
+    1: 'Molto accessibile, ideale per chi inizia o per chi vuole concentrarsi sulle decisioni macro.',
+    2: 'Facile da imparare, bastano poche ore per essere efficaci.',
+    3: 'Difficoltà intermedia: padroneggia le basi prima di ottimizzare.',
+    4: 'Campione impegnativo che premia il tempo investito.',
+    5: 'Molto difficile: riservato ai giocatori disposti a passare ore ad allenarsi.',
+  },
 }
 
 // ── Exported functions ────────────────────────────────────────────────────
@@ -138,6 +206,8 @@ export function generateDescription(champion: Champion, locale: Locale = 'fr'): 
 
   if (l === 'en') return `${champion.name} is a ${archDesc}, primarily played ${laneCtx}. ${styleTip}`
   if (l === 'es') return `${champion.name} es un ${archDesc}, principalmente jugado ${laneCtx}. ${styleTip}`
+  if (l === 'de') return `${champion.name} ist ein ${archDesc}, der hauptsächlich ${laneCtx} gespielt wird. ${styleTip}`
+  if (l === 'it') return `${champion.name} è un ${archDesc}, giocato principalmente ${laneCtx}. ${styleTip}`
   return `${champion.name} est un ${archDesc}, principalement joué ${laneCtx}. ${styleTip}`
 }
 

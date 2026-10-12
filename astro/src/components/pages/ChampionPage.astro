@@ -22,16 +22,10 @@ const { apiId } = Astro.params
 const champion = CHAMPIONS.find(c => c.apiId === apiId)
 if (!champion) return Astro.redirect('/')
 
-// URL locale : 'fr' (default, sans préfixe) | 'en' | 'es'
+// URL locale : 'fr' (default, sans préfixe) | 'en' | 'es' | 'de' | 'it'
 const urlLocale = Astro.currentLocale || 'fr'
-const cookieLocale = Astro.cookies.get('locale')?.value || 'fr'
 
-// Si l'utilisateur est sur l'URL FR par défaut mais préfère une autre langue,
-// on le redirige vers l'URL locale correcte (ex: /en/champion/Ahri)
-if (urlLocale === 'fr' && cookieLocale !== 'fr') {
-  return Astro.redirect(`/${cookieLocale}/champion/${apiId}`, 302)
-}
-
+// (la redirection vers l'URL de la langue préférée est faite dans pages/champion/[apiId].astro)
 const locale = urlLocale
 const tc = (UI as any)[locale]?.championPage || (UI as any).fr.championPage
 
@@ -81,7 +75,7 @@ const homePath = '/'  // homepage n'a pas de variante URL par locale
 ---
 
 <Layout
-  title={`${champion.name} – ${locale === 'en' ? 'LoL Champion' : locale === 'es' ? 'Campeón LoL' : 'Champion LoL'} | RiftMatch`}
+  title={`${champion.name} – ${({ en: 'LoL Champion', es: 'Campeón LoL', de: 'LoL-Champion', it: 'Campione LoL' } as Record<string, string>)[locale] ?? 'Champion LoL'} | RiftMatch`}
   description={`${description.slice(0, 150).trimEnd()}…`}
   image={`${DDR_SPLASH}/${champion.apiId}_0.jpg`}
   lang={locale}
@@ -91,6 +85,8 @@ const homePath = '/'  // homepage n'a pas de variante URL par locale
     <link rel="alternate" hreflang="fr" href={`${BASE}${champPath}`} />
     <link rel="alternate" hreflang="en" href={`${BASE}/en${champPath}`} />
     <link rel="alternate" hreflang="es" href={`${BASE}/es${champPath}`} />
+    <link rel="alternate" hreflang="de" href={`${BASE}/de${champPath}`} />
+    <link rel="alternate" hreflang="it" href={`${BASE}/it${champPath}`} />
     <link rel="alternate" hreflang="x-default" href={`${BASE}${champPath}`} />
   </Fragment>
 

@@ -4,11 +4,19 @@ import { UI } from '../i18n.js'
 
 const locale = Astro.cookies.get('locale')?.value || 'fr'
 const t = UI[locale] || UI.fr
+const NF: Record<string, { title: string; desc: string; h1: string; sub: string; back: string; quiz: string }> = {
+  fr: { title: 'Page introuvable | RiftMatch', desc: "Cette page n'existe pas.", h1: "Cette lane n'existe pas", sub: "Tu t'es aventuré dans une zone non cartographiée. Même le Néant ne va pas si loin.", back: '← Retour à la base', quiz: 'Faire le quiz' },
+  en: { title: 'Page not found | RiftMatch', desc: 'This page does not exist.', h1: "This lane doesn't exist", sub: "You wandered into uncharted territory. Even the Void doesn't map this far.", back: '← Back to base', quiz: 'Take the quiz' },
+  es: { title: 'Página no encontrada | RiftMatch', desc: 'Esta página no existe.', h1: 'Este carril no existe', sub: 'Te has adentrado en territorio inexplorado. Ni el Vacío llega hasta aquí.', back: '← Volver a la base', quiz: 'Hacer el quiz' },
+  de: { title: 'Seite nicht gefunden | RiftMatch', desc: 'Diese Seite existiert nicht.', h1: 'Diese Lane gibt es nicht', sub: 'Du hast dich in unkartiertes Gebiet verirrt. Nicht einmal die Leere reicht so weit.', back: '← Zurück zur Basis', quiz: 'Zum Quiz' },
+  it: { title: 'Pagina non trovata | RiftMatch', desc: 'Questa pagina non esiste.', h1: 'Questa lane non esiste', sub: "Ti sei avventurato in un territorio inesplorato. Nemmeno il Vuoto arriva così lontano.", back: '← Torna alla base', quiz: 'Fai il quiz' },
+}
+const nf = NF[locale] ?? NF.fr
 ---
 
 <Layout
-  title={locale === 'en' ? 'Page not found | RiftMatch' : locale === 'es' ? 'Página no encontrada | RiftMatch' : 'Page introuvable | RiftMatch'}
-  description={locale === 'en' ? 'This page does not exist.' : locale === 'es' ? 'Esta página no existe.' : 'Cette page n\'existe pas.'}
+  title={nf.title}
+  description={nf.desc}
   lang={locale}
 >
   <main class="not-found">
@@ -19,21 +27,17 @@ const t = UI[locale] || UI.fr
     <div class="nf-content">
       <p class="nf-code">404</p>
       <h1 class="nf-title">
-        {locale === 'en' ? 'This lane doesn\'t exist' : locale === 'es' ? 'Este carril no existe' : 'Cette lane n\'existe pas'}
+        {nf.h1}
       </h1>
       <p class="nf-sub">
-        {locale === 'en'
-          ? 'You wandered into uncharted territory. Even the Void doesn\'t map this far.'
-          : locale === 'es'
-          ? 'Te has adentrado en territorio inexplorado. Ni el Vacío llega hasta aquí.'
-          : 'Tu t\'es aventuré dans une zone non cartographiée. Même le Néant ne va pas si loin.'}
+        {nf.sub}
       </p>
       <div class="nf-actions">
         <a href="/" class="btn-primary">
-          {locale === 'en' ? '← Back to base' : locale === 'es' ? '← Volver a la base' : '← Retour à la base'}
+          {nf.back}
         </a>
         <a href="/quiz" class="btn-ghost">
-          {locale === 'en' ? 'Take the quiz' : locale === 'es' ? 'Hacer el quiz' : 'Faire le quiz'}
+          {nf.quiz}
         </a>
       </div>
     </div>

@@ -9,13 +9,8 @@ import Layout from '../../layouts/Layout.astro'
 import { UI } from '../../i18n.js'
 
 const urlLocale = Astro.currentLocale || 'fr'
-const cookieLocale = Astro.cookies.get('locale')?.value || 'fr'
 
-// Redirect si l'utilisateur préfère une autre langue et est sur l'URL FR par défaut
-if (urlLocale === 'fr' && cookieLocale !== 'fr') {
-  return Astro.redirect(`/${cookieLocale}/guides`, 302)
-}
-
+// (redirection vers la langue préférée: faite dans la page, pas dans le composant)
 const locale = urlLocale
 const t = (UI as any)[locale] || (UI as any).fr
 const PAYLOAD_URL = import.meta.env.PAYLOAD_API_URL || 'http://payload:3000'
@@ -49,6 +44,8 @@ const canonicalUrl = locale === 'fr' ? `${BASE}/guides` : `${BASE}/${locale}/gui
     <link rel="alternate" hreflang="fr" href={`${BASE}/guides`} />
     <link rel="alternate" hreflang="en" href={`${BASE}/en/guides`} />
     <link rel="alternate" hreflang="es" href={`${BASE}/es/guides`} />
+    <link rel="alternate" hreflang="de" href={`${BASE}/de/guides`} />
+    <link rel="alternate" hreflang="it" href={`${BASE}/it/guides`} />
     <link rel="alternate" hreflang="x-default" href={`${BASE}/guides`} />
   </Fragment>
 

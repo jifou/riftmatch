@@ -30,6 +30,8 @@ const ChampionContent: CollectionConfig = {
         { label: '🇫🇷 Français', value: 'fr' },
         { label: '🇬🇧 English', value: 'en' },
         { label: '🇪🇸 Español', value: 'es' },
+        { label: '🇩🇪 Deutsch', value: 'de' },
+        { label: '🇮🇹 Italiano', value: 'it' },
       ],
       admin: {
         position: 'sidebar',

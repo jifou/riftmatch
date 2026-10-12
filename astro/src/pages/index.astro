@@ -104,9 +104,9 @@ const DDR_BASE = getDDRBase(ddrVersion)
           id="champions-grid"
           data-champ-word={t.home.statChamps}
           data-no-results={t.home.noResults}
-          data-of-word={locale === 'en' ? 'of' : locale === 'es' ? 'de' : 'sur'}
-          data-result-word={locale === 'en' ? 'result' : locale === 'es' ? 'resultado' : 'résultat'}
-          data-results-word={locale === 'en' ? 'results' : locale === 'es' ? 'resultados' : 'résultats'}
+          data-of-word={({ en: 'of', es: 'de', de: 'von', it: 'di' } as Record<string, string>)[locale] ?? 'sur'}
+          data-result-word={({ en: 'result', es: 'resultado', de: 'Ergebnis', it: 'risultato' } as Record<string, string>)[locale] ?? 'résultat'}
+          data-results-word={({ en: 'results', es: 'resultados', de: 'Ergebnisse', it: 'risultati' } as Record<string, string>)[locale] ?? 'résultats'}
         >
           {champions.map((champion: any, i: number) => (
             <a
