@@ -1,31 +1,41 @@
 ---
 import Layout from '../../layouts/Layout.astro'
+import { UI } from '../../i18n.js'
 import AffiliateBlock from '../AffiliateBlock.astro'
 import SourceLink from '../SourceLink.astro'
 
 const { slug } = Astro.params
 const PAYLOAD_URL = import.meta.env.PAYLOAD_API_URL || 'http://payload:3000'
 const locale = Astro.cookies.get('locale')?.value || 'fr'
+const t = ((UI as any)[locale] || (UI as any).fr).patchNotes
+const dateLocale = ({ en: 'en-GB', es: 'es-ES', de: 'de-DE', it: 'it-IT' } as Record<string, string>)[locale] ?? 'fr-FR'
+const riotLocale = t.riot
 
 let patch: any = null
 try {
-  const res = await fetch(`${PAYLOAD_URL}/api/patch-notes?where[slug][equals]=${slug}&where[status][equals]=published&limit=1`)
-  const data = await res.json()
+  let res = await fetch(`${PAYLOAD_URL}/api/patch-notes?where[slug][equals]=${slug}&where[status][equals]=published&where[locale][equals]=${locale}&limit=1`)
+  let data = await res.json()
   patch = data.docs?.[0] ?? null
+  // Repli: même slug dans une autre langue
+  if (!patch) {
+    res = await fetch(`${PAYLOAD_URL}/api/patch-notes?where[slug][equals]=${slug}&where[status][equals]=published&limit=1`)
+    data = await res.json()
+    patch = data.docs?.[0] ?? null
+  }
 } catch { /* silent fail */ }
 
 if (!patch) return Astro.redirect('/patch-notes')
 
 function formatDate(d: string) {
   if (!d) return ''
-  return new Date(d).toLocaleDateString('fr-FR', {
+  return new Date(d).toLocaleDateString(dateLocale, {
     weekday: 'long', day: 'numeric', month: 'long', year: 'numeric'
   })
 }
 
 function formatDateShort(d: string) {
   if (!d) return ''
-  return new Date(d).toLocaleDateString('fr-FR', { day: 'numeric', month: 'short', year: 'numeric' })
+  return new Date(d).toLocaleDateString(dateLocale, { day: 'numeric', month: 'short', year: 'numeric' })
 }
 
 // ── Rich text renderer (Slate → HTML) ──────────────────────────
@@ -88,8 +98,8 @@ const htmlContent = renderNodes(patch.content || [], true)
 
 // Highlight text analysis: detect buff (🔺 ▲ ↑ +) vs nerf (🔻 ▼ ↓ -)
 function classifyHighlight(text: string): 'buff' | 'nerf' | 'neutral' {
-  if (/🔺|▲|↑|\+\d|buff|augment|bonus/i.test(text)) return 'buff'
-  if (/🔻|▼|↓|\-\d|nerf|réduit|diminué/i.test(text)) return 'nerf'
+  if (/🔺|▲|↑|\+\d|buff|augment|bonus|increas|erhöh|aument|aumenta/i.test(text)) return 'buff'
+  if (/🔻|▼|↓|\-\d|nerf|réduit|diminué|reduc|verringer|senk|riduc|dimin/i.test(text)) return 'nerf'
   return 'neutral'
 }
 
@@ -98,9 +108,10 @@ const isPbe  = patch.type === 'pbe'
 ---
 
 <Layout
-  title={`${patch.title} | RiftMatch Patch Notes`}
-  description={patch.excerpt || `Patch ${patch.version} — Notes de mise à jour League of Legends`}
+  title={`${patch.title} | RiftMatch ${t.eyebrow}`}
+  description={patch.excerpt || `Patch ${patch.version}: ${t.descFallback}`}
   image={patch.coverImage || '/og-image.jpg'}
+  lang={locale}
 >
   <Fragment slot="head">
     {patch.publishedAt && <meta property="article:published_time" content={patch.publishedAt} />}
@@ -127,10 +138,10 @@ const isPbe  = patch.type === 'pbe'
 
       <div class="hero-content">
         <!-- Breadcrumb -->
-        <nav class="hero-breadcrumb" aria-label="Fil d'Ariane">
-          <a href="/">Accueil</a>
+        <nav class="hero-breadcrumb" aria-label={t.breadAria}>
+          <a href="/">{t.home}</a>
           <span aria-hidden="true">›</span>
-          <a href="/patch-notes">Patch Notes</a>
+          <a href="/patch-notes">{t.eyebrow}</a>
           <span aria-hidden="true">›</span>
           <span>{patch.version}</span>
         </nav>
@@ -138,19 +149,19 @@ const isPbe  = patch.type === 'pbe'
         <!-- Version + type badges -->
         <div class="hero-badges">
           <div class="version-chip">
-            <span class="version-label">PATCH</span>
+            <span class="version-label">{t.patchWord}</span>
             <span class="version-number">{patch.version}</span>
           </div>
           {isLive && (
             <div class="type-chip type-chip--live">
               <span class="type-dot type-dot--live"></span>
-              Live — Officiel
+              {t.liveOfficial}
             </div>
           )}
           {isPbe && (
             <div class="type-chip type-chip--pbe">
               <span class="type-dot type-dot--pbe"></span>
-              PBE — Preview
+              {t.pbePreview}
             </div>
           )}
         </div>
@@ -183,7 +194,7 @@ const isPbe  = patch.type === 'pbe'
             <svg viewBox="0 0 24 24" fill="none" width="18" height="18" aria-hidden="true">
               <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
             </svg>
-            <span>Points clés du patch {patch.version}</span>
+            <span>{t.keyPoints} {patch.version}</span>
           </div>
           <ul class="highlights-list">
             {patch.highlights.map((h: any) => {
@@ -219,13 +230,13 @@ const isPbe  = patch.type === 'pbe'
 
       <!-- ── Sidebar ToC ──────────────────────────────────── -->
       {tocItems.length > 0 && (
-        <aside class="pn-sidebar" aria-label="Sommaire">
+        <aside class="pn-sidebar" aria-label={t.toc}>
           <div class="toc-card">
             <p class="toc-title">
               <svg viewBox="0 0 24 24" fill="none" width="14" height="14" aria-hidden="true">
                 <path d="M4 6h16M4 12h12M4 18h8" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
               </svg>
-              Sommaire
+              {t.toc}
             </p>
             <nav>
               <ol class="toc-list">
@@ -243,22 +254,22 @@ const isPbe  = patch.type === 'pbe'
 
           <!-- Quick info card -->
           <div class="sidebar-info-card">
-            <p class="sidebar-info-title">Informations</p>
+            <p class="sidebar-info-title">{t.info}</p>
             <dl class="sidebar-dl">
-              <dt>Version</dt>
+              <dt>{t.version}</dt>
               <dd class="dd-version">{patch.version}</dd>
-              <dt>Type</dt>
-              <dd class={isLive ? 'dd-live' : 'dd-pbe'}>{isLive ? '✅ Live' : '🧪 PBE'}</dd>
+              <dt>{t.type}</dt>
+              <dd class={isLive ? 'dd-live' : 'dd-pbe'}>{isLive ? `✅ ${t.live}` : `🧪 ${t.pbe}`}</dd>
               {patch.publishedAt && (
                 <>
-                  <dt>Date</dt>
+                  <dt>{t.date}</dt>
                   <dd>{formatDateShort(patch.publishedAt)}</dd>
                 </>
               )}
               {patch.highlights?.length > 0 && (
                 <>
-                  <dt>Changements</dt>
-                  <dd>{patch.highlights.length} points clés</dd>
+                  <dt>{t.changes}</dt>
+                  <dd>{patch.highlights.length} {t.points}</dd>
                 </>
               )}
             </dl>
@@ -266,9 +277,9 @@ const isPbe  = patch.type === 'pbe'
 
           <!-- Quiz CTA -->
           <div class="sidebar-quiz">
-            <p class="sidebar-quiz-label">Après ce patch</p>
-            <p class="sidebar-quiz-title">Ton champion idéal ?</p>
-            <a href="/quiz" class="sidebar-quiz-btn">Faire le quiz →</a>
+            <p class="sidebar-quiz-label">{t.afterPatch}</p>
+            <p class="sidebar-quiz-title">{t.idealChamp}</p>
+            <a href="/quiz" class="sidebar-quiz-btn">{t.quiz}</a>
           </div>
         </aside>
       )}
@@ -279,8 +290,8 @@ const isPbe  = patch.type === 'pbe'
           <div class="prose" set:html={htmlContent} />
         ) : (
           <div class="pn-no-content">
-            <p>Le contenu détaillé de ce patch note n'est pas encore disponible.</p>
-            <p>Revenez bientôt ou consultez la <a href="https://www.leagueoflegends.com/fr-fr/news/tags/patch-notes/" target="_blank" rel="noopener noreferrer">page officielle Riot</a>.</p>
+            <p>{t.noContent}</p>
+            <p>{t.comeBack} <a href={`https://www.leagueoflegends.com/${riotLocale}/news/tags/patch-notes/`} target="_blank" rel="noopener noreferrer">{t.officialPage}</a>.</p>
           </div>
         )}
 
@@ -293,10 +304,10 @@ const isPbe  = patch.type === 'pbe'
         <!-- ── Back & navigation ────────────────────────── -->
         <nav class="pn-nav-bottom" aria-label="Navigation patch notes">
           <a href="/patch-notes" class="nav-back">
-            ← Tous les patch notes
+            {t.allPatches}
           </a>
           <a href="/quiz" class="nav-quiz">
-            Trouver mon champion →
+            {t.findChamp}
           </a>
         </nav>
       </article>

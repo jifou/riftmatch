@@ -10,6 +10,21 @@ const PatchNotes: CollectionConfig = {
   access: { read: () => true },
   fields: [
     {
+      name: 'locale',
+      label: 'Langue',
+      type: 'select',
+      required: true,
+      defaultValue: 'fr',
+      options: [
+        { label: '🇫🇷 Français', value: 'fr' },
+        { label: '🇬🇧 English', value: 'en' },
+        { label: '🇪🇸 Español', value: 'es' },
+        { label: '🇩🇪 Deutsch', value: 'de' },
+        { label: '🇮🇹 Italiano', value: 'it' },
+      ],
+      admin: { position: 'sidebar', description: 'Langue de ce patch note. Le même slug existe dans chaque langue.' },
+    },
+    {
       name: 'version',
       label: 'Version du patch',
       type: 'text',

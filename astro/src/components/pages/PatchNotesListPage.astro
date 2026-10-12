@@ -1,18 +1,29 @@
 ---
 import Layout from '../../layouts/Layout.astro'
+import { UI } from '../../i18n.js'
 
 const PAYLOAD_URL = import.meta.env.PAYLOAD_API_URL || 'http://payload:3000'
 
+const locale = Astro.cookies.get('locale')?.value || 'fr'
+const t = ((UI as any)[locale] || (UI as any).fr).patchNotes
+const dateLocale = ({ en: 'en-GB', es: 'es-ES', de: 'de-DE', it: 'it-IT' } as Record<string, string>)[locale] ?? 'fr-FR'
+
 let patches: any[] = []
 try {
-  const res = await fetch(`${PAYLOAD_URL}/api/patch-notes?where[status][equals]=published&limit=50&sort=-publishedAt`)
-  const data = await res.json()
+  let res = await fetch(`${PAYLOAD_URL}/api/patch-notes?where[status][equals]=published&where[locale][equals]=${locale}&limit=50&sort=-publishedAt`)
+  let data = await res.json()
   patches = data.docs ?? []
+  // Repli sur le français si cette langue n'a encore aucun patch note
+  if (patches.length === 0 && locale !== 'fr') {
+    res = await fetch(`${PAYLOAD_URL}/api/patch-notes?where[status][equals]=published&where[locale][equals]=fr&limit=50&sort=-publishedAt`)
+    data = await res.json()
+    patches = data.docs ?? []
+  }
 } catch { /* silent fail */ }
 
 function formatDate(d: string) {
   if (!d) return ''
-  return new Date(d).toLocaleDateString('fr-FR', { day: 'numeric', month: 'long', year: 'numeric' })
+  return new Date(d).toLocaleDateString(dateLocale, { day: 'numeric', month: 'long', year: 'numeric' })
 }
 
 // Separate live and PBE
@@ -23,21 +34,22 @@ const previousPatches = live.slice(1)
 ---
 
 <Layout
-  title="Patch Notes League of Legends | RiftMatch"
-  description="Tous les patch notes League of Legends — Live et PBE. Buffs, nerfs, changements d'items et mises à jour du Rift."
+  title={t.title}
+  description={t.description}
+  lang={locale}
 >
   <main class="pn-page">
 
     <!-- ── Hero ────────────────────────────────────────── -->
     <header class="pn-hero">
-      <p class="pn-eyebrow">Patch Notes</p>
-      <h1 class="pn-title">Mises à jour <span class="gold">du Rift</span></h1>
-      <p class="pn-sub">Suivez tous les changements — PBE en preview et patches officiels Live</p>
+      <p class="pn-eyebrow">{t.eyebrow}</p>
+      <h1 class="pn-title">{t.h1a} <span class="gold">{t.h1b}</span></h1>
+      <p class="pn-sub">{t.sub}</p>
     </header>
 
     {patches.length === 0 ? (
       <div class="pn-empty">
-        <p>Aucun patch note disponible pour le moment.</p>
+        <p>{t.empty}</p>
       </div>
     ) : (
       <>
@@ -46,7 +58,7 @@ const previousPatches = live.slice(1)
           <section class="latest-section">
             <div class="latest-label">
               <span class="live-dot"></span>
-              Dernier patch officiel
+              {t.latest}
             </div>
             <a href={`/patch-notes/${latest.slug}`} class="latest-card gradient-border">
               {latest.coverImage && (
@@ -58,7 +70,7 @@ const previousPatches = live.slice(1)
               <div class="latest-body">
                 <div class="latest-badges">
                   <span class="version-badge">{latest.version}</span>
-                  <span class="type-badge type-live">Live</span>
+                  <span class="type-badge type-live">{t.live}</span>
                 </div>
                 <h2 class="latest-title">{latest.title}</h2>
                 {latest.excerpt && <p class="latest-excerpt">{latest.excerpt}</p>}
@@ -71,7 +83,7 @@ const previousPatches = live.slice(1)
                 )}
                 <div class="latest-footer">
                   <span class="pn-date">{formatDate(latest.publishedAt)}</span>
-                  <span class="read-more">Voir le patch complet →</span>
+                  <span class="read-more">{t.readFull}</span>
                 </div>
               </div>
             </a>
@@ -83,7 +95,7 @@ const previousPatches = live.slice(1)
           <section class="pbe-section">
             <h2 class="section-title">
               <span class="pbe-icon">🧪</span>
-              PBE — En test
+              {t.pbeTitle}
             </h2>
             <ul class="pbe-list">
               {pbe.map((p: any) => (
@@ -91,7 +103,7 @@ const previousPatches = live.slice(1)
                   <a href={`/patch-notes/${p.slug}`} class="pbe-card">
                     <div class="pbe-left">
                       <span class="version-badge version-badge--sm">{p.version}</span>
-                      <span class="type-badge type-pbe">PBE</span>
+                      <span class="type-badge type-pbe">{t.pbe}</span>
                     </div>
                     <div class="pbe-center">
                       <p class="pbe-title">{p.title}</p>
@@ -99,7 +111,7 @@ const previousPatches = live.slice(1)
                     </div>
                     <div class="pbe-right">
                       <span class="pn-date">{formatDate(p.publishedAt)}</span>
-                      <span class="card-cta">Lire →</span>
+                      <span class="card-cta">{t.read}</span>
                     </div>
                   </a>
                 </li>
@@ -111,7 +123,7 @@ const previousPatches = live.slice(1)
         <!-- ── Archive des patchs ───────────────────────── -->
         {previousPatches.length > 0 && (
           <section class="archive-section">
-            <h2 class="section-title">Archives</h2>
+            <h2 class="section-title">{t.archives}</h2>
             <ul class="archive-grid">
               {previousPatches.map((p: any) => (
                 <li>
@@ -124,7 +136,7 @@ const previousPatches = live.slice(1)
                     <div class="archive-body">
                       <div class="archive-badges">
                         <span class="version-badge version-badge--sm">{p.version}</span>
-                        <span class="type-badge type-live">Live</span>
+                        <span class="type-badge type-live">{t.live}</span>
                       </div>
                       <h3 class="archive-title">{p.title}</h3>
                       <span class="pn-date">{formatDate(p.publishedAt)}</span>
