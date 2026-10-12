@@ -2,6 +2,7 @@
 import Layout from '../../layouts/Layout.astro'
 import { UI } from '../../i18n.js'
 import AffiliateBlock from '../AffiliateBlock.astro'
+import PatchCover from '../PatchCover.astro'
 import SourceLink from '../SourceLink.astro'
 
 const { slug } = Astro.params
@@ -110,7 +111,7 @@ const isPbe  = patch.type === 'pbe'
 <Layout
   title={`${patch.title} | RiftMatch ${t.eyebrow}`}
   description={patch.excerpt || `Patch ${patch.version}: ${t.descFallback}`}
-  image={patch.coverImage || '/og-image.jpg'}
+  image="/og-image.jpg"
   lang={locale}
 >
   <Fragment slot="head">
@@ -129,12 +130,10 @@ const isPbe  = patch.type === 'pbe'
 
     <!-- ══ HERO SECTION ══════════════════════════════════════ -->
     <div class="pn-hero" class:list={[isLive ? 'hero--live' : 'hero--pbe']}>
-      {patch.coverImage && (
-        <div class="hero-bg">
-          <img src={patch.coverImage} alt="" aria-hidden="true" class="hero-bg-img" loading="eager" />
-          <div class="hero-bg-overlay"></div>
-        </div>
-      )}
+      <div class="hero-bg">
+        <PatchCover version={patch.version} type={patch.type} word={t.patchWord} size="lg" />
+        <div class="hero-bg-overlay"></div>
+      </div>
 
       <div class="hero-content">
         <!-- Breadcrumb -->
@@ -888,6 +887,17 @@ const isPbe  = patch.type === 'pbe'
     .pn-sidebar { grid-template-columns: 1fr; }
     .sidebar-info-card,
     .sidebar-quiz { display: none; }
+  }
+  /* Visuel de patch en fond de hero : le numero va a droite, le titre reste lisible */
+  :global(.hero-bg .pc-center) { inset: 0 0 0 auto; width: 38%; }
+  :global(.hero-bg .pc-ver) { font-size: clamp(4rem, 11vw, 8.5rem); }
+  :global(.hero-bg .pc-ghost) { left: auto; right: -4%; transform: translateY(-50%); opacity: .35; }
+  @media (max-width: 900px) {
+    :global(.hero-bg .pc-center) { inset: auto 0.9rem 0.9rem auto; width: auto; padding: 0; opacity: .9; }
+    :global(.hero-bg .pc-ver) { font-size: 2.6rem; }
+    :global(.hero-bg .pc-bar) { display: none; }
+    :global(.hero-bg .pc-word) { font-size: .6rem; }
+    :global(.hero-bg .pc-ghost) { display: none; }
   }
 </style>
 

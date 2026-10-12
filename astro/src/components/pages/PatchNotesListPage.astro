@@ -1,5 +1,6 @@
 ---
 import Layout from '../../layouts/Layout.astro'
+import PatchCover from '../PatchCover.astro'
 import { UI } from '../../i18n.js'
 
 const PAYLOAD_URL = import.meta.env.PAYLOAD_API_URL || 'http://payload:3000'
@@ -61,12 +62,10 @@ const previousPatches = live.slice(1)
               {t.latest}
             </div>
             <a href={`/patch-notes/${latest.slug}`} class="latest-card gradient-border">
-              {latest.coverImage && (
-                <div class="latest-img-wrap">
-                  <img src={latest.coverImage} alt={latest.title} loading="eager" class="latest-img" />
-                  <div class="latest-img-overlay"></div>
-                </div>
-              )}
+              <div class="latest-img-wrap">
+                <PatchCover version={latest.version} type={latest.type} word={t.patchWord} size="lg" />
+                <div class="latest-img-overlay"></div>
+              </div>
               <div class="latest-body">
                 <div class="latest-badges">
                   <span class="version-badge">{latest.version}</span>
@@ -128,10 +127,7 @@ const previousPatches = live.slice(1)
               {previousPatches.map((p: any) => (
                 <li>
                   <a href={`/patch-notes/${p.slug}`} class="archive-card">
-                    {p.coverImage
-                      ? <img src={p.coverImage} alt={p.title} loading="lazy" class="archive-img" />
-                      : <div class="archive-img-placeholder"></div>
-                    }
+                    <PatchCover version={p.version} type={p.type} word={t.patchWord} size="sm" />
                     <div class="archive-gradient"></div>
                     <div class="archive-body">
                       <div class="archive-badges">
