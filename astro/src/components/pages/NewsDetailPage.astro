@@ -1,7 +1,7 @@
 ---
 import Layout from '../../layouts/Layout.astro'
 import NewsCover from '../NewsCover.astro'
-import { coverFor } from '../../lib/news-cover'
+import { ogImageFor } from '../../lib/news-cover'
 import AffiliateBlock from '../AffiliateBlock.astro'
 import SourceLink from '../SourceLink.astro'
 
@@ -96,7 +96,7 @@ function renderNode(node: SlateNode): string {
 }
 
 const htmlContent = renderNodes(article.content || [])
-const cover = coverFor(article, locale)
+const cover = { src: ogImageFor(article) }
 const catColor = CATEGORY_COLORS[article.category] ?? 'var(--gold)'
 const catLabel = catLabels[article.category] ?? article.category
 ---
@@ -157,7 +157,7 @@ const catLabel = catLabels[article.category] ?? article.category
 
     <!-- ── Hero full-bleed avec titre en overlay ─────── -->
     <div class="article-hero">
-      <NewsCover item={article} locale={locale} cls="article-hero-img" eager={true} alt={article.title} />
+      <NewsCover item={article} locale={locale} eager={true} alt={article.title} size="lg" />
       <div class="article-hero-overlay"></div>
       <div class="article-hero-content">
         <a href="/news" class="back-link-hero">{ui.back}</a>

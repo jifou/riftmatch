@@ -126,7 +126,7 @@ const t = TITLES[locale] ?? TITLES.fr
               data-newstype={featuredItems[0].newsType ?? ''}
               data-newssubtype={featuredItems[0].newsSubtype ?? ''}
             >
-              <NewsCover item={featuredItems[0]} locale={locale} cls="featured-img" eager={true} alt={featuredItems[0].title} />
+              <NewsCover item={featuredItems[0]} locale={locale} eager={true} alt={featuredItems[0].title} size="lg" />
               <div class="featured-gradient"></div>
               <div class="featured-body">
                 <div class="featured-meta">
@@ -159,7 +159,7 @@ const t = TITLES[locale] ?? TITLES.fr
                     data-newstype={item.newsType ?? ''}
                     data-newssubtype={item.newsSubtype ?? ''}
                   >
-                    <NewsCover item={item} locale={locale} cls="featured-img" alt={item.title} />
+                    <NewsCover item={item} locale={locale} alt={item.title} size="sm" />
                     <div class="featured-gradient"></div>
                     <div class="featured-body featured-body--sm">
                       <div class="featured-meta">
@@ -194,7 +194,7 @@ const t = TITLES[locale] ?? TITLES.fr
               {rest.map((item: any) => (
                 <li class="news-card-item" data-newstype={item.newsType ?? ''} data-newssubtype={item.newsSubtype ?? ''}>
                   <a href={`/news/${item.slug}`} class="news-card">
-                    <NewsCover item={item} locale={locale} cls="card-img" alt={item.title} />
+                    <NewsCover item={item} locale={locale} alt={item.title} />
                     <div class="card-gradient"></div>
                     <div class="card-body">
                       <div class="card-tags">

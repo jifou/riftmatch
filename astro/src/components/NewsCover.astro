@@ -1,6 +1,6 @@
 ---
-// Image de couverture d'une news : splash art + teinte de ligue + filigrane d'evenement.
-// A placer dans un parent en position: relative ; l'image remplit le parent.
+// Couverture d'une news : logo de la ligue sur fond hextech teinte de sa couleur.
+// A placer dans un parent en position: relative ; le composant remplit le parent.
 import { coverFor } from '../lib/news-cover'
 
 export interface Props {
@@ -10,37 +10,68 @@ export interface Props {
   eager?: boolean
   alt?: string
   watermark?: boolean
+  size?: 'sm' | 'md' | 'lg'
 }
-const { item, locale = 'fr', cls = '', eager = false, alt = '', watermark = true } = Astro.props
+const { item, locale = 'fr', eager = false, alt = '', watermark = true, size = 'md' } = Astro.props
 const c = coverFor(item, locale)
 ---
-<img src={c.src} alt={alt} class={cls} loading={eager ? 'eager' : 'lazy'} decoding={eager ? 'sync' : 'async'} />
-<span class="nc-tint" style={`--c:${c.color}`} aria-hidden="true"></span>
-<span class="nc-hex" aria-hidden="true"></span>
-{watermark && <span class="nc-mark" style={`--c:${c.color}`} aria-hidden="true">{c.label}</span>}
+<span class={`nc nc--${size}${c.isRift ? ' nc--rift' : ''}`} style={`--c:${c.color}`} role="img" aria-label={alt || c.label}>
+  <span class="nc-glow" aria-hidden="true"></span>
+  <span class="nc-hex" aria-hidden="true"></span>
+  <span class="nc-ring" aria-hidden="true"></span>
+  <img class="nc-logo" src={c.logo} alt="" loading={eager ? 'eager' : 'lazy'} decoding={eager ? 'sync' : 'async'} />
+  {watermark && <span class="nc-tag" aria-hidden="true">{c.tag}</span>}
+</span>
 
 <style is:global>
-  .nc-tint {
-    position: absolute; inset: 0; pointer-events: none; mix-blend-mode: soft-light; opacity: .85;
-    background: linear-gradient(135deg, var(--c) 0%, transparent 70%);
+  .nc {
+    position: absolute; inset: 0; display: block; overflow: hidden;
+    background:
+      radial-gradient(ellipse 60% 60% at 50% 34%, color-mix(in srgb, var(--c) 38%, transparent), transparent 70%),
+      linear-gradient(160deg, #0f131c 0%, #090b10 100%);
+  }
+  .nc-glow {
+    position: absolute; inset: -20%; opacity: .55;
+    background: conic-gradient(from 210deg at 50% 50%, transparent 0 55%, color-mix(in srgb, var(--c) 50%, transparent) 70%, transparent 85%);
+    filter: blur(22px);
   }
   .nc-hex {
-    position: absolute; inset: 0; pointer-events: none; opacity: .18;
+    position: absolute; inset: 0; opacity: .13;
     background-image:
-      linear-gradient(30deg, rgba(255,255,255,.35) 12%, transparent 12.5%, transparent 87%, rgba(255,255,255,.35) 87.5%, rgba(255,255,255,.35)),
-      linear-gradient(150deg, rgba(255,255,255,.35) 12%, transparent 12.5%, transparent 87%, rgba(255,255,255,.35) 87.5%, rgba(255,255,255,.35));
-    background-size: 46px 80px;
-    mask-image: linear-gradient(200deg, #000 0%, transparent 55%);
-    -webkit-mask-image: linear-gradient(200deg, #000 0%, transparent 55%);
+      linear-gradient(30deg, #fff 12%, transparent 12.5%, transparent 87%, #fff 87.5%, #fff),
+      linear-gradient(150deg, #fff 12%, transparent 12.5%, transparent 87%, #fff 87.5%, #fff);
+    background-size: 44px 76px;
+    mask-image: radial-gradient(ellipse 80% 80% at 50% 50%, #000 0%, transparent 85%);
+    -webkit-mask-image: radial-gradient(ellipse 80% 80% at 50% 50%, #000 0%, transparent 85%);
   }
-  .nc-mark {
-    position: absolute; top: .6rem; right: .9rem; pointer-events: none; z-index: 1;
-    font: 400 clamp(1.6rem, 5.5vw, 3.6rem)/1 'Russo One', sans-serif; letter-spacing: .04em; text-transform: uppercase;
-    color: transparent; -webkit-text-stroke: 1.5px var(--c); opacity: .9;
-    text-shadow: 0 0 24px rgba(0,0,0,.6);
-    filter: drop-shadow(0 2px 8px rgba(0,0,0,.6));
+  .nc-ring {
+    position: absolute; left: 50%; top: 30%; width: min(40%, 40vh); aspect-ratio: 1; transform: translate(-50%, -50%);
+    border: 1px solid color-mix(in srgb, var(--c) 55%, transparent); border-radius: 50%; opacity: .55;
+    box-shadow: 0 0 40px color-mix(in srgb, var(--c) 30%, transparent) inset;
   }
-  .news-card .nc-mark { font-size: 1.45rem; top: .5rem; right: .7rem; -webkit-text-stroke-width: 1px; }
-  .featured-secondary .nc-mark { font-size: 1.6rem; }
-  .article-hero .nc-mark { top: 5.5rem; font-size: clamp(2.4rem, 8vw, 5.5rem); right: 1.5rem; opacity: .75; }
+  .nc-logo {
+    position: absolute; left: 50%; top: 30%; transform: translate(-50%, -50%);
+    width: 34%; height: 34%; object-fit: contain; z-index: 1;
+    filter: drop-shadow(0 4px 18px rgba(0,0,0,.65)) drop-shadow(0 0 22px color-mix(in srgb, var(--c) 45%, transparent));
+    transition: transform .5s var(--ease-out);
+  }
+  .nc--rift .nc-logo { width: 22%; height: 24%; border-radius: 22%; }
+  a:hover .nc-logo { transform: translate(-50%, -50%) scale(1.07); }
+  .nc-tag {
+    position: absolute; top: .65rem; left: .8rem; z-index: 2; max-width: 80%;
+    font: 700 .68rem 'Rajdhani', sans-serif; letter-spacing: .18em; text-transform: uppercase; color: #fff;
+    padding: .22rem .6rem; background: color-mix(in srgb, var(--c) 82%, #000);
+    clip-path: polygon(6px 0, 100% 0, calc(100% - 6px) 100%, 0 100%);
+    white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+  }
+  .nc--lg .nc-tag { top: 5.5rem; left: 1.5rem; font-size: .9rem; padding: .35rem .9rem; }
+  .nc--lg .nc-logo { top: 38%; width: 28%; height: 34%; }
+  .nc--lg .nc-ring { top: 38%; width: min(44%, 44vh); }
+  .nc--sm .nc-logo { width: 30%; height: 36%; top: 32%; }
+  .nc--sm .nc-ring { top: 32%; width: min(36%, 36vh); }
+  @media (max-width: 700px) {
+    .nc--lg .nc-logo { top: 24%; width: 40%; height: 26%; }
+    .nc--lg .nc-ring { top: 24%; width: min(52%, 30vh); }
+    .nc--lg .nc-tag { top: 4.6rem; left: 1rem; font-size: .75rem; }
+  }
 </style>
