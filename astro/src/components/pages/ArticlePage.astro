@@ -98,7 +98,8 @@ function renderNode(node: SlateNode, withIds = false): string {
     case 'blockquote': return `<blockquote>${inner}</blockquote>`
     case 'link': {
       const href = node.url || '#'
-      const target = node.newTab ? ' target="_blank" rel="noopener noreferrer"' : ''
+      const sponsored = /amazon\./.test(node.url || '') ? ' sponsored' : ''
+      const target = node.newTab ? ` target="_blank" rel="noopener noreferrer${sponsored}"` : (sponsored ? ` rel="sponsored"` : '')
       return `<a href="${href}"${target}>${inner}</a>`
     }
     default: return inner ? `<p>${inner}</p>` : ''
