@@ -65,23 +65,42 @@ const faq = {
 
     <!-- Resultat -->
     <section id="rs-screen" class="rs-screen" hidden>
-      <div class="rs-splash" id="rs-splash" aria-hidden="true"></div>
-      <div class="rs-inner">
-        <p class="rs-tag">{T.ui.resultTag}</p>
-        <p class="rs-youare">{T.ui.youAre}</p>
-        <h1 class="rs-name" id="rs-name"></h1>
-        <p class="rs-sub" id="rs-sub"></p>
-
-        <div class="rs-pct">
-          <div class="rs-pct-track"><div class="rs-pct-fill" id="rs-pct-fill"></div></div>
-          <span class="rs-pct-label" id="rs-pct-label"></span>
+      <header class="rs-hero">
+        <div class="rs-splash" id="rs-splash" aria-hidden="true"></div>
+        <div class="rs-hero-shade" aria-hidden="true"></div>
+        <p class="rs-tag"><span></span>{T.ui.resultTag}</p>
+        <div class="rs-gauge" aria-hidden="true">
+          <svg viewBox="0 0 80 80">
+            <circle class="rs-gauge-bg" cx="40" cy="40" r="34"/>
+            <circle class="rs-gauge-fg" id="rs-gauge-fg" cx="40" cy="40" r="34" pathLength="100"/>
+          </svg>
+          <b id="rs-gauge-num">0</b>
+          <i>{T.ui.match}</i>
         </div>
-        <ul class="rs-chips" id="rs-chips"></ul>
+        <div class="rs-title">
+          <p class="rs-youare">{T.ui.youAre}</p>
+          <h1 class="rs-name" id="rs-name"></h1>
+          <p class="rs-sub" id="rs-sub"></p>
+        </div>
+      </header>
+
+      <div class="rs-inner">
+        <div class="rs-panel">
+          <h2 class="rs-panel-title">{T.ui.profile}</h2>
+          <dl class="rs-stats" id="rs-stats"></dl>
+          <p class="rs-legend">{T.ui.legend}</p>
+        </div>
 
         <div class="rs-actions">
           <a class="rs-cta" id="rs-cta" href="#">{T.ui.cta}</a>
-          <button class="rs-btn" id="rs-share" type="button">{T.ui.share}</button>
-          <button class="rs-btn" id="rs-dl" type="button">{T.ui.download}</button>
+          <button class="rs-btn" id="rs-share" type="button">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 12v7a1 1 0 001 1h14a1 1 0 001-1v-7M12 15V3m0 0L7.5 7.5M12 3l4.5 4.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            {T.ui.share}
+          </button>
+          <button class="rs-btn" id="rs-dl" type="button">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 3v12m0 0l-4.5-4.5M12 15l4.5-4.5M4 20h16" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            {T.ui.download}
+          </button>
         </div>
         <p class="rs-toast" id="rs-toast" role="status" aria-live="polite"></p>
 
@@ -179,14 +198,14 @@ const faq = {
 
   // ── Resultat ───────────────────────────────────────────
   let resultTop: any = null
+  const CENTERED = 'https://ddragon.leagueoflegends.com/cdn/img/champion/centered'
 
-  function chips(c: any) {
-    const out: string[] = []
-    c.lanes.forEach((l: string) => out.push(`<li class="${c.matched.lanes.includes(l) ? 'on' : ''}">${X.lanes[l] || l}</li>`))
-    c.archetypes.forEach((a: string) => out.push(`<li class="${c.matched.arch.includes(a) ? 'on' : ''}">${X.arch[a] || a}</li>`))
-    out.push(`<li class="${c.matched.faction ? 'on' : ''}">${X.regions[c.faction] || c.faction}</li>`)
-    out.push(`<li class="diff d${c.difficulty}">${X.diff[c.difficulty] || ''}</li>`)
-    return out.join('')
+  function pips(d: number) {
+    return Array.from({ length: 5 }, (_, i) => `<i class="${i < d ? 'on' : ''}"></i>`).join('')
+  }
+
+  function stat(label: string, value: string, hit: boolean, extra = '') {
+    return `<div class="rs-stat${hit ? ' hit' : ''}"><dt>${label}</dt><dd>${value}${extra}</dd></div>`
   }
 
   function showResult() {
@@ -194,32 +213,47 @@ const faq = {
     const top = res[0]
     resultTop = top
     $('qz-screen').hidden = true
-    const rs = $('rs-screen')
-    rs.hidden = false
+    $('rs-screen').hidden = false
     document.body.classList.add('rs-open')
     window.scrollTo({ top: 0, behavior: 'instant' as ScrollBehavior })
-
     $('qz-bg').style.backgroundImage = ''
-    $('rs-splash').style.backgroundImage = `url(${SPLASH}/${top.apiId}_0.jpg)`
+    $('qz-bg').style.opacity = '0'
+
+    $('rs-splash').style.backgroundImage = `url(${CENTERED}/${top.apiId}_0.jpg)`
     $('rs-name').textContent = top.name
-    $('rs-sub').textContent = [
-      top.lanes.map((l: string) => X.lanes[l] || l).join(' / '),
-      top.archetypes.map((a: string) => X.arch[a] || a).join(' / '),
-    ].join('  ·  ')
-    $('rs-pct-label').textContent = `${top.matchPct}% ${U.match}`
-    requestAnimationFrame(() => { $('rs-pct-fill').style.width = `${top.matchPct}%` })
-    $('rs-chips').innerHTML = chips(top)
+    $('rs-sub').textContent = top.lanes.map((l: string) => X.lanes[l] || l).join('  ·  ')
+
+    // Jauge
+    const fg = document.getElementById('rs-gauge-fg') as unknown as SVGElement
+    requestAnimationFrame(() => requestAnimationFrame(() => { fg.style.strokeDashoffset = String(100 - top.matchPct) }))
+    let n = 0
+    const num = $('rs-gauge-num')
+    const tick = setInterval(() => {
+      n += 3
+      if (n >= top.matchPct) { n = top.matchPct; clearInterval(tick) }
+      num.textContent = n + '%'
+    }, 22)
+
+    const laneHit = top.matched.lanes.length > 0
+    const archHit = top.matched.arch.length > 0
+    $('rs-stats').innerHTML =
+      stat(U.statRole, top.lanes.map((l: string) => X.lanes[l] || l).join(' / '), laneHit) +
+      stat(U.statClass, top.archetypes.map((a: string) => X.arch[a] || a).join(' / '), archHit) +
+      stat(U.statDiff, X.diff[top.difficulty] || '', false, `<span class="rs-pips">${pips(top.difficulty)}</span>`) +
+      stat(U.statRegion, X.regions[top.faction] || top.faction, top.matched.faction)
+
     ;($('rs-cta') as HTMLAnchorElement).href = `${X.champBase}/${top.apiId}`
 
-    $('rs-alts').innerHTML = res.slice(1).map((c: any) => `
-      <a class="rs-alt" href="${X.champBase}/${c.apiId}">
-        <img src="${LOADING}/${c.apiId}_0.jpg" alt="${c.name}" loading="lazy" width="120" height="220"/>
-        <div class="rs-alt-info">
+    $('rs-alts').innerHTML = res.slice(1).map((c: any, i: number) => `
+      <a class="rs-alt" href="${X.champBase}/${c.apiId}" style="--i:${i}">
+        <span class="rs-alt-art" style="background-image:url(${CENTERED}/${c.apiId}_0.jpg)"></span>
+        <span class="rs-alt-shade"></span>
+        <span class="rs-alt-pct">${c.matchPct}%</span>
+        <span class="rs-alt-info">
           <strong>${c.name}</strong>
-          <span class="rs-alt-pct">${c.matchPct}% ${U.match}</span>
-          <ul class="rs-chips rs-chips--sm">${chips(c)}</ul>
+          <small>${c.lanes.map((l: string) => X.lanes[l] || l).join(' · ')}</small>
           <em>${U.ctaShort} →</em>
-        </div>
+        </span>
       </a>`).join('')
   }
 
@@ -374,77 +408,123 @@ const faq = {
   @media (hover: none) { .qz-hint { display: none; } }
 
   /* ── Resultat ── */
-  .rs-screen { position: relative; }
+  .rs-screen { position: relative; margin-top: -64px; }
+  .rs-hero { position: relative; min-height: min(86vh, 760px); display: flex; flex-direction: column; justify-content: flex-end; padding: 6rem 1.5rem 2.5rem; max-width: 1200px; margin: 0 auto; }
   .rs-splash {
-    position: absolute; inset: 0 0 auto 0; height: 78vh; min-height: 520px; z-index: -1;
-    background-size: cover; background-position: center 18%;
-    mask-image: linear-gradient(180deg, #000 45%, transparent 100%);
-    -webkit-mask-image: linear-gradient(180deg, #000 45%, transparent 100%);
-    animation: rsSplash 1.2s var(--ease-out) both;
+    position: absolute; inset: 0 50% 0 50%; width: 100vw; margin-left: -50vw; z-index: -2;
+    background-size: cover; background-position: center 25%; filter: brightness(1.25) saturate(1.15) contrast(1.05);
+    animation: rsSplash 1.4s var(--ease-out) both;
   }
-  @keyframes rsSplash { from { opacity: 0; transform: scale(1.08); } to { opacity: .9; transform: none; } }
-  .rs-inner { max-width: 820px; margin: 0 auto; padding: 4.5rem 1.25rem 4rem; }
-  .rs-tag { font-family: 'Rajdhani', sans-serif; font-weight: 700; letter-spacing: .3em; font-size: .78rem; color: var(--gold); text-transform: uppercase; text-shadow: 0 2px 10px #000; }
-  .rs-youare { margin-top: 5.5rem; font-family: 'Rajdhani', sans-serif; font-size: 1.15rem; letter-spacing: .2em; color: var(--text-light); text-transform: uppercase; text-shadow: 0 2px 12px #000; }
+  @keyframes rsSplash { from { opacity: 0; transform: scale(1.1); } to { opacity: 1; transform: none; } }
+  .rs-hero-shade {
+    position: absolute; inset: 0 50% 0 50%; width: 100vw; margin-left: -50vw; z-index: -1;
+    background:
+      linear-gradient(180deg, rgba(9,11,16,.4) 0%, rgba(9,11,16,0) 18%, rgba(9,11,16,0) 55%, rgba(9,11,16,.85) 88%, var(--dark) 100%),
+      linear-gradient(90deg, rgba(9,11,16,.7), rgba(9,11,16,0) 60%);
+  }
+  .rs-tag {
+    position: absolute; top: 5.2rem; left: 1.5rem; display: flex; align-items: center; gap: .6rem;
+    font: 700 .74rem 'Rajdhani', sans-serif; letter-spacing: .3em; color: var(--gold-light); text-transform: uppercase; text-shadow: 0 2px 10px #000;
+  }
+  .rs-tag span { width: 34px; height: 2px; background: var(--gold); box-shadow: 0 0 10px var(--gold); }
+
+  .rs-gauge { position: absolute; top: 4.6rem; right: 1.25rem; width: 86px; height: 86px; display: grid; place-items: center; text-align: center; filter: drop-shadow(0 4px 14px rgba(0,0,0,.7)); }
+  .rs-gauge svg { position: absolute; inset: 0; transform: rotate(-90deg); }
+  .rs-gauge-bg { fill: rgba(9,11,16,.8); stroke: rgba(255,255,255,.14); stroke-width: 5; }
+  .rs-gauge-fg { fill: none; stroke: var(--gold-light); stroke-width: 5; stroke-linecap: round; stroke-dasharray: 100; stroke-dashoffset: 100; transition: stroke-dashoffset 1.4s var(--ease-out) .5s; filter: drop-shadow(0 0 5px rgba(240,230,178,.8)); }
+  .rs-gauge b { position: relative; font: 700 1.35rem/1 'Rajdhani', sans-serif; color: var(--gold-light); margin-top: -.9rem; }
+  .rs-gauge i { position: absolute; bottom: 22%; left: 0; right: 0; font: 600 .5rem 'Rajdhani', sans-serif; letter-spacing: .04em; color: var(--text-muted); text-transform: uppercase; font-style: normal; }
+
+  .rs-title { position: relative; }
+  .rs-youare { font: 600 .95rem 'Rajdhani', sans-serif; letter-spacing: .32em; color: var(--gold); text-transform: uppercase; text-shadow: 0 2px 12px #000; }
   .rs-name {
-    font-size: clamp(3rem, 12vw, 6.2rem); line-height: 1; margin: .15em 0 .1em; color: var(--gold-light);
-    text-shadow: 0 0 40px rgba(200,155,60,.55), 0 4px 18px #000; text-transform: uppercase;
-    animation: rsName .8s var(--ease-out) .25s both;
+    font-size: clamp(3.4rem, 15vw, 7.5rem); line-height: .95; margin: .1em 0 .12em; color: #fff; text-transform: uppercase;
+    background: linear-gradient(180deg, #fff 30%, var(--gold-light) 75%, var(--gold)); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;
+    filter: drop-shadow(0 4px 22px rgba(0,0,0,.85)) drop-shadow(0 0 28px rgba(200,155,60,.35));
+    animation: rsName .9s var(--ease-out) .3s both;
   }
-  @keyframes rsName { from { opacity: 0; letter-spacing: .25em; } to { opacity: 1; letter-spacing: .01em; } }
-  .rs-sub { font-family: 'Rajdhani', sans-serif; font-weight: 600; letter-spacing: .12em; color: var(--text-muted); text-transform: uppercase; text-shadow: 0 2px 10px #000; }
-  .rs-pct { display: flex; align-items: center; gap: .9rem; margin: 1.4rem 0 1rem; max-width: 440px; }
-  .rs-pct-track { flex: 1; height: 8px; background: rgba(255,255,255,.12); clip-path: polygon(5px 0, 100% 0, calc(100% - 5px) 100%, 0 100%); }
-  .rs-pct-fill { height: 100%; width: 0; background: linear-gradient(90deg, var(--gold), var(--gold-light)); box-shadow: 0 0 12px rgba(240,230,178,.6); transition: width 1.1s var(--ease-out) .5s; }
-  .rs-pct-label { font-family: 'Rajdhani', sans-serif; font-weight: 700; color: var(--gold-light); letter-spacing: .06em; white-space: nowrap; }
+  @keyframes rsName { from { opacity: 0; transform: translateY(18px); letter-spacing: .12em; } to { opacity: 1; transform: none; letter-spacing: 0; } }
+  .rs-sub { font: 600 1rem 'Rajdhani', sans-serif; letter-spacing: .2em; color: var(--text-light); text-transform: uppercase; text-shadow: 0 2px 12px #000; }
 
-  .rs-chips { display: flex; flex-wrap: wrap; gap: .45rem; list-style: none; }
-  .rs-chips li {
-    font: 600 .72rem 'Rajdhani', sans-serif; letter-spacing: .1em; text-transform: uppercase;
-    padding: .3rem .7rem; color: var(--text-muted); background: rgba(9,11,16,.7); border: 1px solid rgba(255,255,255,.14);
-    clip-path: polygon(6px 0, 100% 0, calc(100% - 6px) 100%, 0 100%);
+  .rs-inner { max-width: 1200px; margin: 0 auto; padding: 0 1.25rem 4rem; display: grid; gap: 1rem; }
+  .rs-panel, .rs-alt, .rs-btn, .rs-restart, .qz-card { --bd: rgba(200,155,60,.55); }
+  .rs-panel {
+    position: relative; padding: 1.4rem 1.3rem 1rem; background: rgba(14,17,24,.94);
+    border-top: 1px solid var(--bd); border-bottom: 1px solid rgba(200,155,60,.25);
+    box-shadow: 0 -12px 40px rgba(0,0,0,.5);
   }
-  .rs-chips li.on { color: #090b10; background: var(--gold); border-color: var(--gold); }
-  .rs-chips li.diff.d1, .rs-chips li.diff.d2 { color: #86efac; border-color: rgba(134,239,172,.4); }
-  .rs-chips li.diff.d3 { color: #fbbf24; border-color: rgba(251,191,36,.4); }
-  .rs-chips li.diff.d4, .rs-chips li.diff.d5 { color: #fb923c; border-color: rgba(251,146,60,.45); }
-  .rs-chips--sm li { font-size: .64rem; padding: .22rem .55rem; }
+  .rs-panel::before, .rs-panel::after { content: ''; position: absolute; top: -1px; width: 38px; height: 38px; border-top: 3px solid var(--gold); }
+  .rs-panel::before { left: -1px; border-left: 3px solid var(--gold); }
+  .rs-panel::after { right: -1px; border-right: 3px solid var(--gold); }
+  .rs-panel-title { font: 700 .8rem 'Rajdhani', sans-serif; letter-spacing: .3em; color: var(--gold); text-transform: uppercase; margin-bottom: 1rem; }
+  .rs-stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: .7rem; }
+  .rs-stat { padding: .7rem .85rem; background: rgba(255,255,255,.03); border-left: 3px solid rgba(255,255,255,.12); }
+  .rs-stat.hit { border-left-color: var(--gold); background: rgba(200,155,60,.09); }
+  .rs-stat dt { font: 600 .66rem 'Rajdhani', sans-serif; letter-spacing: .2em; color: var(--text-muted); text-transform: uppercase; }
+  .rs-stat dd { margin-top: .25rem; font: 700 1.08rem 'Rajdhani', sans-serif; color: var(--text-light); display: flex; flex-wrap: wrap; align-items: center; gap: .5rem; }
+  .rs-stat.hit dd { color: var(--gold-light); }
+  .rs-pips { display: inline-flex; gap: 3px; }
+  .rs-pips i { width: 14px; height: 7px; background: rgba(255,255,255,.14); clip-path: polygon(3px 0, 100% 0, calc(100% - 3px) 100%, 0 100%); }
+  .rs-pips i.on { background: var(--gold); box-shadow: 0 0 6px rgba(200,155,60,.7); }
+  .rs-legend { margin-top: .9rem; font-size: .7rem; color: var(--text-dim); }
+  .rs-legend::before { content: ''; display: inline-block; width: 9px; height: 9px; background: var(--gold); margin-right: .45rem; }
 
-  .rs-actions { display: flex; flex-wrap: wrap; gap: .7rem; margin: 1.6rem 0 .4rem; }
+  .rs-actions { display: grid; grid-template-columns: 1fr 1fr; gap: .6rem; margin-top: .4rem; }
   .rs-cta, .rs-btn, .rs-restart {
-    font: 700 .85rem 'Rajdhani', sans-serif; letter-spacing: .14em; text-transform: uppercase; cursor: pointer; text-decoration: none;
-    padding: .85rem 1.4rem; transition: transform .18s, box-shadow .18s, background .18s;
-    clip-path: polygon(10px 0, 100% 0, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0 100%, 0 10px);
+    display: inline-flex; align-items: center; justify-content: center; gap: .55rem;
+    font: 700 .85rem 'Rajdhani', sans-serif; letter-spacing: .16em; text-transform: uppercase; cursor: pointer; text-decoration: none;
+    padding: 1rem 1.2rem; transition: transform .18s, box-shadow .18s, background .18s;
+    clip-path: polygon(12px 0, 100% 0, 100% calc(100% - 12px), calc(100% - 12px) 100%, 0 100%, 0 12px);
   }
-  .rs-cta { color: #090b10; background: linear-gradient(135deg, #e8c96a, var(--gold)); box-shadow: var(--glow-gold); }
+  .rs-cta { grid-column: 1 / -1; font-size: 1.05rem; padding: 1.15rem; color: #090b10; background: linear-gradient(135deg, #f0d98a, var(--gold) 55%, #a97b2c); box-shadow: var(--glow-gold); }
   .rs-cta:hover { transform: translateY(-2px); }
-  .rs-btn, .rs-restart { color: var(--gold-light); background: rgba(9,11,16,.75); border: 1px solid rgba(200,155,60,.5); }
-  .rs-btn:hover, .rs-restart:hover { background: rgba(200,155,60,.18); }
-  .rs-toast { min-height: 1.2em; font-size: .8rem; color: var(--gold-light); }
+  .rs-btn, .rs-restart { color: var(--gold-light); background: linear-gradient(180deg, rgba(200,155,60,.22), rgba(200,155,60,.08)); box-shadow: inset 0 0 0 1px rgba(200,155,60,.55); }
+  .rs-btn:hover, .rs-restart:hover { background: rgba(200,155,60,.3); }
+  .rs-toast { min-height: 1.1em; font-size: .8rem; color: var(--gold-light); text-align: center; }
 
-  .rs-alt-title { margin: 2.6rem 0 1rem; font-size: 1.05rem; color: var(--gold); letter-spacing: .08em; text-transform: uppercase; }
-  .rs-alts { display: grid; gap: .9rem; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); margin-bottom: 2rem; }
+  .rs-alt-title { margin: 1.4rem 0 0; font: 700 .8rem 'Rajdhani', sans-serif; letter-spacing: .3em; color: var(--gold); text-transform: uppercase; }
+  .rs-alts { display: flex; gap: .8rem; overflow-x: auto; scroll-snap-type: x mandatory; padding: .2rem 1.25rem 1rem; margin: 0 -1.25rem; scrollbar-width: none; }
+  .rs-alts::-webkit-scrollbar { display: none; }
   .rs-alt {
-    display: flex; gap: .9rem; text-decoration: none; color: inherit; overflow: hidden;
-    background: rgba(14,17,24,.9); border: 1px solid rgba(200,155,60,.25); transition: border-color .2s, transform .2s;
+    --i: 0; position: relative; flex: 0 0 min(72%, 300px); height: 250px; scroll-snap-align: start; overflow: hidden; text-decoration: none; color: inherit;
+    box-shadow: inset 0 0 0 1px rgba(200,155,60,.4); transition: transform .2s, box-shadow .2s;
     clip-path: polygon(14px 0, 100% 0, 100% calc(100% - 14px), calc(100% - 14px) 100%, 0 100%, 0 14px);
+    animation: ansIn .5s var(--ease-out) calc(.8s + var(--i) * .12s) both;
   }
-  .rs-alt:hover { border-color: var(--gold); transform: translateY(-3px); }
-  .rs-alt img { width: 96px; height: auto; object-fit: cover; flex-shrink: 0; }
-  .rs-alt-info { display: grid; gap: .35rem; align-content: center; padding: .8rem .8rem .8rem 0; }
-  .rs-alt-info strong { font: 400 1.25rem 'Russo One', sans-serif; color: var(--gold-light); }
-  .rs-alt-pct { font: 700 .85rem 'Rajdhani', sans-serif; color: var(--gold); letter-spacing: .06em; }
-  .rs-alt-info em { font-style: normal; font: 700 .72rem 'Rajdhani', sans-serif; letter-spacing: .14em; text-transform: uppercase; color: var(--text-muted); }
-  .rs-restart { display: block; margin: 1.6rem auto; }
+  .rs-alt:hover { transform: translateY(-4px); box-shadow: inset 0 0 0 1px var(--gold), var(--glow-gold); }
+  .rs-alt-art { position: absolute; inset: 0; background-size: cover; background-position: center 20%; transition: transform .5s var(--ease-out); }
+  .rs-alt:hover .rs-alt-art { transform: scale(1.06); }
+  .rs-alt-shade { position: absolute; inset: 0; background: linear-gradient(180deg, rgba(9,11,16,.1) 35%, rgba(9,11,16,.95) 100%); }
+  .rs-alt-pct { position: absolute; top: .7rem; right: .7rem; font: 700 .95rem 'Rajdhani', sans-serif; color: #090b10; background: var(--gold); padding: .15rem .6rem; clip-path: polygon(6px 0, 100% 0, calc(100% - 6px) 100%, 0 100%); }
+  .rs-alt-info { position: absolute; left: 1rem; right: 1rem; bottom: .9rem; display: grid; gap: .15rem; }
+  .rs-alt-info strong { font: 400 1.5rem 'Russo One', sans-serif; color: #fff; text-transform: uppercase; text-shadow: 0 2px 10px #000; }
+  .rs-alt-info small { font: 600 .78rem 'Rajdhani', sans-serif; letter-spacing: .14em; color: var(--text-muted); text-transform: uppercase; }
+  .rs-alt-info em { margin-top: .3rem; font: 700 .7rem 'Rajdhani', sans-serif; letter-spacing: .16em; color: var(--gold-light); text-transform: uppercase; font-style: normal; }
+  .rs-restart { justify-self: center; margin: 1rem 0; }
 
+  @media (min-width: 900px) {
+    .rs-hero { padding: 7rem 2rem 3.5rem; }
+    .rs-tag { left: 2rem; top: 6rem; }
+    .rs-gauge { right: 2rem; top: 5.4rem; width: 110px; height: 110px; }
+    .rs-gauge b { font-size: 1.7rem; }
+    .rs-inner { grid-template-columns: 1.3fr 1fr; align-items: start; column-gap: 1.5rem; margin-top: -2.5rem; }
+    .rs-panel { grid-column: 1; }
+    .rs-actions { grid-column: 2; grid-template-columns: 1fr 1fr; margin-top: 0; }
+    .rs-toast, .rs-alt-title, .rs-alts, .rs-inner > :not(.rs-panel):not(.rs-actions) { grid-column: 1 / -1; }
+    .rs-alts { overflow: visible; margin: 0; padding: 0; }
+    .rs-alt { flex: 1 1 0; height: 300px; }
+  }
   @media (max-width: 600px) {
     .qz-screen { padding: 1.1rem .9rem 3rem; }
     .qz-card { padding: 1.5rem 1rem 1rem; }
     .qz-ans { font-size: .92rem; padding: .8rem .8rem; }
-    .rs-inner { padding-top: 3rem; }
-    .rs-youare { margin-top: 4rem; }
-    .rs-splash { height: 62vh; }
-    .rs-cta, .rs-btn { flex: 1 1 100%; text-align: center; }
+    .rs-hero { min-height: 74svh; padding: 5rem 1.1rem 1.6rem; }
+    .rs-tag { top: 4.6rem; left: 1.1rem; font-size: .66rem; letter-spacing: .22em; }
+    .rs-gauge { top: 4.1rem; right: .9rem; width: 82px; height: 82px; }
+    .rs-gauge b { font-size: 1.1rem; }
+    .rs-splash { background-position: 58% 18%; }
+    .rs-inner { padding: 0 .9rem 3rem; }
+    .rs-btn { font-size: .72rem; letter-spacing: .1em; padding: .9rem .5rem; }
   }
   @media (prefers-reduced-motion: reduce) {
     .qz *, .qz-card--in, .rs-splash, .rs-name { animation: none !important; transition: none !important; }
