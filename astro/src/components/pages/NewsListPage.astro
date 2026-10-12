@@ -1,5 +1,6 @@
 ---
 import Layout from '../../layouts/Layout.astro'
+import NewsCover from '../NewsCover.astro'
 
 const PAYLOAD_URL = import.meta.env.PAYLOAD_API_URL || 'http://payload:3000'
 
@@ -125,10 +126,7 @@ const t = TITLES[locale] ?? TITLES.fr
               data-newstype={featuredItems[0].newsType ?? ''}
               data-newssubtype={featuredItems[0].newsSubtype ?? ''}
             >
-              {featuredItems[0].coverImage
-                ? <img src={featuredItems[0].coverImage} alt={featuredItems[0].title} loading="eager" class="featured-img" />
-                : <div class="featured-img-placeholder" data-type={featuredItems[0].newsType ?? ''}></div>
-              }
+              <NewsCover item={featuredItems[0]} locale={locale} cls="featured-img" eager={true} alt={featuredItems[0].title} />
               <div class="featured-gradient"></div>
               <div class="featured-body">
                 <div class="featured-meta">
@@ -161,10 +159,7 @@ const t = TITLES[locale] ?? TITLES.fr
                     data-newstype={item.newsType ?? ''}
                     data-newssubtype={item.newsSubtype ?? ''}
                   >
-                    {item.coverImage
-                      ? <img src={item.coverImage} alt={item.title} loading="lazy" class="featured-img" />
-                      : <div class="featured-img-placeholder" data-type={item.newsType ?? ''}></div>
-                    }
+                    <NewsCover item={item} locale={locale} cls="featured-img" alt={item.title} />
                     <div class="featured-gradient"></div>
                     <div class="featured-body featured-body--sm">
                       <div class="featured-meta">
@@ -199,10 +194,7 @@ const t = TITLES[locale] ?? TITLES.fr
               {rest.map((item: any) => (
                 <li class="news-card-item" data-newstype={item.newsType ?? ''} data-newssubtype={item.newsSubtype ?? ''}>
                   <a href={`/news/${item.slug}`} class="news-card">
-                    {item.coverImage
-                      ? <img src={item.coverImage} alt={item.title} loading="lazy" class="card-img" />
-                      : <div class="card-img-placeholder"></div>
-                    }
+                    <NewsCover item={item} locale={locale} cls="card-img" alt={item.title} />
                     <div class="card-gradient"></div>
                     <div class="card-body">
                       <div class="card-tags">
@@ -481,7 +473,7 @@ const t = TITLES[locale] ?? TITLES.fr
     transform: translateY(-3px);
     box-shadow: var(--glow-gold);
   }
-  .featured-img {
+  :global(.featured-img) {
     position: absolute;
     inset: 0;
     width: 100%;
@@ -490,7 +482,7 @@ const t = TITLES[locale] ?? TITLES.fr
     object-position: center 20%;
     transition: transform 0.5s var(--ease-out);
   }
-  .featured-card:hover .featured-img { transform: scale(1.04); }
+  .featured-card:hover :global(.featured-img) { transform: scale(1.04); }
 
   /* ── Placeholder RiftMatch branded ─────────────────── */
   .featured-img-placeholder {
@@ -658,7 +650,7 @@ const t = TITLES[locale] ?? TITLES.fr
     transform: translateY(-4px);
     box-shadow: 0 8px 32px rgba(200,155,60,0.18);
   }
-  .card-img {
+  :global(.card-img) {
     position: absolute;
     inset: 0;
     width: 100%;
@@ -667,7 +659,7 @@ const t = TITLES[locale] ?? TITLES.fr
     object-position: center 20%;
     transition: transform 0.4s var(--ease-out);
   }
-  .news-card:hover .card-img { transform: scale(1.06); }
+  .news-card:hover :global(.card-img) { transform: scale(1.06); }
   .card-img-placeholder {
     position: absolute;
     inset: 0;

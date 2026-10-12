@@ -1,0 +1,46 @@
+---
+// Image de couverture d'une news : splash art + teinte de ligue + filigrane d'evenement.
+// A placer dans un parent en position: relative ; l'image remplit le parent.
+import { coverFor } from '../lib/news-cover'
+
+export interface Props {
+  item: any
+  locale?: string
+  cls?: string
+  eager?: boolean
+  alt?: string
+  watermark?: boolean
+}
+const { item, locale = 'fr', cls = '', eager = false, alt = '', watermark = true } = Astro.props
+const c = coverFor(item, locale)
+---
+<img src={c.src} alt={alt} class={cls} loading={eager ? 'eager' : 'lazy'} decoding={eager ? 'sync' : 'async'} />
+<span class="nc-tint" style={`--c:${c.color}`} aria-hidden="true"></span>
+<span class="nc-hex" aria-hidden="true"></span>
+{watermark && <span class="nc-mark" style={`--c:${c.color}`} aria-hidden="true">{c.label}</span>}
+
+<style is:global>
+  .nc-tint {
+    position: absolute; inset: 0; pointer-events: none; mix-blend-mode: soft-light; opacity: .85;
+    background: linear-gradient(135deg, var(--c) 0%, transparent 70%);
+  }
+  .nc-hex {
+    position: absolute; inset: 0; pointer-events: none; opacity: .18;
+    background-image:
+      linear-gradient(30deg, rgba(255,255,255,.35) 12%, transparent 12.5%, transparent 87%, rgba(255,255,255,.35) 87.5%, rgba(255,255,255,.35)),
+      linear-gradient(150deg, rgba(255,255,255,.35) 12%, transparent 12.5%, transparent 87%, rgba(255,255,255,.35) 87.5%, rgba(255,255,255,.35));
+    background-size: 46px 80px;
+    mask-image: linear-gradient(200deg, #000 0%, transparent 55%);
+    -webkit-mask-image: linear-gradient(200deg, #000 0%, transparent 55%);
+  }
+  .nc-mark {
+    position: absolute; top: .6rem; right: .9rem; pointer-events: none; z-index: 1;
+    font: 400 clamp(1.6rem, 5.5vw, 3.6rem)/1 'Russo One', sans-serif; letter-spacing: .04em; text-transform: uppercase;
+    color: transparent; -webkit-text-stroke: 1.5px var(--c); opacity: .9;
+    text-shadow: 0 0 24px rgba(0,0,0,.6);
+    filter: drop-shadow(0 2px 8px rgba(0,0,0,.6));
+  }
+  .news-card .nc-mark { font-size: 1.45rem; top: .5rem; right: .7rem; -webkit-text-stroke-width: 1px; }
+  .featured-secondary .nc-mark { font-size: 1.6rem; }
+  .article-hero .nc-mark { top: 5.5rem; font-size: clamp(2.4rem, 8vw, 5.5rem); right: 1.5rem; opacity: .75; }
+</style>

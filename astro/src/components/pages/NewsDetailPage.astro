@@ -1,5 +1,7 @@
 ---
 import Layout from '../../layouts/Layout.astro'
+import NewsCover from '../NewsCover.astro'
+import { coverFor } from '../../lib/news-cover'
 import AffiliateBlock from '../AffiliateBlock.astro'
 import SourceLink from '../SourceLink.astro'
 
@@ -94,6 +96,7 @@ function renderNode(node: SlateNode): string {
 }
 
 const htmlContent = renderNodes(article.content || [])
+const cover = coverFor(article, locale)
 const catColor = CATEGORY_COLORS[article.category] ?? 'var(--gold)'
 const catLabel = catLabels[article.category] ?? article.category
 ---
@@ -101,7 +104,7 @@ const catLabel = catLabels[article.category] ?? article.category
 <Layout
   title={`${article.title} | RiftMatch News`}
   description={article.excerpt || `${article.title} — RiftMatch actualités League of Legends`}
-  image={article.coverImage || '/og-image.jpg'}
+  image={cover.src}
 >
   <Fragment slot="head">
     <meta property="og:type" content="article" />
@@ -121,7 +124,7 @@ const catLabel = catLabels[article.category] ?? article.category
       "@type": "NewsArticle",
       "headline": article.title,
       "description": article.excerpt || `${article.title} — RiftMatch actualités League of Legends`,
-      "image": article.coverImage ? [article.coverImage] : ["https://riftmatch.io/og-image.jpg"],
+      "image": [cover.src],
       "datePublished": article.publishedAt,
       "dateModified": article.updatedAt || article.publishedAt,
       "author": {
@@ -154,9 +157,7 @@ const catLabel = catLabels[article.category] ?? article.category
 
     <!-- ── Hero full-bleed avec titre en overlay ─────── -->
     <div class="article-hero">
-      {article.coverImage && (
-        <img src={article.coverImage} alt={article.title} class="article-hero-img" loading="eager" />
-      )}
+      <NewsCover item={article} locale={locale} cls="article-hero-img" eager={true} alt={article.title} />
       <div class="article-hero-overlay"></div>
       <div class="article-hero-content">
         <a href="/news" class="back-link-hero">{ui.back}</a>
@@ -238,7 +239,7 @@ const catLabel = catLabels[article.category] ?? article.category
     display: flex;
     align-items: flex-end;
   }
-  .article-hero-img {
+  :global(.article-hero-img) {
     position: absolute;
     inset: 0;
     width: 100%;
