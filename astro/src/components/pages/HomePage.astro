@@ -3,6 +3,7 @@ import Layout from '../../layouts/Layout.astro'
 import { CHAMPIONS } from '../../data/champions'
 import { getLatestDDRVersion, getDDRBase } from '../../lib/ddr-version'
 import AffiliateBlock from '../AffiliateBlock.astro'
+import GearGuides from '../GearGuides.astro'
 import { resolveLocale, lp } from '../../lib/locale'
 import { UI } from '../../i18n.js'
 import { TEXT } from '../../data/quiz-data.js'
@@ -168,6 +169,8 @@ const DDR_BASE = getDDRBase(ddrVersion)
         <p class="results-count" id="results-count">{champions.length} {t.home.statChamps}</p>
       </section>
     )}
+
+    <GearGuides locale={locale} />
 
   </main>
 </Layout>

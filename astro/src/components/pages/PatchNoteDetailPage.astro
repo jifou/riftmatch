@@ -4,6 +4,7 @@ import { urlLocale, lp } from '../../lib/locale'
 import { UI } from '../../i18n.js'
 import AffiliateBlock from '../AffiliateBlock.astro'
 import PatchCover from '../PatchCover.astro'
+import GearGuides from '../GearGuides.astro'
 import SourceLink from '../SourceLink.astro'
 
 const { slug } = Astro.params
@@ -299,6 +300,7 @@ const isPbe  = patch.type === 'pbe'
 
         <!-- ── Affiliate block ──────────────────────────── -->
         <div class="pn-aff-wrap">
+          <GearGuides locale={locale} variant="compact" />
           <AffiliateBlock variant="banner" locale={locale} />
         </div>
 

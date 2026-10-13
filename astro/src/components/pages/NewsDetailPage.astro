@@ -2,6 +2,7 @@
 import Layout from '../../layouts/Layout.astro'
 import { urlLocale, lp } from '../../lib/locale'
 import NewsCover from '../NewsCover.astro'
+import GearGuides from '../GearGuides.astro'
 import { ogImageFor } from '../../lib/news-cover'
 import AffiliateBlock from '../AffiliateBlock.astro'
 import SourceLink from '../SourceLink.astro'
@@ -197,6 +198,8 @@ const catLabel = catLabels[article.category] ?? article.category
         <div class="article-content prose" set:html={htmlContent} />
       )}
 
+
+      <GearGuides locale={locale} variant="compact" />
 
       <!-- ── Affiliate block ───────────────────────────────── -->
       <div class="news-aff-wrap">

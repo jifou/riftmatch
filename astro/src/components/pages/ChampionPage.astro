@@ -17,6 +17,7 @@ import {
   getOpGGUrl,
 } from '../../lib/champion-description'
 import AffiliateBlock from '../AffiliateBlock.astro'
+import GearGuides from '../GearGuides.astro'
 import { UI } from '../../i18n.js'
 import { championSeo } from '../../lib/champion-seo'
 
@@ -220,11 +221,7 @@ const homePath = lp(locale, '/')
           <a class="seo-link" href={seo.roleHref}>{seo.roleCta} →</a>
         </section>
 
-        <section class="info-card seo-card">
-          <h2 class="section-label">{seo.h2Gear}</h2>
-          <p class="champ-desc">{seo.gearText}</p>
-          <a class="seo-link" href={seo.gearHref}>{seo.gearCta} →</a>
-        </section>
+        <GearGuides locale={locale} variant="compact" max={2} />
 
         <section class="info-card seo-card">
           <h2 class="section-label">{seo.h2Faq}</h2>

@@ -1,0 +1,88 @@
+---
+// Bloc "Materiel gaming" : met en avant les derniers guides d'achat de la langue courante.
+// Convention : un guide d'achat est une page Payload (template 'article') SANS translationKey
+// (les guides de role et la page "qu'est-ce que LoL" ont une translationKey).
+import { lp } from '../lib/locale'
+
+export interface Props {
+  locale?: string
+  max?: number
+  variant?: 'row' | 'compact'
+}
+const { locale = 'fr', max = 3, variant = 'row' } = Astro.props
+
+const L: Record<string, { title: string; sub: string; cta: string; all: string }> = {
+  fr: { title: 'Matériel gaming pour LoL', sub: "Nos guides d'achat : critères de choix, comparatifs et avis.", cta: 'Lire le guide', all: "Tous les guides" },
+  en: { title: 'Gaming gear for LoL', sub: 'Our buying guides: what to look for, comparisons and reviews.', cta: 'Read the guide', all: 'All guides' },
+  es: { title: 'Material gaming para LoL', sub: 'Nuestras guías de compra: criterios, comparativas y opiniones.', cta: 'Leer la guía', all: 'Todas las guías' },
+  de: { title: 'Gaming-Equipment für LoL', sub: 'Unsere Kaufratgeber: Kriterien, Vergleiche und Meinungen.', cta: 'Ratgeber lesen', all: 'Alle Ratgeber' },
+  it: { title: 'Accessori gaming per LoL', sub: "Le nostre guide all'acquisto: criteri, confronti e pareri.", cta: 'Leggi la guida', all: 'Tutte le guide' },
+}
+const t = L[locale] ?? L.fr
+
+const PAYLOAD_URL = import.meta.env.PAYLOAD_API_URL || 'http://payload:3000'
+let guides: any[] = []
+try {
+  const res = await fetch(`${PAYLOAD_URL}/api/pages?where[locale][equals]=${locale}&limit=50&sort=-createdAt&depth=0`, { signal: AbortSignal.timeout(3000) })
+  const docs = (await res.json()).docs ?? []
+  guides = docs.filter((p: any) => !p.translationKey && (p.template || 'article') === 'article').slice(0, max)
+} catch { /* Payload KO : pas de bloc */ }
+
+const KIND: [RegExp, string][] = [
+  [/clavier|keyboard|teclado|tastatur|tastiera/i, '⌨'],
+  [/souris|mouse|ratón|raton|maus/i, '🖱'],
+  [/casque|headset|auricular|kopfh|cuffie/i, '🎧'],
+  [/micro/i, '🎙'],
+  [/tapis|pad|alfombrilla|mauspad|tappetino/i, '▭'],
+]
+const icon = (s: string) => (KIND.find(([re]) => re.test(s)) || [null, '🎮'])[1]
+---
+{guides.length > 0 && (
+  <section class={`gear gear--${variant}`} aria-labelledby="gear-title">
+    <header class="gear-head">
+      <h2 id="gear-title" class="gear-title">{t.title}</h2>
+      {variant === 'row' && <p class="gear-sub">{t.sub}</p>}
+    </header>
+    <ul class="gear-list">
+      {guides.map((g: any) => (
+        <li>
+          <a class="gear-card" href={lp(locale, `/info/${g.slug}`)}>
+            <span class="gear-icon" aria-hidden="true">{icon(g.slug)}</span>
+            <span class="gear-body">
+              <strong class="gear-name">{g.title}</strong>
+              {variant === 'row' && g.seo?.description && <span class="gear-desc">{String(g.seo.description).slice(0, 110)}…</span>}
+              <em class="gear-cta">{t.cta} →</em>
+            </span>
+          </a>
+        </li>
+      ))}
+    </ul>
+    <a class="gear-all" href={lp(locale, '/guides')}>{t.all} →</a>
+  </section>
+)}
+
+<style is:global>
+  .gear { max-width: 1100px; margin: 2.5rem auto; padding: 0 1.25rem; }
+  .gear-title { font-size: 1.3rem; color: var(--gold-light); }
+  .gear-sub { margin-top: .3rem; color: var(--text-muted); font-size: .9rem; }
+  .gear-head { margin-bottom: 1rem; }
+  .gear-list { list-style: none; display: grid; gap: .75rem; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); }
+  .gear-card {
+    display: flex; gap: .9rem; align-items: center; height: 100%; padding: 1rem 1.1rem; text-decoration: none; color: inherit;
+    background: linear-gradient(180deg, rgba(21,25,35,.95), rgba(14,17,24,.95)); border: 1px solid rgba(200,155,60,.22);
+    clip-path: polygon(12px 0, 100% 0, 100% calc(100% - 12px), calc(100% - 12px) 100%, 0 100%, 0 12px);
+    transition: transform .2s, border-color .2s, box-shadow .2s;
+  }
+  .gear-card:hover { transform: translateY(-3px); border-color: var(--gold); box-shadow: var(--glow-gold); }
+  .gear-icon { flex-shrink: 0; width: 46px; height: 46px; display: grid; place-items: center; font-size: 1.5rem; background: rgba(200,155,60,.1); border: 1px solid rgba(200,155,60,.35); border-radius: 50%; }
+  .gear-body { display: grid; gap: .25rem; min-width: 0; }
+  .gear-name { font: 400 .98rem/1.25 'Russo One', sans-serif; color: var(--text-light); }
+  .gear-desc { font-size: .78rem; color: var(--text-muted); line-height: 1.4; }
+  .gear-cta { font: 700 .72rem 'Rajdhani', sans-serif; letter-spacing: .14em; text-transform: uppercase; color: var(--gold); font-style: normal; }
+  .gear-all { display: inline-block; margin-top: .9rem; font: 700 .8rem 'Rajdhani', sans-serif; letter-spacing: .14em; text-transform: uppercase; color: var(--gold); text-decoration: none; }
+  .gear-all:hover { color: var(--gold-light); }
+  .gear--compact { margin: 1.5rem 0; padding: 0; }
+  .gear--compact .gear-title { font-size: 1.05rem; }
+  .gear--compact .gear-list { grid-template-columns: 1fr; }
+  .rs-inner .gear { padding: 0; margin: 1.5rem 0 0; }
+</style>
