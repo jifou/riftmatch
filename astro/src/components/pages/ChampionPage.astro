@@ -18,10 +18,11 @@ import {
 } from '../../lib/champion-description'
 import AffiliateBlock from '../AffiliateBlock.astro'
 import { UI } from '../../i18n.js'
+import { championSeo } from '../../lib/champion-seo'
 
 const { apiId } = Astro.params
 const champion = CHAMPIONS.find(c => c.apiId === apiId)
-if (!champion) return Astro.redirect('/')
+if (!champion) throw new Error('champion introuvable')
 
 // URL locale : 'fr' (default, sans préfixe) | 'en' | 'es' | 'de' | 'it'
 const urlLocale = Astro.currentLocale || 'fr'
@@ -50,6 +51,7 @@ try {
   editorial = data.docs?.[0] ?? {}
 } catch { /* silent fail */ }
 
+const seo = championSeo(champion, locale)
 const description = editorial.description || generateDescription(champion, locale as any)
 const tip = editorial.tip
 const diffLabel = getDifficultyLabel(champion.difficulty, locale as any)
@@ -72,12 +74,12 @@ const BASE = 'https://riftmatch.io'
 const champPath = `/champion/${champion.apiId}`
 const canonicalUrl = locale === 'fr' ? `${BASE}${champPath}` : `${BASE}/${locale}${champPath}`
 const quizPath = lp(locale, '/quiz')
-const homePath = '/'  // homepage n'a pas de variante URL par locale
+const homePath = lp(locale, '/')
 ---
 
 <Layout
-  title={`${champion.name} – ${({ en: 'LoL Champion', es: 'Campeón LoL', de: 'LoL-Champion', it: 'Campione LoL' } as Record<string, string>)[locale] ?? 'Champion LoL'} | RiftMatch`}
-  description={`${description.slice(0, 150).trimEnd()}…`}
+  title={`${seo.title} | RiftMatch`}
+  description={seo.metaDescription}
   image={`${DDR_SPLASH}/${champion.apiId}_0.jpg`}
   lang={locale}
 >
@@ -104,6 +106,12 @@ const homePath = '/'  // homepage n'a pas de variante URL par locale
       "name": "League of Legends",
       "publisher": { "@type": "Organization", "name": "Riot Games" }
     }
+  })} />
+
+  <script type="application/ld+json" slot="head" set:html={JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": seo.faq.map((f: any) => ({ "@type": "Question", "name": f.q, "acceptedAnswer": { "@type": "Answer", "text": f.a } })),
   })} />
 
   <main class="champ-page">
@@ -178,7 +186,57 @@ const homePath = '/'  // homepage n'a pas de variante URL par locale
           {tc.opggLink(champion.name)}
         </a>
 
+        <section class="info-card seo-card">
+          <h2 class="section-label">{seo.h2Profile}</h2>
+          <p class="champ-desc">{seo.profile}</p>
+        </section>
+
+        <section class="info-card seo-card">
+          <h2 class="section-label">{seo.h2Who}</h2>
+          <p class="champ-desc">{seo.who}</p>
+        </section>
+
         <AffiliateBlock variant="card" roles={[...champion.lanes, ...champion.archetypes]} locale={locale} />
+
+        <section class="info-card seo-card">
+          <h2 class="section-label">{seo.h2Sim}</h2>
+          <p class="champ-desc">{seo.simIntro}</p>
+          <ul class="sim-grid">
+            {seo.similar.map((o: any) => (
+              <li>
+                <a class="sim-card" href={lp(locale, `/champion/${o.apiId}`)}>
+                  <img src={`${DDR_ICON}/${o.apiId}.png`} alt={o.name} width="56" height="56" loading="lazy" />
+                  <span class="sim-name">{o.name}</span>
+                  <span class="sim-meta">{o.lanes}</span>
+                </a>
+              </li>
+            ))}
+          </ul>
+        </section>
+
+        <section class="info-card seo-card">
+          <h2 class="section-label">{seo.h2Role}</h2>
+          <p class="champ-desc">{seo.roleText}</p>
+          <a class="seo-link" href={seo.roleHref}>{seo.roleCta} →</a>
+        </section>
+
+        <section class="info-card seo-card">
+          <h2 class="section-label">{seo.h2Gear}</h2>
+          <p class="champ-desc">{seo.gearText}</p>
+          <a class="seo-link" href={seo.gearHref}>{seo.gearCta} →</a>
+        </section>
+
+        <section class="info-card seo-card">
+          <h2 class="section-label">{seo.h2Faq}</h2>
+          <dl class="faq-list">
+            {seo.faq.map((f: any) => (
+              <div class="faq-item">
+                <dt>{f.q}</dt>
+                <dd>{f.a}</dd>
+              </div>
+            ))}
+          </dl>
+        </section>
       </div>
 
       <aside class="thumb-col">
@@ -247,4 +305,17 @@ const homePath = '/'  // homepage n'a pas de variante URL par locale
   .diff-num { font-family:'Rajdhani',sans-serif;font-size:.75rem;font-weight:700;text-transform:uppercase;letter-spacing:.06em; }
   @media (max-width:900px) { .champ-page{padding:1rem 1rem 4rem}.content-grid{grid-template-columns:1fr}.thumb-col{position:static;top:auto;flex-direction:row;justify-content:center;flex-wrap:wrap}.champ-thumb{width:90px;height:90px}.diff-meter{max-width:200px}.quiz-cta{max-width:200px;font-size:.78rem} }
   @media (max-width:480px) { .champ-page{padding:.75rem .75rem 3rem}.splash-img{height:280px}.splash-content{padding:1.25rem 1rem}.champ-name{font-size:clamp(1.4rem,5vw,2.4rem)}.info-card{padding:1rem;margin-bottom:.9rem}.stats-grid{grid-template-columns:1fr} }
+  .seo-card { margin-top: 1.25rem; }
+  .seo-card .champ-desc { margin-bottom: .5rem; }
+  .sim-grid { list-style: none; display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: .6rem; margin-top: .9rem; }
+  .sim-card { display: grid; grid-template-columns: 48px 1fr; grid-template-rows: auto auto; column-gap: .65rem; align-items: center; padding: .55rem .65rem; text-decoration: none; color: inherit; background: var(--dark3); border: 1px solid rgba(200,155,60,.15); border-radius: 8px; transition: border-color .2s, transform .2s; }
+  .sim-card:hover { border-color: var(--gold); transform: translateY(-2px); }
+  .sim-card img { grid-row: 1 / 3; width: 48px; height: 48px; border-radius: 50%; object-fit: cover; }
+  .sim-name { font-family: 'Rajdhani', sans-serif; font-weight: 700; color: var(--gold-light); font-size: .95rem; line-height: 1.1; }
+  .sim-meta { font-size: .68rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: .06em; }
+  .seo-link { display: inline-block; margin-top: .4rem; color: var(--gold); font-family: 'Rajdhani', sans-serif; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; font-size: .85rem; text-decoration: none; }
+  .seo-link:hover { color: var(--gold-light); }
+  .faq-list { display: grid; gap: .85rem; margin-top: .4rem; }
+  .faq-item dt { font-family: 'Rajdhani', sans-serif; font-weight: 700; color: var(--gold-light); font-size: 1rem; margin-bottom: .2rem; }
+  .faq-item dd { color: var(--text-light); font-size: .9rem; line-height: 1.65; }
 </style>

@@ -1,12 +1,10 @@
 ---
 import ChampionPage from '../../components/pages/ChampionPage.astro'
+import { CHAMPIONS } from '../../data/champions'
 
-// Visiteur sur l'URL FR par défaut mais qui préfère une autre langue (cookie):
-// redirection vers l'URL de sa langue. Doit se faire ici, pas dans un composant.
 const { apiId } = Astro.params
+if (!CHAMPIONS.some(c => c.apiId === apiId)) return Astro.redirect('/', 302)
 const pref = Astro.cookies.get('locale')?.value || 'fr'
-if (['en', 'es', 'de', 'it'].includes(pref)) {
-  return Astro.redirect(`/${pref}/champion/${apiId}`, 302)
-}
+if (['en', 'es', 'de', 'it'].includes(pref)) return Astro.redirect(`/${pref}/champion/${apiId}`, 302)
 ---
 <ChampionPage />

@@ -1,4 +1,8 @@
 ---
 import ChampionPage from '../../../components/pages/ChampionPage.astro'
+import { CHAMPIONS } from '../../../data/champions'
+
+const { apiId } = Astro.params
+if (!CHAMPIONS.some(c => c.apiId === apiId)) return Astro.redirect('/it/', 302)
 ---
 <ChampionPage />
