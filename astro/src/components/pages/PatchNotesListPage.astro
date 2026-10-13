@@ -1,11 +1,12 @@
 ---
 import Layout from '../../layouts/Layout.astro'
+import { resolveLocale, lp } from '../../lib/locale'
 import PatchCover from '../PatchCover.astro'
 import { UI } from '../../i18n.js'
 
 const PAYLOAD_URL = import.meta.env.PAYLOAD_API_URL || 'http://payload:3000'
 
-const locale = Astro.cookies.get('locale')?.value || 'fr'
+const locale = resolveLocale(Astro)
 const t = ((UI as any)[locale] || (UI as any).fr).patchNotes
 const dateLocale = ({ en: 'en-GB', es: 'es-ES', de: 'de-DE', it: 'it-IT' } as Record<string, string>)[locale] ?? 'fr-FR'
 
@@ -38,6 +39,7 @@ const previousPatches = live.slice(1)
   title={t.title}
   description={t.description}
   lang={locale}
+  hreflangPath="/patch-notes"
 >
   <main class="pn-page">
 
@@ -61,7 +63,7 @@ const previousPatches = live.slice(1)
               <span class="live-dot"></span>
               {t.latest}
             </div>
-            <a href={`/patch-notes/${latest.slug}`} class="latest-card gradient-border">
+            <a href={lp(locale, `/patch-notes/${latest.slug}`)} class="latest-card gradient-border">
               <div class="latest-img-wrap">
                 <PatchCover version={latest.version} type={latest.type} word={t.patchWord} size="lg" />
                 <div class="latest-img-overlay"></div>
@@ -99,7 +101,7 @@ const previousPatches = live.slice(1)
             <ul class="pbe-list">
               {pbe.map((p: any) => (
                 <li>
-                  <a href={`/patch-notes/${p.slug}`} class="pbe-card">
+                  <a href={lp(locale, `/patch-notes/${p.slug}`)} class="pbe-card">
                     <div class="pbe-left">
                       <span class="version-badge version-badge--sm">{p.version}</span>
                       <span class="type-badge type-pbe">{t.pbe}</span>
@@ -126,7 +128,7 @@ const previousPatches = live.slice(1)
             <ul class="archive-grid">
               {previousPatches.map((p: any) => (
                 <li>
-                  <a href={`/patch-notes/${p.slug}`} class="archive-card">
+                  <a href={lp(locale, `/patch-notes/${p.slug}`)} class="archive-card">
                     <PatchCover version={p.version} type={p.type} word={t.patchWord} size="sm" />
                     <div class="archive-gradient"></div>
                     <div class="archive-body">

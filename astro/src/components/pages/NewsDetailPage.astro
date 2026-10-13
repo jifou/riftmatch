@@ -1,5 +1,6 @@
 ---
 import Layout from '../../layouts/Layout.astro'
+import { urlLocale, lp } from '../../lib/locale'
 import NewsCover from '../NewsCover.astro'
 import { ogImageFor } from '../../lib/news-cover'
 import AffiliateBlock from '../AffiliateBlock.astro'
@@ -8,23 +9,19 @@ import SourceLink from '../SourceLink.astro'
 const { slug } = Astro.params
 const PAYLOAD_URL = import.meta.env.PAYLOAD_API_URL || 'http://payload:3000'
 
-const locale = Astro.cookies.get('locale')?.value || 'fr'
+const locale = urlLocale(Astro.url.pathname) || 'fr'
 const dateLocale = ({ en: 'en-GB', es: 'es-ES', de: 'de-DE', it: 'it-IT' } as Record<string, string>)[locale] ?? 'fr-FR'
 
 let article: any = null
 try {
-  // Locale courante d'abord, fallback sur n'importe quelle locale
-  let res = await fetch(`${PAYLOAD_URL}/api/news?where[slug][equals]=${slug}&where[status][equals]=published&where[locale][equals]=${locale}&limit=1`)
-  let data = await res.json()
+  // Les slugs de news sont uniques par langue (suffixe -fr, -en...) : on cherche par slug
+  const res = await fetch(`${PAYLOAD_URL}/api/news?where[slug][equals]=${slug}&where[status][equals]=published&limit=1`)
+  const data = await res.json()
   article = data.docs?.[0] ?? null
-  if (!article) {
-    res = await fetch(`${PAYLOAD_URL}/api/news?where[slug][equals]=${slug}&where[status][equals]=published&limit=1`)
-    data = await res.json()
-    article = data.docs?.[0] ?? null
-  }
 } catch { /* silent fail */ }
 
-if (!article) return Astro.redirect('/news')
+// (article introuvable ou dans une autre langue: redirection faite dans la page, pas ici)
+if (!article) article = { title: '', slug, content: [], locale }
 
 const CATEGORY_LABELS: Record<string, Record<string, string>> = {
   fr: { news: 'Actualité', champion: 'Champion', meta: 'Méta', esports: 'Esports', announcement: 'Annonce Riot', update: 'Mise à jour' },
@@ -105,6 +102,7 @@ const catLabel = catLabels[article.category] ?? article.category
   title={`${article.title} | RiftMatch News`}
   description={article.excerpt || `${article.title} — RiftMatch actualités League of Legends`}
   image={cover.src}
+  lang={locale}
 >
   <Fragment slot="head">
     <meta property="og:type" content="article" />
@@ -143,10 +141,10 @@ const catLabel = catLabels[article.category] ?? article.category
           "height": 60
         }
       },
-      "url": `https://riftmatch.io/news/${slug}`,
+      "url": `https://riftmatch.io${lp(locale, `/news/${slug}`)}`,
       "mainEntityOfPage": {
         "@type": "WebPage",
-        "@id": `https://riftmatch.io/news/${slug}`
+        "@id": `https://riftmatch.io${lp(locale, `/news/${slug}`)}`
       },
       "inLanguage": ['en', 'es', 'de', 'it'].includes(locale) ? locale : 'fr',
       "keywords": article.tags?.map((t: any) => t.tag).join(', ') || 'League of Legends, esports, LoL'
@@ -160,7 +158,7 @@ const catLabel = catLabels[article.category] ?? article.category
       <NewsCover item={article} locale={locale} eager={true} alt={article.title} size="lg" />
       <div class="article-hero-overlay"></div>
       <div class="article-hero-content">
-        <a href="/news" class="back-link-hero">{ui.back}</a>
+        <a href={lp(locale, '/news')} class="back-link-hero">{ui.back}</a>
         <div class="article-meta-top">
           <span class="cat-badge" style={`--cat-color: ${catColor}`}>{catLabel}</span>
           {article.tags?.length > 0 && article.tags.slice(0, 3).map((t: any) => (
@@ -217,8 +215,8 @@ const catLabel = catLabels[article.category] ?? article.category
 
       <!-- ── Back CTA ─────────────────────────────────────── -->
       <div class="article-back-cta">
-        <a href="/news" class="back-cta-link">{ui.backAll}</a>
-        <a href="/quiz" class="quiz-cta">{ui.quiz}</a>
+        <a href={lp(locale, '/news')} class="back-cta-link">{ui.backAll}</a>
+        <a href={lp(locale, '/quiz')} class="quiz-cta">{ui.quiz}</a>
       </div>
 
     </div>

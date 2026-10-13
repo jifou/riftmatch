@@ -6,6 +6,7 @@
  * /es/info/[slug]    → Astro.currentLocale = 'es'
  */
 import Layout from '../../layouts/Layout.astro'
+import { lp } from '../../lib/locale'
 import AffiliateBlock from '../AffiliateBlock.astro'
 import { UI } from '../../i18n.js'
 
@@ -139,7 +140,7 @@ const readingMin = Math.max(1, Math.round(words / 200))
 // Locale-aware paths
 const BASE = 'https://riftmatch.io'
 const guidesPath = locale === 'fr' ? '/guides' : `/${locale}/guides`
-const quizPath = '/quiz'  // pas de variante URL par locale
+const quizPath = lp(locale, '/quiz')
 const canonicalUrl = locale === 'fr' ? `${BASE}/info/${page.slug}` : `${BASE}/${locale}/info/${page.slug}`
 const inLanguage = ['en', 'es', 'de', 'it'].includes(locale) ? locale : 'fr'
 const infoUrl = (l: string, slug: string) => (l === 'fr' ? `${BASE}/info/${slug}` : `${BASE}/${l}/info/${slug}`)
@@ -178,7 +179,7 @@ const articleSchema = {
   {template === 'article' && (
     <main class="t-article">
       <nav class="breadcrumb" aria-label="Fil d'Ariane">
-        <a href="/">{ ta.home }</a><span>›</span><a href={guidesPath}>{ ta.guides }</a><span>›</span><span>{page.title}</span>
+        <a href={lp(locale, '/')}>{ ta.home }</a><span>›</span><a href={guidesPath}>{ ta.guides }</a><span>›</span><span>{page.title}</span>
       </nav>
       <header class="page-header">
         <h1 class="page-title">{page.title}</h1>
@@ -202,7 +203,7 @@ const articleSchema = {
   {template === 'guide' && (
     <main class="t-guide">
       <nav class="breadcrumb" aria-label="Fil d'Ariane">
-        <a href="/">{ ta.home }</a><span>›</span><a href={guidesPath}>{ ta.guides }</a><span>›</span><span>{page.title}</span>
+        <a href={lp(locale, '/')}>{ ta.home }</a><span>›</span><a href={guidesPath}>{ ta.guides }</a><span>›</span><span>{page.title}</span>
       </nav>
       <header class="page-header guide-header">
         <div class="guide-header-badge">{ta.guideBadge}</div>
@@ -259,7 +260,7 @@ const articleSchema = {
   {template === 'listicle' && (
     <main class="t-listicle">
       <nav class="breadcrumb" aria-label="Fil d'Ariane">
-        <a href="/">{ ta.home }</a><span>›</span><a href={guidesPath}>{ ta.guides }</a><span>›</span><span>{page.title}</span>
+        <a href={lp(locale, '/')}>{ ta.home }</a><span>›</span><a href={guidesPath}>{ ta.guides }</a><span>›</span><span>{page.title}</span>
       </nav>
 
       <header class="listicle-hero">

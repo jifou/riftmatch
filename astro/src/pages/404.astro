@@ -1,8 +1,9 @@
 ---
 import Layout from '../layouts/Layout.astro'
 import { UI } from '../i18n.js'
+import { resolveLocale, lp } from '../lib/locale'
 
-const locale = Astro.cookies.get('locale')?.value || 'fr'
+const locale = resolveLocale(Astro)
 const t = UI[locale] || UI.fr
 const NF: Record<string, { title: string; desc: string; h1: string; sub: string; back: string; quiz: string }> = {
   fr: { title: 'Page introuvable | RiftMatch', desc: "Cette page n'existe pas.", h1: "Cette lane n'existe pas", sub: "Tu t'es aventuré dans une zone non cartographiée. Même le Néant ne va pas si loin.", back: '← Retour à la base', quiz: 'Faire le quiz' },
@@ -33,10 +34,10 @@ const nf = NF[locale] ?? NF.fr
         {nf.sub}
       </p>
       <div class="nf-actions">
-        <a href="/" class="btn-primary">
+        <a href={lp(locale, '/')} class="btn-primary">
           {nf.back}
         </a>
-        <a href="/quiz" class="btn-ghost">
+        <a href={lp(locale, '/quiz')} class="btn-ghost">
           {nf.quiz}
         </a>
       </div>

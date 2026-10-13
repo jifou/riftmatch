@@ -17,11 +17,13 @@ export const GET: APIRoute = async () => {
   // ── Fetch des guides depuis Payload ─────────────────────────────
   const PAYLOAD_URL = import.meta.env.PAYLOAD_API_URL || 'http://payload:3000'
   let contentPages: { slug: string; locale: string; updatedAt?: string; translationKey?: string }[] = []
-  let newsArticles: { slug: string; updatedAt?: string; publishedAt?: string }[] = []
+  let newsArticles: { slug: string; locale: string; updatedAt?: string; publishedAt?: string }[] = []
+  let patchNotes: { slug: string; locale: string; updatedAt?: string }[] = []
   try {
-    const [pagesRes, newsRes] = await Promise.all([
+    const [pagesRes, newsRes, patchRes] = await Promise.all([
       fetch(`${PAYLOAD_URL}/api/pages?limit=100&sort=slug`, { signal: AbortSignal.timeout(3000) }),
-      fetch(`${PAYLOAD_URL}/api/news?where[status][equals]=published&limit=200&sort=-publishedAt`, { signal: AbortSignal.timeout(3000) }),
+      fetch(`${PAYLOAD_URL}/api/news?where[status][equals]=published&limit=500&sort=-publishedAt`, { signal: AbortSignal.timeout(3000) }),
+      fetch(`${PAYLOAD_URL}/api/patch-notes?where[status][equals]=published&limit=200&sort=-publishedAt`, { signal: AbortSignal.timeout(3000) }),
     ])
     const pagesData = await pagesRes.json()
     contentPages = (pagesData.docs ?? []).map((p: any) => ({
@@ -33,8 +35,13 @@ export const GET: APIRoute = async () => {
     const newsData = await newsRes.json()
     newsArticles = (newsData.docs ?? []).map((n: any) => ({
       slug:        n.slug,
+      locale:      n.locale || 'fr',
       updatedAt:   (n.updatedAt || n.publishedAt)?.split('T')[0] ?? TODAY,
       publishedAt: n.publishedAt?.split('T')[0] ?? TODAY,
+    }))
+    const patchData = await patchRes.json()
+    patchNotes = (patchData.docs ?? []).map((n: any) => ({
+      slug: n.slug, locale: n.locale || 'fr', updatedAt: (n.updatedAt || n.publishedAt)?.split('T')[0] ?? TODAY,
     }))
   } catch { /* Payload KO — sitemap sans guides/news */ }
 
@@ -42,17 +49,19 @@ export const GET: APIRoute = async () => {
   type Entry = { url: string; priority: string; changefreq: string; lastmod: string; alternates?: { lang: string; url: string }[] }
   const entries: Entry[] = []
 
-  // Homepage (FR seulement — pas de /en/ ni /es/ homepage)
-  entries.push({ url: '/', priority: '1.0', changefreq: 'weekly', lastmod: TODAY })
-
-  // Quiz (une seule URL, pas de variante locale)
-  entries.push({ url: '/quiz', priority: '0.9', changefreq: 'monthly', lastmod: TODAY })
-
-  // Guides listing (×3 locales)
   const withAlt = (path: string) => [
-    ...LOCALES.map(l => ({ lang: l, url: `${BASE_URL}${localeUrl(path, l)}` })),
-    { lang: 'x-default', url: `${BASE_URL}${path}` },
+    ...LOCALES.map(l => ({ lang: l, url: `${BASE_URL}${localeUrl(path, l)}`.replace(/\/$/, '') })),
+    { lang: 'x-default', url: `${BASE_URL}${path === '/' ? '' : path}` },
   ]
+  const home = (l: typeof LOCALES[number]) => (l === 'fr' ? '/' : `/${l}`)
+
+  // Accueil et quiz : une URL par langue
+  for (const locale of LOCALES) {
+    entries.push({ url: home(locale), priority: '1.0', changefreq: 'weekly', lastmod: TODAY, alternates: withAlt('/') })
+    entries.push({ url: localeUrl('/quiz', locale), priority: '0.9', changefreq: 'monthly', lastmod: TODAY, alternates: withAlt('/quiz') })
+  }
+
+  // Guides listing
   for (const locale of LOCALES) {
     entries.push({
       url:        localeUrl('/guides', locale),
@@ -85,17 +94,35 @@ export const GET: APIRoute = async () => {
     })
   }
 
-  // News listing
-  entries.push({ url: '/news', priority: '0.85', changefreq: 'daily', lastmod: TODAY })
+  // News et patch notes : listes par langue
+  for (const locale of LOCALES) {
+    entries.push({ url: localeUrl('/news', locale), priority: '0.85', changefreq: 'daily', lastmod: TODAY, alternates: withAlt('/news') })
+    entries.push({ url: localeUrl('/patch-notes', locale), priority: '0.8', changefreq: 'weekly', lastmod: TODAY, alternates: withAlt('/patch-notes') })
+  }
 
-  // Articles news individuels (les slugs sont uniques par locale, pas de préfixe URL)
+  // Articles de news : chacun dans sa langue (slug unique par langue)
   for (const article of newsArticles) {
+    const locale = LOCALES.includes(article.locale as any) ? (article.locale as typeof LOCALES[number]) : 'fr'
     entries.push({
-      url:        `/news/${article.slug}`,
+      url:        localeUrl(`/news/${article.slug}`, locale),
       priority:   '0.75',
       changefreq: 'monthly',
       lastmod:    article.updatedAt ?? TODAY,
     })
+  }
+
+  // Patch notes : meme slug dans chaque langue
+  const patchSlugs = Array.from(new Set(patchNotes.map(p => p.slug)))
+  for (const slug of patchSlugs) {
+    const langs = patchNotes.filter(p => p.slug === slug)
+    const alternates = [
+      ...langs.map(p => ({ lang: p.locale, url: `${BASE_URL}${localeUrl(`/patch-notes/${slug}`, p.locale as any)}` })),
+      { lang: 'x-default', url: `${BASE_URL}/patch-notes/${slug}` },
+    ]
+    for (const p of langs) {
+      const locale = LOCALES.includes(p.locale as any) ? (p.locale as typeof LOCALES[number]) : 'fr'
+      entries.push({ url: localeUrl(`/patch-notes/${slug}`, locale), priority: '0.7', changefreq: 'monthly', lastmod: p.updatedAt ?? TODAY, alternates })
+    }
   }
 
   // Fiches champions (×3 locales)

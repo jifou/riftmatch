@@ -1,4 +1,7 @@
 ---
 import PatchNotesListPage from '../components/pages/PatchNotesListPage.astro'
+import { preferredRedirect } from '../lib/locale'
+const to = preferredRedirect(Astro, '/patch-notes')
+if (to) return Astro.redirect(to, 302)
 ---
 <PatchNotesListPage />

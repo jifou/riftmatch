@@ -1,5 +1,6 @@
 ---
 import Layout from '../../layouts/Layout.astro'
+import { urlLocale, lp } from '../../lib/locale'
 import { UI } from '../../i18n.js'
 import AffiliateBlock from '../AffiliateBlock.astro'
 import PatchCover from '../PatchCover.astro'
@@ -7,7 +8,7 @@ import SourceLink from '../SourceLink.astro'
 
 const { slug } = Astro.params
 const PAYLOAD_URL = import.meta.env.PAYLOAD_API_URL || 'http://payload:3000'
-const locale = Astro.cookies.get('locale')?.value || 'fr'
+const locale = urlLocale(Astro.url.pathname) || 'fr'
 const t = ((UI as any)[locale] || (UI as any).fr).patchNotes
 const dateLocale = ({ en: 'en-GB', es: 'es-ES', de: 'de-DE', it: 'it-IT' } as Record<string, string>)[locale] ?? 'fr-FR'
 const riotLocale = t.riot
@@ -25,7 +26,7 @@ try {
   }
 } catch { /* silent fail */ }
 
-if (!patch) return Astro.redirect('/patch-notes')
+if (!patch) patch = { title: '', slug, version: '', type: 'live', content: [], sections: [], highlights: [] }
 
 function formatDate(d: string) {
   if (!d) return ''
@@ -113,6 +114,7 @@ const isPbe  = patch.type === 'pbe'
   description={patch.excerpt || `Patch ${patch.version}: ${t.descFallback}`}
   image="/og-image.jpg"
   lang={locale}
+  hreflangPath={`/patch-notes/${slug}`}
 >
   <Fragment slot="head">
     {patch.publishedAt && <meta property="article:published_time" content={patch.publishedAt} />}
@@ -138,9 +140,9 @@ const isPbe  = patch.type === 'pbe'
       <div class="hero-content">
         <!-- Breadcrumb -->
         <nav class="hero-breadcrumb" aria-label={t.breadAria}>
-          <a href="/">{t.home}</a>
+          <a href={lp(locale, '/')}>{t.home}</a>
           <span aria-hidden="true">›</span>
-          <a href="/patch-notes">{t.eyebrow}</a>
+          <a href={lp(locale, '/patch-notes')}>{t.eyebrow}</a>
           <span aria-hidden="true">›</span>
           <span>{patch.version}</span>
         </nav>
@@ -278,7 +280,7 @@ const isPbe  = patch.type === 'pbe'
           <div class="sidebar-quiz">
             <p class="sidebar-quiz-label">{t.afterPatch}</p>
             <p class="sidebar-quiz-title">{t.idealChamp}</p>
-            <a href="/quiz" class="sidebar-quiz-btn">{t.quiz}</a>
+            <a href={lp(locale, '/quiz')} class="sidebar-quiz-btn">{t.quiz}</a>
           </div>
         </aside>
       )}
@@ -302,10 +304,10 @@ const isPbe  = patch.type === 'pbe'
 
         <!-- ── Back & navigation ────────────────────────── -->
         <nav class="pn-nav-bottom" aria-label="Navigation patch notes">
-          <a href="/patch-notes" class="nav-back">
+          <a href={lp(locale, '/patch-notes')} class="nav-back">
             {t.allPatches}
           </a>
-          <a href="/quiz" class="nav-quiz">
+          <a href={lp(locale, '/quiz')} class="nav-quiz">
             {t.findChamp}
           </a>
         </nav>

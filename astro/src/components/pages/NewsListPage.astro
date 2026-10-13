@@ -1,11 +1,12 @@
 ---
 import Layout from '../../layouts/Layout.astro'
+import { resolveLocale, lp } from '../../lib/locale'
 import NewsCover from '../NewsCover.astro'
 
 const PAYLOAD_URL = import.meta.env.PAYLOAD_API_URL || 'http://payload:3000'
 
 // Locale depuis cookie (même pattern que GuidesPage)
-const locale = Astro.cookies.get('locale')?.value || 'fr'
+const locale = resolveLocale(Astro)
 const dateLocale = ({ en: 'en-GB', es: 'es-ES', de: 'de-DE', it: 'it-IT' } as Record<string, string>)[locale] ?? 'fr-FR'
 
 let news: any[] = []
@@ -70,7 +71,7 @@ const TITLES: Record<string, { title: string; desc: string; eyebrow: string; hea
 const t = TITLES[locale] ?? TITLES.fr
 ---
 
-<Layout title={t.title} description={t.desc}>
+<Layout title={t.title} description={t.desc} lang={locale} hreflangPath="/news">
   <main class="news-page">
 
     <!-- ── Hero header ─────────────────────────────────── -->
@@ -120,7 +121,7 @@ const t = TITLES[locale] ?? TITLES.fr
 
             <!-- Main card (large, left) -->
             <a
-              href={`/news/${featuredItems[0].slug}`}
+              href={lp(locale, `/news/${featuredItems[0].slug}`)}
               class="featured-card featured-main"
               data-featured="true"
               data-newstype={featuredItems[0].newsType ?? ''}
@@ -153,7 +154,7 @@ const t = TITLES[locale] ?? TITLES.fr
               <div class="featured-side">
                 {featuredItems.slice(1).map((item: any) => (
                   <a
-                    href={`/news/${item.slug}`}
+                    href={lp(locale, `/news/${item.slug}`)}
                     class="featured-card featured-secondary"
                     data-featured="true"
                     data-newstype={item.newsType ?? ''}
@@ -193,7 +194,7 @@ const t = TITLES[locale] ?? TITLES.fr
             <ul class="news-grid" id="news-grid">
               {rest.map((item: any) => (
                 <li class="news-card-item" data-newstype={item.newsType ?? ''} data-newssubtype={item.newsSubtype ?? ''}>
-                  <a href={`/news/${item.slug}`} class="news-card">
+                  <a href={lp(locale, `/news/${item.slug}`)} class="news-card">
                     <NewsCover item={item} locale={locale} alt={item.title} />
                     <div class="card-gradient"></div>
                     <div class="card-body">

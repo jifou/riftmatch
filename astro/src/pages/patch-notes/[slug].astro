@@ -1,4 +1,10 @@
 ---
 import PatchNoteDetailPage from '../../components/pages/PatchNoteDetailPage.astro'
+import { patchRedirect } from '../../lib/content-guard'
+import { preferredRedirect } from '../../lib/locale'
+const to = preferredRedirect(Astro, `/patch-notes/${Astro.params.slug}`)
+if (to) return Astro.redirect(to, 302)
+const r = await patchRedirect(Astro)
+if (r) return Astro.redirect(r.to, r.status as any)
 ---
 <PatchNoteDetailPage />

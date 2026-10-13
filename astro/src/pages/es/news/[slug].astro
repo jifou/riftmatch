@@ -1,0 +1,8 @@
+---
+import NewsDetailPage from '../../../components/pages/NewsDetailPage.astro'
+import { newsRedirect } from '../../../lib/content-guard'
+import { preferredRedirect } from '../../../lib/locale'
+const r = await newsRedirect(Astro)
+if (r) return Astro.redirect(r.to, r.status as any)
+---
+<NewsDetailPage />

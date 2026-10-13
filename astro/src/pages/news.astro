@@ -1,4 +1,7 @@
 ---
 import NewsListPage from '../components/pages/NewsListPage.astro'
+import { preferredRedirect } from '../lib/locale'
+const to = preferredRedirect(Astro, '/news')
+if (to) return Astro.redirect(to, 302)
 ---
 <NewsListPage />

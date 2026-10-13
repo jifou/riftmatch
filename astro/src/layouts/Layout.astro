@@ -1,6 +1,7 @@
 ---
 import CookieBanner from '../components/CookieBanner.astro'
 import { UI } from '../i18n.js'
+import { lp, LOCALES } from '../lib/locale'
 
 export interface Props {
   title?: string
@@ -8,6 +9,7 @@ export interface Props {
   lang?: string
   image?: string
   canonical?: string
+  hreflangPath?: string
 }
 
 const {
@@ -16,6 +18,7 @@ const {
   lang = 'fr',
   image = '/og-image.jpg',
   canonical,
+  hreflangPath,
 } = Astro.props
 
 // Sur les pages avec préfixe URL (/en/..., /es/...) → locale depuis l'URL
@@ -29,7 +32,8 @@ const tl = UI[currentLocale] || UI.fr
 const gaId = import.meta.env.PUBLIC_GA_ID || process.env.PUBLIC_GA_ID || ''
 
 const BASE_URL = 'https://riftmatch.io'
-const canonicalURL = canonical ?? new URL(Astro.url.pathname, BASE_URL).toString()
+const cleanPath = Astro.url.pathname.length > 1 ? Astro.url.pathname.replace(/\/+$/, '') : Astro.url.pathname
+const canonicalURL = canonical ?? new URL(cleanPath, BASE_URL).toString()
 const ogImage = image.startsWith('http') ? image : `${BASE_URL}${image}`
 
 const OG_LOCALE: Record<string, string> = { fr: 'fr_FR', en: 'en_GB', es: 'es_ES', de: 'de_DE', it: 'it_IT' }
@@ -60,7 +64,10 @@ try {
 
 const infoBase = currentLocale === 'fr' ? '/info' : `/${currentLocale}/info`
 const guidesHref = currentLocale === 'fr' ? '/guides' : `/${currentLocale}/guides`
-const quizHref = '/quiz'  // pas de variante URL par locale
+const quizHref = lp(currentLocale, '/quiz')
+const homeHref = lp(currentLocale, '/')
+const newsHref = lp(currentLocale, '/news')
+const patchHref = lp(currentLocale, '/patch-notes')
 ---
 
 <!doctype html>
@@ -76,6 +83,14 @@ const quizHref = '/quiz'  // pas de variante URL par locale
 
     <!-- Canonical -->
     <link rel="canonical" href={canonicalURL} />
+    {hreflangPath && (
+      <>
+        {LOCALES.map((l) => (
+          <link rel="alternate" hreflang={l} href={`${BASE_URL}${lp(l, hreflangPath)}`.replace(/\/$/, '') || BASE_URL} />
+        ))}
+        <link rel="alternate" hreflang="x-default" href={`${BASE_URL}${hreflangPath === '/' ? '' : hreflangPath}` || BASE_URL} />
+      </>
+    )}
 
     <!-- Open Graph -->
     <meta property="og:title" content={title} />
@@ -110,6 +125,9 @@ const quizHref = '/quiz'  // pas de variante URL par locale
       href="https://fonts.googleapis.com/css2?family=Russo+One&family=Cinzel:wght@700;900&family=Inter:wght@400;500;600;700&family=Rajdhani:wght@500;600;700&display=swap"
       rel="stylesheet"
     />
+
+    <!-- Flux RSS des news -->
+    <link rel="alternate" type="application/rss+xml" title="RiftMatch News" href="/rss.xml" />
 
     <!-- Slot pour JSON-LD et meta spécifiques par page -->
     <slot name="head" />
@@ -149,6 +167,26 @@ const quizHref = '/quiz'  // pas de variante URL par locale
           })
         </script>
       </>
+    )}
+
+
+    <!-- Suivi des clics affilies (GA4, uniquement si l'analytics est accepte) -->
+    {gaId && (
+      <script is:inline>
+        document.addEventListener('click', function (e) {
+          var a = e.target && e.target.closest ? e.target.closest('a[href*="amazon."]') : null
+          if (!a || typeof gtag !== 'function') return
+          var m = a.href.match(/amazon\.([a-z.]+)\//i)
+          var blk = a.closest('[data-aff-block],article,main')
+          gtag('event', 'affiliate_click', {
+            store: m ? m[1] : '',
+            page_path: location.pathname,
+            link_url: a.href,
+            placement: a.closest('[data-aff-block]') ? (a.closest('[data-aff-block]').getAttribute('data-variant') || 'block') : (a.closest('article') ? 'article' : 'page'),
+            transport_type: 'beacon'
+          })
+        }, true)
+      </script>
     )}
 
     <style is:global>
@@ -294,7 +332,7 @@ const quizHref = '/quiz'  // pas de variante URL par locale
   <body>
     <header class="site-header">
       <div class="header-inner">
-        <a href="/" class="logo" aria-label={tl.nav.logoAriaLabel}>
+        <a href={homeHref} class="logo" aria-label={tl.nav.logoAriaLabel}>
           <!-- Logo : deux demi-chevrons face à face = le Rift (fissure lumineuse) + le Match (deux pièces qui se rejoignent) -->
           <svg class="logo-icon" viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
             <defs>
@@ -322,9 +360,9 @@ const quizHref = '/quiz'  // pas de variante URL par locale
           {contentPages.length > 0 && (
             <a href={guidesHref} class="nav-link nav-link--desktop">{tl.nav.guides}</a>
           )}
-          <a href="/news" class="nav-link nav-link--desktop">{tl.nav.news}</a>
-          <a href="/patch-notes" class="nav-link nav-link--desktop">{tl.nav.patchNotes}</a>
-          <a href="/#champions" class="nav-link nav-link--desktop">{tl.nav.champions}</a>
+          <a href={newsHref} class="nav-link nav-link--desktop">{tl.nav.news}</a>
+          <a href={patchHref} class="nav-link nav-link--desktop">{tl.nav.patchNotes}</a>
+          <a href={`${homeHref === "/" ? "" : homeHref}/#champions`} class="nav-link nav-link--desktop">{tl.nav.champions}</a>
 
           <!-- Language switcher — desktop uniquement -->
           <div class="lang-switcher nav-link--desktop" role="group" aria-label="Langue">
@@ -358,9 +396,9 @@ const quizHref = '/quiz'  // pas de variante URL par locale
             {contentPages.length > 0 && (
               <a href={guidesHref} class="mobile-nav-link">{tl.nav.guides}</a>
             )}
-            <a href="/news" class="mobile-nav-link">{tl.nav.news}</a>
-            <a href="/patch-notes" class="mobile-nav-link">{tl.nav.patchNotes}</a>
-            <a href="/#champions" class="mobile-nav-link">{tl.nav.champions}</a>
+            <a href={newsHref} class="mobile-nav-link">{tl.nav.news}</a>
+            <a href={patchHref} class="mobile-nav-link">{tl.nav.patchNotes}</a>
+            <a href={`${homeHref === "/" ? "" : homeHref}/#champions`} class="mobile-nav-link">{tl.nav.champions}</a>
             <a href={quizHref} class="mobile-nav-link mobile-nav-link--cta">
               <svg viewBox="0 0 24 24" fill="none" aria-hidden="true" width="16" height="16"><circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="2"/><path d="M12 8v4l2.5 2.5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
               {tl.nav.quiz}
@@ -395,7 +433,7 @@ const quizHref = '/quiz'  // pas de variante URL par locale
         </div>
         <div class="footer-links">
           <a href={quizHref}>{tl.footer.quiz}</a>
-          <a href="/">{tl.footer.champions}</a>
+          <a href={homeHref}>{tl.footer.champions}</a>
         </div>
         {contentPages.length > 0 && (
           <div class="footer-guides">
@@ -431,21 +469,17 @@ const quizHref = '/quiz'  // pas de variante URL par locale
           document.cookie = `locale=${lang}; path=/; max-age=31536000; SameSite=Lax`
 
           const path = window.location.pathname
-          // Strip existing locale prefix
+          // Retire le prefixe de langue existant
           const cleanPath = path.replace(/^\/(en|es|de|it)(\/|$)/, '/')
 
-          // Detect if this is a URL-localizable page
-          const isLocalizable =
-            /^\/champion\//.test(cleanPath) ||
-            /^\/info\//.test(cleanPath) ||
-            /^\/guides(\/|$)/.test(cleanPath)
+          // Un article de news / un patch ne se traduit pas a l'identique : on renvoie vers la liste
+          let target = cleanPath
+          if (/^\/news\/.+/.test(cleanPath)) target = '/news'
+          else if (/^\/patch-notes\/.+/.test(cleanPath)) target = '/patch-notes'
 
-          if (isLocalizable) {
-            const newPath = lang === 'fr' ? cleanPath : `/${lang}${cleanPath}`
-            window.location.href = newPath
-          } else {
-            window.location.reload()
-          }
+          const newPath = lang === 'fr' ? target : (target === '/' ? `/${lang}` : `/${lang}${target}`)
+          if (newPath === path) { window.location.reload(); return }
+          window.location.href = newPath
         })
       })
     </script>

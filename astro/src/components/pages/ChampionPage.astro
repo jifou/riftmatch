@@ -7,6 +7,7 @@
  * Astro.params.apiId is available from the parent page route.
  */
 import Layout from '../../layouts/Layout.astro'
+import { lp } from '../../lib/locale'
 import { CHAMPIONS } from '../../data/champions'
 import { getLatestDDRVersion, getDDRBase } from '../../lib/ddr-version'
 import {
@@ -70,7 +71,7 @@ const diffColor = diffColors[champion.difficulty] || '#fbbf24'
 const BASE = 'https://riftmatch.io'
 const champPath = `/champion/${champion.apiId}`
 const canonicalUrl = locale === 'fr' ? `${BASE}${champPath}` : `${BASE}/${locale}${champPath}`
-const quizPath = '/quiz'  // pas de variante URL par locale
+const quizPath = lp(locale, '/quiz')
 const homePath = '/'  // homepage n'a pas de variante URL par locale
 ---
 
