@@ -61,7 +61,7 @@ function fakePayload(slugsSeen) {
       const w = `${coll}:${d.slug || a.id || '?'}`
       checkData(coll, d, w)
       if (kind === 'create' && d.slug) {
-        const key = coll + '/' + d.slug
+        const key = coll === 'patch-notes' ? `${coll}/${d.slug}/${d.locale}` : `${coll}/${d.slug}`
         if (slugsSeen.has(key)) bad(`${w}: slug cree deux fois`)
         slugsSeen.add(key)
       }
