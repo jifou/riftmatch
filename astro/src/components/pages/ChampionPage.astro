@@ -1,6 +1,6 @@
 ---
 /**
- * ChampionPage — shared component used by all locale routes
+ * ChampionPage, shared component used by all locale routes
  * /champion/[apiId]       → Astro.currentLocale = 'fr'
  * /en/champion/[apiId]    → Astro.currentLocale = 'en'
  * /es/champion/[apiId]    → Astro.currentLocale = 'es'
@@ -122,7 +122,7 @@ const homePath = lp(locale, '/')
       <img
         class="splash-img"
         src={`${DDR_SPLASH}/${champion.apiId}_0.jpg`}
-        alt={`${champion.name} – splash art League of Legends`}
+        alt={`${champion.name} | splash art League of Legends`}
         width="1215" height="717"
         fetchpriority="high" decoding="async"
       />

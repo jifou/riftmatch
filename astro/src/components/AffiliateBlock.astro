@@ -1,6 +1,6 @@
 ---
 /**
- * AffiliateBlock — 1 produit = 1 bloc, s'affiche partout.
+ * AffiliateBlock, 1 produit = 1 bloc, s'affiche partout.
  * Le serveur récupère tous les blocs actifs → le JS en choisit un au hasard.
  * L'URL est résolue côté serveur selon la locale du visiteur.
  * Fonctionne même si la page HTML est mise en cache (Nginx, CDN).
@@ -103,7 +103,7 @@ try {
       candidates = docs
     }
   }
-} catch { /* Payload unreachable — silent fail */ }
+} catch { /* Payload unreachable, silent fail */ }
 
 if (candidates.length === 0) return
 

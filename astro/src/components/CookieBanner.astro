@@ -1,5 +1,5 @@
 ---
-// CookieBanner — RGPD/GDPR compliant cookie consent
+// CookieBanner, RGPD/GDPR compliant cookie consent
 import { UI } from '../i18n.js'
 const locale = Astro.cookies.get('locale')?.value || 'fr'
 const tc = (UI as any)[locale]?.cookie || (UI as any).fr.cookie
@@ -167,7 +167,7 @@ const tc = (UI as any)[locale]?.cookie || (UI as any).fr.cookie
       // Animate in after a short delay (class-based to handle mobile translateX safely)
       setTimeout(() => { banner.classList.add('visible') }, 800)
     } else {
-      // Already consented — dispatch so components can init
+      // Already consented, dispatch so components can init
       window.dispatchEvent(new CustomEvent('consent-updated', { detail: existing }))
     }
 
@@ -205,7 +205,7 @@ const tc = (UI as any)[locale]?.cookie || (UI as any).fr.cookie
 </script>
 
 <style>
-  /* ── Banner — floating card bottom-left ── */
+  /* ── Banner, floating card bottom-left ── */
   .cookie-banner {
     position: fixed;
     bottom: 1.5rem;
@@ -267,7 +267,7 @@ const tc = (UI as any)[locale]?.cookie || (UI as any).fr.cookie
   }
   .cookie-link:hover { color: var(--gold, #c89b3c); }
 
-  /* Actions — stacked vertically in card */
+  /* Actions, stacked vertically in card */
   .cookie-actions {
     display: grid;
     grid-template-columns: 1fr 1fr;

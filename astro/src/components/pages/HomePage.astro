@@ -6,13 +6,13 @@ import AffiliateBlock from '../AffiliateBlock.astro'
 import GearGuides from '../GearGuides.astro'
 import { resolveLocale, lp } from '../../lib/locale'
 import { UI } from '../../i18n.js'
-import { TEXT } from '../../data/quiz-data.js'
+import { TEXT, KEYS } from '../../data/quiz-data.js'
 
 const champions = [...CHAMPIONS].sort((a, b) => a.name.localeCompare(b.name))
 const locale = resolveLocale(Astro)
 const t = UI[locale] || UI.fr
 const QT = (TEXT as any)[locale] || (TEXT as any).fr
-const HERO_ART = ['Ahri', 'Yasuo', 'Jinx', 'Lux', 'Zed', 'Sylas']
+const HERO_ART = ['Ahri', 'Yasuo', 'Jinx', 'Lux', 'Zed', 'Sylas'].sort(() => Math.random() - 0.5)
 const champBase = locale === 'fr' ? '/champion' : `/${locale}/champion`
 
 const ddrVersion = await getLatestDDRVersion()
@@ -58,30 +58,24 @@ const DDR_BASE = getDDRBase(ddrVersion)
         <div class="hero-art-shade"></div>
       </div>
       <div class="hero-content">
-        <p class="hero-eyebrow">
-          <span class="eyebrow-dot"></span>
-          {t.home.heroEyebrow(champions.length)}
-        </p>
-        <h1 class="hero-title">
-          {t.home.heroTitle1}<br/>
-          <em>{t.home.heroTitle2}</em>
-        </h1>
-        <p class="hero-sub">{t.home.heroSub}</p>
-        <div class="hero-actions">
-          <a href={lp(locale, '/quiz')} class="btn-primary">
-            <span class="btn-shimmer"></span>
-            {t.home.heroCta}
-          </a>
-          <a href="#champions" class="btn-ghost">{t.home.heroGhostCta}</a>
+        <div class="hero-copy">
+          <h1 class="hero-title">
+            {t.home.heroTitle1}<br/>
+            <em>{t.home.heroTitle2}</em>
+          </h1>
+          <p class="hero-sub">{t.home.heroSub}</p>
+          <a href="#champions" class="hero-browse">{t.home.heroGhostCta(champions.length)}</a>
         </div>
-        <div class="hero-stats">
-          <div class="stat-pill">
-            <span class="stat-num">{champions.length}</span>
-            <span>{t.home.statChamps}</span>
-          </div>
-          <div class="stat-pill">
-            <span class="stat-num">8</span>
-            <span>{t.home.statQuestions}</span>
+        <div class="hero-q" role="group" aria-labelledby="hero-q-title">
+          <p class="hero-q-kicker">{t.home.heroQKicker}</p>
+          <p class="hero-q-title" id="hero-q-title">{QT.questions[0].q}</p>
+          <div class="hero-q-answers">
+            {QT.questions[0].a.map((txt: string, i: number) => (
+              <a href={`${lp(locale, '/quiz')}?a=${i}`} class="hero-q-ans" rel="nofollow">
+                <span class="hero-q-key">{KEYS[i]}</span>
+                <span>{txt}</span>
+              </a>
+            ))}
           </div>
         </div>
       </div>
@@ -614,7 +608,7 @@ const DDR_BASE = getDDRBase(ddrVersion)
     font-size: 0.9rem;
   }
 
-  /* Hidden cards — in HTML source (SEO) but not painted */
+  /* Hidden cards, in HTML source (SEO) but not painted */
   .champion-card--hidden { display: none; }
 
   /* Show more */
@@ -749,4 +743,43 @@ const DDR_BASE = getDDRBase(ddrVersion)
   .champion-card { clip-path: polygon(10px 0, 100% 0, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0 100%, 0 10px); border-radius: 0; }
   .champion-card:hover { border-color: var(--gold); box-shadow: var(--glow-gold); transform: translateY(-3px); }
   @media (prefers-reduced-motion: reduce) { .hero-art-slide { animation: none; } .hero-art-slide:first-child { opacity: .7; } }
+
+  /* ── Hero asymétrique : texte à gauche, première question jouable à droite ── */
+  .hero { text-align: left; padding: 5.5rem 1.5rem 5rem; }
+  .hero-content {
+    max-width: 1100px; margin: 0 auto;
+    display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr); gap: 3rem; align-items: center;
+  }
+  .hero-title { font-size: clamp(1.9rem, 4.2vw, 3.1rem); }
+  .hero-sub { margin: 0 0 1.75rem; max-width: 460px; }
+  .hero-browse {
+    font: 600 .95rem 'Rajdhani', sans-serif; letter-spacing: .06em; color: var(--text-light);
+    text-decoration: none; border-bottom: 1px solid rgba(200,155,60,.5); padding-bottom: 2px;
+  }
+  .hero-browse:hover { color: var(--gold); border-color: var(--gold); }
+  .hero-q {
+    background: rgba(9,11,16,.78); border: 1px solid rgba(200,155,60,.35); padding: 1.4rem 1.4rem 1.2rem;
+    clip-path: polygon(14px 0, 100% 0, 100% calc(100% - 14px), calc(100% - 14px) 100%, 0 100%, 0 14px);
+    backdrop-filter: blur(4px);
+  }
+  .hero-q-kicker { font: 700 .75rem 'Rajdhani', sans-serif; letter-spacing: .18em; text-transform: uppercase; color: var(--gold); margin: 0 0 .5rem; }
+  .hero-q-title { font: 400 1.15rem/1.35 'Russo One', sans-serif; color: var(--text-light); margin: 0 0 1rem; }
+  .hero-q-answers { display: grid; gap: .5rem; }
+  .hero-q-ans {
+    display: flex; align-items: center; gap: .75rem; padding: .6rem .8rem; text-decoration: none;
+    color: var(--text-light); font-size: .95rem; line-height: 1.3;
+    background: rgba(255,255,255,.04); border: 1px solid rgba(255,255,255,.08);
+    transition: border-color .18s, background .18s, transform .18s;
+  }
+  .hero-q-ans:hover, .hero-q-ans:focus-visible { border-color: var(--gold); background: rgba(200,155,60,.1); transform: translateX(3px); }
+  .hero-q-key {
+    flex: none; width: 1.7rem; height: 1.7rem; display: grid; place-items: center;
+    font: 700 .8rem 'Rajdhani', sans-serif; color: var(--gold); border: 1px solid rgba(200,155,60,.5);
+  }
+  @media (max-width: 860px) {
+    .hero { padding: 3rem 1rem 3rem; }
+    .hero-content { grid-template-columns: 1fr; gap: 1.75rem; }
+    .hero-title { font-size: clamp(1.7rem, 8vw, 2.4rem); }
+    .hero-sub { margin-bottom: 1.1rem; }
+  }
 </style>

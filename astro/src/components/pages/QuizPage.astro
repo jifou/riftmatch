@@ -326,6 +326,12 @@ const faq = {
 
   $('rs-restart').onclick = () => { window.location.reload() }
 
+  // Première réponse venue de l'accueil (?a=N)
+  const first = Number(new URLSearchParams(location.search).get('a'))
+  if (Number.isInteger(first) && first >= 0 && first < questions[0].a.length && new URLSearchParams(location.search).has('a')) {
+    answers.push(first); step = 1
+    history.replaceState(null, '', location.pathname)
+  }
   render()
 </script>
 

@@ -62,9 +62,9 @@ const featuredItems = news.slice(0, 3)
 const rest = news.slice(3)
 
 const TITLES: Record<string, { title: string; desc: string; eyebrow: string; heading: string; sub: string; readMore: string; all: string; empty: string; filterLigue: string; filterType: string; filterAll: string; noResult: string }> = {
-  fr: { title: 'News League of Legends | RiftMatch', desc: "Toute l'actualité League of Legends : patches, champions, méta, esports et annonces Riot Games.", eyebrow: 'Actualités', heading: 'News LoL', sub: 'Patches, champions, méta, esports — tout ce qui se passe dans le Rift', readMore: "Lire l'article →", all: 'Dernières actualités', empty: 'Aucune actualité disponible.', filterLigue: 'Ligue', filterType: 'Type', filterAll: 'Tous', noResult: 'Aucun article ne correspond à ces filtres.' },
-  en: { title: 'League of Legends News | RiftMatch', desc: 'All League of Legends news: patches, champions, meta, esports and Riot announcements.', eyebrow: 'News', heading: 'LoL News', sub: 'Patches, champions, meta, esports — everything happening in the Rift', readMore: 'Read article →', all: 'Latest news', empty: 'No news available yet.', filterLigue: 'League', filterType: 'Type', filterAll: 'All', noResult: 'No articles match these filters.' },
-  es: { title: 'Noticias de League of Legends | RiftMatch', desc: 'Toda la actualidad de League of Legends: parches, campeones, meta, esports y anuncios de Riot.', eyebrow: 'Noticias', heading: 'Noticias LoL', sub: 'Parches, campeones, meta, esports — todo lo que pasa en el Rift', readMore: 'Leer artículo →', all: 'Últimas noticias', empty: 'No hay noticias disponibles.', filterLigue: 'Liga', filterType: 'Tipo', filterAll: 'Todos', noResult: 'Ningún artículo coincide con estos filtros.' },
+  fr: { title: 'News League of Legends | RiftMatch', desc: "Toute l'actualité League of Legends : patches, champions, méta, esports et annonces Riot Games.", eyebrow: 'Actualités', heading: 'News LoL', sub: 'Patches, champions, méta, esports, tout ce qui se passe dans le Rift', readMore: "Lire l'article →", all: 'Dernières actualités', empty: 'Aucune actualité disponible.', filterLigue: 'Ligue', filterType: 'Type', filterAll: 'Tous', noResult: 'Aucun article ne correspond à ces filtres.' },
+  en: { title: 'League of Legends News | RiftMatch', desc: 'All League of Legends news: patches, champions, meta, esports and Riot announcements.', eyebrow: 'News', heading: 'LoL News', sub: 'Patches, champions, meta, esports, everything happening in the Rift', readMore: 'Read article →', all: 'Latest news', empty: 'No news available yet.', filterLigue: 'League', filterType: 'Type', filterAll: 'All', noResult: 'No articles match these filters.' },
+  es: { title: 'Noticias de League of Legends | RiftMatch', desc: 'Toda la actualidad de League of Legends: parches, campeones, meta, esports y anuncios de Riot.', eyebrow: 'Noticias', heading: 'Noticias LoL', sub: 'Parches, campeones, meta, esports, todo lo que pasa en el Rift', readMore: 'Leer artículo →', all: 'Últimas noticias', empty: 'No hay noticias disponibles.', filterLigue: 'Liga', filterType: 'Tipo', filterAll: 'Todos', noResult: 'Ningún artículo coincide con estos filtros.' },
   de: { title: 'League of Legends News | RiftMatch', desc: 'Alle News zu League of Legends: Patches, Champions, Meta, Esports und Ankündigungen von Riot Games.', eyebrow: 'News', heading: 'LoL News', sub: 'Patches, Champions, Meta, Esports, alles was im Rift passiert', readMore: 'Artikel lesen →', all: 'Neueste News', empty: 'Noch keine News verfügbar.', filterLigue: 'Liga', filterType: 'Typ', filterAll: 'Alle', noResult: 'Keine Artikel für diese Filter gefunden.' },
   it: { title: 'Notizie su League of Legends | RiftMatch', desc: 'Tutte le novità su League of Legends: patch, campioni, meta, esports e annunci di Riot Games.', eyebrow: 'Notizie', heading: 'Notizie LoL', sub: 'Patch, campioni, meta, esports: tutto quello che succede nel Rift', readMore: "Leggi l'articolo →", all: 'Ultime notizie', empty: 'Nessuna notizia disponibile.', filterLigue: 'Lega', filterType: 'Tipo', filterAll: 'Tutti', noResult: 'Nessun articolo corrisponde a questi filtri.' },
 }
@@ -247,7 +247,7 @@ const t = TITLES[locale] ?? TITLES.fr
   }
 
   function applyFilters() {
-    // Featured cards — show/hide individually
+    // Featured cards, show/hide individually
     let featuredVisible = 0
     featuredCards.forEach(card => {
       const show = matches(card)
@@ -437,7 +437,7 @@ const t = TITLES[locale] ?? TITLES.fr
     padding: 0.1rem 0.45rem;
   }
 
-  /* ── Featured grid — 3 cartes ─────────────────────── */
+  /* ── Featured grid, 3 cartes ─────────────────────── */
   .featured-grid {
     display: grid;
     grid-template-columns: 3fr 2fr;
@@ -451,7 +451,7 @@ const t = TITLES[locale] ?? TITLES.fr
     gap: 1rem;
   }
 
-  /* ── Featured card — base ──────────────────────────── */
+  /* ── Featured card, base ──────────────────────────── */
   .featured-card {
     position: relative;
     display: block;
@@ -633,7 +633,7 @@ const t = TITLES[locale] ?? TITLES.fr
     font-size: 0.95rem;
   }
 
-  /* ── News card — full bleed ─────────────────────────── */
+  /* ── News card, full bleed ─────────────────────────── */
   .news-card {
     position: relative;
     display: block;

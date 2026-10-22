@@ -1,5 +1,5 @@
 /**
- * sitemap.xml — Sitemap dynamique SSR
+ * sitemap.xml, Sitemap dynamique SSR
  * Inclut : homepage, quiz, fiches champions (×3 locales), guides Payload (×3 locales)
  */
 import type { APIRoute } from 'astro'
@@ -43,7 +43,7 @@ const handler: APIRoute = async () => {
     patchNotes = (patchData.docs ?? []).map((n: any) => ({
       slug: n.slug, locale: n.locale || 'fr', updatedAt: (n.updatedAt || n.publishedAt)?.split('T')[0] ?? TODAY,
     }))
-  } catch { /* Payload KO — sitemap sans guides/news */ }
+  } catch { /* Payload KO, sitemap sans guides/news */ }
 
   // ── Toutes les URLs ──────────────────────────────────────────────
   type Entry = { url: string; priority: string; changefreq: string; lastmod: string; alternates?: { lang: string; url: string }[] }

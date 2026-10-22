@@ -1,5 +1,5 @@
 /* ═══════════════════════════════════════════════════════════════
-   RiftMatch — i18n Engine
+   RiftMatch, i18n Engine
    Supported: fr | en | es | de | it
    Add new language: copy a block, translate, add to LANG_MAP
 ═══════════════════════════════════════════════════════════════ */
@@ -23,7 +23,7 @@ export function detectLang() {
 export const T = {
   fr: {
     logoSub:       'Découvrez votre champion',
-    adText:        '🖱️ <strong>SteelSeries Arctis Nova Pro</strong> — Le casque des champions',
+    adText:        '🖱️ <strong>SteelSeries Arctis Nova Pro</strong>, Le casque des champions',
     adBtn:         "Voir l'offre →",
     welcomeTitle:  'Comment tu veux choisir ton champion ?',
     welcomeSub:    '5 questions · Résultats personnalisés · 100% gratuit',
@@ -36,7 +36,7 @@ export const T = {
     shareTwitter:  '🐦 Twitter/X',
     shareNative:   '📤 Partager',
     affTitle:      name => `🔗 Les joueurs de ${name} utilisent aussi`,
-    adFooterText:  '⌨️ <strong>Keychron K8 Pro</strong> — Le clavier préféré des streamers LoL',
+    adFooterText:  '⌨️ <strong>Keychron K8 Pro</strong>, Le clavier préféré des streamers LoL',
     restartBtn:    '↩ Essayer un autre parcours',
     offlineBar:    '📵 Mode hors ligne',
     champCta:      name => `Jouer ${name} →`,
@@ -50,7 +50,7 @@ export const T = {
     initStep4:     'Téléchargement des champions…',
     initStep5:     'Traitement des données…',
     initDone:      n => `${n} champions chargés ✓`,
-    initFallback:  'Mode hors ligne — données de fallback',
+    initFallback:  'Mode hors ligne, données de fallback',
     initCache:     'Données chargées depuis le cache ✓',
     champCount:    (n, v) => `Base de données : ${n} champions · Version ${v}`,
     loaderTitle:   'Analyse en cours…',
@@ -70,7 +70,7 @@ export const T = {
 
   en: {
     logoSub:       'Discover your champion',
-    adText:        '🖱️ <strong>SteelSeries Arctis Nova Pro</strong> — The champion\'s headset',
+    adText:        '🖱️ <strong>SteelSeries Arctis Nova Pro</strong>, The champion\'s headset',
     adBtn:         'See the deal →',
     welcomeTitle:  'How do you want to find your champion?',
     welcomeSub:    '5 questions · Personalized results · 100% free',
@@ -83,7 +83,7 @@ export const T = {
     shareTwitter:  '🐦 Twitter/X',
     shareNative:   '📤 Share',
     affTitle:      name => `🔗 ${name} players also use`,
-    adFooterText:  '⌨️ <strong>Keychron K8 Pro</strong> — The keyboard streamers love',
+    adFooterText:  '⌨️ <strong>Keychron K8 Pro</strong>, The keyboard streamers love',
     restartBtn:    '↩ Try another path',
     offlineBar:    '📵 Offline mode',
     champCta:      name => `Play ${name} →`,
@@ -97,7 +97,7 @@ export const T = {
     initStep4:     'Downloading champions…',
     initStep5:     'Processing data…',
     initDone:      n => `${n} champions loaded ✓`,
-    initFallback:  'Offline mode — fallback data',
+    initFallback:  'Offline mode, fallback data',
     initCache:     'Data loaded from cache ✓',
     champCount:    (n, v) => `Database: ${n} champions · Version ${v}`,
     loaderTitle:   'Analyzing…',
@@ -117,7 +117,7 @@ export const T = {
 
   es: {
     logoSub:       'Descubre tu campeón',
-    adText:        '🖱️ <strong>SteelSeries Arctis Nova Pro</strong> — Los auriculares de los campeones',
+    adText:        '🖱️ <strong>SteelSeries Arctis Nova Pro</strong>, Los auriculares de los campeones',
     adBtn:         'Ver la oferta →',
     welcomeTitle:  '¿Cómo quieres encontrar tu campeón?',
     welcomeSub:    '5 preguntas · Resultados personalizados · 100% gratis',
@@ -130,7 +130,7 @@ export const T = {
     shareTwitter:  '🐦 Twitter/X',
     shareNative:   '📤 Compartir',
     affTitle:      name => `🔗 Los jugadores de ${name} también usan`,
-    adFooterText:  '⌨️ <strong>Keychron K8 Pro</strong> — El teclado favorito de los streamers',
+    adFooterText:  '⌨️ <strong>Keychron K8 Pro</strong>, El teclado favorito de los streamers',
     restartBtn:    '↩ Probar otro camino',
     offlineBar:    '📵 Modo sin conexión',
     champCta:      name => `Jugar ${name} →`,
@@ -144,7 +144,7 @@ export const T = {
     initStep4:     'Descargando campeones…',
     initStep5:     'Procesando datos…',
     initDone:      n => `${n} campeones cargados ✓`,
-    initFallback:  'Modo sin conexión — datos de respaldo',
+    initFallback:  'Modo sin conexión, datos de respaldo',
     initCache:     'Datos cargados desde caché ✓',
     champCount:    (n, v) => `Base de datos: ${n} campeones · Versión ${v}`,
     loaderTitle:   'Analizando…',
@@ -271,19 +271,19 @@ export const QUIZ = {
       { q:'Victoire rapide ou partie épique ?', a:[{i:'⚡',t:'Victoire rapide, snowball tôt'},{i:'🏰',t:'Partie épique avec teamfight final'},{i:'📈',t:'Peu importe si je performe bien'},{i:'🎭',t:'Je veux des moments mémorables'}]},
     ]},
     tastes: { questions: [
-      { q:'Le type de héros qui te parle le plus ?', a:[{i:'⚔️',t:'Le guerrier — force brute'},{i:'🔮',t:'Le mage — pouvoir et intelligence'},{i:'🗡️',t:"L'assassin — ombre et précision"},{i:'🛡️',t:'Le protecteur — courage et loyauté'}]},
+      { q:'Le type de héros qui te parle le plus ?', a:[{i:'⚔️',t:'Le guerrier, force brute'},{i:'🔮',t:'Le mage, pouvoir et intelligence'},{i:'🗡️',t:"L'assassin, ombre et précision"},{i:'🛡️',t:'Le protecteur, courage et loyauté'}]},
       { q:'Ce que tu aimes dans un personnage fictif ?', a:[{i:'💪',t:'La puissance brute'},{i:'🧠',t:"L'intelligence et la ruse"},{i:'🌑',t:"Le mystère et l'ambiguïté"},{i:'⚡',t:"La vitesse et l'agilité"}]},
     ]},
     playstyle: { questions: [
       { q:'Comment tu préfères gagner tes combats ?', a:[{i:'💥',t:'All-in brutal et direct'},{i:'🎯',t:'Poke à distance et sécurisé'},{i:'🌪️',t:'Burst et disparaître'},{i:'⏳',t:'Outscale et late game'}]},
-      { q:'Ta priorité en partie ?', a:[{i:'🏆',t:'Carry — max kills et dégâts'},{i:'🗺️',t:'Objectifs — dragon, baron, tours'},{i:'📡',t:'Vision et contrôle de map'},{i:'🤝',t:"Peel et protéger l'équipe"}]},
+      { q:'Ta priorité en partie ?', a:[{i:'🏆',t:'Carry, max kills et dégâts'},{i:'🗺️',t:'Objectifs, dragon, baron, tours'},{i:'📡',t:'Vision et contrôle de map'},{i:'🤝',t:"Peel et protéger l'équipe"}]},
     ]},
     universe: { questions: [
-      { q:'Quelle région de Runeterra te correspond ?', a:[{i:'⚔️',t:'Demacia — honneur et lumière'},{i:'🌑',t:'Noxus — force et domination'},{i:'🔮',t:'Ionia — équilibre et spiritualité'},{i:'⚡',t:'Zaun / Piltover — innovation'}]},
-      { q:'Quel archétype narratif te représente ?', a:[{i:'👑',t:'Le roi — né pour régner'},{i:'🗡️',t:'Le vengeur — consumé par sa mission'},{i:'🎪',t:'Le trickster — imprévisible et libre'},{i:'🛡️',t:'Le gardien — protège les autres'}]},
+      { q:'Quelle région de Runeterra te correspond ?', a:[{i:'⚔️',t:'Demacia, honneur et lumière'},{i:'🌑',t:'Noxus, force et domination'},{i:'🔮',t:'Ionia, équilibre et spiritualité'},{i:'⚡',t:'Zaun / Piltover, innovation'}]},
+      { q:'Quel archétype narratif te représente ?', a:[{i:'👑',t:'Le roi, né pour régner'},{i:'🗡️',t:'Le vengeur, consumé par sa mission'},{i:'🎪',t:'Le trickster, imprévisible et libre'},{i:'🛡️',t:'Le gardien, protège les autres'}]},
     ]},
     difficulty: { questions: [
-      { q:'Combien de temps tu mets à apprendre un champion ?', a:[{i:'⚡',t:'Efficace rapidement'},{i:'📅',t:'Quelques heures'},{i:'📚',t:'Quelques semaines'},{i:'🔭',t:'Des mois — maîtrise totale'}]},
+      { q:'Combien de temps tu mets à apprendre un champion ?', a:[{i:'⚡',t:'Efficace rapidement'},{i:'📅',t:'Quelques heures'},{i:'📚',t:'Quelques semaines'},{i:'🔭',t:'Des mois, maîtrise totale'}]},
       { q:'Ton objectif final avec ce champion ?', a:[{i:'🥇',t:'Avoir du fun et gagner'},{i:'📊',t:'Grimper en ranked efficacement'},{i:'🎭',t:'Avoir un main iconique'},{i:'🌟',t:'Atteindre le niveau one-trick'}]},
     ]},
   },
@@ -298,19 +298,19 @@ export const QUIZ = {
       { q:'Quick win or epic game?', a:[{i:'⚡',t:'Quick win, snowball early'},{i:'🏰',t:'Epic game with a final teamfight'},{i:'📈',t:"Doesn't matter as long as I perform"},{i:'🎭',t:'I want memorable moments'}]},
     ]},
     tastes: { questions: [
-      { q:'Which hero archetype speaks to you most?', a:[{i:'⚔️',t:'The warrior — raw power'},{i:'🔮',t:'The mage — power and intelligence'},{i:'🗡️',t:'The assassin — shadow and precision'},{i:'🛡️',t:'The protector — courage and loyalty'}]},
+      { q:'Which hero archetype speaks to you most?', a:[{i:'⚔️',t:'The warrior, raw power'},{i:'🔮',t:'The mage, power and intelligence'},{i:'🗡️',t:'The assassin, shadow and precision'},{i:'🛡️',t:'The protector, courage and loyalty'}]},
       { q:'What do you love in a fictional character?', a:[{i:'💪',t:'Raw power'},{i:'🧠',t:'Intelligence and cunning'},{i:'🌑',t:'Mystery and ambiguity'},{i:'⚡',t:'Speed and agility'}]},
     ]},
     playstyle: { questions: [
       { q:'How do you prefer to win fights?', a:[{i:'💥',t:'All-in brutal and direct'},{i:'🎯',t:'Poke from safe distance'},{i:'🌪️',t:'Burst and vanish'},{i:'⏳',t:'Outscale and dominate late game'}]},
-      { q:'Your top priority in a game?', a:[{i:'🏆',t:'Carry — max kills and damage'},{i:'🗺️',t:'Objectives — dragon, baron, towers'},{i:'📡',t:'Vision and map control'},{i:'🤝',t:'Peel and protect the team'}]},
+      { q:'Your top priority in a game?', a:[{i:'🏆',t:'Carry, max kills and damage'},{i:'🗺️',t:'Objectives, dragon, baron, towers'},{i:'📡',t:'Vision and map control'},{i:'🤝',t:'Peel and protect the team'}]},
     ]},
     universe: { questions: [
-      { q:'Which Runeterra region fits you?', a:[{i:'⚔️',t:'Demacia — honor and light'},{i:'🌑',t:'Noxus — strength and domination'},{i:'🔮',t:'Ionia — balance and spirituality'},{i:'⚡',t:'Zaun / Piltover — innovation'}]},
-      { q:'Which narrative archetype represents you?', a:[{i:'👑',t:'The king — born to rule'},{i:'🗡️',t:'The avenger — consumed by purpose'},{i:'🎪',t:'The trickster — unpredictable and free'},{i:'🛡️',t:'The guardian — protects others'}]},
+      { q:'Which Runeterra region fits you?', a:[{i:'⚔️',t:'Demacia, honor and light'},{i:'🌑',t:'Noxus, strength and domination'},{i:'🔮',t:'Ionia, balance and spirituality'},{i:'⚡',t:'Zaun / Piltover, innovation'}]},
+      { q:'Which narrative archetype represents you?', a:[{i:'👑',t:'The king, born to rule'},{i:'🗡️',t:'The avenger, consumed by purpose'},{i:'🎪',t:'The trickster, unpredictable and free'},{i:'🛡️',t:'The guardian, protects others'}]},
     ]},
     difficulty: { questions: [
-      { q:'How long does it take you to learn a new champion?', a:[{i:'⚡',t:'I want to be effective quickly'},{i:'📅',t:'A few hours, I adapt fast'},{i:'📚',t:'A few weeks of intense practice'},{i:'🔭',t:'Months — I want total mastery'}]},
+      { q:'How long does it take you to learn a new champion?', a:[{i:'⚡',t:'I want to be effective quickly'},{i:'📅',t:'A few hours, I adapt fast'},{i:'📚',t:'A few weeks of intense practice'},{i:'🔭',t:'Months, I want total mastery'}]},
       { q:'Your ultimate goal with this champion?', a:[{i:'🥇',t:'Have fun and win'},{i:'📊',t:'Climb ranked efficiently'},{i:'🎭',t:'Have an iconic main'},{i:'🌟',t:'Reach one-trick level'}]},
     ]},
   },
@@ -325,19 +325,19 @@ export const QUIZ = {
       { q:'¿Victoria rápida o partida épica?', a:[{i:'⚡',t:'Victoria rápida, snowball temprano'},{i:'🏰',t:'Partida épica con teamfight final'},{i:'📈',t:'Me da igual si juego bien'},{i:'🎭',t:'Quiero momentos memorables'}]},
     ]},
     tastes: { questions: [
-      { q:'¿Qué tipo de héroe te habla más?', a:[{i:'⚔️',t:'El guerrero — fuerza bruta'},{i:'🔮',t:'El mago — poder e inteligencia'},{i:'🗡️',t:'El asesino — sombra y precisión'},{i:'🛡️',t:'El protector — valentía y lealtad'}]},
+      { q:'¿Qué tipo de héroe te habla más?', a:[{i:'⚔️',t:'El guerrero, fuerza bruta'},{i:'🔮',t:'El mago, poder e inteligencia'},{i:'🗡️',t:'El asesino, sombra y precisión'},{i:'🛡️',t:'El protector, valentía y lealtad'}]},
       { q:'¿Qué te gusta en un personaje de ficción?', a:[{i:'💪',t:'La fuerza bruta'},{i:'🧠',t:'La inteligencia y la astucia'},{i:'🌑',t:'El misterio y la ambigüedad'},{i:'⚡',t:'La velocidad y la agilidad'}]},
     ]},
     playstyle: { questions: [
       { q:'¿Cómo prefieres ganar tus peleas?', a:[{i:'💥',t:'All-in brutal y directo'},{i:'🎯',t:'Poke a distancia y seguro'},{i:'🌪️',t:'Burst y desaparecer'},{i:'⏳',t:'Escalar y dominar el late game'}]},
-      { q:'¿Tu prioridad en partida?', a:[{i:'🏆',t:'Carry — máximo daño y kills'},{i:'🗺️',t:'Objetivos — dragón, barón, torres'},{i:'📡',t:'Visión y control del mapa'},{i:'🤝',t:'Peel y proteger al equipo'}]},
+      { q:'¿Tu prioridad en partida?', a:[{i:'🏆',t:'Carry, máximo daño y kills'},{i:'🗺️',t:'Objetivos, dragón, barón, torres'},{i:'📡',t:'Visión y control del mapa'},{i:'🤝',t:'Peel y proteger al equipo'}]},
     ]},
     universe: { questions: [
-      { q:'¿Qué región de Runeterra encaja contigo?', a:[{i:'⚔️',t:'Demacia — honor y luz'},{i:'🌑',t:'Noxus — fuerza y dominación'},{i:'🔮',t:'Ionia — equilibrio y espiritualidad'},{i:'⚡',t:'Zaun / Piltover — innovación'}]},
-      { q:'¿Qué arquetipo narrativo te representa?', a:[{i:'👑',t:'El rey — nacido para reinar'},{i:'🗡️',t:'El vengador — consumido por su misión'},{i:'🎪',t:'El trickster — impredecible y libre'},{i:'🛡️',t:'El guardián — protege a los demás'}]},
+      { q:'¿Qué región de Runeterra encaja contigo?', a:[{i:'⚔️',t:'Demacia, honor y luz'},{i:'🌑',t:'Noxus, fuerza y dominación'},{i:'🔮',t:'Ionia, equilibrio y espiritualidad'},{i:'⚡',t:'Zaun / Piltover, innovación'}]},
+      { q:'¿Qué arquetipo narrativo te representa?', a:[{i:'👑',t:'El rey, nacido para reinar'},{i:'🗡️',t:'El vengador, consumido por su misión'},{i:'🎪',t:'El trickster, impredecible y libre'},{i:'🛡️',t:'El guardián, protege a los demás'}]},
     ]},
     difficulty: { questions: [
-      { q:'¿Cuánto tardas en aprender un nuevo campeón?', a:[{i:'⚡',t:'Quiero ser eficaz rápidamente'},{i:'📅',t:'Unas horas, me adapto rápido'},{i:'📚',t:'Unas semanas de práctica intensa'},{i:'🔭',t:'Meses — quiero el dominio total'}]},
+      { q:'¿Cuánto tardas en aprender un nuevo campeón?', a:[{i:'⚡',t:'Quiero ser eficaz rápidamente'},{i:'📅',t:'Unas horas, me adapto rápido'},{i:'📚',t:'Unas semanas de práctica intensa'},{i:'🔭',t:'Meses, quiero el dominio total'}]},
       { q:'¿Tu objetivo final con este campeón?', a:[{i:'🥇',t:'Divertirme y ganar'},{i:'📊',t:'Subir en ranked eficientemente'},{i:'🎭',t:'Tener un main icónico'},{i:'🌟',t:'Alcanzar el nivel one-trick'}]},
     ]},
   },
@@ -398,7 +398,7 @@ export const QUIZ = {
 };
 
 /* ════════════════════════════════════════════════════════════
-   COMMON QUESTIONS — shown first (diff, role, style)
+   COMMON QUESTIONS, shown first (diff, role, style)
    answers[0]=difficulty, answers[1]=role, answers[2]=style
 ════════════════════════════════════════════════════════════ */
 export const COMMON_QUESTIONS = {
@@ -407,10 +407,10 @@ export const COMMON_QUESTIONS = {
       badge: '⚙️ Difficulté',
       q: 'Quel niveau de difficulté tu veux ?',
       a: [
-        { i: '🟢', t: 'Facile — efficace rapidement' },
-        { i: '🟡', t: 'Modéré — quelques mécaniques' },
-        { i: '🔴', t: 'Difficile — haut skill cap' },
-        { i: '🎲', t: 'Peu importe — surprends-moi' },
+        { i: '🟢', t: 'Facile, efficace rapidement' },
+        { i: '🟡', t: 'Modéré, quelques mécaniques' },
+        { i: '🔴', t: 'Difficile, haut skill cap' },
+        { i: '🎲', t: 'Peu importe, surprends-moi' },
       ]
     },
     {
@@ -429,9 +429,9 @@ export const COMMON_QUESTIONS = {
       badge: '⚔️ Style',
       q: 'Tu préfères quel style de champion ?',
       a: [
-        { i: '✨', t: 'Magie — sorts et AP' },
-        { i: '⚔️', t: 'Physique — force et AD' },
-        { i: '🛡️', t: 'Tank — résistance et CC' },
+        { i: '✨', t: 'Magie, sorts et AP' },
+        { i: '⚔️', t: 'Physique, force et AD' },
+        { i: '🛡️', t: 'Tank, résistance et CC' },
         { i: '🎲', t: 'Peu importe' },
       ]
     },
@@ -441,10 +441,10 @@ export const COMMON_QUESTIONS = {
       badge: '⚙️ Difficulty',
       q: 'What difficulty level are you looking for?',
       a: [
-        { i: '🟢', t: 'Easy — effective right away' },
-        { i: '🟡', t: 'Moderate — some fun mechanics' },
-        { i: '🔴', t: 'Hard — high skill cap' },
-        { i: '🎲', t: 'Any — surprise me' },
+        { i: '🟢', t: 'Easy, effective right away' },
+        { i: '🟡', t: 'Moderate, some fun mechanics' },
+        { i: '🔴', t: 'Hard, high skill cap' },
+        { i: '🎲', t: 'Any, surprise me' },
       ]
     },
     {
@@ -463,9 +463,9 @@ export const COMMON_QUESTIONS = {
       badge: '⚔️ Style',
       q: 'What champion style do you prefer?',
       a: [
-        { i: '✨', t: 'Magic — spells and AP' },
-        { i: '⚔️', t: 'Physical — strength and AD' },
-        { i: '🛡️', t: 'Tank — resilience and CC' },
+        { i: '✨', t: 'Magic, spells and AP' },
+        { i: '⚔️', t: 'Physical, strength and AD' },
+        { i: '🛡️', t: 'Tank, resilience and CC' },
         { i: '🎲', t: 'Any style' },
       ]
     },
@@ -475,10 +475,10 @@ export const COMMON_QUESTIONS = {
       badge: '⚙️ Dificultad',
       q: '¿Qué nivel de dificultad buscas?',
       a: [
-        { i: '🟢', t: 'Fácil — eficaz enseguida' },
-        { i: '🟡', t: 'Moderado — mecánicas divertidas' },
-        { i: '🔴', t: 'Difícil — alto techo de habilidad' },
-        { i: '🎲', t: 'Me da igual — sorpréndeme' },
+        { i: '🟢', t: 'Fácil, eficaz enseguida' },
+        { i: '🟡', t: 'Moderado, mecánicas divertidas' },
+        { i: '🔴', t: 'Difícil, alto techo de habilidad' },
+        { i: '🎲', t: 'Me da igual, sorpréndeme' },
       ]
     },
     {
@@ -497,9 +497,9 @@ export const COMMON_QUESTIONS = {
       badge: '⚔️ Estilo',
       q: '¿Qué estilo de campeón prefieres?',
       a: [
-        { i: '✨', t: 'Magia — hechizos y AP' },
-        { i: '⚔️', t: 'Físico — fuerza y AD' },
-        { i: '🛡️', t: 'Tanque — resistencia y CC' },
+        { i: '✨', t: 'Magia, hechizos y AP' },
+        { i: '⚔️', t: 'Físico, fuerza y AD' },
+        { i: '🛡️', t: 'Tanque, resistencia y CC' },
         { i: '🎲', t: 'Me da igual' },
       ]
     },
@@ -575,7 +575,7 @@ export const COMMON_QUESTIONS = {
 };
 
 /* ════════════════════════════════════════════════════════════
-   UI — Page-level strings (nav, footer, pages, components)
+   UI, Page-level strings (nav, footer, pages, components)
 ════════════════════════════════════════════════════════════ */
 export const UI = {
 
@@ -587,7 +587,7 @@ export const UI = {
       patchNotes:   'Patch Notes',
       champions:    'Champions',
       quiz:         'Quiz',
-      logoAriaLabel:'RiftMatch – Accueil',
+      logoAriaLabel:'RiftMatch | Accueil',
       navAriaLabel: 'Navigation principale',
     },
     footer: {
@@ -599,14 +599,15 @@ export const UI = {
       legal:      'Non affilié à Riot Games. League of Legends est une marque de Riot Games, Inc.',
     },
     home: {
-      title:            'RiftMatch – Quel champion League of Legends jouer ?',
+      title:            'RiftMatch | Quel champion League of Legends jouer ?',
       description:      'Découvrez quel champion LoL vous correspond en 8 questions. Quiz personnalisé basé sur votre style de jeu, votre rang et votre lore préféré.',
       heroEyebrow:      n => `${n} champions · Quiz gratuit`,
       heroTitle1:       'Quel champion',
       heroTitle2:       'es-tu vraiment ?',
-      heroSub:          'Réponds à 8 questions et découvre le champion qui correspond à ton style, ta personnalité et ton niveau de jeu.',
+      heroSub:          '8 questions, un seul champion. La première est juste là, réponds-y pour lancer le quiz.',
       heroCta:          'Commencer le quiz',
-      heroGhostCta:     'Voir tous les champions ↓',
+      heroGhostCta:     n => `Parcourir les ${n} champions`,
+      heroQKicker:      'Question 1 sur 8',
       statChamps:       'Champions',
       statQuestions:    'Questions',
       statPaths:        'Chemins',
@@ -619,7 +620,7 @@ export const UI = {
       resultsCount:     (v, t) => `${v} résultat${v > 1 ? 's' : ''} sur ${t}`,
     },
     quizPage: {
-      title:           'Quiz – Trouve ton champion LoL | RiftMatch',
+      title:           'Quiz | Trouve ton champion LoL | RiftMatch',
       description:     'Réponds à 8 questions pour découvrir quel champion League of Legends correspond à ta personnalité et ton style de jeu. Gratuit, sans inscription.',
       backAriaLabel:   'Retour',
       progressAriaLabel:'Progression',
@@ -748,14 +749,15 @@ export const UI = {
       legal:      'Not affiliated with Riot Games. League of Legends is a trademark of Riot Games, Inc.',
     },
     home: {
-      title:            'RiftMatch – Which League of Legends champion should you play?',
+      title:            'RiftMatch | Which League of Legends champion should you play?',
       description:      'Discover which LoL champion matches you in 8 questions. Personalized quiz based on your playstyle, rank and lore preferences.',
       heroEyebrow:      n => `${n} champions · Free quiz`,
       heroTitle1:       'Which champion',
       heroTitle2:       'are you really?',
-      heroSub:          'Answer 8 questions and discover the champion that matches your style, personality and skill level.',
+      heroSub:          '8 questions, one champion. The first one is right here, answer it to start the quiz.',
       heroCta:          'Start the quiz',
-      heroGhostCta:     'See all champions ↓',
+      heroGhostCta:     n => `Browse all ${n} champions`,
+      heroQKicker:      'Question 1 of 8',
       statChamps:       'Champions',
       statQuestions:    'Questions',
       statPaths:        'Paths',
@@ -768,7 +770,7 @@ export const UI = {
       resultsCount:     (v, t) => `${v} result${v > 1 ? 's' : ''} of ${t}`,
     },
     quizPage: {
-      title:           'Quiz – Find your LoL champion | RiftMatch',
+      title:           'Quiz | Find your LoL champion | RiftMatch',
       description:     'Answer 8 questions to discover which League of Legends champion matches your personality and playstyle. Free, no sign-up required.',
       backAriaLabel:   'Back',
       progressAriaLabel:'Progress',
@@ -885,7 +887,7 @@ export const UI = {
       patchNotes:   'Notas de parche',
       champions:    'Campeones',
       quiz:         'Quiz',
-      logoAriaLabel:'RiftMatch – Inicio',
+      logoAriaLabel:'RiftMatch | Inicio',
       navAriaLabel: 'Navegación principal',
     },
     footer: {
@@ -897,14 +899,15 @@ export const UI = {
       legal:      'No afiliado a Riot Games. League of Legends es una marca de Riot Games, Inc.',
     },
     home: {
-      title:            'RiftMatch – ¿Qué campeón de League of Legends jugar?',
+      title:            'RiftMatch | ¿Qué campeón de League of Legends jugar?',
       description:      'Descubre qué campeón de LoL te corresponde en 8 preguntas. Quiz personalizado según tu estilo de juego, rango y preferencias de lore.',
       heroEyebrow:      n => `${n} campeones · Quiz gratis`,
       heroTitle1:       '¿Qué campeón',
       heroTitle2:       'eres realmente?',
-      heroSub:          'Responde 8 preguntas y descubre el campeón que mejor encaja con tu estilo, personalidad y nivel de juego.',
+      heroSub:          '8 preguntas, un solo campeón. La primera está aquí, respóndela para empezar el quiz.',
       heroCta:          'Empezar el quiz',
-      heroGhostCta:     'Ver todos los campeones ↓',
+      heroGhostCta:     n => `Ver los ${n} campeones`,
+      heroQKicker:      'Pregunta 1 de 8',
       statChamps:       'Campeones',
       statQuestions:    'Preguntas',
       statPaths:        'Caminos',
@@ -917,7 +920,7 @@ export const UI = {
       resultsCount:     (v, t) => `${v} resultado${v > 1 ? 's' : ''} de ${t}`,
     },
     quizPage: {
-      title:           'Quiz – Encuentra tu campeón LoL | RiftMatch',
+      title:           'Quiz | Encuentra tu campeón LoL | RiftMatch',
       description:     'Responde 8 preguntas para descubrir qué campeón de League of Legends encaja con tu personalidad y estilo de juego. Gratis, sin registro.',
       backAriaLabel:   'Volver',
       progressAriaLabel:'Progreso',
@@ -1051,9 +1054,10 @@ export const UI = {
       heroEyebrow:      n => `${n} Champions · Kostenloses Quiz`,
       heroTitle1:       'Welcher Champion',
       heroTitle2:       'bist du wirklich?',
-      heroSub:          'Beantworte 8 Fragen und entdecke den Champion, der zu deinem Stil, deiner Persönlichkeit und deinem Skill-Level passt.',
+      heroSub:          '8 Fragen, ein Champion. Die erste steht gleich hier, beantworte sie und das Quiz startet.',
       heroCta:          'Quiz starten',
-      heroGhostCta:     'Alle Champions ansehen ↓',
+      heroGhostCta:     n => `Alle ${n} Champions ansehen`,
+      heroQKicker:      'Frage 1 von 8',
       statChamps:       'Champions',
       statQuestions:    'Fragen',
       statPaths:        'Wege',
@@ -1183,7 +1187,7 @@ export const UI = {
       patchNotes:   'Patch Notes',
       champions:    'Campioni',
       quiz:         'Quiz',
-      logoAriaLabel:'RiftMatch – Home',
+      logoAriaLabel:'RiftMatch | Home',
       navAriaLabel: 'Navigazione principale',
     },
     footer: {
@@ -1200,9 +1204,10 @@ export const UI = {
       heroEyebrow:      n => `${n} campioni · Quiz gratuito`,
       heroTitle1:       'Quale campione',
       heroTitle2:       'sei davvero?',
-      heroSub:          'Rispondi a 8 domande e scopri il campione che corrisponde al tuo stile, alla tua personalità e al tuo livello.',
+      heroSub:          '8 domande, un solo campione. La prima è qui, rispondi per far partire il quiz.',
       heroCta:          'Inizia il quiz',
-      heroGhostCta:     'Vedi tutti i campioni ↓',
+      heroGhostCta:     n => `Sfoglia i ${n} campioni`,
+      heroQKicker:      'Domanda 1 di 8',
       statChamps:       'Campioni',
       statQuestions:    'Domande',
       statPaths:        'Percorsi',

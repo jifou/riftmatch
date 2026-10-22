@@ -101,7 +101,7 @@ const catLabel = catLabels[article.category] ?? article.category
 
 <Layout
   title={`${article.title} | RiftMatch News`}
-  description={article.excerpt || `${article.title} — RiftMatch actualités League of Legends`}
+  description={article.excerpt || `${article.title}, RiftMatch actualités League of Legends`}
   image={cover.src}
   lang={locale}
 >
@@ -117,12 +117,12 @@ const catLabel = catLabels[article.category] ?? article.category
     {article.tags?.map((t: any) => (
       <meta property="article:tag" content={t.tag} />
     ))}
-    <!-- JSON-LD NewsArticle — Google News + rich results -->
+    <!-- JSON-LD NewsArticle, Google News + rich results -->
     <script type="application/ld+json" set:html={JSON.stringify({
       "@context": "https://schema.org",
       "@type": "NewsArticle",
       "headline": article.title,
-      "description": article.excerpt || `${article.title} — RiftMatch actualités League of Legends`,
+      "description": article.excerpt || `${article.title}, RiftMatch actualités League of Legends`,
       "image": [cover.src],
       "datePublished": article.publishedAt,
       "dateModified": article.updatedAt || article.publishedAt,

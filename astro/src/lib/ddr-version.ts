@@ -7,7 +7,7 @@ const CACHE_TTL = 60 * 60 * 1000 // 1 heure
 
 /**
  * Retourne la dernière version Data Dragon connue.
- * Résultat mis en cache 1h — tombe en fallback sur la version hardcodée si le réseau est KO.
+ * Résultat mis en cache 1h, tombe en fallback sur la version hardcodée si le réseau est KO.
  */
 export async function getLatestDDRVersion(): Promise<string> {
   if (_cached && Date.now() - _cachedAt < CACHE_TTL) return _cached

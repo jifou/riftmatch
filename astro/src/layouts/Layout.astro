@@ -13,7 +13,7 @@ export interface Props {
 }
 
 const {
-  title = 'RiftMatch – Quel champion jouer ?',
+  title = 'RiftMatch | Quel champion jouer ?',
   description = 'Découvrez quel champion League of Legends vous correspond en 8 questions.',
   lang = 'fr',
   image = '/og-image.jpg',
@@ -60,7 +60,7 @@ try {
     data = await res.json()
     contentPages = (data.docs ?? []).map((p: any) => ({ title: p.title, slug: p.slug }))
   }
-} catch { /* Payload unreachable — silent fail */ }
+} catch { /* Payload unreachable, silent fail */ }
 
 const infoBase = currentLocale === 'fr' ? '/info' : `/${currentLocale}/info`
 const ABOUT_SLUG: Record<string, string> = { fr: 'a-propos', en: 'about', es: 'acerca-de', de: 'ueber-riftmatch', it: 'chi-siamo' }
@@ -134,7 +134,7 @@ const patchHref = lp(currentLocale, '/patch-notes')
     <!-- Slot pour JSON-LD et meta spécifiques par page -->
     <slot name="head" />
 
-    <!-- Google Analytics 4 — chargé uniquement si PUBLIC_GA_ID défini -->
+    <!-- Google Analytics 4, chargé uniquement si PUBLIC_GA_ID défini -->
     <!-- Respecte le consentement analytics via l'event consent-updated -->
     {gaId && (
       <>
@@ -144,7 +144,7 @@ const patchHref = lp(currentLocale, '/patch-notes')
           function gtag() { window.dataLayer.push(arguments) }
           gtag('js', new Date())
 
-          // Consent mode v2 — refusé par défaut, activé via le banner
+          // Consent mode v2, refusé par défaut, activé via le banner
           gtag('consent', 'default', {
             analytics_storage: 'denied',
             ad_storage: 'denied',
@@ -261,7 +261,7 @@ const patchHref = lp(currentLocale, '/patch-notes')
       ::-webkit-scrollbar-thumb { background: rgba(200,155,60,0.3); border-radius: 3px; }
       ::-webkit-scrollbar-thumb:hover { background: var(--gold); }
 
-      /* Typography — système de fontes */
+      /* Typography, système de fontes */
       /* Russo One  → H1/H2 gaming impact          */
       /* Cinzel     → logo wordmark uniquement      */
       /* Rajdhani   → badges, labels UI             */
@@ -366,7 +366,7 @@ const patchHref = lp(currentLocale, '/patch-notes')
           <a href={patchHref} class="nav-link nav-link--desktop">{tl.nav.patchNotes}</a>
           <a href={`${homeHref === "/" ? "" : homeHref}/#champions`} class="nav-link nav-link--desktop">{tl.nav.champions}</a>
 
-          <!-- Language switcher — desktop uniquement -->
+          <!-- Language switcher, desktop uniquement -->
           <div class="lang-switcher nav-link--desktop" role="group" aria-label="Langue">
             {LANGS.map(l => (
               <button
@@ -386,7 +386,7 @@ const patchHref = lp(currentLocale, '/patch-notes')
             {tl.nav.quiz}
           </a>
 
-          <!-- Hamburger — mobile uniquement -->
+          <!-- Hamburger, mobile uniquement -->
           <button class="hamburger" id="hamburger-btn" aria-label="Menu" aria-expanded="false" aria-controls="mobile-menu">
             <span></span><span></span><span></span>
           </button>
@@ -463,7 +463,7 @@ const patchHref = lp(currentLocale, '/patch-notes')
     </footer>
 
     <script>
-      // Language switcher — URL-based for localizable pages, cookie reload for others
+      // Language switcher, URL-based for localizable pages, cookie reload for others
       document.querySelectorAll<HTMLButtonElement>('.lang-btn').forEach(btn => {
         btn.addEventListener('click', () => {
           const lang = btn.dataset.lang
