@@ -63,6 +63,8 @@ try {
 } catch { /* Payload unreachable — silent fail */ }
 
 const infoBase = currentLocale === 'fr' ? '/info' : `/${currentLocale}/info`
+const ABOUT_SLUG: Record<string, string> = { fr: 'a-propos', en: 'about', es: 'acerca-de', de: 'ueber-riftmatch', it: 'chi-siamo' }
+const ABOUT_LABEL: Record<string, string> = { fr: 'À propos', en: 'About', es: 'Acerca de', de: 'Über uns', it: 'Chi siamo' }
 const guidesHref = currentLocale === 'fr' ? '/guides' : `/${currentLocale}/guides`
 const quizHref = lp(currentLocale, '/quiz')
 const homeHref = lp(currentLocale, '/')
@@ -434,6 +436,7 @@ const patchHref = lp(currentLocale, '/patch-notes')
         <div class="footer-links">
           <a href={quizHref}>{tl.footer.quiz}</a>
           <a href={homeHref}>{tl.footer.champions}</a>
+          <a href={`${infoBase}/${ABOUT_SLUG[currentLocale] || ABOUT_SLUG.fr}`}>{ABOUT_LABEL[currentLocale] || ABOUT_LABEL.fr}</a>
         </div>
         {contentPages.length > 0 && (
           <div class="footer-guides">
