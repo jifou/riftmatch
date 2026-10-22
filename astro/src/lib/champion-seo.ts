@@ -64,7 +64,7 @@ const T: Record<L, any> = {
     metaDesc: (n: string, lane: string, cls: string, d: string, reg: string, sim: string) => `${n}, ${cls.toLowerCase()} ${lane} from ${reg}. Difficulty: ${d.toLowerCase()}. Similar champions: ${sim}. Full profile and role guide.`,
     h2Profile: (n: string) => `${n} profile`,
     profile: (n: string, lanes: string, cls: string, reg: string, sty: string, nl: number, lane: string) =>
-      `${n} is a ${cls} champion from ${reg}. They are mainly played ${lanes}. Their profile favors ${sty}. On RiftMatch, ${n} is one of ${nl} champions playable ${lane}.`,
+      `${n} is ${/^[aeiou]/i.test(cls) ? 'an' : 'a'} ${cls} champion from ${reg}. They are mainly played ${lanes}. Their profile favors ${sty}. On RiftMatch, ${n} is one of ${nl} champions playable ${lane}.`,
     h2Who: (n: string) => `Is ${n} right for you?`,
     easy: (n: string) => `${n} is accessible: you can be effective after a few games, which makes them a good pick to start out or to learn a new role.`,
     mid: (n: string) => `${n} asks you to master the basics before really paying off: plan a few dozen games to feel comfortable.`,
@@ -187,6 +187,60 @@ function similar(c: Champion, n = 4): Champion[] {
     .map(x => x.o)
 }
 
+// Variantes de formulation (meme information, phrases differentes) pour que les 173 fiches
+// ne se ressemblent pas. Choix stable par champion (hash de apiId). Aucune info ajoutee.
+type PV = (n: string, lanes: string, cls: string, reg: string, sty: string, nl: number, lane: string) => string
+const PROFILE_ALT: Record<L, PV[]> = {
+  fr: [
+    (n, lanes, cls, reg, sty) => `${n} vient de ${reg} et appartient à la catégorie ${cls}. On le croise surtout ${lanes}, avec un style qui penche vers ${sty}.`,
+    (n, lanes, cls, reg, sty, nl, lane) => `${n} (${cls}, ${reg}) se joue ${lanes}. Le style : ${sty}. Pour situer, ${nl} champions du site se jouent ${lane}.`,
+  ],
+  en: [
+    (n, lanes, cls, reg, sty) => `${n} comes from ${reg} and belongs to the ${cls} category. You will mostly see them ${lanes}, with a style built around ${sty}.`,
+    (n, lanes, cls, reg, sty, nl, lane) => `${n} (${cls}, ${reg}) is played ${lanes}. Style: ${sty}. For reference, ${nl} champions on the site are playable ${lane}.`,
+  ],
+  es: [
+    (n, lanes, cls, reg, sty) => `${n} viene de ${reg} y pertenece a la categoría ${cls}. Lo verás sobre todo ${lanes}, con un estilo basado en ${sty}.`,
+    (n, lanes, cls, reg, sty, nl, lane) => `${n} (${cls}, ${reg}) se juega ${lanes}. Estilo: ${sty}. Como referencia, ${nl} campeones del sitio se juegan ${lane}.`,
+  ],
+  de: [
+    (n, lanes, cls, reg, sty) => `${n} stammt aus ${reg} und gehört zur Kategorie ${cls}. Man trifft den Champion meist ${lanes}, mit einem Stil, der auf ${sty} setzt.`,
+    (n, lanes, cls, reg, sty, nl, lane) => `${n} (${cls}, ${reg}) wird ${lanes} gespielt. Stil: ${sty}. Zum Vergleich: ${nl} Champions der Seite sind ${lane} spielbar.`,
+  ],
+  it: [
+    (n, lanes, cls, reg, sty) => `${n} arriva da ${reg} e rientra nella categoria ${cls}. Lo si incontra soprattutto ${lanes}, con uno stile che punta su ${sty}.`,
+    (n, lanes, cls, reg, sty, nl, lane) => `${n} (${cls}, ${reg}) si gioca ${lanes}. Stile: ${sty}. Come riferimento, ${nl} campioni del sito si giocano ${lane}.`,
+  ],
+}
+const WHO_ALT: Record<L, ((n: string) => string)[]> = {
+  fr: [
+    n => `Difficulté basse sur notre échelle : ${n} se prend en main vite, même si tu débutes.`,
+    n => `Difficulté moyenne sur notre échelle : ${n} demande un peu de pratique avant d'être à l'aise.`,
+    n => `Difficulté élevée sur notre échelle : ${n} s'adresse plutôt à ceux qui ont déjà de l'expérience.`,
+  ],
+  en: [
+    n => `Low difficulty on our scale: ${n} is quick to pick up, even if you are new.`,
+    n => `Medium difficulty on our scale: ${n} takes some practice before it feels comfortable.`,
+    n => `High difficulty on our scale: ${n} is better suited to players who already have some experience.`,
+  ],
+  es: [
+    n => `Dificultad baja en nuestra escala: ${n} se aprende rápido, incluso si empiezas.`,
+    n => `Dificultad media en nuestra escala: ${n} requiere algo de práctica antes de sentirte cómodo.`,
+    n => `Dificultad alta en nuestra escala: ${n} es más adecuado para jugadores con algo de experiencia.`,
+  ],
+  de: [
+    n => `Niedrige Schwierigkeit auf unserer Skala: ${n} ist schnell zu lernen, auch für Einsteiger.`,
+    n => `Mittlere Schwierigkeit auf unserer Skala: ${n} braucht etwas Übung, bevor es sich sicher anfühlt.`,
+    n => `Hohe Schwierigkeit auf unserer Skala: ${n} passt eher zu Spielern mit Erfahrung.`,
+  ],
+  it: [
+    n => `Difficoltà bassa sulla nostra scala: ${n} si impara in fretta, anche se parti da zero.`,
+    n => `Difficoltà media sulla nostra scala: ${n} richiede un po' di pratica prima di sentirsi a proprio agio.`,
+    n => `Difficoltà alta sulla nostra scala: ${n} è più adatto a chi ha già un po' di esperienza.`,
+  ],
+}
+function hashId(s: string): number { let h = 0; for (let i = 0; i < s.length; i++) h = (h * 31 + s.charCodeAt(i)) >>> 0; return h }
+
 export interface ChampionSeo {
   title: string
   metaDescription: string
@@ -226,7 +280,12 @@ export function championSeo(c: Champion, locale: string): ChampionSeo {
   const nl = CHAMPIONS.filter(o => o.lanes.includes(main)).length
   const sims = similar(c, 4)
   const simNames = sims.slice(0, 3).map(s => s.name).join(', ')
-  const who = c.difficulty <= 2 ? t.easy(n) : c.difficulty === 3 ? t.mid(n) : t.hard(n)
+  const h = hashId(c.apiId)
+  const lvl = c.difficulty <= 2 ? 0 : c.difficulty === 3 ? 1 : 2
+  const whoBase = lvl === 0 ? t.easy(n) : lvl === 1 ? t.mid(n) : t.hard(n)
+  const who = (h >> 3) % 2 === 0 ? whoBase : WHO_ALT[l][lvl](n)
+  const pv = h % 3
+  const profile = pv === 0 ? t.profile(n, lanesTxt, cls, region, sty, nl, mainTxt) : PROFILE_ALT[l][pv - 1](n, lanesTxt, cls, region, sty, nl, mainTxt)
   const prefix = l === 'fr' ? '' : `/${l}`
   const roleWord = laneName(main)
 
@@ -234,7 +293,7 @@ export function championSeo(c: Champion, locale: string): ChampionSeo {
     title: t.title(n, laneName(main)),
     metaDescription: t.metaDesc(n, mainTxt, cls, diffText, region, simNames),
     h2Profile: t.h2Profile(n),
-    profile: t.profile(n, lanesTxt, cls, region, sty, nl, mainTxt),
+    profile,
     h2Who: t.h2Who(n),
     who,
     h2Sim: t.h2Sim(n),
