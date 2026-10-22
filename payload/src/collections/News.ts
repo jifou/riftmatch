@@ -7,7 +7,10 @@ const News: CollectionConfig = {
     defaultColumns: ['title', 'newsType', 'newsSubtype', 'locale', 'status', 'publishedAt'],
     description: 'Articles et actualités League of Legends.',
   },
-  access: { read: () => true },
+  access: {
+    // Public: seulement le publie. Un utilisateur connecte (admin) voit tout, brouillons compris.
+    read: ({ req }) => (req.user ? true : { status: { equals: 'published' } }),
+  },
   fields: [
     {
       name: 'title',

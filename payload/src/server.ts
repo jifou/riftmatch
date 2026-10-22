@@ -1,5 +1,6 @@
 import express from 'express'
 import payload from 'payload'
+import { requireSecret } from './secret'
 
 require('dotenv').config()
 
@@ -10,7 +11,7 @@ app.get('/', (_, res) => res.redirect('/admin'))
 
 const start = async () => {
   await payload.init({
-    secret: process.env.PAYLOAD_SECRET || 'CHANGE_ME_IN_PRODUCTION',
+    secret: requireSecret(),
     express: app,
     onInit: async () => {
       payload.logger.info(`Payload Admin URL: ${payload.getAdminURL()}`)

@@ -7,7 +7,10 @@ const PatchNotes: CollectionConfig = {
     defaultColumns: ['title', 'version', 'type', 'status', 'publishedAt'],
     description: 'Notes de patch LoL — PBE (preview) et Live (officiel).',
   },
-  access: { read: () => true },
+  access: {
+    // Public: seulement le publie. Un utilisateur connecte (admin) voit tout, brouillons compris.
+    read: ({ req }) => (req.user ? true : { status: { equals: 'published' } }),
+  },
   fields: [
     {
       name: 'locale',

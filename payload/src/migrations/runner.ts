@@ -8,6 +8,7 @@
  * Usage : npm run migrate
  */
 import payload from 'payload'
+import { requireSecret } from '../secret'
 import path from 'path'
 import fs from 'fs'
 require('dotenv').config()
@@ -20,7 +21,7 @@ export type MigrationModule = {
 
 async function run() {
   await payload.init({
-    secret: process.env.PAYLOAD_SECRET || 'CHANGE_ME_IN_PRODUCTION',
+    secret: requireSecret(),
     local: true,
   })
 
