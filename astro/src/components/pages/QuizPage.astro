@@ -280,12 +280,12 @@ const faq = {
     g.fillStyle = '#090b10'; g.fillRect(0, 0, W, H)
     try {
       const img = await loadImg(`${SPLASH}/${resultTop.apiId}_0.jpg`)
-      const r = Math.max(W / img.width, (H * 0.78) / img.height)
+      const r = Math.max(W / img.width, (H * 0.86) / img.height)
       const w = img.width * r, h = img.height * r
       g.drawImage(img, (W - w) / 2, 0, w, h)
     } catch {}
     const grad = g.createLinearGradient(0, H * 0.35, 0, H)
-    grad.addColorStop(0, 'rgba(9,11,16,0)'); grad.addColorStop(0.62, 'rgba(9,11,16,0.92)'); grad.addColorStop(1, '#090b10')
+    grad.addColorStop(0, 'rgba(9,11,16,0)'); grad.addColorStop(0.5, 'rgba(9,11,16,0.85)'); grad.addColorStop(0.7, '#090b10'); grad.addColorStop(1, '#090b10')
     g.fillStyle = grad; g.fillRect(0, 0, W, H)
     g.strokeStyle = '#c89b3c'; g.lineWidth = 6; g.strokeRect(24, 24, W - 48, H - 48)
     g.textAlign = 'center'
@@ -313,7 +313,7 @@ const faq = {
 
   $('rs-share').onclick = async () => {
     const text = U.shareText(resultTop.name, resultTop.matchPct)
-    const url = 'https://riftmatch.io/quiz'
+    const url = `https://riftmatch.io${X.champBase}/${resultTop.apiId}`
     try {
       const blob = await buildCard()
       const file = new File([blob], `riftmatch-${resultTop.apiId}.png`, { type: 'image/png' })
