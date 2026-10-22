@@ -1,5 +1,5 @@
 /**
- * news-sitemap.xml : sitemap Google News (articles des 2 derniers jours uniquement, toutes langues).
+ * news-sitemap.xml : sitemap Google News (articles des 30 derniers jours, toutes langues. Google News n'en lit que 2 jours, mais un fichier vide est refusé par Search Console).
  * https://developers.google.com/search/docs/crawling-indexing/sitemaps/news-sitemap
  */
 import type { APIRoute } from 'astro'
@@ -7,9 +7,9 @@ import type { APIRoute } from 'astro'
 const BASE = 'https://riftmatch.io'
 const esc = (s: string) => String(s ?? '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;')
 
-export const GET: APIRoute = async () => {
+const handler: APIRoute = async () => {
   const PAYLOAD = import.meta.env.PAYLOAD_API_URL || 'http://payload:3000'
-  const since = new Date(Date.now() - 2 * 24 * 3600 * 1000).toISOString()
+  const since = new Date(Date.now() - 30 * 24 * 3600 * 1000).toISOString()
   let items: any[] = []
   try {
     const r = await fetch(
@@ -24,7 +24,7 @@ export const GET: APIRoute = async () => {
 ${items.map((n: any) => {
     const lang = ['fr', 'en', 'es', 'de', 'it'].includes(n.locale) ? n.locale : 'fr'
     return `  <url>
-    <loc>${BASE}/news/${esc(n.slug)}</loc>
+    <loc>${BASE}${lang === 'fr' ? '' : '/' + lang}/news/${esc(n.slug)}</loc>
     <news:news>
       <news:publication><news:name>RiftMatch</news:name><news:language>${lang}</news:language></news:publication>
       <news:publication_date>${new Date(n.publishedAt).toISOString()}</news:publication_date>
@@ -38,3 +38,6 @@ ${items.map((n: any) => {
     headers: { 'Content-Type': 'application/xml; charset=utf-8', 'Cache-Control': 'public, max-age=600' },
   })
 }
+
+export const GET = handler
+export const HEAD = handler

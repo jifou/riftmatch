@@ -13,7 +13,7 @@ function localeUrl(path: string, locale: 'fr' | 'en' | 'es' | 'de' | 'it'): stri
   return locale === 'fr' ? path : `/${locale}${path}`
 }
 
-export const GET: APIRoute = async () => {
+const handler: APIRoute = async () => {
   // ── Fetch des guides depuis Payload ─────────────────────────────
   const PAYLOAD_URL = import.meta.env.PAYLOAD_API_URL || 'http://payload:3000'
   let contentPages: { slug: string; locale: string; updatedAt?: string; translationKey?: string }[] = []
@@ -156,3 +156,6 @@ ${entries.map(p => `  <url>
     },
   })
 }
+
+export const GET = handler
+export const HEAD = handler
