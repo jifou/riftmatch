@@ -79,6 +79,12 @@ interface T {
   otherCmp: (name: string) => string
   footerPicks: string
   footerCompare: string
+  exploreTitle: string
+  explorePicksTitle: string
+  explorePicksText: string
+  exploreCmpTitle: string
+  exploreCmpText: string
+  exploreGo: string
 }
 
 export const DT: Record<Loc, T> = {
@@ -145,6 +151,12 @@ export const DT: Record<Loc, T> = {
     otherCmp: (n) => `Autres comparaisons avec ${n}`,
     footerPicks: 'Sélections',
     footerCompare: 'Comparateur',
+    exploreTitle: 'Explorer',
+    explorePicksTitle: 'Quel champion pour débuter ?',
+    explorePicksText: 'Des listes par rôle et par classe, triées par difficulté : faciles à prendre en main ou pour les joueurs qui aiment la mécanique.',
+    exploreCmpTitle: 'Comparer deux champions',
+    exploreCmpText: 'Rôle, classe, style, région et difficulté côte à côte, pour trancher entre deux candidats.',
+    exploreGo: 'Voir',
   },
   en: {
     hubTitle: 'Which LoL champion to play? Our picks by role and skill level',
@@ -209,6 +221,12 @@ export const DT: Record<Loc, T> = {
     otherCmp: (n) => `More comparisons with ${n}`,
     footerPicks: 'Picks',
     footerCompare: 'Compare',
+    exploreTitle: 'Explore',
+    explorePicksTitle: 'Which champion to start with?',
+    explorePicksText: 'Lists by role and class, sorted by difficulty: easy to pick up, or for players who enjoy mechanics.',
+    exploreCmpTitle: 'Compare two champions',
+    exploreCmpText: 'Role, class, playstyle, region and difficulty side by side, to settle between two candidates.',
+    exploreGo: 'See',
   },
   es: {
     hubTitle: '¿Qué campeón de LoL jugar? Nuestras selecciones por línea y nivel',
@@ -273,6 +291,12 @@ export const DT: Record<Loc, T> = {
     otherCmp: (n) => `Más comparaciones con ${n}`,
     footerPicks: 'Selecciones',
     footerCompare: 'Comparador',
+    exploreTitle: 'Explorar',
+    explorePicksTitle: '¿Qué campeón para empezar?',
+    explorePicksText: 'Listas por línea y por clase, ordenadas por dificultad: fáciles de aprender o para quien disfruta la mecánica.',
+    exploreCmpTitle: 'Comparar dos campeones',
+    exploreCmpText: 'Línea, clase, estilo, región y dificultad lado a lado, para decidir entre dos candidatos.',
+    exploreGo: 'Ver',
   },
   de: {
     hubTitle: 'Welchen LoL-Champion spielen? Unsere Auswahl nach Rolle und Niveau',
@@ -337,6 +361,12 @@ export const DT: Record<Loc, T> = {
     otherCmp: (n) => `Weitere Vergleiche mit ${n}`,
     footerPicks: 'Auswahl',
     footerCompare: 'Vergleich',
+    exploreTitle: 'Entdecken',
+    explorePicksTitle: 'Welcher Champion für den Einstieg?',
+    explorePicksText: 'Listen nach Rolle und Klasse, nach Schwierigkeit sortiert: leicht zu lernen oder für alle, die Mechanik mögen.',
+    exploreCmpTitle: 'Zwei Champions vergleichen',
+    exploreCmpText: 'Rolle, Klasse, Spielstil, Region und Schwierigkeit nebeneinander, um dich zwischen zwei Kandidaten zu entscheiden.',
+    exploreGo: 'Ansehen',
   },
   it: {
     hubTitle: 'Quale campione di LoL giocare? Le nostre selezioni per ruolo e livello',
@@ -401,5 +431,11 @@ export const DT: Record<Loc, T> = {
     otherCmp: (n) => `Altri confronti con ${n}`,
     footerPicks: 'Selezioni',
     footerCompare: 'Confronto',
+    exploreTitle: 'Esplora',
+    explorePicksTitle: 'Quale campione per iniziare?',
+    explorePicksText: 'Elenchi per ruolo e classe, ordinati per difficoltà: facili da imparare o per chi ama la meccanica.',
+    exploreCmpTitle: 'Confronta due campioni',
+    exploreCmpText: 'Ruolo, classe, stile, regione e difficoltà fianco a fianco, per scegliere tra due candidati.',
+    exploreGo: 'Vedi',
   },
 }

@@ -7,12 +7,16 @@ import GearGuides from '../GearGuides.astro'
 import { resolveLocale, lp } from '../../lib/locale'
 import { UI } from '../../i18n.js'
 import { TEXT, KEYS } from '../../data/quiz-data.js'
+import { DT, type Loc } from '../../data/discover-text'
+import { picksHub, compareHub, pickUrl, pickByKey } from '../../lib/discover'
 
 const champions = [...CHAMPIONS].sort((a, b) => a.name.localeCompare(b.name))
 const locale = resolveLocale(Astro)
 const t = UI[locale] || UI.fr
 const QT = (TEXT as any)[locale] || (TEXT as any).fr
 const HERO_ART = ['Ahri', 'Yasuo', 'Jinx', 'Lux', 'Zed', 'Sylas'].sort(() => Math.random() - 0.5)
+const dtx = DT[locale as Loc] || DT.fr
+const quick = ['beginner-lane-top','beginner-lane-jungle','beginner-lane-mid','beginner-lane-bot','beginner-lane-support'].map((k) => pickByKey(k)).filter(Boolean) as any[]
 const champBase = locale === 'fr' ? '/champion' : `/${locale}/champion`
 
 const ddrVersion = await getLatestDDRVersion()
@@ -85,6 +89,26 @@ const DDR_BASE = getDDRBase(ddrVersion)
     <div class="aff-wrap-hero">
       <AffiliateBlock variant="banner" locale={locale} />
     </div>
+
+    <!-- ── Explorer : sélections et comparateur ── -->
+    <section class="explore" aria-labelledby="explore-title">
+      <h2 class="explore-title" id="explore-title">{dtx.exploreTitle}</h2>
+      <div class="explore-grid">
+        <div class="explore-card">
+          <h3>{dtx.explorePicksTitle}</h3>
+          <p>{dtx.explorePicksText}</p>
+          <div class="explore-chips">
+            {quick.map((p) => <a href={pickUrl(locale as Loc, p)}>{QT.lanes[p.term]}</a>)}
+            <a href={picksHub(locale as Loc)} class="explore-all">{dtx.exploreGo} →</a>
+          </div>
+        </div>
+        <a class="explore-card explore-card--link" href={compareHub(locale as Loc)}>
+          <h3>{dtx.exploreCmpTitle}</h3>
+          <p>{dtx.exploreCmpText}</p>
+          <span class="explore-all">{dtx.exploreGo} →</span>
+        </a>
+      </div>
+    </section>
 
     <!-- ── Champions Grid ── -->
     {champions.length > 0 && (
@@ -782,4 +806,19 @@ const DDR_BASE = getDDRBase(ddrVersion)
     .hero-title { font-size: clamp(1.7rem, 8vw, 2.4rem); }
     .hero-sub { margin-bottom: 1.1rem; }
   }
+
+  /* ── Explorer ── */
+  .explore { max-width: 1100px; margin: 2.5rem auto 0; padding: 0 1rem; scroll-margin-top: 90px; }
+  .explore-title { font: 700 .8rem 'Rajdhani', sans-serif; letter-spacing: .18em; text-transform: uppercase; color: var(--gold); margin: 0 0 .9rem; }
+  .explore-grid { display: grid; grid-template-columns: 1.3fr 1fr; gap: 1rem; }
+  .explore-card { background: var(--dark3); border: 1px solid rgba(200,155,60,.18); padding: 1.2rem 1.3rem; text-decoration: none; color: inherit; display: block;
+    clip-path: polygon(12px 0, 100% 0, 100% calc(100% - 12px), calc(100% - 12px) 100%, 0 100%, 0 12px); }
+  .explore-card h3 { font: 400 1.1rem 'Russo One', sans-serif; color: var(--gold-light); margin: 0 0 .5rem; }
+  .explore-card p { color: var(--text-muted); line-height: 1.6; font-size: .92rem; margin: 0 0 .9rem; }
+  .explore-card--link:hover { border-color: var(--gold); }
+  .explore-chips { display: flex; flex-wrap: wrap; gap: .45rem; align-items: center; }
+  .explore-chips a { padding: .35rem .8rem; font: 600 .85rem 'Rajdhani', sans-serif; letter-spacing: .06em; text-transform: uppercase; color: var(--text-light); text-decoration: none; border: 1px solid rgba(200,155,60,.3); }
+  .explore-chips a:hover { color: var(--gold); border-color: var(--gold); }
+  .explore-chips a.explore-all, .explore-all { border: 0; padding: .35rem .4rem; color: var(--gold); font: 700 .85rem 'Rajdhani', sans-serif; letter-spacing: .08em; text-transform: uppercase; }
+  @media (max-width: 760px) { .explore-grid { grid-template-columns: 1fr; } .explore { margin-top: 1.5rem; } }
 </style>

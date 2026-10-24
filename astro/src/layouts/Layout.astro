@@ -381,6 +381,7 @@ const dtl = DT[(currentLocale as Loc)] || DT.fr
           )}
           <a href={newsHref} class="nav-link nav-link--desktop">{tl.nav.news}</a>
           <a href={patchHref} class="nav-link nav-link--desktop">{tl.nav.patchNotes}</a>
+          <a href={picksHref} class="nav-link nav-link--desktop">{dtl.footerPicks}</a>
           <a href={`${homeHref === "/" ? "" : homeHref}/#champions`} class="nav-link nav-link--desktop">{tl.nav.champions}</a>
 
           <!-- Language switcher, desktop uniquement -->
@@ -417,6 +418,7 @@ const dtl = DT[(currentLocale as Loc)] || DT.fr
             )}
             <a href={newsHref} class="mobile-nav-link">{tl.nav.news}</a>
             <a href={patchHref} class="mobile-nav-link">{tl.nav.patchNotes}</a>
+            <a href={picksHref} class="mobile-nav-link">{dtl.footerPicks}</a>
             <a href={`${homeHref === "/" ? "" : homeHref}/#champions`} class="mobile-nav-link">{tl.nav.champions}</a>
             <a href={quizHref} class="mobile-nav-link mobile-nav-link--cta">
               <svg viewBox="0 0 24 24" fill="none" aria-hidden="true" width="16" height="16"><circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="2"/><path d="M12 8v4l2.5 2.5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
