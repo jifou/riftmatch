@@ -9,7 +9,7 @@ export const LOCS: Loc[] = ['fr', 'en', 'es', 'de', 'it']
 export const LANES = ['top', 'jungle', 'mid', 'bot', 'support'] as const
 export const CLASSES = ['mage', 'fighter', 'tank', 'support', 'adc'] as const
 const MIN_LIST = 8
-export const COMPARE_LINKS = 2
+export const COMPARE_LINKS = 1
 
 const slugify = (s: string) =>
   s.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '')
