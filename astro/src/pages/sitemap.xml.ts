@@ -4,6 +4,7 @@
  */
 import type { APIRoute } from 'astro'
 import { CHAMPIONS } from '../data/champions'
+import { PICKS, picksHub, pickUrl, compareHub, compareUrl, curatedPairs } from '../lib/discover'
 
 const BASE_URL = 'https://riftmatch.io'
 const TODAY    = new Date().toISOString().split('T')[0]
@@ -122,6 +123,19 @@ const handler: APIRoute = async () => {
     for (const p of langs) {
       const locale = LOCALES.includes(p.locale as any) ? (p.locale as typeof LOCALES[number]) : 'fr'
       entries.push({ url: localeUrl(`/patch-notes/${slug}`, locale), priority: '0.7', changefreq: 'monthly', lastmod: p.updatedAt ?? TODAY, alternates })
+    }
+  }
+
+  // Selections et comparateur (URLs propres a chaque langue, hreflang croises)
+  for (const locale of LOCALES) {
+    const hubAlt = (fn: (l: any) => string) => [...LOCALES.map(l => ({ lang: l, url: `${BASE_URL}${fn(l)}` })), { lang: 'x-default', url: `${BASE_URL}${fn('fr')}` }]
+    entries.push({ url: picksHub(locale), priority: '0.8', changefreq: 'monthly', lastmod: TODAY, alternates: hubAlt(picksHub) })
+    entries.push({ url: compareHub(locale), priority: '0.6', changefreq: 'monthly', lastmod: TODAY, alternates: hubAlt(compareHub) })
+    for (const p of PICKS) {
+      entries.push({ url: pickUrl(locale, p), priority: '0.75', changefreq: 'monthly', lastmod: TODAY, alternates: hubAlt((l) => pickUrl(l, p)) })
+    }
+    for (const [a, b] of curatedPairs()) {
+      entries.push({ url: compareUrl(locale, a.apiId, b.apiId), priority: '0.4', changefreq: 'monthly', lastmod: TODAY, alternates: hubAlt((l) => compareUrl(l, a.apiId, b.apiId)) })
     }
   }
 

@@ -1,0 +1,82 @@
+---
+import Layout from '../../layouts/Layout.astro'
+import '../../styles/discover.css'
+import { DT, STYLES, type Loc } from '../../data/discover-text'
+import { parsePair, isCurated, compareHub, compareUrl, laneLabel, classLabel, regionLabel, similarTo, pickFor, pickUrl, pickTerm, COMPARE_LINKS } from '../../lib/discover'
+import { getLatestDDRVersion, getDDRBase } from '../../lib/ddr-version'
+import { getDifficultyStars, getDifficultyLabel } from '../../lib/champion-description'
+import { lp } from '../../lib/locale'
+
+const locale = (Astro.currentLocale || 'fr') as Loc
+const d = DT[locale]
+const { slug } = Astro.params
+const pair = parsePair(slug as string)
+if (!pair) return Astro.redirect(compareHub(locale), 302)
+const [a, b] = pair
+const DDR = getDDRBase(await getLatestDDRVersion())
+const champBase = lp(locale, '/champion')
+const LL = (c: any) => c.lanes.map((l: string) => laneLabel(locale, l))
+const CL = (c: any) => c.archetypes.map((x: string) => classLabel(locale, x))
+const lanesJoin = (arr: string[]) => arr.join(' / ')
+const shared = a.lanes.filter((l) => b.lanes.includes(l))
+const sum: string[] = []
+if (a.lanes.length === b.lanes.length && shared.length === a.lanes.length) sum.push(d.sLanesBoth(a.name, b.name, lanesJoin(shared.map((l) => laneLabel(locale, l)))))
+else if (shared.length) sum.push(d.sLanesShared(a.name, b.name, lanesJoin(shared.map((l) => laneLabel(locale, l))), lanesJoin(LL(a)), lanesJoin(LL(b))))
+else sum.push(d.sLanesApart(a.name, b.name, lanesJoin(LL(a)), lanesJoin(LL(b))))
+if (a.difficulty === b.difficulty) sum.push(d.sDiffSame(a.difficulty))
+else { const [e, h] = a.difficulty < b.difficulty ? [a, b] : [b, a]; sum.push(d.sDiffEasier(e.name, e.difficulty, h.name, h.difficulty)) }
+if (a.archetypes[0] === b.archetypes[0]) sum.push(d.sClassSame(classLabel(locale, a.archetypes[0])))
+else sum.push(d.sClassDiff(a.name, CL(a).join(' / '), b.name, CL(b).join(' / ')))
+if (a.faction === b.faction) sum.push(d.sRegionSame(regionLabel(locale, a.faction)))
+else sum.push(d.sRegionDiff(a.name, regionLabel(locale, a.faction), b.name, regionLabel(locale, b.faction)))
+const verdict = a.difficulty === b.difficulty ? d.verdictSame : d.verdictEasier((a.difficulty < b.difficulty ? a : b).name)
+
+const diffColors: Record<number, string> = { 1: '#22c55e', 2: '#86efac', 3: '#fbbf24', 4: '#f97316', 5: '#ef4444' }
+const rows: [string, (c: any) => string][] = [
+  [d.rowLane, (c) => LL(c).join(' · ')],
+  [d.rowClass, (c) => CL(c).join(' · ')],
+  [d.rowStyle, (c) => c.styles.map((s: string) => STYLES[locale][s] || s).join(' · ')],
+  [d.rowRegion, (c) => regionLabel(locale, c.faction)],
+]
+const indexable = isCurated(a.apiId, b.apiId)
+const altMap = Object.fromEntries((['fr','en','es','de','it'] as Loc[]).map(l => [l, compareUrl(l, a.apiId, b.apiId)]))
+const more = [a, b].flatMap((c) => similarTo(c, COMPARE_LINKS).map((o) => [c, o] as const)).filter(([x, y]) => !((x === a && y === b) || (x === b && y === a))).slice(0, 4)
+const pk = [pickFor(a), pickFor(b)].filter((p, i, arr) => p && arr.findIndex((q) => q?.key === p.key) === i) as any[]
+---
+<Layout title={`${d.cmpTitle(a.name, b.name)} | RiftMatch`} description={d.cmpDesc(a.name, b.name)} lang={locale} hreflangMap={indexable ? altMap : undefined} noindex={!indexable}>
+  <main class="dc">
+    <header class="dc-head">
+      <a class="dc-crumb" href={compareHub(locale)}>← {d.cmpHubH1}</a>
+      <h1>{d.cmpTitle(a.name, b.name)}</h1>
+      <p class="dc-intro">{d.cmpIntro(a.name, b.name)}</p>
+    </header>
+    <div class="vs">
+      <a class="vs-side" href={`${champBase}/${a.apiId}`}><img src={`${DDR}/${a.apiId}.png`} alt={a.name} width="96" height="96" /><b>{a.name}</b></a>
+      <span class="vs-mid">VS</span>
+      <a class="vs-side" href={`${champBase}/${b.apiId}`}><img src={`${DDR}/${b.apiId}.png`} alt={b.name} width="96" height="96" /><b>{b.name}</b></a>
+    </div>
+    <table class="cmp-table">
+      <thead><tr><th></th><th>{a.name}</th><th>{b.name}</th></tr></thead>
+      <tbody>
+        {rows.map(([label, fn]) => <tr><th scope="row">{label}</th><td>{fn(a)}</td><td>{fn(b)}</td></tr>)}
+        <tr><th scope="row">{d.rowDiff}</th>
+          {[a, b].map((c) => <td><span style={`color:${diffColors[c.difficulty]};letter-spacing:2px`}>{getDifficultyStars(c.difficulty)}</span> {getDifficultyLabel(c.difficulty, locale as any)}</td>)}
+        </tr>
+      </tbody>
+    </table>
+    <h2>{d.cmpSummary}</h2>
+    <ul class="cmp-sum">{sum.map((s) => <li>{s}</li>)}</ul>
+    <p class="dc-intro" style="margin-top:.8rem">{verdict}</p>
+    <div class="dc-cta">
+      <p>{d.quizCta}</p>
+      <a class="dc-btn" href={lp(locale, '/quiz')}>{d.quizBtn}</a>
+    </div>
+    {more.length > 0 && (<>
+      <h2>{d.otherCmp(`${a.name} / ${b.name}`)}</h2>
+      <div class="dc-chips">
+        {more.map(([x, y]) => <a class="dc-chip" href={compareUrl(locale, x.apiId, y.apiId)}>{x.name} / {y.name}</a>)}
+        {pk.map((p) => <a class="dc-chip" href={pickUrl(locale, p)}>{d.pickTitle(p.level, p.kind, pickTerm(locale, p))}</a>)}
+      </div>
+    </>)}
+  </main>
+</Layout>

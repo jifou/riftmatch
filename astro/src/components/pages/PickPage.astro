@@ -1,0 +1,59 @@
+---
+import Layout from '../../layouts/Layout.astro'
+import '../../styles/discover.css'
+import { DT, STYLES, type Loc } from '../../data/discover-text'
+import { PICKS, pickBySlug, pickUrl, pickTerm, picksHub, laneLabel, classLabel } from '../../lib/discover'
+import { getLatestDDRVersion, getDDRBase } from '../../lib/ddr-version'
+import { getDifficultyStars } from '../../lib/champion-description'
+import { lp } from '../../lib/locale'
+
+const locale = (Astro.currentLocale || 'fr') as Loc
+const d = DT[locale]
+const { slug } = Astro.params
+const pick = pickBySlug(locale, slug as string)
+if (!pick) return Astro.redirect(picksHub(locale), 302)
+const term = pickTerm(locale, pick)
+const title = d.pickTitle(pick.level, pick.kind, term)
+const n = pick.champs.length
+const intro = d.pickIntro(pick.level, pick.kind, term, n)
+const DDR = getDDRBase(await getLatestDDRVersion())
+const champBase = lp(locale, '/champion')
+const diffColors: Record<number, string> = { 1: '#22c55e', 2: '#86efac', 3: '#fbbf24', 4: '#f97316', 5: '#ef4444' }
+const others = PICKS.filter((p) => p.key !== pick.key && (p.kind === pick.kind || p.level !== pick.level)).slice(0, 8)
+const altMap = Object.fromEntries((['fr','en','es','de','it'] as Loc[]).map(l => [l, pickUrl(l, pick)]))
+---
+<Layout title={`${title} | RiftMatch`} description={d.pickDesc(pick.level, pick.kind, term, n)} lang={locale} hreflangMap={altMap}>
+  <script type="application/ld+json" slot="head" set:html={JSON.stringify({
+    '@context': 'https://schema.org', '@type': 'ItemList', name: title, numberOfItems: n,
+    itemListElement: pick.champs.map((c, i) => ({ '@type': 'ListItem', position: i + 1, name: c.name, url: `https://riftmatch.io${champBase}/${c.apiId}` })),
+  })} />
+  <main class="dc">
+    <header class="dc-head">
+      <a class="dc-crumb" href={picksHub(locale)}>← {d.backHub}</a>
+      <h1>{title}</h1>
+      {intro.map((t, i) => <p class={i === 0 ? 'dc-intro' : 'dc-note'}>{t}</p>)}
+    </header>
+    <ul class="dc-list">
+      {pick.champs.map((c) => (
+        <li>
+          <a class="dc-row" href={`${champBase}/${c.apiId}`}>
+            <img src={`${DDR}/${c.apiId}.png`} alt={c.name} width="56" height="56" loading="lazy" />
+            <span>
+              <span class="dc-name">{c.name}</span><br />
+              <span class="dc-meta">{c.lanes.map((l) => laneLabel(locale, l)).join(' · ')} · {c.archetypes.map((a) => classLabel(locale, a)).join(' · ')} · {c.styles.map((s) => STYLES[locale][s] || s).join(' · ')}</span>
+            </span>
+            <span class="dc-diff" style={`color:${diffColors[c.difficulty]}`} aria-label={`${c.difficulty}/5`}>{getDifficultyStars(c.difficulty)}</span>
+          </a>
+        </li>
+      ))}
+    </ul>
+    <div class="dc-cta">
+      <p>{d.quizCta}</p>
+      <a class="dc-btn" href={lp(locale, '/quiz')}>{d.quizBtn}</a>
+    </div>
+    <h2>{d.otherPicks}</h2>
+    <div class="dc-chips">
+      {others.map((p) => <a class="dc-chip" href={pickUrl(locale, p)}>{d.pickTitle(p.level, p.kind, pickTerm(locale, p))}</a>)}
+    </div>
+  </main>
+</Layout>

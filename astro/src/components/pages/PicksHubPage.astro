@@ -1,0 +1,38 @@
+---
+import Layout from '../../layouts/Layout.astro'
+import '../../styles/discover.css'
+import { DT, SEG, type Loc } from '../../data/discover-text'
+import { PICKS, picksHub, pickUrl, pickTerm, LANES, CLASSES, compareHub } from '../../lib/discover'
+import { lp } from '../../lib/locale'
+
+const locale = (Astro.currentLocale || 'fr') as Loc
+const d = DT[locale]
+const groups = [
+  { title: d.groupLane, kind: 'lane' },
+  { title: d.groupClass, kind: 'class' },
+]
+---
+<Layout title={`${d.hubTitle} | RiftMatch`} description={d.hubDesc} lang={locale} hreflangMap={Object.fromEntries((['fr','en','es','de','it'] as Loc[]).map(l => [l, picksHub(l)]))}>
+  <main class="dc">
+    <header class="dc-head">
+      <h1>{d.hubH1}</h1>
+      <p class="dc-intro">{d.hubIntro}</p>
+    </header>
+    <div class="dc-groups">
+      {(['beginner', 'expert'] as const).flatMap((level) => groups.map((g) => (
+        <section class="dc-group">
+          <h3>{g.title} : {d.groupLevel[level]}</h3>
+          <ul>
+            {PICKS.filter((p) => p.level === level && p.kind === g.kind).map((p) => (
+              <li><a href={pickUrl(locale, p)}><span>{pickTerm(locale, p)}</span><small>{d.count(p.champs.length)}</small></a></li>
+            ))}
+          </ul>
+        </section>
+      )))}
+    </div>
+    <div class="dc-cta">
+      <p>{d.quizCta}</p>
+      <a class="dc-btn" href={lp(locale, '/quiz')}>{d.quizBtn}</a>
+    </div>
+  </main>
+</Layout>

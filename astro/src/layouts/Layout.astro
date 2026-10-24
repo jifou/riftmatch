@@ -2,6 +2,7 @@
 import CookieBanner from '../components/CookieBanner.astro'
 import { UI } from '../i18n.js'
 import { lp, LOCALES } from '../lib/locale'
+import { SEG, DT, type Loc } from '../data/discover-text'
 
 export interface Props {
   title?: string
@@ -10,6 +11,8 @@ export interface Props {
   image?: string
   canonical?: string
   hreflangPath?: string
+  noindex?: boolean
+  hreflangMap?: Record<string, string>
 }
 
 const {
@@ -19,6 +22,8 @@ const {
   image = '/og-image.jpg',
   canonical,
   hreflangPath,
+  noindex = false,
+  hreflangMap,
 } = Astro.props
 
 // Sur les pages avec préfixe URL (/en/..., /es/...) → locale depuis l'URL
@@ -70,6 +75,9 @@ const quizHref = lp(currentLocale, '/quiz')
 const homeHref = lp(currentLocale, '/')
 const newsHref = lp(currentLocale, '/news')
 const patchHref = lp(currentLocale, '/patch-notes')
+const picksHref = lp(currentLocale, `/${SEG.picks[currentLocale as Loc] || SEG.picks.fr}`)
+const compareHref = lp(currentLocale, `/${SEG.compare[currentLocale as Loc] || SEG.compare.fr}`)
+const dtl = DT[(currentLocale as Loc)] || DT.fr
 ---
 
 <!doctype html>
@@ -85,6 +93,15 @@ const patchHref = lp(currentLocale, '/patch-notes')
 
     <!-- Canonical -->
     <link rel="canonical" href={canonicalURL} />
+    {hreflangMap && (
+      <>
+        {Object.entries(hreflangMap).map(([l, path]) => (
+          <link rel="alternate" hreflang={l} href={`${BASE_URL}${path}`} />
+        ))}
+        <link rel="alternate" hreflang="x-default" href={`${BASE_URL}${hreflangMap.fr}`} />
+      </>
+    )}
+    {noindex && <meta name="robots" content="noindex,follow" />}
     {hreflangPath && (
       <>
         {LOCALES.map((l) => (
@@ -436,6 +453,8 @@ const patchHref = lp(currentLocale, '/patch-notes')
         <div class="footer-links">
           <a href={quizHref}>{tl.footer.quiz}</a>
           <a href={homeHref}>{tl.footer.champions}</a>
+          <a href={picksHref}>{dtl.footerPicks}</a>
+          <a href={compareHref}>{dtl.footerCompare}</a>
           <a href={`${infoBase}/${ABOUT_SLUG[currentLocale] || ABOUT_SLUG.fr}`}>{ABOUT_LABEL[currentLocale] || ABOUT_LABEL.fr}</a>
         </div>
         {contentPages.length > 0 && (

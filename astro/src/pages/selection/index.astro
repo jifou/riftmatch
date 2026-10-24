@@ -1,0 +1,7 @@
+---
+import Comp from '../../components/pages/PicksHubPage.astro'
+const SEG: Record<string, string> = {"en": "picks", "es": "selecciones", "de": "auswahl", "it": "selezioni"}
+const pref = Astro.cookies.get('locale')?.value || 'fr'
+if (SEG[pref]) return Astro.redirect(`/${pref}/${SEG[pref]}`, 302)
+---
+<Comp />

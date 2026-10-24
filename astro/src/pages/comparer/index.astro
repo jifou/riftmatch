@@ -1,0 +1,7 @@
+---
+import Comp from '../../components/pages/CompareHubPage.astro'
+const SEG: Record<string, string> = {"en": "compare", "es": "comparar", "de": "vergleich", "it": "confronta"}
+const pref = Astro.cookies.get('locale')?.value || 'fr'
+if (SEG[pref]) return Astro.redirect(`/${pref}/${SEG[pref]}`, 302)
+---
+<Comp />

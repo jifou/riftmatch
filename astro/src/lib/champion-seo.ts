@@ -165,7 +165,7 @@ const T: Record<L, any> = {
   },
 }
 
-function similar(c: Champion, n = 4): Champion[] {
+export function similar(c: Champion, n = 4): Champion[] {
   const main = c.lanes[0]
   const arch = c.archetypes[0]
   return CHAMPIONS

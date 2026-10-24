@@ -1,0 +1,8 @@
+---
+import Comp from '../../components/pages/PickPage.astro'
+import { pickBySlug, picksHub } from '../../lib/discover'
+const loc = 'fr' as any
+const { slug } = Astro.params
+if (!pickBySlug(loc, slug as string)) return Astro.redirect(picksHub(loc), 302)
+---
+<Comp />

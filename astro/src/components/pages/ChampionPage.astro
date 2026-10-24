@@ -20,6 +20,8 @@ import AffiliateBlock from '../AffiliateBlock.astro'
 import GearGuides from '../GearGuides.astro'
 import { UI } from '../../i18n.js'
 import { championSeo } from '../../lib/champion-seo'
+import { DT, type Loc } from '../../data/discover-text'
+import { compareUrl, pickFor, pickUrl, pickTerm, COMPARE_LINKS } from '../../lib/discover'
 
 const { apiId } = Astro.params
 const champion = CHAMPIONS.find(c => c.apiId === apiId)
@@ -75,6 +77,9 @@ const BASE = 'https://riftmatch.io'
 const champPath = `/champion/${champion.apiId}`
 const canonicalUrl = locale === 'fr' ? `${BASE}${champPath}` : `${BASE}/${locale}${champPath}`
 const quizPath = lp(locale, '/quiz')
+const dt = DT[(locale as Loc)] || DT.fr
+const cmpLinks = seo.similar.slice(0, COMPARE_LINKS)
+const myPick = pickFor(champion)
 const homePath = lp(locale, '/')
 ---
 
@@ -213,6 +218,14 @@ const homePath = lp(locale, '/')
               </li>
             ))}
           </ul>
+          <div class="sim-links">
+            {cmpLinks.map((o: any) => (
+              <a class="sim-chip" href={compareUrl(locale as Loc, champion.apiId, o.apiId)}>{dt.compareWith(champion.name, o.name)}</a>
+            ))}
+            {myPick && (
+              <a class="sim-chip" href={pickUrl(locale as Loc, myPick)}>{dt.morePicks(myPick.level, myPick.kind, pickTerm(locale as Loc, myPick))}</a>
+            )}
+          </div>
         </section>
 
         <section class="info-card seo-card">
@@ -310,6 +323,9 @@ const homePath = lp(locale, '/')
   .sim-card img { grid-row: 1 / 3; width: 48px; height: 48px; border-radius: 50%; object-fit: cover; }
   .sim-name { font-family: 'Rajdhani', sans-serif; font-weight: 700; color: var(--gold-light); font-size: .95rem; line-height: 1.1; }
   .sim-meta { font-size: .68rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: .06em; }
+  .sim-links { display: flex; flex-wrap: wrap; gap: .5rem; margin-top: 1rem; }
+  .sim-chip { padding: .4rem .85rem; font-family: 'Rajdhani', sans-serif; font-weight: 600; font-size: .85rem; letter-spacing: .04em; color: var(--gold-light); text-decoration: none; background: rgba(200,155,60,.07); border: 1px solid rgba(200,155,60,.28); }
+  .sim-chip:hover { border-color: var(--gold); color: var(--gold); }
   .seo-link { display: inline-block; margin-top: .4rem; color: var(--gold); font-family: 'Rajdhani', sans-serif; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; font-size: .85rem; text-decoration: none; }
   .seo-link:hover { color: var(--gold-light); }
   .faq-list { display: grid; gap: .85rem; margin-top: .4rem; }

@@ -1,0 +1,49 @@
+---
+import Layout from '../../layouts/Layout.astro'
+import '../../styles/discover.css'
+import { DT, type Loc } from '../../data/discover-text'
+import { CHAMPIONS } from '../../data/champions'
+import { compareHub, compareUrl, curatedPairs } from '../../lib/discover'
+
+const locale = (Astro.currentLocale || 'fr') as Loc
+const d = DT[locale]
+const list = [...CHAMPIONS].sort((a, b) => a.name.localeCompare(b.name))
+// 24 comparaisons courantes, reparties sur l'alphabet (pas les 24 premieres)
+const all = curatedPairs()
+const step = Math.max(1, Math.floor(all.length / 24))
+const popular = all.filter((_, i) => i % step === 0).slice(0, 24)
+const hub = compareHub(locale)
+const altMap = Object.fromEntries((['fr','en','es','de','it'] as Loc[]).map(l => [l, compareHub(l)]))
+---
+<Layout title={`${d.cmpHubTitle} | RiftMatch`} description={d.cmpHubDesc} lang={locale} hreflangMap={altMap}>
+  <main class="dc">
+    <header class="dc-head">
+      <h1>{d.cmpHubH1}</h1>
+      <p class="dc-intro">{d.cmpHubIntro}</p>
+    </header>
+    <form class="dc-form" id="cmp-form" data-hub={hub}>
+      <label>{d.cmpPick1}
+        <select id="cmp-a" required>{list.map((c) => <option value={c.apiId}>{c.name}</option>)}</select>
+      </label>
+      <label>{d.cmpPick2}
+        <select id="cmp-b" required>{list.map((c, i) => <option value={c.apiId} selected={i === 1}>{c.name}</option>)}</select>
+      </label>
+      <button class="dc-btn" type="submit">{d.cmpGo}</button>
+    </form>
+    <h2>{d.cmpPopular}</h2>
+    <div class="dc-chips">
+      {popular.map(([a, b]) => <a class="dc-chip" href={compareUrl(locale, a.apiId, b.apiId)}>{a.name} / {b.name}</a>)}
+    </div>
+  </main>
+</Layout>
+<script>
+  const f = document.getElementById('cmp-form') as HTMLFormElement
+  f.addEventListener('submit', (e) => {
+    e.preventDefault()
+    const a = (document.getElementById('cmp-a') as HTMLSelectElement).value
+    const b = (document.getElementById('cmp-b') as HTMLSelectElement).value
+    if (a === b) return
+    const key = [a, b].sort((x, y) => x.toLowerCase().localeCompare(y.toLowerCase())).map((x) => x.toLowerCase()).join('-vs-')
+    location.href = `${f.dataset.hub}/${key}`
+  })
+</script>

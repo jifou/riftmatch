@@ -1,0 +1,18 @@
+---
+import Comp from '../../../components/pages/ComparePage.astro'
+import { parsePair, compareHub, compareUrl } from '../../../lib/discover'
+const loc = 'en' as any
+const { slug } = Astro.params
+const pair = parsePair(slug as string)
+if (!pair) {
+  const parts = (slug as string).split('-vs-')
+  if (parts.length === 2) {
+    const mk = (x: string) => x.toLowerCase()
+    const k = [mk(parts[0]), mk(parts[1])].sort().join('-vs-')
+    const ok = parsePair(k)
+    if (ok) return Astro.redirect(compareUrl(loc, ok[0].apiId, ok[1].apiId), 301)
+  }
+  return Astro.redirect(compareHub(loc), 302)
+}
+---
+<Comp />
