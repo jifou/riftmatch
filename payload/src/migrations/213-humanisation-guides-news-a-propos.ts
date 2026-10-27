@@ -221,7 +221,7 @@ const guides: any[] = [
        },
        {
         "type": "link",
-        "url": "https://www.amazon.fr/dp/B0F1YS92S2?tag=riftmatchio-21",
+        "url": "https://www.amazon.fr/dp/B0F1YS92S2?tag=riftmatchiofr-21",
         "newTab": true,
         "children": [
          {
@@ -239,7 +239,7 @@ const guides: any[] = [
        },
        {
         "type": "link",
-        "url": "https://www.amazon.fr/dp/B0B6XTDJS1?tag=riftmatchio-21",
+        "url": "https://www.amazon.fr/dp/B0B6XTDJS1?tag=riftmatchiofr-21",
         "newTab": true,
         "children": [
          {
@@ -257,7 +257,7 @@ const guides: any[] = [
        },
        {
         "type": "link",
-        "url": "https://www.amazon.fr/dp/B0B7X65SX2?tag=riftmatchio-21",
+        "url": "https://www.amazon.fr/dp/B0B7X65SX2?tag=riftmatchiofr-21",
         "newTab": true,
         "children": [
          {
@@ -275,7 +275,7 @@ const guides: any[] = [
        },
        {
         "type": "link",
-        "url": "https://www.amazon.fr/dp/B0C3BSZ56D?tag=riftmatchio-21",
+        "url": "https://www.amazon.fr/dp/B0C3BSZ56D?tag=riftmatchiofr-21",
         "newTab": true,
         "children": [
          {
@@ -367,7 +367,7 @@ const guides: any[] = [
      },
      {
       "type": "link",
-      "url": "https://www.amazon.fr/dp/B07W6H91JG?tag=riftmatchio-21",
+      "url": "https://www.amazon.fr/dp/B07W6H91JG?tag=riftmatchiofr-21",
       "newTab": true,
       "children": [
        {

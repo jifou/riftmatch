@@ -157,7 +157,7 @@ const articles: any[] = [
           },
           {
             type: 'link',
-            url: 'https://www.amazon.fr/dp/B07W5JKP66?tag=riftmatchio-21',
+            url: 'https://www.amazon.fr/dp/B07W5JKP66?tag=riftmatchiofr-21',
             newTab: true,
             children: [
               {

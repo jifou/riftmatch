@@ -76,7 +76,7 @@ const AffiliateBlocks: CollectionConfig = {
           type: 'text',
           required: true,
           admin: {
-            description: 'Ex: https://www.amazon.fr/dp/B0C...?tag=riftmatch-21',
+            description: 'Ex: https://www.amazon.fr/dp/B0C...?tag=riftmatchiofr-21',
           },
         },
       ],

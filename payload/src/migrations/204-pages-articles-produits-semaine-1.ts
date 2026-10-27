@@ -175,7 +175,7 @@ const pages: any[] = [
           },
           {
             "type": "link",
-            "url": "https://www.amazon.fr/dp/B07W6H91JG?tag=riftmatchio-21",
+            "url": "https://www.amazon.fr/dp/B07W6H91JG?tag=riftmatchiofr-21",
             "newTab": true,
             "children": [
               {
