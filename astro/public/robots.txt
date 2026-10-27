@@ -1,6 +1,7 @@
 User-agent: *
 Allow: /
 Disallow: /admin
+Disallow: /bujoclair/
 
 Sitemap: https://riftmatch.io/sitemap.xml
 Sitemap: https://riftmatch.io/news-sitemap.xml
