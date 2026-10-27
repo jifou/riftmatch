@@ -18,9 +18,12 @@ const PAYLOAD_URL = import.meta.env.PAYLOAD_API_URL || 'http://payload:3000'
 const env = (k: string): string => import.meta.env[k] || process.env[k] || ''
 
 // Un tag Associates par boutique Amazon, choisi selon le domaine du lien.
-// AMAZON_AFFILIATE_TAG reste le tag historique (amazon.fr).
+// Les tags sont des identifiants publics (visibles dans chaque lien): le tag FR est donc
+// fixe dans le code, pour ne plus dépendre d'une variable d'environnement du serveur.
+// Les autres boutiques viennent de AMAZON_TAG_*, vides = pas de tag ajouté.
+const FR_TAG = 'riftmatchiofr-21'
 const TAGS_BY_DOMAIN: Record<string, string> = {
-  'amazon.fr': env('AMAZON_TAG_FR') || env('AMAZON_AFFILIATE_TAG'),
+  'amazon.fr': FR_TAG,
   'amazon.co.uk': env('AMAZON_TAG_UK'),
   'amazon.es': env('AMAZON_TAG_ES'),
   'amazon.de': env('AMAZON_TAG_DE'),
@@ -33,7 +36,9 @@ function injectTag(url: string): string {
     const u = new URL(url)
     const domain = u.hostname.replace(/^www\./, '')
     const tag = TAGS_BY_DOMAIN[domain]
-    if (tag && !u.searchParams.has('tag')) u.searchParams.set('tag', tag)
+    if (!tag) return url
+    // amazon.fr: le tag fixe prime sur un ancien tag resté dans un lien (riftmatchio-21...).
+    if (domain === 'amazon.fr' || !u.searchParams.has('tag')) u.searchParams.set('tag', tag)
     return u.toString()
   } catch { return url }
 }
